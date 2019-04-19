@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="teachModalSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="16a1578fd7e" ></w:Config>
+	<e:Image id="bgImg" source="img_bg_prop_01_jpg" horizontalCenter="0" top="0"/>
+	<e:Image id="closeBtn" source="btn_home_01_png" x="30" y="40" touchEnabled="true"/>
+	<e:Image source="img_text_02_png" y="241" horizontalCenter="0"/>
+	<e:Image source="img_text_03_png" y="559" horizontalCenter="0"/>
+	<e:Group x="109.5" y="288" width="220">
+		<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
+		<e:Image source="img_prop_a1_png" y="56" horizontalCenter="0"/>
+		<e:Label text="【开局使用】" y="191" textColor="0x9d7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+		<e:Label text="可以看清弹药射击路线" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group x="433" y="288" width="220">
+		<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
+		<e:Image source="img_prop_b1_png" y="44" horizontalCenter="0"/>
+		<e:Label text="【第5关解锁】" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+		<e:Label text="装有5颗弹药的神奇筒" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group x="109.5" y="604" width="220">
+		<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
+		<e:Image y="44" horizontalCenter="0" source="img_prop_c1_png"/>
+		<e:Label text="【第2关解锁】" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+		<e:Label text="一锤可以粉碎任何砖块" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group x="433" y="604" width="220">
+		<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
+		<e:Label text="【第10关解锁】" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+		<e:Label text="可使所有弹药伤害翻倍" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group x="109.5" y="863" width="220">
+		<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
+		<e:Image y="44" horizontalCenter="0" source="img_prop_c1_png"/>
+		<e:Label text="【第15关解锁】" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+		<e:Label text="可暂停一次方块下落" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+	</e:Group>
+	<e:Group x="433" y="863" width="220">
+		<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
+		<e:Image source="img_unknown_01_png" y="51" horizontalCenter="0"/>
+		<e:Label text="敬请期待" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+	</e:Group>
+</e:Skin>

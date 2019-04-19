@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="rankModalSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<w:Config id="16753daf9c0" ></w:Config>
+	<e:Image id="bgImg" x="0" y="0" height="1334" width="750" source="img_bg_ranking_01_jpg"/>
+	<e:Group id="friendGroup" width="588" y="300" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" height="740">
+	</e:Group>
+	<e:Group id="worldGroup" width="588" height="690" y="348" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" cacheAsBitmap="true" visible="false"/>
+	<e:Image id="friend" touchEnabled="true" source="btn_tittle_a1_png" x="100" y="218"/>
+	<e:Image id="world" touchEnabled="true" source="btn_tittle_b2_png" x="400" y="218"/>
+	<e:Group y="984" anchorOffsetX="0" width="168" horizontalCenter="-0.5">
+		<e:Image id="lastPage" left="0" top="0" source="btn_page_01_png"/>
+		<e:Image id="nextPage" right="0" top="0" source="btn_page_02_png"/>
+		<e:Label id="pageText" text="1 / 2" horizontalCenter="0" verticalCenter="0" fontFamily="Microsoft YaHei" size="24" textColor="0x9d7236" visible="false"/>
+	</e:Group>
+	<e:Button id="goHome" label="" x="30" y="40">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="btn_home_01_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Label id="myRank" text="您当前为：第10名" y="305" fontFamily="Microsoft YaHei" size="24" textColor="0x9d7236" horizontalCenter="0" visible="false"/>
+</e:Skin>

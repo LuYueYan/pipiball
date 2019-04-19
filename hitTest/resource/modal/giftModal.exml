@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="giftModalSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<w:Config id="16a2fadf349" ></w:Config>
+	<e:Image source="img_bg_lottery_00_jpg" horizontalCenter="0" top="0"/>
+	<e:Image id="closeBtn" source="btn_home_01_png" x="30" y="40" touchEnabled="true"/>
+	<e:Group width="551.51" height="557.58" y="423.8" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0">
+		<e:Group height="178" width="178" left="0" top="0">
+			<e:Image horizontalCenter="0" verticalCenter="0" id="bg_0" source="img_bg_lottery_02_png"/>
+			<e:Image scaleX="0.5" scaleY="0.5" horizontalCenter="1" verticalCenter="-13" source="img_gift_05_png"/>
+			<e:BitmapLabel x="115" y="117.54" font="stripe_text_fnt" text="X1" scaleX="0.7" scaleY="0.7"/>
+		</e:Group>
+		<e:Group height="178" width="178" horizontalCenter="0" top="0">
+			<e:Image id="bg_1" source="img_bg_lottery_01_png" horizontalCenter="0" verticalCenter="0"/>
+			<e:Image source="img_gift_02_png" scaleX="0.5" scaleY="0.5" horizontalCenter="1" verticalCenter="-13"/>
+			<e:BitmapLabel x="89" y="117.54" font="stripe_text_fnt" text="X30" scaleX="0.7" scaleY="0.7"/>
+		</e:Group>
+		<e:Group height="178" width="178" right="0" top="0">
+			<e:Image source="img_bg_lottery_01_png" horizontalCenter="0" verticalCenter="0" id="bg_2"/>
+			<e:Image scaleX="0.5" scaleY="0.5" horizontalCenter="1" verticalCenter="-13" source="img_gift_05_png"/>
+			<e:BitmapLabel x="115" y="117.54" font="stripe_text_fnt" text="X1" scaleX="0.7" scaleY="0.7"/>
+		</e:Group>
+		<e:Group height="178" width="178" right="0" verticalCenter="0">
+			<e:Image source="img_bg_lottery_01_png" horizontalCenter="0" verticalCenter="0" id="bg_3"/>
+			<e:Image scaleX="0.5" scaleY="0.5" horizontalCenter="1" verticalCenter="-13" source="img_gift_04_png"/>
+			<e:BitmapLabel x="115" y="117.54" font="stripe_text_fnt" text="X1" scaleX="0.7" scaleY="0.7"/>
+		</e:Group>
+		<e:Group height="178" width="178" right="0" bottom="0">
+			<e:Image source="img_bg_lottery_01_png" horizontalCenter="0" verticalCenter="0" id="bg_4"/>
+			<e:Image scaleX="0.5" scaleY="0.5" horizontalCenter="1" verticalCenter="-13" source="img_gift_01_png"/>
+			<e:BitmapLabel x="89" y="117.54" font="stripe_text_fnt" text="X20" scaleX="0.7" scaleY="0.7"/>
+		</e:Group>
+		<e:Group height="178" width="178" bottom="0" horizontalCenter="0">
+			<e:Image source="img_bg_lottery_01_png" horizontalCenter="0" verticalCenter="0" id="bg_5"/>
+			<e:Image source="img_gift_02_png" scaleX="0.5" scaleY="0.5" horizontalCenter="1" verticalCenter="-13"/>
+			<e:BitmapLabel x="89" y="117.54" font="stripe_text_fnt" text="X20" scaleX="0.7" scaleY="0.7"/>
+		</e:Group>
+		<e:Group height="178" width="178" left="0" bottom="0">
+			<e:Image source="img_bg_lottery_01_png" horizontalCenter="0" verticalCenter="0" id="bg_6"/>
+			<e:Image scaleX="0.5" scaleY="0.5" horizontalCenter="1" verticalCenter="-13" source="img_gift_01_png"/>
+			<e:BitmapLabel x="115" y="117.54" font="stripe_text_fnt" text="X1" scaleX="0.7" scaleY="0.7"/>
+		</e:Group>
+		<e:Group height="178" width="178" verticalCenter="0" left="0">
+			<e:Image source="img_bg_lottery_01_png" horizontalCenter="0" verticalCenter="0" id="bg_7"/>
+			<e:Image scaleX="0.5" scaleY="0.5" horizontalCenter="1" verticalCenter="-13" source="img_gift_03_png"/>
+			<e:BitmapLabel x="98.08" y="117.54" font="stripe_text_fnt" text="X10" scaleX="0.7" scaleY="0.7"/>
+		</e:Group>
+		<e:Image id="getBtn" source="btn_lottery_01_png" touchEnabled="true" horizontalCenter="0" verticalCenter="0" anchorOffsetX="89" anchorOffsetY="89"/>
+	</e:Group>
+</e:Skin>

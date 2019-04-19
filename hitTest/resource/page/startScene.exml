@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="startSceneSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<w:Config id="16a0c5503cc" ></w:Config>
+	<e:Rect id="bgImg" width="750" height="1334" fillColor="0xaddc8b" horizontalCenter="0" top="0"/>
+	<e:Group id="lifeGroup" width="236" height="70" x="25.68" y="60" anchorOffsetY="0" anchorOffsetX="0">
+		<e:Image source="btn_remain_strength_png" horizontalCenter="0" verticalCenter="0"/>
+		<e:BitmapLabel id="liftText" x="66" font="stripe_text_fnt" text="5/5" scaleX="0.6" scaleY="0.6" width="250" verticalCenter="0" textAlign="center"/>
+	</e:Group>
+	<e:Group id="goldGroup" width="236" height="70" x="263" y="60" anchorOffsetY="0" anchorOffsetX="0">
+		<e:Image source="btn_remain_diamond_png" verticalCenter="0" horizontalCenter="0"/>
+		<e:BitmapLabel id="goldText" x="70" font="stripe_text_fnt" text="66" scaleX="0.6" scaleY="0.6" anchorOffsetX="0" width="250" textAlign="center" verticalCenter="-3" rotation="359.88"/>
+	</e:Group>
+	<ns1:tweenButton id="openLife" label="" x="670" y="675.5" anchorOffsetX="60" anchorOffsetY="62.5">
+		<ns1:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="icn_home_05_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</ns1:skinName>
+	</ns1:tweenButton>
+	<ns1:tweenButton id="openShare" label="" x="670" y="836.5" anchorOffsetX="60" anchorOffsetY="62.5">
+		<ns1:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="icn_home_06_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</ns1:skinName>
+	</ns1:tweenButton>
+	<ns1:tweenButton id="openBullet" label="" x="120" y="1226.5" anchorOffsetX="65" anchorOffsetY="67.5">
+		<ns1:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="icn_home_01_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</ns1:skinName>
+	</ns1:tweenButton>
+	<ns1:tweenButton id="openShop" label="" x="290" y="1226.5" anchorOffsetX="65" anchorOffsetY="67.5">
+		<ns1:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="icn_home_02_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</ns1:skinName>
+	</ns1:tweenButton>
+	<ns1:tweenButton id="openRank" label="" x="450" y="1226.5" anchorOffsetX="65" anchorOffsetY="67.5">
+		<ns1:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="icn_home_03_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</ns1:skinName>
+	</ns1:tweenButton>
+	<e:Group id="openGift" width="130" height="135" x="610" y="1226.5" anchorOffsetX="65" anchorOffsetY="67.5">
+		<e:Image source="icn_home_04c_png" horizontalCenter="0" verticalCenter="0"/>
+		<e:Image y="24.41" source="icn_home_04b_png" horizontalCenter="0.5"/>
+		<e:Image source="icn_home_04a_png" horizontalCenter="0" bottom="0"/>
+		<e:Image id="red_dot" source="img_red_dot_png" x="97.04" y="10.96"/>
+	</e:Group>
+	<e:Image source="img_game_name_png" y="210" horizontalCenter="0"/>
+	<e:Rect width="140" height="500" y="419" ellipseWidth="20" fillColor="0xffffff" fillAlpha="0.3"/>
+	<e:Group id="moreGroup" width="140" height="458" y="444" anchorOffsetY="0" x="0"/>
+</e:Skin>

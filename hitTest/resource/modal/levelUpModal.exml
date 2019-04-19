@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="levelUpModalSkin" width="667" height="850" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="16a108c9e1e" ></w:Config>
+	<e:Image source="img_bg_bb_01_png" horizontalCenter="0" top="0"/>
+	<e:Image id="light" source="img_light_star_png" x="46" y="-105"/>
+	<e:Image id="star_1" source="img_star_a2_png" x="155.37" y="176.65" width="92" height="92" rotation="350"/>
+	<e:Image id="star_2" source="img_star_a2_png" y="119.29" width="115" height="115" horizontalCenter="0"/>
+	<e:Image id="star_3" source="img_star_a2_png" x="419.34" y="159.36" width="92" height="92" rotation="10"/>
+	<e:Label id="levelText" text="第1关" y="297" fontFamily="Microsoft YaHei" size="36" textColor="0x6c371a" horizontalCenter="0"/>
+	<e:Label id="scoreText" text="666" y="352" size="60" fontFamily="Microsoft YaHei" bold="true" textColor="0x6c371a" horizontalCenter="0"/>
+	<e:Image source="img_bg_aa_png" y="425" horizontalCenter="0"/>
+	<e:BitmapLabel id="goldText" x="328" y="459" text="X25" font="stripe_text_fnt"/>
+	<e:Button id="videoBtn" label="" y="613" horizontalCenter="0" anchorOffsetX="151" anchorOffsetY="56">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" scaleX.down="0.8" scaleY.down="0.8" source="btn_get_double_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Rect width="240" height="70" y="770" ellipseWidth="40" fillAlpha="0.2" horizontalCenter="0"/>
+	<e:Label id="getBtn" text="普通领取>" y="770" touchEnabled="true" width="240" height="70" horizontalCenter="0" verticalAlign="middle" textAlign="center" size="32" fontFamily="Microsoft YaHei"/>
+	<e:Image source="icn_diamond_01_png" x="193" y="433"/>
+	<e:Label text="太棒了！" y="64" bold="true" horizontalCenter="0"/>
+</e:Skin>

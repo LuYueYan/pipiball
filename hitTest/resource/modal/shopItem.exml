@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="shopItemSkin" width="738" height="293" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="16a149679dd" ></w:Config>
+	<e:Image id="bgImg" source="img_bg_bullet_02_png" horizontalCenter="0" bottom="0"/>
+	<e:Image source="img_bg_bullet_03_png" x="98" y="90"/>
+	<e:Image id="img" x="122" y="111" anchorOffsetX="0" anchorOffsetY="0" source="img_bullet_c3_png" width="120" height="120"/>
+	<e:Label id="title" text="仙人球" x="285" y="103" size="32" fontFamily="Microsoft YaHei" textColor="0x874717" bold="true"/>
+	<e:Label id="price" text="x1000" x="334.5" y="163.02" textColor="0xef4d52" fontFamily="Microsoft YaHei" size="24"/>
+	<e:Image source="icn_diamond_02_png" x="284.81" y="158.02"/>
+	<e:Image id="btn" x="494.33" y="171" source="btn_use_png"/>
+</e:Skin>

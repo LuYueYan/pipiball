@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="cloudComSkin" width="750" height="152" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="16a2f4a50ba" ></w:Config>
+	<e:Image id="img_1" source="cloud_top_left_png"/>
+	<e:Image id="img_2" source="cloud_top_right_png" x="750"/>
+</e:Skin>
