@@ -57,7 +57,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 			that.choosing = false;
 			let ran = Math.floor(Math.random() * 8 * 1000) + 5;
 			setTimeout(function () {
-				if(that.canTap){
+				if (that.canTap) {
 					return;
 				}
 				clearInterval(that.terval);
@@ -66,7 +66,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 					case 'glass':
 					case 'bullet':
 						let tool = userDataMaster.tool;
-						tool[item.type] += item.num;
+						tool[item.type].num += item.num;
 						userDataMaster.myTool = tool;
 						break;
 					case 'gold':
@@ -81,7 +81,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 						break;
 					default:
 				}
-				userDataMaster.dayGift.num++;
+				userDataMaster.dayGift.num == 0 ? userDataMaster.dayGift.num++ : '';
 				that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
 				sceneMaster.openLittleModal(new getSuccess(item.name, 'X' + item.num));
 				that.canTap = true;

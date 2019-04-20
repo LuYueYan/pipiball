@@ -33,11 +33,13 @@ var playBefore = (function (_super) {
     };
     playBefore.prototype.init = function () {
         var that = this;
-        if (1 <= 0) {
-            that.glassNum.visible = true;
+        if (userDataMaster.tool.glass.num <= 0) {
+            that.glassNum.visible = false;
+            that.glassAdd.visible = true;
         }
-        if (0 <= 0) {
-            that.bulletNum.visible = true;
+        if (userDataMaster.tool.bullet.num <= 0) {
+            that.bulletNum.visible = false;
+            that.bulletAdd.visible = true;
         }
         that.titleText.text = '第' + this.level + '关';
         that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
@@ -47,7 +49,7 @@ var playBefore = (function (_super) {
     };
     playBefore.prototype.chooseFun = function (type) {
         var that = this;
-        if (1) {
+        if (!that.choose[type] && userDataMaster.tool[type].num <= 0) {
             //是否有道具，没有的话视频购买
             AdMaster.useVideo(function () {
                 suc();
@@ -58,13 +60,21 @@ var playBefore = (function (_super) {
             });
             return;
         }
+        else {
+            that.choose[type] = !that.choose[type];
+            that[type + 'Choose'].visible = that.choose[type];
+            that[type + 'Light'].visible = that.choose[type];
+            that[type + 'Num'].visible = !that.choose[type];
+        }
         function suc() {
             //道具+1
-            that[type + 'Num'].visible = false;
+            var tool = userDataMaster.tool;
+            tool[type].num++;
+            userDataMaster.myTool = tool;
+            that[type + 'Add'].visible = false;
+            that[type + 'Num'].visible = true;
+            that[type + 'Num'].text = 'X' + tool[type].num;
         }
-        that.choose[type] = !that.choose[type];
-        that[type + 'Choose'].visible = that.choose[type];
-        that[type + 'Light'].visible = that.choose[type];
     };
     playBefore.prototype.startFun = function (life) {
         if (life === void 0) { life = true; }
@@ -76,7 +86,12 @@ var playBefore = (function (_super) {
             }
             userDataMaster.myLife = userDataMaster.life - 1;
         }
-        sceneMaster.changeScene(new runningScene(this.level));
+        for (var item in this.choose) {
+            if (this.choose[item]) {
+                userDataMaster.tool[item].num--;
+            }
+        }
+        sceneMaster.changeScene(new runningScene(this.level, {}, this.choose));
     };
     playBefore.prototype.videoFun = function () {
         var that = this;

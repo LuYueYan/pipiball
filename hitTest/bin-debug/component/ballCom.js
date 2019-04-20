@@ -15,11 +15,11 @@ var ballCom = (function () {
         this.img.anchorOffsetY = this.img.height / 2;
     };
     ballCom.prototype.createBody = function (x, y, that) {
-        var boxShape = new p2.Box({ width: 2, height: 2 });
+        var boxShape = new p2.Box({ width: 1.8, height: 1.8 });
         boxShape.collisionGroup = 2;
-        boxShape.collisionMask = 1;
+        boxShape.collisionMask = 5;
         boxShape.sensor = true; //作为传感器，被穿透
-        this.boxBody = new p2.Body({ mass: 100, position: [x, y], type: p2.Body.STATIC });
+        this.boxBody = new p2.Body({ mass: 100, position: [x, y], type: p2.Body.KINEMATIC });
         this.boxBody.addShape(boxShape);
         this.boxBody.displays = [this.img];
         that.addChild(this.img);

@@ -11,8 +11,9 @@ r.prototype = e.prototype, t.prototype = new r();
 var runningScene = (function (_super) {
     __extends(runningScene, _super);
     //发射起点/目标点坐标/ 每次发射后是否有球落地/目前屁屁球数量（还没掉落到地的也算）//在地面上上时的速度
-    function runningScene(level, myData) {
+    function runningScene(level, myData, tool) {
         if (myData === void 0) { myData = {}; }
+        if (tool === void 0) { tool = { glass: false, bullet: false }; }
         var _this = _super.call(this) || this;
         _this.arcPro = new egret.Shape(); //弧形进度条
         _this.factor = 50;
@@ -36,11 +37,13 @@ var runningScene = (function (_super) {
             gold: 0,
             star: 0 //星星数量
         };
+        _this.chooseTool = { glass: false, bullet: false }; //开局道具
         _this.shootPoint = { bx: 375, by: 1034, ex: 0, ey: 0, floor: false, beeNum: 0, speedy: 3 };
         _this.levelInfo = userDataMaster.levelArr[level - 1];
         if (myData && myData.beeNum) {
             _this.myData = myData;
         }
+        _this.chooseTool = tool;
         return _this;
     }
     runningScene.prototype.partAdded = function (partName, instance) {
@@ -84,6 +87,7 @@ var runningScene = (function (_super) {
         that.scoreProccess.addChildAt(that.arcPro, 2);
         that.scoreText.text = that.myData.score + '';
         that.changeGraphics();
+        that.toolState();
         that.world.on("beginContact", this.onBeginContact, this);
         this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
         that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, this);
@@ -92,6 +96,40 @@ var runningScene = (function (_super) {
         platform.onShow(function () {
             that.currentTimer = egret.getTimer();
         });
+    };
+    runningScene.prototype.toolState = function () {
+        var that = this;
+        var tool = ['hammer', 'hat', 'lamp'];
+        var _loop_1 = function (i) {
+            var item = userDataMaster.tool[tool[i]];
+            if (item.level >= userDataMaster.level) {
+                if (item.num > 0) {
+                    that[tool[i] + '_add'].visible = false;
+                    that[tool[i] + '_num'].visible = true;
+                    that[tool[i] + '_num'].text = 'X' + item.num;
+                }
+                if (!item.unlock) {
+                    //首次解锁
+                    userDataMaster.tool[tool[i]].unlock = true;
+                    //引导内容
+                    //
+                }
+                that[tool[i]].addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.judgeTool(tool[i]); }, this_1);
+            }
+            else {
+                //未达到解锁关卡
+                that[tool[i] + '_img'].texture = RES.getRes('icn_lock_png');
+                that[tool[i] + '_text'].visible = true;
+                that[tool[i] + '_add'].visible = false;
+            }
+        };
+        var this_1 = this;
+        for (var i = 0; i < tool.length; i++) {
+            _loop_1(i);
+        }
+    };
+    runningScene.prototype.judgeTool = function (type) {
+        //选择使用道具
     };
     runningScene.prototype.createCeil = function () {
         var arr = [
@@ -102,10 +140,10 @@ var runningScene = (function (_super) {
         ];
         for (var i = 0, len = arr.length; i < len; i++) {
             var item = arr[i];
-            var planeBody = new p2.Body({ mass: 1, position: [this.getPosition(item.x, 2), this.getPosition(item.y)], type: p2.Body.STATIC }); //创建墙壁
+            var planeBody = new p2.Body({ mass: 1, position: [this.getPosition(item.x, 2), this.getPosition(item.y)], type: p2.Body.KINEMATIC }); //创建墙壁
             var shape = new p2.Box({ width: item.width, height: item.height });
             shape.collisionGroup = 6;
-            shape.collisionMask = 1;
+            shape.collisionMask = 5;
             planeBody.addShape(shape); //给这个刚体添加形状
             planeBody.displays = []; //与每个形状对应的显示对象
             this.world.addBody(planeBody);
@@ -213,18 +251,20 @@ var runningScene = (function (_super) {
             var x = (e.stageX - adaptParams.gridAreaLeft) / adaptParams.itemWidth;
             var y = (e.stageY - adaptParams.gridAreaTop) / adaptParams.itemWidth;
             if (x > 0 && x < 7 && y > 0 && y < 8) {
+                var target = void 0;
                 for (var i = 0, len = this.gridArr.length; i < len; i++) {
                     var img = this.gridArr[i].img;
                     if (Math.abs(e.stageX - img.x) <= img.width / 2 && Math.abs(e.stageY - img.y) <= img.height / 2) {
                         console.log('target', i);
+                        target = this.gridArr[i];
                         break;
                     }
                 }
-                this.useTool();
+                this.useTool(target);
             }
         }
     };
-    runningScene.prototype.useTool = function () {
+    runningScene.prototype.useTool = function (target) {
     };
     runningScene.prototype.touchMoveFun = function (e) {
         if (this.shooting) {
@@ -253,7 +293,7 @@ var runningScene = (function (_super) {
             that.shooting = true;
             console.log('shoot', that.shooting);
         }, 100);
-        var _loop_1 = function (i) {
+        var _loop_2 = function (i) {
             var bee = that.beeArr[i].boxBody;
             setTimeout(function () {
                 egret.Tween.removeTweens(bee.displays[0]);
@@ -265,7 +305,7 @@ var runningScene = (function (_super) {
             }, 150 * i);
         };
         for (var i = 0; i < that.beeArr.length; i++) {
-            _loop_1(i);
+            _loop_2(i);
         }
     };
     runningScene.prototype.testRay = function () {
@@ -322,6 +362,19 @@ var runningScene = (function (_super) {
         var that = this;
         var bodyA = event.bodyA;
         var bodyB = event.bodyB;
+        var judge1 = bodyA.shapes[0].collisionMask == 7 && bodyB.type == p2.Body.KINEMATIC;
+        var judge2 = bodyB.shapes[0].collisionMask == 7 && bodyA.type == p2.Body.KINEMATIC;
+        var judge3 = bodyA.shapes[0].collisionMask == 7 && bodyB.shapes[0].collisionMask == 7;
+        if (judge1 || judge2 || judge3) {
+            //冰块
+            if (bodyA.velocity[0]) {
+                bodyA.velocity[0] = -bodyA.velocity[0];
+            }
+            if (bodyB.velocity[0]) {
+                bodyB.velocity[0] = -bodyB.velocity[0];
+            }
+            return;
+        }
         for (var i = 0; i < that.beeArr.length; i++) {
             var bee = that.beeArr[i].boxBody;
             if (bodyA.id == bee.id || bodyB.id == bee.id) {
@@ -346,7 +399,7 @@ var runningScene = (function (_super) {
                     bee.velocity = [0, -that.shootPoint.speedy];
                     return;
                 }
-                var _loop_2 = function (k) {
+                var _loop_3 = function (k) {
                     if (that.gridArr[k].boxBody.id == hittedBody.id) {
                         if (that.gridArr[k].type == 3) {
                             //是球
@@ -383,7 +436,7 @@ var runningScene = (function (_super) {
                     }
                 };
                 for (var k = 0; k < that.gridArr.length; k++) {
-                    var state_1 = _loop_2(k);
+                    var state_1 = _loop_3(k);
                     if (state_1 === "break")
                         break;
                 }
@@ -490,6 +543,12 @@ var runningScene = (function (_super) {
                 }
             }
         }
+        for (var len_2 = that.gridArr.length, i_2 = len_2 - 1; i_2 >= 0; i_2--) {
+            if (that.gridArr[i_2].type == 6) {
+                var k = that.gridArr[i_2].boxBody.velocity[0] > 0 ? 0.5 : -0.5;
+                that.gridArr[i_2].boxBody.velocity[0] = k;
+            }
+        }
     };
     runningScene.prototype.updateBee = function () {
         //更新球的水平坐标
@@ -564,7 +623,7 @@ var runningScene = (function (_super) {
         });
         function suc() {
             that.myData.reborn++;
-            sceneMaster.changeScene(new runningScene(that.levelInfo.level, that.myData));
+            sceneMaster.changeScene(new runningScene(that.levelInfo.level, that.myData, that.chooseTool));
         }
     };
     runningScene.prototype.updateSpeed = function (bee) {

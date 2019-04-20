@@ -82,17 +82,15 @@ var userDataMaster = (function () {
                                 //上次退出时体力没满
                                 var closeDate = info.closeDate;
                                 var n = (new Date().getTime() - closeDate) / 1000 / 5 / 60;
-                                if (Math.floor(n) > 0) {
-                                    var c = userDataMaster.life + Math.floor(n);
-                                    if (c >= 5) {
-                                        userDataMaster.myLife = c;
-                                    }
-                                    else {
-                                        userDataMaster.life = c;
-                                        userDataMaster.myCollection.replaceItemAt(c, 1);
-                                        var t = n / 1000 - Math.floor(n) * 5 * 60;
-                                        userDataMaster.updateTime(t);
-                                    }
+                                var c = userDataMaster.life + Math.floor(n);
+                                if (c >= 5) {
+                                    userDataMaster.myLife = c;
+                                }
+                                else {
+                                    userDataMaster.life = c;
+                                    userDataMaster.myCollection.replaceItemAt(c, 1);
+                                    var t = n / 1000 - Math.floor(n) * 5 * 60;
+                                    userDataMaster.updateTime(t);
                                 }
                             }
                         }
@@ -108,6 +106,12 @@ var userDataMaster = (function () {
                         }
                         if (info.tool) {
                             userDataMaster.tool = info.tool;
+                        }
+                        if (info.bulletArr) {
+                            userDataMaster.bulletArr = info.bulletArr;
+                        }
+                        if (info.bulletIndex) {
+                            userDataMaster.bulletIndex = info.bulletIndex;
                         }
                     }
                 }
@@ -352,7 +356,13 @@ var userDataMaster = (function () {
     userDataMaster.terval = null; //计时器
     userDataMaster.levelStar = []; //过关星星情况 n颗星
     userDataMaster.bulletIndex = 0; //当前使用的炮弹
-    userDataMaster.tool = { bullet: 0, glass: 0 }; //道具数量
+    userDataMaster.tool = {
+        bullet: { level: 1, unlock: true, num: 0 },
+        glass: { level: 1, unlock: true, num: 0 },
+        hammer: { level: 2, unlock: false, num: 0 },
+        hat: { level: 10, unlock: false, num: 0 },
+        lamp: { level: 15, unlock: false, num: 0 }
+    }; //道具数量
     userDataMaster.bulletArr = [
         { id: 0, img: 'img_bullet_a2', title: '仙人掌', price: 1000, state: 1 },
         { id: 1, img: 'img_bullet_b3', title: '仙人掌', price: 300, state: 0 },

@@ -2,7 +2,6 @@
 <e:Skin class="runningSceneSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
 	<w:Config id="169bcf4f973" ></w:Config>
 	<e:Image id="bgImg" source="img_bg_game_02_jpg" horizontalCenter="0" top="0" height="1334"/>
-	<e:Image source="img_bg_game_01_jpg" y="195" horizontalCenter="0"/>
 	<e:Image source="img_bg_green_1_png" x="55" y="47"/>
 	<e:BitmapLabel id="scoreText" x="155" y="78" text="66" font="stripe_text_fnt" width="200" textAlign="center"/>
 	<e:Group id="scoreProccess" x="38.68" y="36" height="120" width="120">
@@ -20,28 +19,27 @@
 		<e:Image source="img_schedule_01_png" x="83" y="62"/>
 		<e:Image id="amountPro" source="img_schedule_02_png" x="83" y="62" width="0"/>
 	</e:Group>
-	<e:Image id="hero" source="img_role_boy_png" x="446" y="1129" anchorOffsetY="162" anchorOffsetX="40"/>
 	<e:Image source="img_bg_game_03_png" y="1275" horizontalCenter="0"/>
 	<e:Group width="478.79" height="110" y="1192.7" anchorOffsetX="0" horizontalCenter="-105.5" cacheAsBitmap="true">
 		<e:Group id="hammer" x="-143" y="-28.5" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image source="img_prop_game_01_png" scaleX="1" scaleY="1" horizontalCenter="0" top="0"/>
-			<e:Label id="hammer_text" text="第2关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867"/>
-			<e:Image id="hammer_add" source="btn_more_png" x="77.68" y="76.54" visible="false"/>
+			<e:Image id="hammer_img" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="img_prop_game_01_png"/>
+			<e:Label id="hammer_text" text="第2关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
+			<e:Image id="hammer_add" source="btn_more_png" x="77.68" y="76.54"/>
 			<e:BitmapLabel id="hammer_num" x="41.04" y="81.6" text="X11" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
 		<e:Group id="hat" x="-133" y="-18.5" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image source="img_prop_game_01_png" scaleX="1" scaleY="1" horizontalCenter="0" top="0"/>
-			<e:Label id="hat_text" text="第10关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867"/>
-			<e:Image id="hat_add" source="btn_more_png" x="77.68" y="76.54" visible="false"/>
+			<e:Image id="hat_img" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="img_prop_game_01_png"/>
+			<e:Label id="hat_text" text="第10关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
+			<e:Image id="hat_add" source="btn_more_png" x="77.68" y="76.54"/>
 			<e:BitmapLabel id="hat_num" x="41.04" y="81.6" text="X11" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
 		<e:Group id="lamp" x="-123" y="-8.5" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image source="img_prop_game_01_png" scaleX="1" scaleY="1" horizontalCenter="0" top="0"/>
-			<e:Label id="lamp_text" text="第15关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867"/>
-			<e:Image id="lamp_add" source="btn_more_png" x="77.68" y="76.54" visible="false"/>
+			<e:Image id="lamp_img" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="img_prop_game_01_png"/>
+			<e:Label id="lamp_text" text="第15关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
+			<e:Image id="lamp_add" source="btn_more_png" x="77.68" y="76.54"/>
 			<e:BitmapLabel id="lamp_num" x="41.04" y="81.6" text="X1" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
 		<e:Group x="-113" y="1.5" width="110">
@@ -55,6 +53,8 @@
 	</e:Group>
 	<e:Image id="bulletImg" source="img_bullet_a2_png" x="540" y="1207" width="95" height="85"/>
 	<e:BitmapLabel id="bulletNum" x="630" y="1266" text="X5" font="stripe_text_fnt"/>
+	<e:Image source="img_bg_game_01_jpg" y="195" horizontalCenter="0"/>
+	<e:Image id="hero" source="img_role_boy_png" x="446" y="1129" anchorOffsetY="162" anchorOffsetX="40"/>
 	<e:Group id="rayGroup" width="690" height="914" anchorOffsetY="0" y="195" horizontalCenter="0">
 	</e:Group>
 </e:Skin>

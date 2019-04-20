@@ -3,10 +3,15 @@
 	<w:Config id="16a2e29f645" ></w:Config>
 	<e:Scroller id="scroller" width="750" anchorOffsetY="0" horizontalCenter="0" height="1184">
 		<e:Group>
-			<e:Group id="content" width="750" height="200">
+			<e:Group id="content" width="750" height="624.24" anchorOffsetY="0">
 				<e:Rect width="750" height="164" fillColor="0xaddc8b"/>
 				<e:Image source="img_map_01_png" horizontalCenter="0" y="164"/>
 				<e:Image source="img_map_02_png" x="0" y="294"/>
+				<e:Group id="head" width="150" height="150" x="339" y="424">
+					<e:Image source="img_bg_head_png" horizontalCenter="0" verticalCenter="0"/>
+					<e:Rect id="headmask" width="80" height="80" horizontalCenter="0" verticalCenter="0" ellipseWidth="15"/>
+					<e:Image id="headimg" width="80" height="80" horizontalCenter="0" verticalCenter="0"/>
+				</e:Group>
 			</e:Group>
 		</e:Group>
 	</e:Scroller>

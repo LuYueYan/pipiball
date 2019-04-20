@@ -1,35 +1,39 @@
 
 class runningScene extends eui.Component implements eui.UIComponent {
-	public bgImg:eui.Image;
-public scoreText:eui.BitmapLabel;
-public scoreProccess:eui.Group;
-public levelText:eui.BitmapLabel;
-public star_1:eui.Image;
-public star_2:eui.Image;
-public star_3:eui.Image;
-public amountText:eui.BitmapLabel;
-public amountPro:eui.Image;
-public hero:eui.Image;
-public hammer:eui.Group;
-public hammer_text:eui.Label;
-public hammer_add:eui.Image;
-public hammer_num:eui.BitmapLabel;
-public hat:eui.Group;
-public hat_text:eui.Label;
-public hat_add:eui.Image;
-public hat_num:eui.BitmapLabel;
-public lamp:eui.Group;
-public lamp_text:eui.Label;
-public lamp_add:eui.Image;
-public lamp_num:eui.BitmapLabel;
-public bulletImg:eui.Image;
-public bulletNum:eui.BitmapLabel;
-public rayGroup:eui.Group;
+	public bgImg: eui.Image;
+	public scoreText: eui.BitmapLabel;
+	public scoreProccess: eui.Group;
+	public levelText: eui.BitmapLabel;
+	public star_1: eui.Image;
+	public star_2: eui.Image;
+	public star_3: eui.Image;
+	public amountText: eui.BitmapLabel;
+	public amountPro: eui.Image;
+	public hero: eui.Image;
+	public hammer: eui.Group;
+	public hammer_img: eui.Image;
+	public hammer_text: eui.Label;
+	public hammer_add: eui.Image;
+	public hammer_num: eui.BitmapLabel;
+	public hat: eui.Group;
+	public hat_img: eui.Image;
+	public hat_text: eui.Label;
+	public hat_add: eui.Image;
+	public hat_num: eui.BitmapLabel;
+	public lamp: eui.Group;
+	public lamp_img: eui.Image;
+	public lamp_text: eui.Label;
+	public lamp_add: eui.Image;
+	public lamp_num: eui.BitmapLabel;
+	public bulletImg: eui.Image;
+	public bulletNum: eui.BitmapLabel;
+	public rayGroup: eui.Group;
+	public gridGroup: eui.Group;
+
 
 
 
 	public arcPro: egret.Shape = new egret.Shape();//弧形进度条
-
 	public world: p2.World;
 	public factor: number = 50;
 	public bee: p2.Body;
@@ -60,7 +64,6 @@ public rayGroup:eui.Group;
 	public chooseTool = { glass: false, bullet: false };//开局道具
 	public shootPoint = { bx: 375, by: 1034, ex: 0, ey: 0, floor: false, beeNum: 0, speedy: 3 };
 	//发射起点/目标点坐标/ 每次发射后是否有球落地/目前屁屁球数量（还没掉落到地的也算）//在地面上上时的速度
-
 	public constructor(level, myData: any = {}, tool = { glass: false, bullet: false }) {
 		super();
 		this.levelInfo = userDataMaster.levelArr[level - 1];
@@ -111,20 +114,48 @@ public rayGroup:eui.Group;
 		that.scoreProccess.addChildAt(that.arcPro, 2);
 		that.scoreText.text = that.myData.score + '';
 		that.changeGraphics();
-        
-        for(let item in userDataMaster.tool){
-			
-		}
+		that.toolState();
 
 		that.world.on("beginContact", this.onBeginContact, this);
 		this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
 		that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, this)
 		that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, this)
 		that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, this);
-		
+
 		platform.onShow(() => {
 			that.currentTimer = egret.getTimer();
 		})
+	}
+	public toolState() {
+		let that = this;
+		let tool = ['hammer', 'hat', 'lamp'];
+		for (let i = 0; i < tool.length; i++) {
+			let item = userDataMaster.tool[tool[i]];
+			if (item.level >= userDataMaster.level) {
+				if (item.num > 0) {
+					that[tool[i] + '_add'].visible = false;
+					that[tool[i] + '_num'].visible = true;
+					that[tool[i] + '_num'].text = 'X' + item.num;
+				}
+				if (!item.unlock) {
+					//首次解锁
+					userDataMaster.tool[tool[i]].unlock = true;
+					//引导内容
+
+					//
+				}
+				that[tool[i]].addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.judgeTool(tool[i]) }, this);
+			} else {
+				//未达到解锁关卡
+				that[tool[i] + '_img'].texture = RES.getRes('icn_lock_png');
+				that[tool[i] + '_text'].visible = true;
+				that[tool[i] + '_add'].visible = false;
+			}
+		}
+
+	}
+	public judgeTool(type) {
+		//选择使用道具
 	}
 	public createCeil() {
 		let arr = [
@@ -238,18 +269,20 @@ public rayGroup:eui.Group;
 			let x = (e.stageX - adaptParams.gridAreaLeft) / adaptParams.itemWidth;
 			let y = (e.stageY - adaptParams.gridAreaTop) / adaptParams.itemWidth;
 			if (x > 0 && x < 7 && y > 0 && y < 8) {
+				let target;
 				for (let i = 0, len = this.gridArr.length; i < len; i++) {
 					let img = this.gridArr[i].img;
 					if (Math.abs(e.stageX - img.x) <= img.width / 2 && Math.abs(e.stageY - img.y) <= img.height / 2) {
 						console.log('target', i)
+						target = this.gridArr[i];
 						break;
 					}
 				}
-				this.useTool()
+				this.useTool(target)
 			}
 		}
 	}
-	public useTool() {
+	public useTool(target) {
 
 	}
 	public touchMoveFun(e: egret.TouchEvent) {

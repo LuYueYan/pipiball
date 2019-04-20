@@ -7,7 +7,17 @@ class levelItem extends eui.ItemRenderer implements eui.UIComponent {
 	public star_3: eui.Image;
 	public levelText: eui.BitmapLabel;
 
-	public point = [200, 142, 230, 452, 452, 185, 130, 260, 390];
+	public static point = [
+		{ x: 230, y:-30 },
+		{ x: 142, y: 0 },
+		{ x: 262, y: -6 },
+		{ x: 422, y: -40 },
+		{ x: 480, y: 0 },
+		{ x: 255, y: -30 },
+		{ x: 120, y: -30 },
+		{ x: 260, y: 0 },
+		{ x: 390, y: -26 },
+	];
 	public constructor() {
 		super();
 	}
@@ -28,9 +38,10 @@ class levelItem extends eui.ItemRenderer implements eui.UIComponent {
 		sceneMaster.openModal(new playBefore(this.data.level));
 	}
 	protected dataChanged(): void {
-		let n = (this.data.level + 1) % this.point.length + 1;
+		let n = (this.data.level + 1) % levelItem.point.length + 1;
 		this.map.texture = RES.getRes('img_map_0' + n + '_png');
-		this.bodyGroup.x = this.point[n - 1];
+		this.bodyGroup.x = levelItem.point[n - 1].x;
+		this.bodyGroup.y = levelItem.point[n - 1].y;
 		this.levelText.text = this.data.level + '';
 		if (this.data.level <= userDataMaster.levelStar.length) {
 			//已过关的

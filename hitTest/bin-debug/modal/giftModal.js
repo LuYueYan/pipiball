@@ -38,7 +38,13 @@ var giftModal = (function (_super) {
     };
     giftModal.prototype.init = function () {
         var that = this;
-        that.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.getFun, this);
+        if (userDataMaster.todayGift) {
+            that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
+            that.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.getFun, this);
+        }
+        else {
+            that.getBtn.texture = RES.getRes('btn_lottery_03_png');
+        }
         that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
         that.terval = setInterval(function () { that.timer(that); }, 1000);
     };
@@ -50,14 +56,16 @@ var giftModal = (function (_super) {
             that.choosing = false;
             var ran = Math.floor(Math.random() * 8 * 1000) + 5;
             setTimeout(function () {
+                if (that.canTap) {
+                    return;
+                }
                 clearInterval(that.terval);
-                that.canTap = true;
                 var item = that.dataArr[that.current];
                 switch (item.type) {
                     case 'glass':
                     case 'bullet':
                         var tool = userDataMaster.tool;
-                        tool[item.type] += item.num;
+                        tool[item.type].num += item.num;
                         userDataMaster.myTool = tool;
                         break;
                     case 'gold':
@@ -72,7 +80,10 @@ var giftModal = (function (_super) {
                         break;
                     default:
                 }
+                userDataMaster.dayGift.num++;
+                that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
                 sceneMaster.openLittleModal(new getSuccess(item.name, 'X' + item.num));
+                that.canTap = true;
             }, ran);
         }
         if (that.choosing) {
@@ -83,10 +94,24 @@ var giftModal = (function (_super) {
     };
     giftModal.prototype.getFun = function () {
         var that = this;
-        if (!that.canTap) {
+        if (!that.canTap || !userDataMaster.todayGift) {
             return;
         }
-        if (1) {
+        egret.Tween.removeTweens(that.getBtn);
+        egret.Tween.get(that.getBtn).to({ scaleX: 0.8, scaleY: 0.8 }, 60).to({ scaleX: 1, scaleY: 1 }, 60);
+        if (userDataMaster.dayGift.num == 0) {
+            suc();
+        }
+        else if (userDataMaster.dayGift.num == 1) {
+            AdMaster.useVideo(function () {
+                suc();
+            }, function () {
+                CallbackMaster.openShare(function () {
+                    suc();
+                });
+            });
+        }
+        function suc() {
             that.canTap = false;
             that.speed = 50;
             clearInterval(that.terval);

@@ -103,7 +103,18 @@ var startScene = (function (_super) {
         that.openLifeFun();
     };
     startScene.prototype.goldGroupFun = function () {
+        AdMaster.useVideo(function () {
+            suc();
+        }, function () {
+            CallbackMaster.openShare(function () {
+                suc();
+            });
+        });
         var that = this;
+        function suc() {
+            userDataMaster.myGold = userDataMaster.gold + 10;
+            sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + 10));
+        }
     };
     startScene.prototype.openLifeFun = function () {
         var that = this;
@@ -127,6 +138,7 @@ var startScene = (function (_super) {
     };
     startScene.prototype.openGiftFun = function () {
         var that = this;
+        that.red_dot.parent && that.red_dot.parent.removeChild(that.red_dot);
         sceneMaster.openModal(new giftModal());
     };
     return startScene;

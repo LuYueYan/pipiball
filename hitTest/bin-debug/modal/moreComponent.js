@@ -32,7 +32,7 @@ var moreComponent = (function (_super) {
         // this.loadData()
         this.dataGroup = new eui.DataGroup();
         this.dataGroup.dataProvider = this.sourceArr;
-        this.dataGroup.percentWidth = 495;
+        this.dataGroup.percentWidth = 400;
         this.dataGroup.percentHeight = this.sourceArr.length * 170;
         this.content.height = this.sourceArr.length * 170;
         this.dataGroup.useVirtualLayout = true;
@@ -46,14 +46,19 @@ var moreComponent = (function (_super) {
         this.tipImg.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changePosition, this);
     };
     moreComponent.prototype.changePosition = function () {
+        var that = this;
         if (this.tipImg.visible == true) {
             this.tipImg.visible = false;
         }
-        if (this.container.x == -562) {
-            egret.Tween.get(this.container).to({ x: 0 }, 560);
+        if (this.container.x == -465) {
+            egret.Tween.get(this.container).to({ x: 0 }, 500).call(function () {
+                that.changeArea.texture = RES.getRes('btn_more_game_turn_png');
+            });
         }
         else {
-            egret.Tween.get(this.container).to({ x: -562 }, 560);
+            egret.Tween.get(this.container).to({ x: -465 }, 500).call(function () {
+                that.changeArea.texture = RES.getRes('btn_more_game_png');
+            });
         }
     };
     return moreComponent;

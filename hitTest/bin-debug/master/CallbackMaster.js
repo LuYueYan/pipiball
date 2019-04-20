@@ -62,7 +62,9 @@ var CallbackMaster = (function () {
                 levelStar: userDataMaster.levelStar,
                 dayShareLife: userDataMaster.dayShareLife,
                 tool: userDataMaster.tool,
-                dayGift: userDataMaster.dayGift
+                dayGift: userDataMaster.dayGift,
+                bulletIndex: userDataMaster.bulletIndex,
+                bulletArr: userDataMaster.bulletArr
             };
             var params = {
                 uid: userDataMaster.getMyInfo.uid,

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <e:Skin class="levelItemSkin" states="up,down,disabled" minHeight="50" minWidth="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" height="130" width="750">
 	<e:Image id="map" horizontalCenter="0" top="0" source="img_map_02_png"/>
-	<e:Group id="bodyGroup" x="0" y="0" cacheAsBitmap="true" height="100%">
+	<e:Group id="bodyGroup" cacheAsBitmap="true" height="100%">
 		<e:Image id="bgImg" source="img_wood_02_png" anchorOffsetY="0" x="0" bottom="0"/>
 		<e:Image id="star_1" source="img_star_b2_png" x="10" y="17" width="27" height="27" rotation="345.96"/>
 		<e:Image id="star_2" source="img_star_b2_png" y="0" width="34" height="34" x="45"/>

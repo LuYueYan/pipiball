@@ -36,11 +36,11 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
-		if (userDataMaster.tool.glass <= 0) {
+		if (userDataMaster.tool.glass.num <= 0) {
 			that.glassNum.visible = false;
 			that.glassAdd.visible = true;
 		}
-		if (userDataMaster.tool.bullet <= 0) {
+		if (userDataMaster.tool.bullet.num <= 0) {
 			that.bulletNum.visible = false;
 			that.bulletAdd.visible = true;
 		}
@@ -52,7 +52,7 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	}
 	public chooseFun(type) {
 		let that = this;
-		if (!that.choose[type] && userDataMaster.tool[type] <= 0) {
+		if (!that.choose[type] && userDataMaster.tool[type].num <= 0) {
 			//是否有道具，没有的话视频购买
 			AdMaster.useVideo(() => {
 				suc();
@@ -71,11 +71,11 @@ class playBefore extends eui.Component implements eui.UIComponent {
 		function suc() {
 			//道具+1
 			let tool = userDataMaster.tool;
-			tool[type]++;
+			tool[type].num++;
 			userDataMaster.myTool = tool;
 			that[type + 'Add'].visible = false;
 			that[type + 'Num'].visible = true;
-			that[type + 'Num'].text = 'X' + tool[type];
+			that[type + 'Num'].text = 'X' + tool[type].num;
 		}
 
 	}
@@ -91,7 +91,7 @@ class playBefore extends eui.Component implements eui.UIComponent {
 		}
 		for (let item in this.choose) {
 			if (this.choose[item]) {
-				userDataMaster.tool[item]--;
+				userDataMaster.tool[item].num--;
 			}
 		}
 		sceneMaster.changeScene(new runningScene(this.level, {}, this.choose));

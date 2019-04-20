@@ -167,7 +167,7 @@ class Rank {
       keyList: ['maxScore', 'maxLevel', 'star', 'week'],
       success: function(res) {
         // console.log('+++++++用户排行榜数据++++++++')
-
+          console.log(res)
         if (res && res.data) {
           for (let i = 0; i < res.data.length; i++) {
             let scoreData = res.data[i].KVDataList;

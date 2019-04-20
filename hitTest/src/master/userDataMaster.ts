@@ -8,13 +8,19 @@ class userDataMaster {
 	public static terval = null;//计时器
 	public static levelStar = [];//过关星星情况 n颗星
 	public static bulletIndex = 0;//当前使用的炮弹
-	public static tool = { bullet: 0, glass: 0,hammer:0,hat:0,lamp:0 };//道具数量
+	public static tool = {
+		bullet: { level: 1, unlock: true, num: 0 },
+		glass: { level: 1, unlock: true, num: 0 },
+		hammer: { level: 2, unlock: false, num: 0 },
+		hat: { level: 10, unlock: false, num: 0 },
+		lamp: { level: 15, unlock: false, num: 0 }
+	};//道具数量
 	public static bulletArr = [
-		{ id: 0, img: 'img_bullet_a2', title: '仙人掌', price: 1000, state: 1 },
-		{ id: 1, img: 'img_bullet_b3', title: '仙人掌', price: 300, state: 0 },
-		{ id: 2, img: 'img_bullet_c3', title: '仙人掌', price: 500, state: 0 },
-		{ id: 3, img: 'img_bullet_d3', title: '仙人掌', price: 1000, state: 0 },
-		{ id: 4, img: 'img_bullet_e3', title: '仙人掌', price: 2000, state: 0 },
+		{ id: 0, img: 'img_bullet_a2', title: '仙人球', price: 1000, state: 1 },
+		{ id: 1, img: 'img_bullet_b3', title: '小蘑菇', price: 300, state: 0 },
+		{ id: 2, img: 'img_bullet_c3', title: '西兰花', price: 500, state: 0 },
+		{ id: 3, img: 'img_bullet_d3', title: '小南瓜', price: 1000, state: 0 },
+		{ id: 4, img: 'img_bullet_e3', title: '包菜君', price: 2000, state: 0 },
 		{ id: 5, img: 'img_bullet_f3', title: '仙人掌', price: 3000, state: 0 },
 		{ id: 6, img: 'img_bullet_g3', title: '仙人掌', price: 5000, state: 0 },
 	];
@@ -135,14 +141,14 @@ class userDataMaster {
 						if (info.dayGift) {
 							userDataMaster.dayGift = info.dayGift;
 						}
-						if (info.tool) {
-							userDataMaster.tool = info.tool;
+						// if (info.tool) {
+						// 	userDataMaster.tool = info.tool;
+						// }
+						if (info.bulletArr) {
+							userDataMaster.bulletArr = info.bulletArr;
 						}
-						if(info.bulletArr){
-							userDataMaster.bulletArr=info.bulletArr;
-						}
-						if(info.bulletIndex){
-							userDataMaster.bulletIndex=info.bulletIndex;
+						if (info.bulletIndex) {
+							userDataMaster.bulletIndex = info.bulletIndex;
 						}
 					}
 				}
@@ -230,7 +236,7 @@ class userDataMaster {
 		//获取今日抽奖次数
 		if (userDataMaster.dayGift.day == userDataMaster.getToday()) {
 			if (userDataMaster.dayGift.num >= 2) {
-				//每日抽奖两次 一次免费 一次视频
+				//每日抽奖n次 一次免费 n次视频
 				return false;
 			}
 		} else {
@@ -309,8 +315,7 @@ class userDataMaster {
 
 					//测试测试………………
 					// userDataMaster.myInfo.is_new_user = true;
-
-					// userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
+                   // userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
 					//初始化用户openid
 					platform.openDataContext.postMessage({
 						type: "openid",

@@ -6,15 +6,18 @@ var gridCom = (function () {
         if (num === void 0) { num = 1; }
         this.itemW = 94; //格子大小
         this.num = 1; //需要击打的数量
-        this.type = 1; //类型 1--方形 2--三角型 5--炸弹
+        this.type = 1; //类型 1--方形 2--三角型 5--炸弹 6--冰块
         this.isRemoved = false; //是否已经被移除
         this.num = num;
         var ran = Math.random();
-        if (ran < 0.4) {
+        if (ran < 0.2) {
             this.type = 2;
         }
-        else if (ran < 0.6) {
+        else if (ran < 0.4) {
             this.type = 5;
+        }
+        else if (ran < 0.9) {
+            this.type = 6;
         }
         this.init();
     }
@@ -27,8 +30,11 @@ var gridCom = (function () {
         else if (this.type == 2) {
             this.img = this.createBitmapByName('img_diamonds_b1');
         }
-        else {
+        else if (this.type == 5) {
             this.img = this.createBitmapByName('img_diamonds_c1');
+        }
+        else {
+            this.img = this.createBitmapByName('img_diamonds_00');
         }
         this.img.anchorOffsetX = this.img.width / 2;
         this.img.anchorOffsetY = this.img.height / 2;
@@ -46,16 +52,22 @@ var gridCom = (function () {
             boxShape = new p2.Convex({ vertices: vertices });
         }
         else {
-            boxShape = new p2.Box({ width: 2, height: 2 });
+            boxShape = new p2.Box({ width: 1.8, height: 1.8 });
         }
         boxShape.collisionGroup = 6;
         boxShape.collisionMask = 7;
-        this.boxBody = new p2.Body({ mass: 100, position: [x, y], type: p2.Body.STATIC });
+        this.boxBody = new p2.Body({ mass: 100, position: [x, y], type: p2.Body.KINEMATIC });
         this.boxBody.addShape(boxShape);
+        if (this.type == 6) {
+            console.log(6563);
+            this.boxBody.type = p2.Body.DYNAMIC;
+            this.boxBody.gravityScale = 0;
+            this.boxBody.velocity = [0.5, 0];
+        }
         this.boxBody.fixedRotation = false;
         this.boxBody.displays = [this.img, this.txt];
-        that.addChild(this.img);
-        that.addChild(this.txt);
+        that.gridGroup.addChild(this.img);
+        that.gridGroup.addChild(this.txt);
         return this.boxBody;
     };
     gridCom.prototype.updateText = function (that, n, callback) {
@@ -69,7 +81,7 @@ var gridCom = (function () {
         var ran = 90 * Math.random() - 45;
         hitText.x = this.img.x + ran;
         hitText.y = this.img.y - 80;
-        that.addChild(hitText);
+        that.gridGroup.addChild(hitText);
         egret.Tween.removeTweens(this.img);
         egret.Tween.get(this.img).to({ y: this.img.y - 10 }, 20).to({ y: this.img.y }, 20);
         egret.Tween.get(hitText).to({ scaleX: 1.2, scaleY: 1.2, y: hitText.y - 80 }, 500).to({ alpha: 0.5 }, 200).call(function () {
