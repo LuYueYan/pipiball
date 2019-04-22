@@ -6,12 +6,14 @@ class startScene extends eui.Component implements eui.UIComponent {
 	public goldText: eui.BitmapLabel;
 	public openLife: tweenButton;
 	public openShare: tweenButton;
+	public navGroup: eui.Group;
 	public openBullet: tweenButton;
 	public openShop: tweenButton;
 	public openRank: tweenButton;
 	public openGift: eui.Group;
 	public red_dot: eui.Image;
 	public moreGroup: eui.Group;
+
 
 
 	public targetArr = [
@@ -43,6 +45,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 	public init() {
 		let that = this;
 		that.bgImg.height = that.stage.stageHeight;
+		that.navGroup.y += that.stage.stageHeight - 1334;
 		this.liftText.text = userDataMaster.life + '/5';
 		this.goldText.text = userDataMaster.gold + '';
 		this.createRecommand();
@@ -97,8 +100,9 @@ class startScene extends eui.Component implements eui.UIComponent {
 		}
 		for (let item of that.targetArr) {
 			let t = that[item];
-			let x = e.stageX - (t.x - t.anchorOffsetX);
-			let y = e.stageY - (t.y - t.anchorOffsetY);
+			let x = e.stageX - (t.x - t.anchorOffsetX+t.parent.x);
+			let y = e.stageY - (t.y - t.anchorOffsetY+t.parent.y);
+
 			if (x > 0 && x < t.width && y > 0 && y < t.height) {
 				that[item + 'Fun'] && that[item + 'Fun']();
 				return;
@@ -145,7 +149,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 	}
 	public openGiftFun() {
 		let that = this;
-		that.red_dot.parent&&that.red_dot.parent.removeChild(that.red_dot);
+		that.red_dot.parent && that.red_dot.parent.removeChild(that.red_dot);
 		sceneMaster.openModal(new giftModal());
 	}
 }

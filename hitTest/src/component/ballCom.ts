@@ -28,8 +28,15 @@ class ballCom {
 	public updateText(that, callback: Function = null) {
 		//销毁
 		let self = this;
-		egret.Tween.removeTweens(this.img);
-		egret.Tween.get(this.img).to({ scaleX: 1.3, scaleY: 1.3 }, 200).to({ scaleX: 1, scaleY: 1 }, 100);
+		let gif = movieMaster.getGif('bullet');
+		gif.x = this.img.x - 200 / 2;
+		gif.y = this.img.y - 200 / 2;
+		that.addChild(gif);
+		gif.gotoAndPlay(1, 1);
+		gif.addEventListener(egret.Event.COMPLETE, (e: egret.Event) => {
+			gif.parent && gif.parent.removeChild(gif);
+		}, this);
+
 		self.boxBody.shapes[0].collisionMask = 0;
 		self.isRemoved = true;
 		setTimeout(() => {

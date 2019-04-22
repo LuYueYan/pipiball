@@ -3,11 +3,12 @@ class starCom {
 	public boxBody: p2.Body;
 	public type = 4;//星星
 	public isRemoved = false;//是否已经被移除
+	public gif;//动画
 	public constructor() {
 		this.init()
 	}
 	public init() {
-		this.img = this.createBitmapByName('star');
+		this.img = this.createBitmapByName('img_lightning_01');
 	}
 	public createBody(x, y, that) {
 		var boxShape: p2.Shape = new p2.Box({ width: 1.8, height: 1.8 });
@@ -24,8 +25,19 @@ class starCom {
 		//碰撞后做出反应
 		let self = this;
 		self.isRemoved = true;
-		egret.Tween.removeTweens(self.img);
-		egret.Tween.get(self.img).to({ scaleX: 1.5, scaleY: 1.5 }, 100).to({ scaleX: 1, scaleY: 1 }, 100);
+		if (!this.gif) {
+			let gif = movieMaster.getGif('lightning');
+			gif.x = this.img.x - 180 / 2;
+			gif.y = this.img.y - 180 / 2;
+			this.gif = gif;
+			gif.addEventListener(egret.Event.COMPLETE, (e: egret.Event) => {
+				gif.parent && gif.parent.removeChild(gif);
+			}, this);
+		}
+		that.addChild(this.gif);
+		this.gif.gotoAndPlay(1, 1);
+
+
 		callback && callback();
 	}
 	private createBitmapByName(name: string): egret.Bitmap {

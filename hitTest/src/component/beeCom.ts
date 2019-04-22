@@ -30,12 +30,11 @@ class beeCom {
 		//伤害值改变
 		this.power = num;
 		if (num == 2) {
-			this.img.texture = RES.getRes('img_elf_32_png');
-		} else {
-			this.img.texture = RES.getRes(userDataMaster.bulletArr[userDataMaster.bulletIndex].img+'_png');
+			this.img.texture = RES.getRes('img_lightning_02_png');
+		} else if (num == 1) {
+			this.img.texture = RES.getRes(userDataMaster.bulletArr[userDataMaster.bulletIndex].img + '_png');
 		}
 	}
-
 	private createBitmapByName(name: string): egret.Bitmap {
 		var result: egret.Bitmap = new egret.Bitmap();
 		var texture: egret.Texture = RES.getRes(name + '_png');

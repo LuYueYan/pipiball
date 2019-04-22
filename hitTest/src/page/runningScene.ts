@@ -41,7 +41,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	public ceilArr = [];
 
 	public adaptParams = {
-		gridAreaTop: 186 + 9,//格子区域距离屏幕顶部距离
+		gridAreaTop: 195 + 9,//格子区域距离屏幕顶部距离
 		gridAreaLeft: 30 + 9,//格子区域距离屏幕左侧距离
 		itemWidth: 96//格子尺寸
 	};
@@ -59,13 +59,18 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		score: 0,//分数
 		reborn: 0,//复活次数
 		gold: 0,//获得的金币数量
-		star: 0//星星数量
+		star: 0,//星星数量
+		line:0
 	};
+	public tooling = null;//正在使用的道具名称
+	public lampShow;//使用红绿灯道具时页面上方出现的红绿灯
+	public hammerShow;//使用锥子道具时页面暗色背景
 	public chooseTool = { glass: false, bullet: false };//开局道具
 	public shootPoint = { bx: 375, by: 1034, ex: 0, ey: 0, floor: false, beeNum: 0, speedy: 3 };
 	//发射起点/目标点坐标/ 每次发射后是否有球落地/目前屁屁球数量（还没掉落到地的也算）//在地面上上时的速度
 	public constructor(level, myData: any = {}, tool = { glass: false, bullet: false }) {
 		super();
+		console.log(level)
 		this.levelInfo = userDataMaster.levelArr[level - 1];
 		if (myData && myData.beeNum) {
 			this.myData = myData;
@@ -104,7 +109,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		}
 		that.updateBee()
 		that.createCeil();
-		for (let i = 1; i <= 3; i++) {
+		for (let i = 3; i >0; i--) {
 			that.createGrids(i)
 		}
 
@@ -127,11 +132,12 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		})
 	}
 	public toolState() {
+		//下方道具栏
 		let that = this;
 		let tool = ['hammer', 'hat', 'lamp'];
 		for (let i = 0; i < tool.length; i++) {
 			let item = userDataMaster.tool[tool[i]];
-			if (item.level >= userDataMaster.level) {
+			if (userDataMaster.level + 1 >= item.level) {
 				if (item.num > 0) {
 					that[tool[i] + '_add'].visible = false;
 					that[tool[i] + '_num'].visible = true;
@@ -156,6 +162,48 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	}
 	public judgeTool(type) {
 		//选择使用道具
+		console.log(type, userDataMaster.tool[type]);
+		let that = this;
+		if (userDataMaster.tool[type].num > 0) {
+			//使用道具
+			that.tooling = type;
+			userDataMaster.tool[type].num--;
+			that[type + '_add'].visible = true;
+			that[type + '_num'].visible = false;
+
+			if (type == 'hammer') {
+				//锤子
+				let rect = new eui.Rect(that.stage.stageWidth, that.stage.stageHeight, 0x000000);
+				rect.alpha = 0.7;
+				that.addChildAt(rect, 9);
+				that.hammerShow = rect;
+
+			} else if (type == 'hat') {
+				//攻击加倍
+			} else if (type == 'lamp') {
+				// 暂停一次下落
+				let lamp = that.createBitmapByName('img_prop_e1');
+				lamp.x = (that.stage.stageWidth - lamp.width) / 2;
+				lamp.y = 195;
+				that.addChild(lamp);
+				that.lampShow = lamp;
+			}
+		} else {
+			///看视频获取
+			AdMaster.useVideo(() => {
+				suc();
+			}, () => {
+				CallbackMaster.openShare(() => {
+					suc();
+				})
+			});
+		}
+		function suc() {
+			userDataMaster.tool[type].num++;
+			that[type + '_add'].visible = false;
+			that[type + '_num'].visible = true;
+			that[type + '_num'].text = 'X' + userDataMaster.tool[type].num;
+		}
 	}
 	public createCeil() {
 		let arr = [
@@ -235,19 +283,20 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			//本关卡数量已足够
 			return;
 		}
+		that.myData.line++;
 		for (let col = 0; col < 7; col++) {
 			let g;
 			let ran = Math.random();
-			if (ran > 0.4) {
+			if (ran > 0.7) {
 				continue;
 			}
-			if (ran < 0.2 && (that.levelInfo.existAmount < that.levelInfo.amount)) {
-				let num = Math.floor(1 + Math.random() * that.levelInfo.existAmount);
+			if (ran < 0.5 && (that.levelInfo.existAmount < that.levelInfo.amount)) {
+				let num = Math.floor(1+that.levelInfo.level + that.myData.line);
 				g = new gridCom(num);
 				that.levelInfo.existAmount++;
-			} else if (ran < 0.3) {
+			} else if (ran < 0.6) {
 				g = new ballCom();
-			} else if (ran < 0.4) {
+			} else if (ran < 0.7) {
 				g = new starCom();
 			}
 			let x = col * that.adaptParams.itemWidth + that.adaptParams.itemWidth / 2;
@@ -260,26 +309,43 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		if (this.shooting) {
 			return;
 		}
-		if (0) {
-			//发射状态
-			this.touchMoveFun(e);
-		} else {
-			//使用道具
-			let adaptParams = this.adaptParams;
-			let x = (e.stageX - adaptParams.gridAreaLeft) / adaptParams.itemWidth;
-			let y = (e.stageY - adaptParams.gridAreaTop) / adaptParams.itemWidth;
-			if (x > 0 && x < 7 && y > 0 && y < 8) {
-				let target;
-				for (let i = 0, len = this.gridArr.length; i < len; i++) {
-					let img = this.gridArr[i].img;
-					if (Math.abs(e.stageX - img.x) <= img.width / 2 && Math.abs(e.stageY - img.y) <= img.height / 2) {
-						console.log('target', i)
-						target = this.gridArr[i];
-						break;
+		let that = this;
+		if (that.hammerShow && that.tooling == 'hammer') {
+			//使用道具锥子中
+			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+			for (let i = 0, len = this.gridArr.length; i < len; i++) {
+				let hit = that.gridArr[i].img.hitTestPoint(e.stageX, e.stageY);
+				if (hit) {
+					if (that.gridArr[i].type == 3 || that.gridArr[i] == 4) {
+						//球或者精灵
+						that.gridArr[i].updateText(that, () => {
+							if (that.gridArr[i].img.parent && that.gridArr[i].type == 4) {
+								that.world.removeBody(that.gridArr[i].boxBody);
+								that.gridArr[i].img.parent.removeChild(that.gridArr[i].img);
+							}
+							that.gridArr.splice(i, 1);
+							suc();
+						})
+					} else {
+						that.gridArr[i].updateText(that, that.gridArr[i].num, () => {
+							that.updateProccess();
+							suc();
+						})
 					}
+
+					break;
 				}
-				this.useTool(target)
 			}
+		} else {
+			//正常发射
+			this.touchMoveFun(e);
+		}
+		function suc() {
+			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+			that.tooling = null;
+			that.hammerShow.parent && that.hammerShow.parent.removeChild(that.hammerShow);
 		}
 	}
 	public useTool(target) {
@@ -317,6 +383,10 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		for (let i = 0; i < that.beeArr.length; i++) {
 			let bee = that.beeArr[i].boxBody;
 			setTimeout(function () {
+				if (that.tooling == 'hat') {
+					that.beeArr[i].powerUp(2);
+				}
+
 				egret.Tween.removeTweens(bee.displays[0]);
 				bee.position[0] = startX;
 				bee.position[1] = startY;
@@ -440,7 +510,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 						} else {
 							if (that.gridArr[k].type == 4) {
 								//是星星
-								that.beeArr[i].powerUp(2);
+								that.beeArr[i].powerUp(that.beeArr[i].power * 2);
 								that.gridArr[k].updateText(that);
 							} else if (!that.gridArr[k].isRemoved) {
 								//是方块
@@ -530,7 +600,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 					bee.angle = 0;
 					bee.displays[0].rotation = 0;
 					bee.gravityScale = 1;
-					this.beeArr[i].powerUp();
+					this.beeArr[i].powerUp(1);
 					if (!that.shootPoint.floor) {
 						//第一个球落地时更新下次发射点
 						that.shootPoint.floor = true;
@@ -545,6 +615,9 @@ class runningScene extends eui.Component implements eui.UIComponent {
 					console.log('enter', that.shooting)
 					that.shooting = false;
 					that.shootPoint.floor = false;
+					if (that.tooling != 'lamp') {
+						that.tooling = null;
+					}
 					setTimeout(function () {
 						that.updateGrids();
 						that.updateBee()
@@ -555,7 +628,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 					this.updateSpeed(bee);
 				} else {
 					bee.velocity[1] = -that.shootPoint.speedy;
-					this.beeArr[i].powerUp();
+					this.beeArr[i].powerUp(1);
 				}
 			}
 		}
@@ -582,7 +655,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			that.beeArr[i].boxBody.position[0] = i * direction + bx + dx;
 			if ((that.beeArr[i].boxBody.position[0] > 13) || (that.beeArr[i].boxBody.position[0] < 2)) {
 				that.beeArr[i].boxBody.position[0] = (i % n) * direction + bx + dx / 2;
-				console.log(111, that.beeArr[i].boxBody.position[0])
+
 			} else {
 				n = i;
 			}
@@ -591,6 +664,16 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	public updateGrids() {
 		//更新方块的位置以及产生新方块
 		let that = this;
+		console.log(7657, that.tooling, that.lampShow)
+		if (that.tooling == 'lamp' && that.lampShow) {
+			//使用红绿灯道具中
+			that.tooling = null;
+			setTimeout(function () {
+				that.lampShow.parent && that.lampShow.parent.removeChild(that.lampShow);
+				that.lampShow = null;
+			}, 500);
+			return;
+		}
 		for (let len = that.gridArr.length, i = len - 1; i >= 0; i--) {
 			if (that.gridArr[i].isRemoved) {
 				if (that.gridArr[i].img.parent && that.gridArr[i].type == 4) {
@@ -601,11 +684,11 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				continue;
 			}
 			let y = that.gridArr[i].boxBody.position[1];
-			if (y <= that.getPosition(that.adaptParams.itemWidth * 6.5)) {
+			if (y <= that.getPosition(that.adaptParams.itemWidth * 5.5)) {
 				//危险警告
 				console.log('danger');
 			}
-			if (y <= that.getPosition(that.adaptParams.itemWidth * 7.5)) {
+			if (y <= that.getPosition(that.adaptParams.itemWidth * 6.5)) {
 				//游戏结束
 				console.log('gameOver');
 				that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
@@ -673,9 +756,6 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	public changeGraphics() {
 		//percent 进度百分比
 		let percent = this.myData.score / this.levelInfo.score;
-		if (percent > 1 && this.myData.reborn > 0) {
-			return;
-		}
 		percent = percent > 1 ? 1 : percent;
 		let angle = percent * 2 * Math.PI * 3 / 4 + Math.PI * 0.55;
 		this.arcPro.graphics.clear();

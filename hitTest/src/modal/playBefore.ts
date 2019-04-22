@@ -11,7 +11,8 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	public bulletAdd: eui.Image;
 	public bulletChoose: eui.Image;
 	public startBtn: tweenButton;
-	public videoBtn: tweenButton;
+	public closeBtn: eui.Image;
+	public videoBtn: eui.Image;
 
 
 	public level;
@@ -44,9 +45,13 @@ class playBefore extends eui.Component implements eui.UIComponent {
 			that.bulletNum.visible = false;
 			that.bulletAdd.visible = true;
 		}
+		if (userDataMaster.dayFreeLife.num >= 3) {
+			that.videoBtn.texture = RES.getRes('btn_before_02_png');
+		}
 		that.titleText.text = '第' + this.level + '关';
 		that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
 		that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
+		that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
 		that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('glass') }, this);
 		that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('bullet') }, this);
 	}
@@ -98,13 +103,33 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	}
 	public videoFun() {
 		let that = this;
-		AdMaster.useVideo(() => {
-			that.startFun(false);
-		}, () => {
+		if (!userDataMaster.dayFreeLife) {
+			//今天视频次数用完
+			platform.showModal({
+				title: '温馨提醒',
+				content: '今日免体力次数已用完，请明日再来'
+			});
+		}
+		if (userDataMaster.dayFreeLife.num < 3) {
 			CallbackMaster.openShare(() => {
 				that.startFun(false);
 			})
-		});
+		} else {
+			AdMaster.useVideo(() => {
+				that.startFun(false);
+			}, () => {
+				CallbackMaster.openShare(() => {
+					that.startFun(false);
+				})
+			});
+		}
+	}
+	public closeFun() {
+		if (sceneMaster.littleModal) {
+          sceneMaster.closeLittleModal()
+		} else {
+			sceneMaster.closeModal()
+		}
 
 	}
 }

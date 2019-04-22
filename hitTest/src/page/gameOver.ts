@@ -63,7 +63,7 @@ class gameOver extends eui.Component implements eui.UIComponent {
 		sceneMaster.changeScene(new startScene());
 	}
 	public playFun() {
-		sceneMaster.changeScene(new runningScene(this.level));
+		let  level=this.level;
+		sceneMaster.openLittleModal(new playBefore(level));
 	}
-
 }

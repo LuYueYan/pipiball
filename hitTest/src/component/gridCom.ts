@@ -1,7 +1,7 @@
 class gridCom {
 	public img: egret.Bitmap;//图片
 	public txt: egret.BitmapText;//文字
-	public itemW: number = 94;//格子大小
+	public itemW: number = 96;//格子大小
 	public num: number = 1;//需要击打的数量
 	public boxBody: p2.Body;
 	public type: number = 1;//类型 1--方形 2--三角型 5--炸弹 6--冰块
@@ -12,11 +12,11 @@ class gridCom {
 	public constructor(num = 1) {
 		this.num = num;
 		let ran = Math.random();
-		if (ran < 0.2) {
+		if (ran < 0.1) {
 			this.type = 2;
-		} else if (ran < 0.4) {
+		} else if (ran < 0.3) {
 			this.type = 5;
-		} else if (ran < 0.9) {
+		} else if (ran < 0.45) {
 			this.type = 6;
 		}
 		this.init();
@@ -26,13 +26,17 @@ class gridCom {
 	}
 	public init() {
 		if (this.type == 1) {
-			this.img = this.createBitmapByName('img_diamonds_a1');
+			let x = 'img_diamonds_a1';
+			if (Math.random() > 0.7) {
+				x = 'img_diamonds_c1';
+			}
+			this.img = this.createBitmapByName(x);
 		} else if (this.type == 2) {
 			this.img = this.createBitmapByName('img_diamonds_b1');
 		} else if (this.type == 5) {
-			this.img = this.createBitmapByName('img_diamonds_c1');
+			this.img = this.createBitmapByName('img_diamonds_e1');
 		} else {
-			this.img = this.createBitmapByName('img_diamonds_00');
+			this.img = this.createBitmapByName('img_diamonds_d1');
 		}
 		this.img.anchorOffsetX = this.img.width / 2;
 		this.img.anchorOffsetY = this.img.height / 2;
@@ -40,8 +44,9 @@ class gridCom {
 		this.font = RES.getRes('stripe_text_fnt');
 		this.txt.font = this.font;
 		this.txt.text = this.num + '';
-
-		this.txt.anchorOffsetX = this.img.width / 5;
+		this.txt.width = this.itemW;
+		this.txt.textAlign='center';
+		this.txt.anchorOffsetX = this.img.width / 2;
 		this.txt.anchorOffsetY = this.img.height / 1.8;
 	}
 	public createBody(x, y, that) {
@@ -58,7 +63,6 @@ class gridCom {
 		this.boxBody = new p2.Body({ mass: 100, position: [x, y], type: p2.Body.KINEMATIC });
 		this.boxBody.addShape(boxShape);
 		if (this.type == 6) {
-			console.log(6563)
 			this.boxBody.type = p2.Body.DYNAMIC;
 			this.boxBody.gravityScale = 0;
 			this.boxBody.velocity = [0.5, 0];
@@ -96,6 +100,17 @@ class gridCom {
 			this.img.parent && this.img.parent.removeChild(this.img);
 			this.txt.parent && this.txt.parent.removeChild(this.txt);
 			//播放销毁的动画
+			let g = this.type == 2 ? 1 : this.type;
+			let gif = movieMaster.getGif('boom_' + g);
+			let w = this.type == 5 ? 250 : 200;
+			gif.x = this.img.x - w / 2;
+			gif.y = this.img.y - w / 2;
+
+			that.addChild(gif);
+			gif.gotoAndPlay(1, 1);
+			gif.addEventListener(egret.Event.COMPLETE, (e: egret.Event) => {
+				gif.parent && gif.parent.removeChild(gif);
+			}, this);
 			let res = {};//被销毁的对象，分数之类的信息
 			if (this.type == 5) {
 				//是炸弹 判断被炸毁的区域

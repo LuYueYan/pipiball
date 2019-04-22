@@ -28,12 +28,6 @@
 			</e:Skin>
 		</ns1:skinName>
 	</ns1:tweenButton>
-	<ns1:tweenButton id="videoBtn" label="" x="420" y="561" anchorOffsetX="131" anchorOffsetY="56">
-		<ns1:skinName>
-			<e:Skin states="up,down,disabled">
-			<e:Image width="100%" height="100%" source="btn_start_02_png"/>
-			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
-			</e:Skin>
-		</ns1:skinName>
-	</ns1:tweenButton>
+	<e:Image id="closeBtn" source="btn_close_png" x="555" y="15.44" touchEnabled="true"/>
+	<e:Image id="videoBtn" x="420" y="561" touchEnabled="true" anchorOffsetX="131" anchorOffsetY="56" source="btn_before_01_png"/>
 </e:Skin>

@@ -27,19 +27,19 @@ class userDataMaster {
 	public static levelArr = [
 		{ level: 1, amount: 10, existAmount: 0, score: 20 },
 		{ level: 2, amount: 20, existAmount: 0, score: 40 },
-		{ level: 3, amount: 30, existAmount: 0, score: 60 },
-		{ level: 4, amount: 40, existAmount: 0, score: 100 },
-		{ level: 5, amount: 40, existAmount: 0, score: 200 },
+		{ level: 3, amount: 20, existAmount: 0, score: 60 },
+		{ level: 4, amount: 20, existAmount: 0, score: 100 },
+		{ level: 5, amount: 20, existAmount: 0, score: 200 },
 		{ level: 6, amount: 10, existAmount: 0, score: 20 },
 		{ level: 7, amount: 20, existAmount: 0, score: 40 },
-		{ level: 8, amount: 30, existAmount: 0, score: 60 },
-		{ level: 9, amount: 40, existAmount: 0, score: 100 },
-		{ level: 10, amount: 40, existAmount: 0, score: 200 },
-		{ level: 11, amount: 10, existAmount: 0, score: 20 },
-		{ level: 12, amount: 20, existAmount: 0, score: 40 },
-		{ level: 13, amount: 30, existAmount: 0, score: 60 },
-		{ level: 14, amount: 40, existAmount: 0, score: 100 },
-		{ level: 15, amount: 40, existAmount: 0, score: 200 },
+		{ level: 8, amount: 20, existAmount: 0, score: 60 },
+		{ level: 9, amount: 20, existAmount: 0, score: 100 },
+		{ level: 10, amount: 20, existAmount: 0, score: 200 },
+		{ level: 11, amount: 5, existAmount: 0, score: 20 },
+		{ level: 12, amount: 5, existAmount: 0, score: 40 },
+		{ level: 13, amount: 5, existAmount: 0, score: 60 },
+		{ level: 14, amount: 5, existAmount: 0, score: 100 },
+		{ level: 15, amount: 10, existAmount: 0, score: 200 },
 		{ level: 16, amount: 10, existAmount: 0, score: 20 },
 		{ level: 17, amount: 20, existAmount: 0, score: 40 },
 		{ level: 18, amount: 30, existAmount: 0, score: 60 },
@@ -73,6 +73,7 @@ class userDataMaster {
 	public static requestTimes = 0;//请求游戏数据的次数
 	public static dayShareLife = { day: '', num: 0 };//每日通过分享获得体力
 	public static dayGift = { day: '', num: 0 };//每日抽奖次数
+	public static dayFreeLife = { day: '', num: 0 };//每日免体力开局次数
 	public static loginCallback = null;//弹窗登录成功的回调
 	public constructor() {
 	}
@@ -141,14 +142,17 @@ class userDataMaster {
 						if (info.dayGift) {
 							userDataMaster.dayGift = info.dayGift;
 						}
-						// if (info.tool) {
-						// 	userDataMaster.tool = info.tool;
-						// }
+						if (info.tool) {
+							userDataMaster.tool = info.tool;
+						}
 						if (info.bulletArr) {
 							userDataMaster.bulletArr = info.bulletArr;
 						}
 						if (info.bulletIndex) {
 							userDataMaster.bulletIndex = info.bulletIndex;
+						}
+						if(info.dayFreeLife){
+							userDataMaster.dayFreeLife=info.dayFreeLife;
 						}
 					}
 				}
@@ -244,6 +248,19 @@ class userDataMaster {
 		}
 		return true;
 	}
+	public static get todayFreeLife() {
+		//获取今日免体力开局次数
+		if (userDataMaster.dayFreeLife.day == userDataMaster.getToday()) {
+			if (userDataMaster.dayFreeLife.num >= 8) {
+				//每日前三次分享，后5次看视频
+				return false;
+			}
+		} else {
+			userDataMaster.dayFreeLife = { day: userDataMaster.getToday(), num: 0 };
+		}
+		return true;
+	}
+	
 	public static async createLoginBtn(left, top, width, height) {
 		let that = this;
 		let scale = DeviceMaster.screenWidth / 750;

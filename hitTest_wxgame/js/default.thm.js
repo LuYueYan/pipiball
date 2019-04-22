@@ -1900,53 +1900,13 @@ var egret = window.egret;window.skins={};
 		return playBeforeSkin$Skin7;
 	})(eui.Skin);
 
-	var playBeforeSkin$Skin8 = 	(function (_super) {
-		__extends(playBeforeSkin$Skin8, _super);
-		function playBeforeSkin$Skin8() {
-			_super.call(this);
-			this.skinParts = ["labelDisplay"];
-			
-			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
-			this.states = [
-				new eui.State ("up",
-					[
-					])
-				,
-				new eui.State ("down",
-					[
-					])
-				,
-				new eui.State ("disabled",
-					[
-					])
-			];
-		}
-		var _proto = playBeforeSkin$Skin8.prototype;
-
-		_proto._Image1_i = function () {
-			var t = new eui.Image();
-			t.percentHeight = 100;
-			t.source = "btn_start_02_png";
-			t.percentWidth = 100;
-			return t;
-		};
-		_proto.labelDisplay_i = function () {
-			var t = new eui.Label();
-			this.labelDisplay = t;
-			t.horizontalCenter = 0;
-			t.verticalCenter = 0;
-			return t;
-		};
-		return playBeforeSkin$Skin8;
-	})(eui.Skin);
-
 	function playBeforeSkin() {
 		_super.call(this);
-		this.skinParts = ["titleText","glassLight","glassNum","glassAdd","glassChoose","glass","bulletLight","bulletNum","bulletAdd","bulletChoose","bullet","startBtn","videoBtn"];
+		this.skinParts = ["titleText","glassLight","glassNum","glassAdd","glassChoose","glass","bulletLight","bulletNum","bulletAdd","bulletChoose","bullet","startBtn","closeBtn","videoBtn"];
 		
 		this.height = 750;
 		this.width = 605;
-		this.elementsContent = [this._Image1_i(),this.titleText_i(),this._Label1_i(),this.glass_i(),this.bullet_i(),this.startBtn_i(),this.videoBtn_i()];
+		this.elementsContent = [this._Image1_i(),this.titleText_i(),this._Label1_i(),this.glass_i(),this.bullet_i(),this.startBtn_i(),this.closeBtn_i(),this.videoBtn_i()];
 	}
 	var _proto = playBeforeSkin.prototype;
 
@@ -2133,15 +2093,24 @@ var egret = window.egret;window.skins={};
 		t.skinName = playBeforeSkin$Skin7;
 		return t;
 	};
+	_proto.closeBtn_i = function () {
+		var t = new eui.Image();
+		this.closeBtn = t;
+		t.source = "btn_close_png";
+		t.touchEnabled = true;
+		t.x = 555;
+		t.y = 15.44;
+		return t;
+	};
 	_proto.videoBtn_i = function () {
-		var t = new tweenButton();
+		var t = new eui.Image();
 		this.videoBtn = t;
 		t.anchorOffsetX = 131;
 		t.anchorOffsetY = 56;
-		t.label = "";
+		t.source = "btn_before_01_png";
+		t.touchEnabled = true;
 		t.x = 420;
 		t.y = 561;
-		t.skinName = playBeforeSkin$Skin8;
 		return t;
 	};
 	return playBeforeSkin;
@@ -2312,9 +2281,9 @@ var egret = window.egret;window.skins={};
 	return rankItemSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/rankModal.exml'] = window.rankModalSkin = (function (_super) {
 	__extends(rankModalSkin, _super);
-	var rankModalSkin$Skin9 = 	(function (_super) {
-		__extends(rankModalSkin$Skin9, _super);
-		function rankModalSkin$Skin9() {
+	var rankModalSkin$Skin8 = 	(function (_super) {
+		__extends(rankModalSkin$Skin8, _super);
+		function rankModalSkin$Skin8() {
 			_super.call(this);
 			this.skinParts = ["labelDisplay"];
 			
@@ -2333,7 +2302,7 @@ var egret = window.egret;window.skins={};
 					])
 			];
 		}
-		var _proto = rankModalSkin$Skin9.prototype;
+		var _proto = rankModalSkin$Skin8.prototype;
 
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
@@ -2349,7 +2318,7 @@ var egret = window.egret;window.skins={};
 			t.verticalCenter = 0;
 			return t;
 		};
-		return rankModalSkin$Skin9;
+		return rankModalSkin$Skin8;
 	})(eui.Skin);
 
 	function rankModalSkin() {
@@ -2457,7 +2426,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.x = 30;
 		t.y = 40;
-		t.skinName = rankModalSkin$Skin9;
+		t.skinName = rankModalSkin$Skin8;
 		return t;
 	};
 	_proto.myRank_i = function () {
@@ -2475,9 +2444,9 @@ var egret = window.egret;window.skins={};
 	return rankModalSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/rebornModal.exml'] = window.rebornModalSkin = (function (_super) {
 	__extends(rebornModalSkin, _super);
-	var rebornModalSkin$Skin10 = 	(function (_super) {
-		__extends(rebornModalSkin$Skin10, _super);
-		function rebornModalSkin$Skin10() {
+	var rebornModalSkin$Skin9 = 	(function (_super) {
+		__extends(rebornModalSkin$Skin9, _super);
+		function rebornModalSkin$Skin9() {
 			_super.call(this);
 			this.skinParts = ["labelDisplay"];
 			
@@ -2496,7 +2465,7 @@ var egret = window.egret;window.skins={};
 					])
 			];
 		}
-		var _proto = rebornModalSkin$Skin10.prototype;
+		var _proto = rebornModalSkin$Skin9.prototype;
 
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
@@ -2512,7 +2481,7 @@ var egret = window.egret;window.skins={};
 			t.verticalCenter = 0;
 			return t;
 		};
-		return rebornModalSkin$Skin10;
+		return rebornModalSkin$Skin9;
 	})(eui.Skin);
 
 	function rebornModalSkin() {
@@ -2570,7 +2539,7 @@ var egret = window.egret;window.skins={};
 		t.horizontalCenter = 0;
 		t.label = "";
 		t.y = 569;
-		t.skinName = rebornModalSkin$Skin10;
+		t.skinName = rebornModalSkin$Skin9;
 		return t;
 	};
 	return rebornModalSkin;
@@ -2959,6 +2928,46 @@ var egret = window.egret;window.skins={};
 	return cloudComSkin;
 })(eui.Skin);generateEUI.paths['resource/page/gameOver.exml'] = window.gameOverSkin = (function (_super) {
 	__extends(gameOverSkin, _super);
+	var gameOverSkin$Skin10 = 	(function (_super) {
+		__extends(gameOverSkin$Skin10, _super);
+		function gameOverSkin$Skin10() {
+			_super.call(this);
+			this.skinParts = ["labelDisplay"];
+			
+			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = gameOverSkin$Skin10.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			t.percentHeight = 100;
+			t.source = "btn_challenge_png";
+			t.percentWidth = 100;
+			return t;
+		};
+		_proto.labelDisplay_i = function () {
+			var t = new eui.Label();
+			this.labelDisplay = t;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
+			return t;
+		};
+		return gameOverSkin$Skin10;
+	})(eui.Skin);
+
 	var gameOverSkin$Skin11 = 	(function (_super) {
 		__extends(gameOverSkin$Skin11, _super);
 		function gameOverSkin$Skin11() {
@@ -2985,7 +2994,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "btn_challenge_png";
+			t.source = "btn_share_01_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -3025,46 +3034,6 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "btn_share_01_png";
-			t.percentWidth = 100;
-			return t;
-		};
-		_proto.labelDisplay_i = function () {
-			var t = new eui.Label();
-			this.labelDisplay = t;
-			t.horizontalCenter = 0;
-			t.verticalCenter = 0;
-			return t;
-		};
-		return gameOverSkin$Skin12;
-	})(eui.Skin);
-
-	var gameOverSkin$Skin13 = 	(function (_super) {
-		__extends(gameOverSkin$Skin13, _super);
-		function gameOverSkin$Skin13() {
-			_super.call(this);
-			this.skinParts = ["labelDisplay"];
-			
-			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
-			this.states = [
-				new eui.State ("up",
-					[
-					])
-				,
-				new eui.State ("down",
-					[
-					])
-				,
-				new eui.State ("disabled",
-					[
-					])
-			];
-		}
-		var _proto = gameOverSkin$Skin13.prototype;
-
-		_proto._Image1_i = function () {
-			var t = new eui.Image();
-			t.percentHeight = 100;
 			t.source = "btn_home_02_png";
 			t.percentWidth = 100;
 			return t;
@@ -3076,7 +3045,7 @@ var egret = window.egret;window.skins={};
 			t.verticalCenter = 0;
 			return t;
 		};
-		return gameOverSkin$Skin13;
+		return gameOverSkin$Skin12;
 	})(eui.Skin);
 
 	function gameOverSkin() {
@@ -3158,7 +3127,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.x = 192;
 		t.y = 721;
-		t.skinName = gameOverSkin$Skin11;
+		t.skinName = gameOverSkin$Skin10;
 		return t;
 	};
 	_proto.shareBtn_i = function () {
@@ -3169,7 +3138,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.x = 444;
 		t.y = 721;
-		t.skinName = gameOverSkin$Skin12;
+		t.skinName = gameOverSkin$Skin11;
 		return t;
 	};
 	_proto.homeBtn_i = function () {
@@ -3180,7 +3149,7 @@ var egret = window.egret;window.skins={};
 		t.horizontalCenter = 0;
 		t.label = "";
 		t.y = 865.5;
-		t.skinName = gameOverSkin$Skin13;
+		t.skinName = gameOverSkin$Skin12;
 		return t;
 	};
 	_proto.moreGroup_i = function () {
@@ -3744,6 +3713,46 @@ var egret = window.egret;window.skins={};
 	return runningSceneSkin;
 })(eui.Skin);generateEUI.paths['resource/page/startScene.exml'] = window.startSceneSkin = (function (_super) {
 	__extends(startSceneSkin, _super);
+	var startSceneSkin$Skin13 = 	(function (_super) {
+		__extends(startSceneSkin$Skin13, _super);
+		function startSceneSkin$Skin13() {
+			_super.call(this);
+			this.skinParts = ["labelDisplay"];
+			
+			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = startSceneSkin$Skin13.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			t.percentHeight = 100;
+			t.source = "icn_home_05_png";
+			t.percentWidth = 100;
+			return t;
+		};
+		_proto.labelDisplay_i = function () {
+			var t = new eui.Label();
+			this.labelDisplay = t;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
+			return t;
+		};
+		return startSceneSkin$Skin13;
+	})(eui.Skin);
+
 	var startSceneSkin$Skin14 = 	(function (_super) {
 		__extends(startSceneSkin$Skin14, _super);
 		function startSceneSkin$Skin14() {
@@ -3770,7 +3779,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "icn_home_05_png";
+			t.source = "icn_home_06_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -3810,7 +3819,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "icn_home_06_png";
+			t.source = "icn_home_01_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -3850,7 +3859,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "icn_home_01_png";
+			t.source = "icn_home_02_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -3890,7 +3899,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "icn_home_02_png";
+			t.source = "icn_home_03_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -3904,53 +3913,13 @@ var egret = window.egret;window.skins={};
 		return startSceneSkin$Skin17;
 	})(eui.Skin);
 
-	var startSceneSkin$Skin18 = 	(function (_super) {
-		__extends(startSceneSkin$Skin18, _super);
-		function startSceneSkin$Skin18() {
-			_super.call(this);
-			this.skinParts = ["labelDisplay"];
-			
-			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
-			this.states = [
-				new eui.State ("up",
-					[
-					])
-				,
-				new eui.State ("down",
-					[
-					])
-				,
-				new eui.State ("disabled",
-					[
-					])
-			];
-		}
-		var _proto = startSceneSkin$Skin18.prototype;
-
-		_proto._Image1_i = function () {
-			var t = new eui.Image();
-			t.percentHeight = 100;
-			t.source = "icn_home_03_png";
-			t.percentWidth = 100;
-			return t;
-		};
-		_proto.labelDisplay_i = function () {
-			var t = new eui.Label();
-			this.labelDisplay = t;
-			t.horizontalCenter = 0;
-			t.verticalCenter = 0;
-			return t;
-		};
-		return startSceneSkin$Skin18;
-	})(eui.Skin);
-
 	function startSceneSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","liftText","lifeGroup","goldText","goldGroup","openLife","openShare","openBullet","openShop","openRank","red_dot","openGift","moreGroup"];
+		this.skinParts = ["bgImg","liftText","lifeGroup","goldText","goldGroup","openLife","openShare","openBullet","openShop","openRank","red_dot","openGift","navGroup","moreGroup"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.bgImg_i(),this.lifeGroup_i(),this.goldGroup_i(),this.openLife_i(),this.openShare_i(),this.openBullet_i(),this.openShop_i(),this.openRank_i(),this.openGift_i(),this._Image6_i(),this._Rect1_i(),this.moreGroup_i()];
+		this.elementsContent = [this.bgImg_i(),this.lifeGroup_i(),this.goldGroup_i(),this.openLife_i(),this.openShare_i(),this.navGroup_i(),this._Image6_i(),this._Rect1_i(),this.moreGroup_i()];
 	}
 	var _proto = startSceneSkin.prototype;
 
@@ -4038,7 +4007,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.x = 670;
 		t.y = 675.5;
-		t.skinName = startSceneSkin$Skin14;
+		t.skinName = startSceneSkin$Skin13;
 		return t;
 	};
 	_proto.openShare_i = function () {
@@ -4049,7 +4018,23 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.x = 670;
 		t.y = 836.5;
-		t.skinName = startSceneSkin$Skin15;
+		t.skinName = startSceneSkin$Skin14;
+		return t;
+	};
+	_proto.navGroup_i = function () {
+		var t = new eui.Group();
+		this.navGroup = t;
+		t.anchorOffsetX = 0;
+		t.cacheAsBitmap = true;
+		t.height = 135;
+		t.horizontalCenter = 0;
+		t.y = 1159;
+		t.layout = this._BasicLayout1_i();
+		t.elementsContent = [this.openBullet_i(),this.openShop_i(),this.openRank_i(),this.openGift_i()];
+		return t;
+	};
+	_proto._BasicLayout1_i = function () {
+		var t = new eui.BasicLayout();
 		return t;
 	};
 	_proto.openBullet_i = function () {
@@ -4058,9 +4043,9 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetX = 65;
 		t.anchorOffsetY = 67.5;
 		t.label = "";
-		t.x = 120;
-		t.y = 1226.5;
-		t.skinName = startSceneSkin$Skin16;
+		t.verticalCenter = 0;
+		t.x = 65;
+		t.skinName = startSceneSkin$Skin15;
 		return t;
 	};
 	_proto.openShop_i = function () {
@@ -4069,9 +4054,9 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetX = 65;
 		t.anchorOffsetY = 67.5;
 		t.label = "";
-		t.x = 290;
-		t.y = 1226.5;
-		t.skinName = startSceneSkin$Skin17;
+		t.verticalCenter = 0;
+		t.x = 235;
+		t.skinName = startSceneSkin$Skin16;
 		return t;
 	};
 	_proto.openRank_i = function () {
@@ -4080,9 +4065,9 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetX = 65;
 		t.anchorOffsetY = 67.5;
 		t.label = "";
-		t.x = 450;
-		t.y = 1226.5;
-		t.skinName = startSceneSkin$Skin18;
+		t.verticalCenter = 0;
+		t.x = 395;
+		t.skinName = startSceneSkin$Skin17;
 		return t;
 	};
 	_proto.openGift_i = function () {
@@ -4091,9 +4076,9 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetX = 65;
 		t.anchorOffsetY = 67.5;
 		t.height = 135;
+		t.verticalCenter = 0;
 		t.width = 130;
-		t.x = 610;
-		t.y = 1226.5;
+		t.x = 555;
 		t.elementsContent = [this._Image3_i(),this._Image4_i(),this._Image5_i(),this.red_dot_i()];
 		return t;
 	};
