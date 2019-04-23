@@ -69,7 +69,7 @@ class CallbackMaster {
 				tool: userDataMaster.tool,
 				dayGift: userDataMaster.dayGift,
 				bulletIndex: userDataMaster.bulletIndex,
-				bulletArr: userDataMaster.bulletArr,
+				bulletSateArr: userDataMaster.bulletSateArr,
 				dayFreeLife: userDataMaster.dayFreeLife
 			};
 			let params = {

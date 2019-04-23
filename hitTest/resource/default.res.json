@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,img_elf_82_png,square_png,img_bg_game_png,img_time_05_png,img_time_01_png,img_time_02_png,img_time_03_png,img_time_04_png,arrow_png,point_png,Convex_png,ball_png,star_png,img_elf_32_png,blue_text_fnt,blue_text_png,brown_text_fnt,brown_text_png,icn_lock_png,img_bg_game_01_jpg,img_bg_game_02_jpg,img_bg_game_03_png,img_bg_green_1_png,img_bg_green_2_png,img_bg_prop_01_png,img_bullet_a1_png,img_bullet_a2_png,img_diamonds_00_png,img_diamonds_a1_png,img_diamonds_b1_png,img_prop_a1_png,img_role_boy_png,img_schedule_01_png,img_schedule_02_png,stripe_text_fnt,stripe_text_png,img_diamonds_c1_png,btn_buy_png,btn_challenge_png,btn_close_png,btn_get_png,btn_get_double_png,btn_get_lottery_png,btn_get_video_png,btn_home_01_png,btn_home_02_png,btn_insufficient_png,btn_know_png,btn_more_png,btn_more_game_png,btn_page_01_png,btn_page_02_png,btn_remain_diamond_png,btn_remain_strength_png,btn_revive_png,btn_share_01_png,btn_share_02_png,btn_start_01_png,btn_tittle_a1_png,btn_tittle_a2_png,btn_tittle_b1_png,btn_tittle_b2_png,btn_use_png,icn_diamond_01_png,icn_diamond_02_png,icn_home_01_png,icn_home_02_png,icn_home_03_png,icn_home_04a_png,icn_home_04b_png,icn_home_04c_png,icn_home_05_png,icn_home_06_png,icn_medal_01_png,icn_medal_02_png,icn_medal_03_png,img_bg_aa_png,img_bg_bb_01_png,img_bg_bb_02_png,img_bg_bullet_02_png,img_bg_bullet_03_png,img_bg_head_png,img_bg_prop_01_jpg,img_bg_prop_02_png,img_bg_ranking_01_jpg,img_bg_ranking_02_png,img_bg_start_png,img_bg_strength_png,img_bg_strength_time_png,img_bullet_b3_png,img_bullet_c3_png,img_bullet_d3_png,img_bullet_e3_png,img_bullet_f3_png,img_bullet_g3_png,img_check_01_png,img_check_02_png,img_countdown_00_png,img_countdown_01_png,img_countdown_02_png,img_countdown_03_png,img_countdown_04_png,img_countdown_05_png,img_diamond_big_png,img_game_name_png,img_gift_00a_png,img_gift_00b_png,img_gift_01_png,img_gift_02_png,img_gift_03_png,img_gift_04_png,img_gift_05_png,img_hourglass_png,img_light_gift_01_png,img_light_star_png,img_new_record_png,img_prop_b1_png,img_prop_c1_png,img_prop_e1_png,img_prop_game_01_png,img_red_dot_png,img_remain_diamonds_png,img_role_girl_png,img_select_png,img_star_a1_png,img_star_a2_png,img_strength_01_png,img_strength_02_png,img_text_01_png,img_text_02_png,img_text_03_png,img_text_04_png,img_tittle_png,img_unknown_01_png,img_unknown_02_png,img_using_png,img_wood_01_png,img_wood_02_png,img_bg_bullet_01_png,star_bg_png,img_star_b2_png,img_star_b1_png,cloud_top_left_png,cloud_top_right_png,cloud_bottom_left_png,cloud_bottom_right_png,img_map_09_png,img_map_01_png,img_map_02_png,img_map_03_png,img_map_04_png,img_map_05_png,img_map_06_png,img_map_07_png,img_map_08_png,btn_lottery_01_png,btn_lottery_02_png,btn_lottery_03_png,img_bg_lottery_00_jpg,img_bg_lottery_01_png,img_bg_lottery_02_png,img_bg_text_guide_png,img_prop_d1_png,btn_more_game_turn_png,img_bg_game_more_png,img_diamonds_d1_png,img_diamonds_e1_png,btn_before_01_png,btn_before_02_png,boom_gif_png,boom_gif_json,img_lightning_01_png,img_lightning_02_png,boom_gif_2_png,boom_gif_2_json",
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,img_elf_82_png,square_png,img_bg_game_png,img_time_05_png,img_time_01_png,img_time_02_png,img_time_03_png,img_time_04_png,arrow_png,point_png,Convex_png,ball_png,star_png,img_elf_32_png,blue_text_fnt,blue_text_png,brown_text_fnt,brown_text_png,icn_lock_png,img_bg_game_01_jpg,img_bg_game_02_jpg,img_bg_game_03_png,img_bg_green_1_png,img_bg_green_2_png,img_bg_prop_01_png,img_bullet_a1_png,img_bullet_a2_png,img_diamonds_00_png,img_diamonds_a1_png,img_diamonds_b1_png,img_prop_a1_png,img_role_boy_png,img_schedule_01_png,img_schedule_02_png,stripe_text_fnt,stripe_text_png,img_diamonds_c1_png,btn_buy_png,btn_challenge_png,btn_close_png,btn_get_png,btn_get_double_png,btn_get_lottery_png,btn_get_video_png,btn_home_01_png,btn_home_02_png,btn_insufficient_png,btn_know_png,btn_more_png,btn_more_game_png,btn_page_01_png,btn_page_02_png,btn_remain_diamond_png,btn_remain_strength_png,btn_revive_png,btn_share_01_png,btn_share_02_png,btn_start_01_png,btn_tittle_a1_png,btn_tittle_a2_png,btn_tittle_b1_png,btn_tittle_b2_png,btn_use_png,icn_diamond_01_png,icn_diamond_02_png,icn_home_01_png,icn_home_02_png,icn_home_03_png,icn_home_04a_png,icn_home_04b_png,icn_home_04c_png,icn_home_05_png,icn_home_06_png,icn_medal_01_png,icn_medal_02_png,icn_medal_03_png,img_bg_aa_png,img_bg_bb_01_png,img_bg_bb_02_png,img_bg_bullet_02_png,img_bg_bullet_03_png,img_bg_head_png,img_bg_prop_01_jpg,img_bg_prop_02_png,img_bg_ranking_01_jpg,img_bg_ranking_02_png,img_bg_start_png,img_bg_strength_png,img_bg_strength_time_png,img_bullet_b3_png,img_bullet_c3_png,img_bullet_d3_png,img_bullet_e3_png,img_check_01_png,img_check_02_png,img_countdown_00_png,img_countdown_01_png,img_countdown_02_png,img_countdown_03_png,img_countdown_04_png,img_countdown_05_png,img_diamond_big_png,img_game_name_png,img_gift_00a_png,img_gift_00b_png,img_gift_01_png,img_gift_02_png,img_gift_03_png,img_gift_04_png,img_gift_05_png,img_hourglass_png,img_light_gift_01_png,img_light_star_png,img_new_record_png,img_prop_b1_png,img_prop_c1_png,img_prop_e1_png,img_prop_game_01_png,img_red_dot_png,img_remain_diamonds_png,img_role_girl_png,img_select_png,img_star_a1_png,img_star_a2_png,img_strength_01_png,img_strength_02_png,img_text_01_png,img_text_02_png,img_text_03_png,img_text_04_png,img_tittle_png,img_unknown_01_png,img_unknown_02_png,img_using_png,img_wood_01_png,img_wood_02_png,img_bg_bullet_01_png,star_bg_png,img_star_b2_png,img_star_b1_png,cloud_top_left_png,cloud_top_right_png,cloud_bottom_left_png,cloud_bottom_right_png,img_map_09_png,img_map_01_png,img_map_02_png,img_map_03_png,img_map_04_png,img_map_05_png,img_map_06_png,img_map_07_png,img_map_08_png,btn_lottery_01_png,btn_lottery_02_png,btn_lottery_03_png,img_bg_lottery_00_jpg,img_bg_lottery_01_png,img_bg_lottery_02_png,img_bg_text_guide_png,img_prop_d1_png,btn_more_game_turn_png,img_bg_game_more_png,img_diamonds_d1_png,img_diamonds_e1_png,btn_before_01_png,btn_before_02_png,boom_gif_png,boom_gif_json,img_lightning_01_png,img_lightning_02_png,boom_gif_2_png,boom_gif_2_json,img_power_01_png,img_power_02_png,img_power_03_png",
 			"name": "preload"
 		}
 	],
@@ -603,16 +603,6 @@
 			"url": "assets/Aimages0410/img_bullet_e3.png"
 		},
 		{
-			"name": "img_bullet_f3_png",
-			"type": "image",
-			"url": "assets/Aimages0410/img_bullet_f3.png"
-		},
-		{
-			"name": "img_bullet_g3_png",
-			"type": "image",
-			"url": "assets/Aimages0410/img_bullet_g3.png"
-		},
-		{
 			"name": "img_check_01_png",
 			"type": "image",
 			"url": "assets/Aimages0410/img_check_01.png"
@@ -1011,6 +1001,21 @@
 			"name": "boom_gif_2_json",
 			"type": "json",
 			"url": "assets/Aimages0410/boom_gif_2.json"
+		},
+		{
+			"name": "img_power_01_png",
+			"type": "image",
+			"url": "assets/Aimages0410/img_power_01.png"
+		},
+		{
+			"name": "img_power_02_png",
+			"type": "image",
+			"url": "assets/Aimages0410/img_power_02.png"
+		},
+		{
+			"name": "img_power_03_png",
+			"type": "image",
+			"url": "assets/Aimages0410/img_power_03.png"
 		}
 	]
 }

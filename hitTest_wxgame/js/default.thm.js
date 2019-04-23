@@ -2547,11 +2547,11 @@ var egret = window.egret;window.skins={};
 	__extends(shopItemSkin, _super);
 	function shopItemSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","img","title","price","btn"];
+		this.skinParts = ["bgImg","img","power","title","txt","price","btn"];
 		
 		this.height = 293;
 		this.width = 738;
-		this.elementsContent = [this.bgImg_i(),this._Image1_i(),this.img_i(),this.title_i(),this.price_i(),this._Image2_i(),this.btn_i()];
+		this.elementsContent = [this.bgImg_i(),this._Group1_i(),this.title_i(),this.txt_i(),this.price_i(),this._Image2_i(),this.btn_i()];
 	}
 	var _proto = shopItemSkin.prototype;
 
@@ -2563,11 +2563,18 @@ var egret = window.egret;window.skins={};
 		t.source = "img_bg_bullet_02_png";
 		return t;
 	};
+	_proto._Group1_i = function () {
+		var t = new eui.Group();
+		t.x = 98;
+		t.y = 90;
+		t.elementsContent = [this._Image1_i(),this.img_i(),this.power_i()];
+		return t;
+	};
 	_proto._Image1_i = function () {
 		var t = new eui.Image();
 		t.source = "img_bg_bullet_03_png";
-		t.x = 98;
-		t.y = 90;
+		t.x = 0;
+		t.y = 0;
 		return t;
 	};
 	_proto.img_i = function () {
@@ -2576,10 +2583,18 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetX = 0;
 		t.anchorOffsetY = 0;
 		t.height = 120;
-		t.source = "img_bullet_c3_png";
+		t.source = "img_bullet_a2_png";
 		t.width = 120;
-		t.x = 122;
-		t.y = 111;
+		t.x = 24;
+		t.y = 21;
+		return t;
+	};
+	_proto.power_i = function () {
+		var t = new eui.Image();
+		this.power = t;
+		t.horizontalCenter = 0;
+		t.source = "img_power_01_png";
+		t.y = 145;
 		return t;
 	};
 	_proto.title_i = function () {
@@ -2590,8 +2605,19 @@ var egret = window.egret;window.skins={};
 		t.size = 32;
 		t.text = "仙人球";
 		t.textColor = 0x874717;
-		t.x = 285;
+		t.x = 273;
 		t.y = 103;
+		return t;
+	};
+	_proto.txt_i = function () {
+		var t = new eui.Label();
+		this.txt = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 22;
+		t.text = "仙人球";
+		t.textColor = 0x874717;
+		t.x = 276;
+		t.y = 152;
 		return t;
 	};
 	_proto.price_i = function () {
@@ -2601,15 +2627,15 @@ var egret = window.egret;window.skins={};
 		t.size = 24;
 		t.text = "x1000";
 		t.textColor = 0xef4d52;
-		t.x = 334.5;
-		t.y = 163.02;
+		t.x = 322.5;
+		t.y = 206.02;
 		return t;
 	};
 	_proto._Image2_i = function () {
 		var t = new eui.Image();
 		t.source = "icn_diamond_02_png";
-		t.x = 284.81;
-		t.y = 158.02;
+		t.x = 272.81;
+		t.y = 201.02;
 		return t;
 	};
 	_proto.btn_i = function () {
@@ -2617,7 +2643,7 @@ var egret = window.egret;window.skins={};
 		this.btn = t;
 		t.source = "btn_use_png";
 		t.x = 494.33;
-		t.y = 171;
+		t.y = 133;
 		return t;
 	};
 	return shopItemSkin;
