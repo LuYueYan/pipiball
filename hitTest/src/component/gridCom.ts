@@ -45,9 +45,10 @@ class gridCom {
 		this.txt.font = this.font;
 		this.txt.text = this.num + '';
 		this.txt.width = this.itemW;
-		this.txt.textAlign='center';
+		this.txt.textAlign = 'center';
 		this.txt.anchorOffsetX = this.img.width / 2;
-		this.txt.anchorOffsetY = this.img.height / 1.8;
+		this.txt.anchorOffsetY = this.img.height / 1.9;
+		this.txt.scaleX = 0.8, this.txt.scaleY = 0.8;
 	}
 	public createBody(x, y, that) {
 		var boxShape: p2.Shape;
@@ -55,7 +56,7 @@ class gridCom {
 			var vertices = [[1, -1], [1, 1], [-1, 1]];//必须是逆时针方向的数组
 			boxShape = new p2.Convex({ vertices: vertices });
 		} else {
-			boxShape = new p2.Box({ width: 1.8, height: 1.8 });
+			boxShape = new p2.Box({ width: 1.9, height: 1.9 });
 		}
 		boxShape.collisionGroup = 6;
 		boxShape.collisionMask = 7;
@@ -65,7 +66,10 @@ class gridCom {
 		if (this.type == 6) {
 			this.boxBody.type = p2.Body.DYNAMIC;
 			this.boxBody.gravityScale = 0;
-			this.boxBody.velocity = [0.5, 0];
+			let self = this;
+			setTimeout(function () {
+				self.boxBody.velocity = [0.5, 0];
+			}, 100);
 		}
 		this.boxBody.fixedRotation = false;
 		this.boxBody.displays = [this.img, this.txt];

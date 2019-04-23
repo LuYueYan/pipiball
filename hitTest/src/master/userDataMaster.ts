@@ -24,48 +24,7 @@ class userDataMaster {
 		{ id: 5, img: 'img_bullet_f3', title: '仙人掌', price: 3000, state: 0 },
 		{ id: 6, img: 'img_bullet_g3', title: '仙人掌', price: 5000, state: 0 },
 	];
-	public static levelArr = [
-		{ level: 1, amount: 10, existAmount: 0, score: 20 },
-		{ level: 2, amount: 20, existAmount: 0, score: 40 },
-		{ level: 3, amount: 20, existAmount: 0, score: 60 },
-		{ level: 4, amount: 20, existAmount: 0, score: 100 },
-		{ level: 5, amount: 20, existAmount: 0, score: 200 },
-		{ level: 6, amount: 10, existAmount: 0, score: 20 },
-		{ level: 7, amount: 20, existAmount: 0, score: 40 },
-		{ level: 8, amount: 20, existAmount: 0, score: 60 },
-		{ level: 9, amount: 20, existAmount: 0, score: 100 },
-		{ level: 10, amount: 20, existAmount: 0, score: 200 },
-		{ level: 11, amount: 5, existAmount: 0, score: 20 },
-		{ level: 12, amount: 5, existAmount: 0, score: 40 },
-		{ level: 13, amount: 5, existAmount: 0, score: 60 },
-		{ level: 14, amount: 5, existAmount: 0, score: 100 },
-		{ level: 15, amount: 10, existAmount: 0, score: 200 },
-		{ level: 16, amount: 10, existAmount: 0, score: 20 },
-		{ level: 17, amount: 20, existAmount: 0, score: 40 },
-		{ level: 18, amount: 30, existAmount: 0, score: 60 },
-		{ level: 19, amount: 40, existAmount: 0, score: 100 },
-		{ level: 20, amount: 40, existAmount: 0, score: 200 },
-		{ level: 21, amount: 10, existAmount: 0, score: 20 },
-		{ level: 22, amount: 20, existAmount: 0, score: 40 },
-		{ level: 23, amount: 30, existAmount: 0, score: 60 },
-		{ level: 24, amount: 40, existAmount: 0, score: 100 },
-		{ level: 25, amount: 40, existAmount: 0, score: 200 },
-		{ level: 26, amount: 10, existAmount: 0, score: 20 },
-		{ level: 27, amount: 20, existAmount: 0, score: 40 },
-		{ level: 28, amount: 30, existAmount: 0, score: 60 },
-		{ level: 29, amount: 40, existAmount: 0, score: 100 },
-		{ level: 30, amount: 40, existAmount: 0, score: 200 },
-		{ level: 31, amount: 10, existAmount: 0, score: 20 },
-		{ level: 32, amount: 20, existAmount: 0, score: 40 },
-		{ level: 33, amount: 30, existAmount: 0, score: 60 },
-		{ level: 34, amount: 40, existAmount: 0, score: 100 },
-		{ level: 35, amount: 40, existAmount: 0, score: 200 },
-		{ level: 36, amount: 10, existAmount: 0, score: 20 },
-		{ level: 37, amount: 20, existAmount: 0, score: 40 },
-		{ level: 38, amount: 30, existAmount: 0, score: 60 },
-		{ level: 39, amount: 40, existAmount: 0, score: 100 },
-		{ level: 40, amount: 40, existAmount: 0, score: 200 }
-	];
+	public static levelArr = [];//关卡信息数组
 	public static myCollection: eui.ArrayCollection;
 	public static shareUid = 0;//分享人id
 	public static userInfoBtn;
@@ -97,6 +56,20 @@ class userDataMaster {
 		userDataMaster.myCollection = new eui.ArrayCollection(sourceArr);
 		userDataMaster.login();
 		userDataMaster.getRecommand();
+		userDataMaster.createLevelArr();
+	}
+	public static createLevelArr() {
+		let arr = [];
+		let bigArr = [5, 8, 11, 14, 15];
+		for (let i = 1; i <= 100; i++) {
+			let small = i < 5 ? i : 5;
+			let big = i > bigArr.length ? i + 10 : bigArr[i - 1];
+			let line = big-small+1;
+			let amount=Math.ceil((line*7)/2);
+			let item = { level: i, amount: amount, existAmount: 0, score: 20 };
+			arr.push(item);
+		}
+		userDataMaster.levelArr = arr;
 	}
 	public static getGameData(uid) {
 		let that = this;
@@ -151,8 +124,8 @@ class userDataMaster {
 						if (info.bulletIndex) {
 							userDataMaster.bulletIndex = info.bulletIndex;
 						}
-						if(info.dayFreeLife){
-							userDataMaster.dayFreeLife=info.dayFreeLife;
+						if (info.dayFreeLife) {
+							userDataMaster.dayFreeLife = info.dayFreeLife;
 						}
 					}
 				}
@@ -260,7 +233,7 @@ class userDataMaster {
 		}
 		return true;
 	}
-	
+
 	public static async createLoginBtn(left, top, width, height) {
 		let that = this;
 		let scale = DeviceMaster.screenWidth / 750;
@@ -332,7 +305,7 @@ class userDataMaster {
 
 					//测试测试………………
 					// userDataMaster.myInfo.is_new_user = true;
-                   // userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
+					// userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
 					//初始化用户openid
 					platform.openDataContext.postMessage({
 						type: "openid",

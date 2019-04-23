@@ -11,7 +11,7 @@ class starCom {
 		this.img = this.createBitmapByName('img_lightning_01');
 	}
 	public createBody(x, y, that) {
-		var boxShape: p2.Shape = new p2.Box({ width: 1.8, height: 1.8 });
+		var boxShape: p2.Shape = new p2.Box({ width: 1.92, height: 1.92 });
 		boxShape.collisionGroup = 2;
 		boxShape.collisionMask = 5;
 		boxShape.sensor = true;//作为传感器，被穿透

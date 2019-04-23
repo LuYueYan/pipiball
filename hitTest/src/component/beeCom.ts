@@ -13,13 +13,16 @@ class beeCom {
 		this.img.anchorOffsetX = this.img.width / 2;
 		this.img.anchorOffsetY = this.img.height / 2;
 	}
-	public createBody(that, x = 7.5) {
-		var boxShape: p2.Shape = new p2.Box({ width: 1.16, height: 1.26 });
+	public createBody(that, x = 7.5, y = 0) {
+		var boxShape: p2.Shape = new p2.Box({ width: 0.5, height: 1.26 });
 		//不碰撞同类
 		boxShape.collisionGroup = 1;
 		boxShape.collisionMask = 2;
-		this.boxBody = new p2.Body({ mass: 100, position: [x, that.getPosition(900)] });
-		this.boxBody.gravityScale = 0;
+		if (y == 0) {
+			y = that.getPosition(900);
+		}
+		this.boxBody = new p2.Body({ mass: 100, position: [x, y] });
+		this.boxBody.gravityScale = 1;
 		this.boxBody.addShape(boxShape);
 		that.world.addBody(this.boxBody);
 		this.boxBody.displays = [this.img];
