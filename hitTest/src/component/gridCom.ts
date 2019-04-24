@@ -2,6 +2,7 @@ class gridCom {
 	public img: egret.Bitmap;//图片
 	public txt: egret.BitmapText;//文字
 	public itemW: number = 96;//格子大小
+	public initNum: number = 1;//保存初始的血量数值
 	public num: number = 1;//需要击打的数量
 	public boxBody: p2.Body;
 	public type: number = 1;//类型 1--方形 2--三角型 5--炸弹 6--冰块
@@ -9,21 +10,13 @@ class gridCom {
 	public destroyGif;//被销毁时的动画
 	public isRemoved = false;//是否已经被移除
 	public font: egret.BitmapFont;
-	public constructor(num = 1) {
+	public constructor(num = 1, type = 1) {
 		this.num = num;
-		let ran = Math.random();
-		if (ran < 0.1) {
-			this.type = 2;
-		} else if (ran < 0.3) {
-			this.type = 5;
-		} else if (ran < 0.45) {
-			this.type = 6;
-		}
+		this.initNum = num;
+		this.type = type;
 		this.init();
 	}
-	private onLoadComplete(font: egret.BitmapFont): void {
 
-	}
 	public init() {
 		if (this.type == 1) {
 			let x = 'img_diamonds_a1';
@@ -53,10 +46,11 @@ class gridCom {
 	public createBody(x, y, that) {
 		var boxShape: p2.Shape;
 		if (this.type == 2) {
-			var vertices = [[1, -1], [1, 1], [-1, 1]];//必须是逆时针方向的数组
+			var vertices = [[0.95, -0.95], [0.95, 0.95], [-0.95, 0.95]];//必须是逆时针方向的数组
 			boxShape = new p2.Convex({ vertices: vertices });
 		} else {
-			boxShape = new p2.Box({ width: 1.9, height: 1.9 });
+			var vertices = [[0.95, -0.95], [0.95, 0.95], [-0.95, 0.95], [-0.95, -0.95]];
+			boxShape = new p2.Convex({ vertices: vertices });
 		}
 		boxShape.collisionGroup = 6;
 		boxShape.collisionMask = 7;
@@ -80,10 +74,7 @@ class gridCom {
 	public updateText(that, n = 1, callback: Function = null) {
 		//n--击打次数
 		let hitText = new egret.BitmapText();
-
 		hitText.font = this.font;
-
-		let t = n > this.num ? this.num + '' : n + '';
 		hitText.text = n > this.num ? this.num + '' : n + '';
 		let ran = 90 * Math.random() - 45;
 		hitText.x = this.img.x + ran;
@@ -115,6 +106,23 @@ class gridCom {
 			gif.addEventListener(egret.Event.COMPLETE, (e: egret.Event) => {
 				gif.parent && gif.parent.removeChild(gif);
 			}, this);
+
+			that.conTimes.num++;
+			if (that.conTimes.num > 2) {
+				let con = new egret.BitmapText();
+				con.font = this.font;
+				con.text = 'X' + that.conTimes.num;
+				con.x = this.img.x + 50;
+				con.y = this.img.y - 50;
+				con.anchorOffsetX = con.width / 2;
+				con.anchorOffsetY = con.height / 2;
+				con.scaleX = 0;
+				con.scaleY = 0;
+				that.addChild(con);
+				egret.Tween.get(con).to({ scaleX: 1.5, scaleY: 1.5 }, 500).wait(1000).to({ alpha: 0 }, 200).call(() => {
+					con.parent && con.parent.removeChild(con);
+				});
+			}
 			let res = {};//被销毁的对象，分数之类的信息
 			if (this.type == 5) {
 				//是炸弹 判断被炸毁的区域
@@ -146,13 +154,10 @@ class gridCom {
 
 					}
 				}
-			} else {
-
 			}
-
-			callback && callback(res);
-
+			callback && callback();
 		}
+
 	}
 	private createBitmapByName(name: string): egret.Bitmap {
 		var result: egret.Bitmap = new egret.Bitmap();

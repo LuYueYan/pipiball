@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="squareGuideSkin" height="600" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="16a4e428e45" ></w:Config>
+	<e:Group id="txtGroup" x="0" y="0" cacheAsBitmap="true">
+		<e:Image source="img_bg_text_guide_png" x="0" y="0"/>
+		<e:Label id="txt_1" text="爆炸方块现身" y="67" textColor="0xff3e43" fontFamily="Microsoft YaHei" size="24" textAlign="center" bold="true" x="100"/>
+		<e:Label id="txt_2" text="可引爆周围的方块" y="106" textColor="0xff3e43" textAlign="center" size="24" fontFamily="Microsoft YaHei" bold="true" x="76"/>
+	</e:Group>
+	<e:Image id="img" source="img_diamonds_big_01_png" y="217" horizontalCenter="0"/>
+	<e:Label id="kownBtn" text="知道了" x="138.5" y="453" fontFamily="Microsoft YaHei" size="22" touchEnabled="true"/>
+</e:Skin>

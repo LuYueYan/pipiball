@@ -3,6 +3,7 @@ class beeCom {
 	public boxBody: p2.Body;
 	public adaptation = 0;//适配长度
 	public power: number = 1;//每次的伤害值
+	public against: any;//针对威力不同
 	public constructor() {
 		this.init()
 	}
@@ -12,9 +13,12 @@ class beeCom {
 		this.img.height = 63;
 		this.img.anchorOffsetX = this.img.width / 2;
 		this.img.anchorOffsetY = this.img.height / 2;
+		this.against = userDataMaster.bulletArr[userDataMaster.bulletIndex].target;
 	}
 	public createBody(that, x = 7.5, y = 0) {
-		var boxShape: p2.Shape = new p2.Box({ width: 0.5, height: 1.26 });
+		var vertices = [[0.25, -0.63], [0.25, 0.63], [-0.25, 0.63], [-0.25, -0.63]];
+		var boxShape = new p2.Convex({ vertices: vertices });
+		// var boxShape: p2.Shape = new p2.Box({ width: 0.5, height: 1.26 });
 		//不碰撞同类
 		boxShape.collisionGroup = 1;
 		boxShape.collisionMask = 2;

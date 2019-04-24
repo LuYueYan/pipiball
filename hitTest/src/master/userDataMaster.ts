@@ -16,13 +16,13 @@ class userDataMaster {
 		lamp: { level: 15, unlock: false, num: 0 }
 	};//道具数量
 	public static bulletArr = [
-		{ id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 1000, powerImg: 1, txt: '', target: {}},
-		{ id: 1, img: 'img_bullet_b3', title: '蘑菇炮', price: 500, powerImg: 3, txt: '对炸弹方块威力+2', target: { type_5: 2 }},
-		{ id: 2, img: 'img_bullet_c3', title: '大头炮', price: 1000, powerImg: 3, txt: '对移动方块威力+2', target: { type_6: 2 }},
+		{ id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 1000, powerImg: 1, txt: '', target: { } },
+		{ id: 1, img: 'img_bullet_b3', title: '蘑菇炮', price: 500, powerImg: 3, txt: '对炸弹方块威力+2', target: { type_5: 2 } },
+		{ id: 2, img: 'img_bullet_c3', title: '大头炮', price: 1000, powerImg: 3, txt: '对移动方块威力+2', target: { type_6: 2 } },
 		{ id: 3, img: 'img_bullet_d3', title: '小南瓜', price: 5000, powerImg: 2, txt: '对普通方块威力+1', target: { type_1: 1, type_2: 1 } },
 		{ id: 4, img: 'img_bullet_e3', title: '包菜君', price: 5000, powerImg: 2, txt: '对所有方块威力+1', target: { type_1: 1, type_2: 1, type_5: 1, type_6: 1 } }
 	];
-	public static bulletSateArr=[1,0,0,0,0];//炸弹状态
+	public static bulletSateArr = [1, 0, 0, 0, 0];//炸弹状态
 	public static levelArr = [];//关卡信息数组
 	public static myCollection: eui.ArrayCollection;
 	public static shareUid = 0;//分享人id
@@ -60,12 +60,15 @@ class userDataMaster {
 	public static createLevelArr() {
 		let arr = [];
 		let bigArr = [5, 8, 11, 14, 15];
+		let goldArr = [6, 8, 11, 13];
 		for (let i = 1; i <= 100; i++) {
 			let small = i < 5 ? i : 5;
 			let big = i > bigArr.length ? i + 10 : bigArr[i - 1];
 			let line = big - small + 1;
 			let amount = Math.ceil((line * 7) / 2);
-			let item = { level: i, amount: amount, existAmount: 0, score: 20 };
+			let gold = i < 5 ? goldArr[i - 1] : i + 8;
+			let item = { level: i, amount: amount, existAmount: 0,small:small, score: amount+1000, gold: gold };
+			//score是达到一颗星的最小分数
 			arr.push(item);
 		}
 		userDataMaster.levelArr = arr;

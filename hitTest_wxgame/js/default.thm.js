@@ -10,7 +10,7 @@ var egret = window.egret;window.skins={};
                 window.generateEUI = {};
                 generateEUI.paths = {};
                 generateEUI.styles = undefined;
-                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","runningScene":"resource/page/runningScene.exml","startScene":"resource/page/startScene.exml","rankModal":"resource/modal/rankModal.exml","rankItem":"resource/modal/rankItem.exml","getLifr":"resource/eui_skins/getLifr.exml","getLifeModal":"resource/modal/getLifeModal.exml","moreItem":"resource/modal/moreItem.exml","moreScroller":"resource/modal/moreScroller.exml","rebornModal":"resource/modal/rebornModal.exml","gameOver":"resource/page/gameOver.exml","levelUpModal":"resource/modal/levelUpModal.exml","getSuccess":"resource/modal/getSuccess.exml","playBefore":"resource/modal/playBefore.exml","myShop":"resource/modal/myShop.exml","shopItem":"resource/modal/shopItem.exml","teachModal":"resource/modal/teachModal.exml","moreComponent":"resource/modal/moreComponent.exml","levelCom":"resource/page/levelCom.exml","levelItem":"resource/modal/levelItem.exml","cloudCom":"resource/page/cloudCom.exml","giftModal":"resource/modal/giftModal.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
+                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","runningScene":"resource/page/runningScene.exml","startScene":"resource/page/startScene.exml","rankModal":"resource/modal/rankModal.exml","rankItem":"resource/modal/rankItem.exml","getLifr":"resource/eui_skins/getLifr.exml","getLifeModal":"resource/modal/getLifeModal.exml","moreItem":"resource/modal/moreItem.exml","moreScroller":"resource/modal/moreScroller.exml","rebornModal":"resource/modal/rebornModal.exml","gameOver":"resource/page/gameOver.exml","levelUpModal":"resource/modal/levelUpModal.exml","getSuccess":"resource/modal/getSuccess.exml","playBefore":"resource/modal/playBefore.exml","myShop":"resource/modal/myShop.exml","shopItem":"resource/modal/shopItem.exml","teachModal":"resource/modal/teachModal.exml","moreComponent":"resource/modal/moreComponent.exml","levelCom":"resource/page/levelCom.exml","levelItem":"resource/modal/levelItem.exml","cloudCom":"resource/page/cloudCom.exml","giftModal":"resource/modal/giftModal.exml","squareGuide":"resource/modal/squareGuide.exml","toolGuide":"resource/modal/toolGuide.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
 	__extends(ButtonSkin, _super);
 	function ButtonSkin() {
 		_super.call(this);
@@ -2647,6 +2647,79 @@ var egret = window.egret;window.skins={};
 		return t;
 	};
 	return shopItemSkin;
+})(eui.Skin);generateEUI.paths['resource/modal/squareGuide.exml'] = window.squareGuideSkin = (function (_super) {
+	__extends(squareGuideSkin, _super);
+	function squareGuideSkin() {
+		_super.call(this);
+		this.skinParts = ["txt_1","txt_2","txtGroup","img","kownBtn"];
+		
+		this.height = 600;
+		this.elementsContent = [this.txtGroup_i(),this.img_i(),this.kownBtn_i()];
+	}
+	var _proto = squareGuideSkin.prototype;
+
+	_proto.txtGroup_i = function () {
+		var t = new eui.Group();
+		this.txtGroup = t;
+		t.cacheAsBitmap = true;
+		t.x = 0;
+		t.y = 0;
+		t.elementsContent = [this._Image1_i(),this.txt_1_i(),this.txt_2_i()];
+		return t;
+	};
+	_proto._Image1_i = function () {
+		var t = new eui.Image();
+		t.source = "img_bg_text_guide_png";
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto.txt_1_i = function () {
+		var t = new eui.Label();
+		this.txt_1 = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 24;
+		t.text = "爆炸方块现身";
+		t.textAlign = "center";
+		t.textColor = 0xff3e43;
+		t.x = 100;
+		t.y = 67;
+		return t;
+	};
+	_proto.txt_2_i = function () {
+		var t = new eui.Label();
+		this.txt_2 = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 24;
+		t.text = "可引爆周围的方块";
+		t.textAlign = "center";
+		t.textColor = 0xff3e43;
+		t.x = 76;
+		t.y = 106;
+		return t;
+	};
+	_proto.img_i = function () {
+		var t = new eui.Image();
+		this.img = t;
+		t.horizontalCenter = 0;
+		t.source = "img_diamonds_big_01_png";
+		t.y = 217;
+		return t;
+	};
+	_proto.kownBtn_i = function () {
+		var t = new eui.Label();
+		this.kownBtn = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 22;
+		t.text = "知道了";
+		t.touchEnabled = true;
+		t.x = 138.5;
+		t.y = 453;
+		return t;
+	};
+	return squareGuideSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/teachModal.exml'] = window.teachModalSkin = (function (_super) {
 	__extends(teachModalSkin, _super);
 	function teachModalSkin() {
@@ -2926,6 +2999,74 @@ var egret = window.egret;window.skins={};
 		return t;
 	};
 	return teachModalSkin;
+})(eui.Skin);generateEUI.paths['resource/modal/toolGuide.exml'] = window.toolGuideSkin = (function (_super) {
+	__extends(toolGuideSkin, _super);
+	function toolGuideSkin() {
+		_super.call(this);
+		this.skinParts = ["txt_1","txt_2","txt_3","txtGroup"];
+		
+		this.height = 310;
+		this.width = 343;
+		this.elementsContent = [this.txtGroup_i()];
+	}
+	var _proto = toolGuideSkin.prototype;
+
+	_proto.txtGroup_i = function () {
+		var t = new eui.Group();
+		this.txtGroup = t;
+		t.horizontalCenter = 0;
+		t.y = 0;
+		t.elementsContent = [this._Image1_i(),this.txt_1_i(),this.txt_2_i(),this.txt_3_i()];
+		return t;
+	};
+	_proto._Image1_i = function () {
+		var t = new eui.Image();
+		t.source = "img_bg_text_guide_png";
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto.txt_1_i = function () {
+		var t = new eui.Label();
+		this.txt_1 = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 24;
+		t.text = "oh~新道具";
+		t.textAlign = "center";
+		t.textColor = 0xFF3E43;
+		t.x = 110;
+		t.y = 70;
+		return t;
+	};
+	_proto.txt_2_i = function () {
+		var t = new eui.Label();
+		this.txt_2 = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 24;
+		t.text = "可使弹药威力翻倍";
+		t.textAlign = "center";
+		t.textColor = 0xFF3E43;
+		t.x = 75;
+		t.y = 116;
+		return t;
+	};
+	_proto.txt_3_i = function () {
+		var t = new eui.Label();
+		this.txt_3 = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.size = 24;
+		t.text = "快点击使用吧~";
+		t.textAlign = "center";
+		t.textColor = 0xFF3E43;
+		t.visible = false;
+		t.x = 90;
+		t.y = 92;
+		return t;
+	};
+	return toolGuideSkin;
 })(eui.Skin);generateEUI.paths['resource/page/cloudCom.exml'] = window.cloudComSkin = (function (_super) {
 	__extends(cloudComSkin, _super);
 	function cloudComSkin() {
@@ -3288,11 +3429,11 @@ var egret = window.egret;window.skins={};
 	__extends(runningSceneSkin, _super);
 	function runningSceneSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","scoreText","levelText","star_1","star_2","star_3","scoreProccess","amountText","amountPro","hammer_img","hammer_text","hammer_add","hammer_num","hammer","hat_img","hat_text","hat_add","hat_num","hat","lamp_img","lamp_text","lamp_add","lamp_num","lamp","bulletImg","bulletNum","hero","rayGroup"];
+		this.skinParts = ["bgImg","scoreText","levelText","star_1","star_2","star_3","scoreProccess","amountText","amountPro","hammer_img","hammer_text","hammer_add","hammer_num","hammer","hat_img","hat_text","hat_add","hat_num","hat","lamp_img","lamp_text","lamp_add","lamp_num","lamp","toolBottom","bulletImg","bulletNum","heroImg","hero","rayGroup"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.bgImg_i(),this._Image1_i(),this.scoreText_i(),this.scoreProccess_i(),this._Group1_i(),this._Image6_i(),this._Group3_i(),this.bulletImg_i(),this.bulletNum_i(),this._Image12_i(),this.hero_i(),this.rayGroup_i()];
+		this.elementsContent = [this.bgImg_i(),this._Image1_i(),this.scoreText_i(),this.scoreProccess_i(),this._Group1_i(),this._Image6_i(),this.toolBottom_i(),this.bulletImg_i(),this.bulletNum_i(),this._Image12_i(),this.hero_i(),this.rayGroup_i()];
 	}
 	var _proto = runningSceneSkin.prototype;
 
@@ -3451,29 +3592,20 @@ var egret = window.egret;window.skins={};
 		t.y = 1275;
 		return t;
 	};
-	_proto._Group3_i = function () {
+	_proto.toolBottom_i = function () {
 		var t = new eui.Group();
-		t.anchorOffsetX = 0;
-		t.cacheAsBitmap = true;
-		t.height = 110;
-		t.horizontalCenter = -105.5;
-		t.width = 478.79;
-		t.y = 1192.7;
-		t.layout = this._HorizontalLayout1_i();
+		this.toolBottom = t;
+		t.x = 30;
+		t.y = 1190;
 		t.elementsContent = [this.hammer_i(),this.hat_i(),this.lamp_i(),this._Group2_i()];
-		return t;
-	};
-	_proto._HorizontalLayout1_i = function () {
-		var t = new eui.HorizontalLayout();
-		t.horizontalAlign = "justify";
 		return t;
 	};
 	_proto.hammer_i = function () {
 		var t = new eui.Group();
 		this.hammer = t;
 		t.width = 110;
-		t.x = -143;
-		t.y = -28.5;
+		t.x = 0;
+		t.y = 0;
 		t.elementsContent = [this._Image7_i(),this.hammer_img_i(),this.hammer_text_i(),this.hammer_add_i(),this.hammer_num_i()];
 		return t;
 	};
@@ -3489,11 +3621,15 @@ var egret = window.egret;window.skins={};
 	_proto.hammer_img_i = function () {
 		var t = new eui.Image();
 		this.hammer_img = t;
-		t.horizontalCenter = 0;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.height = 95;
+		t.horizontalCenter = 0.5;
 		t.scaleX = 1;
 		t.scaleY = 1;
-		t.source = "img_prop_game_01_png";
-		t.top = 0;
+		t.source = "img_prop_c1_png";
+		t.top = -6;
+		t.width = 71;
 		return t;
 	};
 	_proto.hammer_text_i = function () {
@@ -3534,8 +3670,8 @@ var egret = window.egret;window.skins={};
 		var t = new eui.Group();
 		this.hat = t;
 		t.width = 110;
-		t.x = -133;
-		t.y = -18.5;
+		t.x = 121;
+		t.y = 0;
 		t.elementsContent = [this._Image8_i(),this.hat_img_i(),this.hat_text_i(),this.hat_add_i(),this.hat_num_i()];
 		return t;
 	};
@@ -3551,11 +3687,15 @@ var egret = window.egret;window.skins={};
 	_proto.hat_img_i = function () {
 		var t = new eui.Image();
 		this.hat_img = t;
-		t.horizontalCenter = 0;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.height = 88;
+		t.horizontalCenter = -2.5;
 		t.scaleX = 1;
 		t.scaleY = 1;
-		t.source = "img_prop_game_01_png";
-		t.top = 0;
+		t.source = "img_prop_d1_png";
+		t.width = 81;
+		t.y = 0;
 		return t;
 	};
 	_proto.hat_text_i = function () {
@@ -3596,8 +3736,8 @@ var egret = window.egret;window.skins={};
 		var t = new eui.Group();
 		this.lamp = t;
 		t.width = 110;
-		t.x = -123;
-		t.y = -8.5;
+		t.x = 242;
+		t.y = 0;
 		t.elementsContent = [this._Image9_i(),this.lamp_img_i(),this.lamp_text_i(),this.lamp_add_i(),this.lamp_num_i()];
 		return t;
 	};
@@ -3613,11 +3753,15 @@ var egret = window.egret;window.skins={};
 	_proto.lamp_img_i = function () {
 		var t = new eui.Image();
 		this.lamp_img = t;
-		t.horizontalCenter = 0;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.height = 98;
+		t.horizontalCenter = -2;
 		t.scaleX = 1;
 		t.scaleY = 1;
-		t.source = "img_prop_game_01_png";
-		t.top = 0;
+		t.source = "img_prop_e1_png";
+		t.top = -10;
+		t.width = 72;
 		return t;
 	};
 	_proto.lamp_text_i = function () {
@@ -3657,8 +3801,8 @@ var egret = window.egret;window.skins={};
 	_proto._Group2_i = function () {
 		var t = new eui.Group();
 		t.width = 110;
-		t.x = -113;
-		t.y = 1.5;
+		t.x = 364;
+		t.y = 0;
 		t.elementsContent = [this._Image10_i(),this._Image11_i(),this._Label2_i()];
 		return t;
 	};
@@ -3717,13 +3861,23 @@ var egret = window.egret;window.skins={};
 		return t;
 	};
 	_proto.hero_i = function () {
-		var t = new eui.Image();
+		var t = new eui.Group();
 		this.hero = t;
 		t.anchorOffsetX = 40;
 		t.anchorOffsetY = 162;
-		t.source = "img_role_boy_png";
+		t.height = 162;
+		t.width = 119;
 		t.x = 446;
 		t.y = 1129;
+		t.elementsContent = [this.heroImg_i()];
+		return t;
+	};
+	_proto.heroImg_i = function () {
+		var t = new eui.Image();
+		this.heroImg = t;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.source = "img_role_boy_png";
 		return t;
 	};
 	_proto.rayGroup_i = function () {

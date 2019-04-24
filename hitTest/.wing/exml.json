@@ -115,5 +115,15 @@
         "path": "modal\\giftModal.ts",
         "class": "giftModal",
         "parentPath": ""
+    },
+    "16a4e428e45": {
+        "path": "modal\\squareGuide.ts",
+        "class": "squareGuide",
+        "parentPath": ""
+    },
+    "16a4e52704c": {
+        "path": "modal\\toolGuide.ts",
+        "class": "toolGuide",
+        "parentPath": ""
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="toolGuideSkin" width="343" height="310" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="16a4e52704c" ></w:Config>
+	<e:Group id="txtGroup" y="0" horizontalCenter="0">
+		<e:Image source="img_bg_text_guide_png" y="0" x="0"/>
+		<e:Label id="txt_1" text="oh~新道具" y="70" textColor="0xFF3E43" textAlign="center" size="24" fontFamily="Microsoft YaHei" bold="true" x="110"/>
+		<e:Label id="txt_2" text="可使弹药威力翻倍" y="116" textColor="0xFF3E43" textAlign="center" size="24" fontFamily="Microsoft YaHei" bold="true" x="75"/>
+		<e:Label id="txt_3" text="快点击使用吧~" y="92" textColor="0xFF3E43" textAlign="center" size="24" fontFamily="Microsoft YaHei" bold="true" x="90" visible="false"/>
+	</e:Group>
+</e:Skin>

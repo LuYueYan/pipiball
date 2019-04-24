@@ -45,7 +45,7 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 		for (let i = 1; i <= this.info.star; i++) {
 			setTimeout(function () {
 				that['star_' + i].texture = RES.getRes('img_star_a1_png');
-			}, i * 1000);
+			}, i * 300);
 		}
 		let params = {
 			uid: userDataMaster.myInfo.uid,

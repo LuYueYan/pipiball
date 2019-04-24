@@ -33,7 +33,9 @@
 		"levelCom": "resource/page/levelCom.exml",
 		"levelItem": "resource/modal/levelItem.exml",
 		"cloudCom": "resource/page/cloudCom.exml",
-		"giftModal": "resource/modal/giftModal.exml"
+		"giftModal": "resource/modal/giftModal.exml",
+		"squareGuide": "resource/modal/squareGuide.exml",
+		"toolGuide": "resource/modal/toolGuide.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
@@ -64,7 +66,9 @@
 		"resource/modal/rankModal.exml",
 		"resource/modal/rebornModal.exml",
 		"resource/modal/shopItem.exml",
+		"resource/modal/squareGuide.exml",
 		"resource/modal/teachModal.exml",
+		"resource/modal/toolGuide.exml",
 		"resource/page/cloudCom.exml",
 		"resource/page/gameOver.exml",
 		"resource/page/levelCom.exml",

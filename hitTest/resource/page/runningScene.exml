@@ -20,41 +20,40 @@
 		<e:Image id="amountPro" source="img_schedule_02_png" x="83" y="62" width="0"/>
 	</e:Group>
 	<e:Image source="img_bg_game_03_png" y="1275" horizontalCenter="0"/>
-	<e:Group width="478.79" height="110" y="1192.7" anchorOffsetX="0" horizontalCenter="-105.5" cacheAsBitmap="true">
-		<e:Group id="hammer" x="-143" y="-28.5" width="110">
+	<e:Group id="toolBottom" x="30" y="1190">
+		<e:Group id="hammer" x="0" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image id="hammer_img" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="img_prop_game_01_png"/>
+			<e:Image id="hammer_img" scaleX="1" scaleY="1" top="-6" source="img_prop_c1_png" anchorOffsetX="0" anchorOffsetY="0" width="71" height="95" horizontalCenter="0.5"/>
 			<e:Label id="hammer_text" text="第2关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
 			<e:Image id="hammer_add" source="btn_more_png" x="77.68" y="76.54"/>
 			<e:BitmapLabel id="hammer_num" x="41.04" y="81.6" text="X11" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
-		<e:Group id="hat" x="-133" y="-18.5" width="110">
+		<e:Group id="hat" x="121" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image id="hat_img" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="img_prop_game_01_png"/>
+			<e:Image id="hat_img" scaleX="1" scaleY="1" source="img_prop_d1_png" anchorOffsetX="0" width="81" anchorOffsetY="0" height="88" horizontalCenter="-2.5" y="0"/>
 			<e:Label id="hat_text" text="第10关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
 			<e:Image id="hat_add" source="btn_more_png" x="77.68" y="76.54"/>
 			<e:BitmapLabel id="hat_num" x="41.04" y="81.6" text="X11" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
-		<e:Group id="lamp" x="-123" y="-8.5" width="110">
+		<e:Group id="lamp" x="242" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image id="lamp_img" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="img_prop_game_01_png"/>
+			<e:Image id="lamp_img" scaleX="1" scaleY="1" top="-10" source="img_prop_e1_png" anchorOffsetX="0" width="72" anchorOffsetY="0" height="98" horizontalCenter="-2"/>
 			<e:Label id="lamp_text" text="第15关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
 			<e:Image id="lamp_add" source="btn_more_png" x="77.68" y="76.54"/>
 			<e:BitmapLabel id="lamp_num" x="41.04" y="81.6" text="X1" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
-		<e:Group x="-113" y="1.5" width="110">
+		<e:Group x="364" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="1.52" y="0" scaleX="1" scaleY="1"/>
 			<e:Image scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png"/>
 			<e:Label text="期待中" y="81.72" fontFamily="Microsoft YaHei" size="18" textColor="0x7a7867" horizontalCenter="0.5"/>
 		</e:Group>
-		<e:layout>
-			<e:HorizontalLayout horizontalAlign="justify"/>
-		</e:layout>
 	</e:Group>
 	<e:Image id="bulletImg" source="img_bullet_a2_png" x="540" y="1207" width="95" height="85"/>
 	<e:BitmapLabel id="bulletNum" x="630" y="1266" text="X5" font="stripe_text_fnt"/>
 	<e:Image source="img_bg_game_01_jpg" y="195" horizontalCenter="0"/>
-	<e:Image id="hero" source="img_role_boy_png" x="446" y="1129" anchorOffsetY="162" anchorOffsetX="40"/>
+	<e:Group id="hero" x="446" y="1129" anchorOffsetX="40" anchorOffsetY="162" width="119" height="162">
+		<e:Image id="heroImg" source="img_role_boy_png" scaleX="1" scaleY="1"/>
+	</e:Group>
 	<e:Group id="rayGroup" width="690" height="914" anchorOffsetY="0" y="195" horizontalCenter="0">
 	</e:Group>
 </e:Skin>
