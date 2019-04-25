@@ -1,8 +1,8 @@
 class userDataMaster {
-	public static myInfo: any = { uid: 0, openId: '', is_new_user: true, nickName: '', avatarUrl: '' };//用户信息
+	public static myInfo: any = { uid: 0, openId: '', is_new_user: true, nickName: '', avatarUrl: '', gender: 0 };//用户信息
 	public static gold = 500;//金币
 	public static life = 5;//体力
-	public static level = 1;//关卡
+	public static level = 0;//已达成的关卡
 	public static closeDate = 0;//上次关闭游戏的时间点
 	public static seconds = 0;//获取体力剩余秒数
 	public static terval = null;//计时器
@@ -16,7 +16,7 @@ class userDataMaster {
 		lamp: { level: 15, unlock: false, num: 0 }
 	};//道具数量
 	public static bulletArr = [
-		{ id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 1000, powerImg: 1, txt: '', target: { } },
+		{ id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 1000, powerImg: 1, txt: '', target: {} },
 		{ id: 1, img: 'img_bullet_b3', title: '蘑菇炮', price: 500, powerImg: 3, txt: '对炸弹方块威力+2', target: { type_5: 2 } },
 		{ id: 2, img: 'img_bullet_c3', title: '大头炮', price: 1000, powerImg: 3, txt: '对移动方块威力+2', target: { type_6: 2 } },
 		{ id: 3, img: 'img_bullet_d3', title: '小南瓜', price: 5000, powerImg: 2, txt: '对普通方块威力+1', target: { type_1: 1, type_2: 1 } },
@@ -67,7 +67,8 @@ class userDataMaster {
 			let line = big - small + 1;
 			let amount = Math.ceil((line * 7) / 2);
 			let gold = i < 5 ? goldArr[i - 1] : i + 8;
-			let item = { level: i, amount: amount, existAmount: 0,small:small, score: amount+1000, gold: gold };
+			let bullet=i>30?8:Math.floor((i-1)/10)+5;
+			let item = { level: i, amount: amount, existAmount: 0, small: small, score: amount + 1000, gold: gold,bullet:bullet };
 			//score是达到一颗星的最小分数
 			arr.push(item);
 		}
@@ -189,7 +190,6 @@ class userDataMaster {
 				clearInterval(userDataMaster.terval);
 				userDataMaster.terval = null;
 				userDataMaster.myLife = userDataMaster.life + 1;
-
 			}
 		}, 1000);
 	}
@@ -236,7 +236,7 @@ class userDataMaster {
 		return true;
 	}
 
-	public static async createLoginBtn(left, top, width, height) {
+	public static async createLoginBtn(left, top, width, height, callback: Function = null) {
 		let that = this;
 		let scale = DeviceMaster.screenWidth / 750;
 		left *= scale, top *= scale, width *= scale, height *= scale;
@@ -260,17 +260,17 @@ class userDataMaster {
 		})
 
 		userDataMaster.userInfoBtn.onTap((res) => {
-			userDataMaster.updateUser(res)
+			userDataMaster.updateUser(res, callback)
 		})
 	}
-	public static async updateUser(res: any = null) {
+	public static async updateUser(res: any = null, callback: Function = null) {
 		let userInfo = res.userInfo;
 		userDataMaster.myInfo.nickName = userInfo.nickName;
 		userDataMaster.myInfo.avatarUrl = userInfo.avatarUrl;
 		let params: any = {
 			uid: userDataMaster.getMyInfo.uid,
 			nickName: userInfo.nickName,
-			gender: userInfo.gender,
+			gender: userDataMaster.myInfo.gender,
 			avatarUrl: userInfo.avatarUrl
 		};
 
@@ -283,6 +283,7 @@ class userDataMaster {
 					userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
 					userDataMaster.loginCallback && userDataMaster.loginCallback();
 					userDataMaster.loginCallback = null;
+					callback && callback();
 				}
 			}
 		);

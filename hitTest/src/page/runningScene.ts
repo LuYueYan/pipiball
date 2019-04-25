@@ -95,7 +95,10 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
-
+		if (userDataMaster.myInfo.gender) {
+			that.heroImg.texture = RES.getRes('img_role_' + userDataMaster.myInfo.gender + '_png');
+		}
+		that.myData.beeNum = that.levelInfo.bullet;
 		that.levelText.text = that.levelInfo.level + '';
 		that.bulletImg.texture = RES.getRes(userDataMaster.bulletArr[userDataMaster.bulletIndex].img + '_png');
 		that.bulletNum.text = 'X' + that.myData.beeNum;
@@ -163,12 +166,11 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			setTimeout(function () {
 
 			}, t);
-			t += 2000;
+			t += 3000;
 		}
 		setTimeout(function () {
 			that.prepare = true;
 			that.updateBee();
-			console.log(78777)
 			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
 			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
 			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
@@ -207,7 +209,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 					that[tool[i] + '_num'].visible = true;
 					that[tool[i] + '_num'].text = 'X' + item.num;
 				}
-				if (i == 2 || !item.unlock) {
+				if (i == 0 || !item.unlock) {
 					//首次解锁
 					userDataMaster.tool[tool[i]].unlock = true;
 					//引导内容
@@ -258,10 +260,24 @@ class runningScene extends eui.Component implements eui.UIComponent {
 
 			if (type == 'hammer') {
 				//锤子
+				let group = new eui.Group();
+				that.addChildAt(group, 9);
 				let rect = new eui.Rect(that.stage.stageWidth, that.stage.stageHeight, 0x000000);
 				rect.alpha = 0.7;
-				that.addChildAt(rect, 9);
-				that.hammerShow = rect;
+				group.addChild(rect);
+				let text = that.createBitmapByName('img_text_05');
+				text.x = 375 - text.width / 2;
+				text.y = 1190;
+				group.addChild(text);
+
+				let img = that.createBitmapByName('img_prop_game_01');
+				img.anchorOffsetX = img.width;
+				img.anchorOffsetY = img.height;
+				img.x = 375 - img.width / 4;
+				img.y = 1320;
+				group.addChild(img);
+				egret.Tween.get(img, { loop: true }).to({ rotation: 30 }, 200).to({ rotation: 0 }, 200);
+				that.hammerShow = group;
 
 			} else if (type == 'hat') {
 				//攻击加倍
@@ -272,18 +288,25 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				hat.x = 375;
 				hat.y = 600;
 				that.addChild(hat);
-				egret.Tween.get(hat).to({ y: 1100, scaleX: 0, scaleY: 0 }, 2000).call(() => {
+				egret.Tween.get(hat).to({ y: 1100, scaleX: 0.6, scaleY: 0.6 }, 1000).call(() => {
+					hat.parent && hat.parent.removeChild(hat);
 					that.hero.rotation = -30;
-					that.hero.addChild(hat);
-					hat.scaleX = 0.6, hat.scaleY = 0.6;
-					hat.x = -that.hero.width / 2, hat.y = hat.anchorOffsetY-4;
+
+					let helmet = that.createBitmapByName('img_helmet');
+					helmet.x = 77;
+					helmet.y = 43;
+					helmet.anchorOffsetX = helmet.width / 2;
+					helmet.anchorOffsetY = helmet.height / 2;
+					helmet.scaleX = 0.6;
+					helmet.scaleY = 0.6;
+					that.hero.addChild(helmet);
 					setTimeout(function () {
 						that.hero.rotation = 0;
 						let txt = that.createBitmapByName('img_text_06');
 						txt.x = (750 - txt.width) / 2;
 						txt.y = 900;
 						that.addChild(txt);
-						egret.Tween.get(txt).to({ y: 600 }, 3000).wait(3000).call(() => {
+						egret.Tween.get(txt).to({ y: 600 }, 3000).wait(1000).call(() => {
 							txt.parent && txt.parent.removeChild(txt);
 						});
 					}, 500);
@@ -292,11 +315,25 @@ class runningScene extends eui.Component implements eui.UIComponent {
 
 			} else if (type == 'lamp') {
 				// 暂停一次下落
-				let lampShow = that.createBitmapByName('img_traffic_light_02');
-				lampShow.x = (that.stage.stageWidth - lampShow.width) / 2;
-				lampShow.y = 195;
-				that.addChild(lampShow);
-				that.lampShow = lampShow;
+				let group = new eui.Group();
+				that.addChild(group);
+				that.swapChildren(group, that.rayGroup);
+				let lamp = that.createBitmapByName('img_traffic_light_02');
+				lamp.x = (that.stage.stageWidth - lamp.width) / 2;
+				lamp.y = 195;
+				group.addChild(lamp);
+
+				let left = that.createBitmapByName('img_traffic_02');
+				left.x = 40;
+				left.y = 1000;
+				group.addChild(left);
+
+				let right = that.createBitmapByName('img_traffic_01');
+				right.x = 710 - right.width;
+				right.y = 1000;
+				group.addChild(right);
+
+				that.lampShow = group;
 			}
 		} else {
 			///看视频获取
@@ -365,11 +402,21 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		//得分
 		that.myData.score += conTimes.score;
 		if (conTimes.num > 2) {
-			that.myData.score += 1125;
+			let score = 1125;
+			let name = 'img_text_a1';
+			if (conTimes.num < 5) {
+				name = 'img_text_a1';
+			} else if (conTimes.num < 7) {
+				name = 'img_text_a2';
+			} else {
+				name = 'img_text_a3';
+			}
+			that.myData.score += score;
 
+			that.createGif(name, 2, 1000);
 			let con = new egret.BitmapText();
-			con.font = RES.getRes('stripe_text_fnt');;
-			con.text = '+' + 1125;
+			con.font = RES.getRes('stripe_text_big_fnt');;
+			con.text = '+' + score;
 			con.x = 375;
 			con.y = 500;
 			con.anchorOffsetX = con.width / 2;
@@ -377,7 +424,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			con.scaleX = 0;
 			con.scaleY = 0;
 			that.addChild(con);
-			egret.Tween.get(con).to({ scaleX: 3, scaleY: 3 }, 500).wait(1000).to({ alpha: 0 }, 1000).call(() => {
+			egret.Tween.get(con).to({ scaleX: 1, scaleY: 1 }, 500).wait(1000).to({ alpha: 0 }, 1000).call(() => {
 				con.parent && con.parent.removeChild(con);
 			});
 		}
@@ -398,6 +445,29 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		that.changeGraphics();
 
 	}
+	public createGif(name, t, wait) {
+		let that = this;
+		let group = new eui.Group();
+		group.anchorOffsetX = 600 / 2;
+		group.anchorOffsetY = 450 / 2;
+		group.x = 375;
+		group.y = 600;
+		let gif = movieMaster.getGif('gif_streamer');
+		group.addChild(gif);
+		let txt = that.createBitmapByName(name);
+		txt.x = (group.width - txt.width) / 2;
+		txt.y = 260;
+		group.addChild(txt);
+		that.addChild(group);
+		gif.gotoAndPlay(1, t);
+		egret.Tween.get(group).
+			to({ scaleX: 1, scaleY: 1 }, 500)
+			.wait(wait).
+			to({ scaleX: 0, scaleY: 0 }, 1000)
+			.call(() => {
+				group.parent && group.parent.removeChild(group);
+			});
+	}
 	public createGrids(row = 1, first = false) {
 		//每次生成一行 row--生成的位置为第几行（从上往下0行开始） 默认第一行
 		//first为是否出现新方块
@@ -408,7 +478,11 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
-			sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData))
+
+			that.createGif('img_text_a4', 5, 5000);
+			setTimeout(function () {
+				sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData))
+			}, 5000);
 		}
 		if (that.levelInfo.existAmount >= that.levelInfo.amount) {
 			//本关卡数量已足够
@@ -416,6 +490,9 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		}
 		that.myData.line++;
 		for (let col = 0; col < 7; col++) {
+			if (that.levelInfo.existAmount >= that.levelInfo.amount) {
+				break;
+			}
 			let g;
 			let type = 1;
 			let ran = Math.random();
@@ -494,11 +571,26 @@ class runningScene extends eui.Component implements eui.UIComponent {
 						// 	suc();
 						// })
 					} else {
-						that.conTimes.score += that.gridArr[i].initNum;
-						that.gridArr[i].updateText(that, that.gridArr[i].initNum, () => {
-							that.hitDown();
-							suc();
-						})
+
+						let img = that.createBitmapByName('img_prop_game_01');
+						img.anchorOffsetX = img.width;
+						img.anchorOffsetY = img.height;
+						img.x = that.gridArr[i].img.x + img.width / 2;
+						img.y = that.gridArr[i].img.y + img.height / 2;
+						that.addChild(img);
+						egret.Tween.get(img).to({ rotation: 20 }, 200)
+							.to({ rotation: 0 }, 200)
+							.to({ rotation: 30 }, 200)
+							.to({ rotation: 0 }, 200).call(() => {
+								img.parent && img.parent.removeChild(img);
+								that.conTimes.score += that.gridArr[i].initNum;
+								that.gridArr[i].updateText(that, that.gridArr[i].initNum, () => {
+									that.hitDown();
+									suc();
+								})
+							});
+
+
 					}
 
 					break;
@@ -538,6 +630,10 @@ class runningScene extends eui.Component implements eui.UIComponent {
 
 		if (that.shooting || (that.hammerShow && that.hammerShow.parent)) {
 			return;
+		}
+		if (that.lampShow && that.lampShow.parent && (!that.tooling || that.tooling != 'lamp')) {
+			that.lampShow.parent && that.lampShow.parent.removeChild(that.lampShow);
+			that.lampShow = null;
 		}
 		that.shootPoint.speedy = 3;
 		that.shootPoint.ex = e.stageX;
@@ -590,9 +686,10 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		// console.log(result)
 		that.world.raycast(result, ray);
 		if (result && result.body) {
-			that.createLine(result, ray)
-			that.testRay2(result, ray)
-
+			that.createLine(result, ray);
+			if (that.chooseTool.glass) {
+				that.testRay2(result, ray)
+			}
 		}
 	}
 	public testRay2(res, r, ray_3 = false) {
@@ -654,11 +751,9 @@ class runningScene extends eui.Component implements eui.UIComponent {
 
 		that.world.raycast(result, ray);
 		if (result && result.body) {
-
 			if (!ray_3 && ray.to[1] > 7) {
 				that.testRay2(result, ray, true)
 			}
-
 			that.createLine(result, ray)
 		}
 	}
@@ -670,19 +765,20 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		let distance = result.getHitDistance(ray);
 		let dx = ray.to[0] - ray.from[0];
 		let dy = ray.to[1] - ray.from[1];
+		let type = that.chooseTool.glass ? 2 : 1;
 		for (let i = 0; i < distance - 1; i++) {
-			let point = that.createBitmapByName('point');
-			point.width = 10;
-			point.height = 10;
+			let point = that.createBitmapByName('img_aim_0' + type);
+			// point.width = 10;
+			// point.height = 10;
 			point.anchorOffsetX = point.width / 2;
 			point.anchorOffsetY = point.height / 2;
 			point.x = (ray.from[0] + dx / ray.length * i) * that.factor - that.rayGroup.x;
 			point.y = that.stage.stageHeight - (ray.from[1] + dy / ray.length * i) * that.factor - that.rayGroup.y;
 			this.rayGroup.addChild(point)
 		}
-		let point = that.createBitmapByName('arrow');
-		point.width = 10;
-		point.height = 10;
+		let point = that.createBitmapByName('img_aim_0' + type);
+		// point.width = 10;
+		// point.height = 10;
 		point.anchorOffsetX = point.width / 2;
 		point.anchorOffsetY = point.height / 2;
 		point.x = (ray.from[0] + dx / ray.length * (distance - 0.5)) * that.factor - that.rayGroup.x;
@@ -909,9 +1005,8 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		let n = 0;
 		for (let i = 0, len = that.beeArr.length; i < len; i++) {
 			that.beeArr[i].boxBody.position[0] = i * direction + bx + dx;
-			if ((that.beeArr[i].boxBody.position[0] > 13) || (that.beeArr[i].boxBody.position[0] < 2)) {
+			if ((that.beeArr[i].boxBody.position[0] > 13.5) || (that.beeArr[i].boxBody.position[0] < 1.5)) {
 				that.beeArr[i].boxBody.position[0] = (i % n) * direction + bx + dx / 2;
-
 			} else {
 				n = i;
 			}
@@ -923,10 +1018,13 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		if (that.tooling == 'lamp' && that.lampShow) {
 			//使用红绿灯道具中
 			that.tooling = null;
-			that.lampShow.texture = RES.getRes('img_traffic_light_01_png');
-			egret.Tween.get(that.lampShow).wait(1000).to({ y: 87 }, 1000).call(() => {
-				that.lampShow.parent && that.lampShow.parent.removeChild(that.lampShow);
-				that.lampShow = null;
+			that.lampShow.getChildAt(0).texture = RES.getRes('img_traffic_light_01_png');
+			let text = that.createBitmapByName('img_text_07');
+			text.x = 375 - text.width / 2;
+			text.y = 600;
+			that.addChild(text);
+			egret.Tween.get(text).to({ alpha: 0 }, 3000).call(() => {
+				text.parent && text.parent.removeChild(text);
 			})
 			return;
 		}

@@ -1,5 +1,6 @@
 class playBefore extends eui.Component implements eui.UIComponent {
 	public titleText: eui.Label;
+	public chooseGroup: eui.Group;
 	public glass: eui.Group;
 	public glassLight: eui.Image;
 	public glassNum: eui.BitmapLabel;
@@ -10,9 +11,12 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	public bulletNum: eui.BitmapLabel;
 	public bulletAdd: eui.Image;
 	public bulletChoose: eui.Image;
-	public startBtn: tweenButton;
-	public closeBtn: eui.Image;
+	public startBtn: eui.Image;
 	public videoBtn: eui.Image;
+	public closeBtn: eui.Image;
+	public guide: eui.Group;
+	public txt_1: eui.Label;
+	public txt_2: eui.Label;
 
 
 	public level;
@@ -37,23 +41,63 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
+		if (this.level == 5 && userDataMaster.level == 4) {
+			//道具bullet首次出现 第五关
+			that.guide.visible = true;
+			that.guide.x = 240;
+			that.txt_1.text = '点击试试新的道具';
+			that.txt_1.text = '超级弹药筒';
+			that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
+
+		} else if (this.level == 1 && userDataMaster.level == 0) {
+			//道具glass首次出现 第一关
+			that.guide.visible = true;
+			that.removeChild(that.bullet);
+			that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
+		} else {
+			that.removeChild(that.guide);
+			if (that.bullet.parent) {
+				if (userDataMaster.tool.bullet.num <= 0) {
+					that.bulletNum.visible = false;
+					that.bulletAdd.visible = true;
+				}
+				that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('bullet') }, this);
+			}
+			if (this.level <= userDataMaster.level) {
+				//已通过的老关卡
+				that.removeChild(that.startBtn);
+				that.videoBtn.texture = RES.getRes('btn_start_04_png');
+			} else {
+				if (userDataMaster.dayFreeLife.num >= 3) {
+					that.videoBtn.texture = RES.getRes('btn_before_02_png');
+				}
+				that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
+			}
+			that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
+			that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
+			that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('glass') }, this);
+		}
 		if (userDataMaster.tool.glass.num <= 0) {
 			that.glassNum.visible = false;
 			that.glassAdd.visible = true;
 		}
-		if (userDataMaster.tool.bullet.num <= 0) {
-			that.bulletNum.visible = false;
-			that.bulletAdd.visible = true;
-		}
-		if (userDataMaster.dayFreeLife.num >= 3) {
-			that.videoBtn.texture = RES.getRes('btn_before_02_png');
-		}
 		that.titleText.text = '第' + this.level + '关';
-		that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
+	}
+	public guideFun() {
+		let that = this;
+		that.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
 		that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
 		that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
 		that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('glass') }, this);
-		that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('bullet') }, this);
+		if (that.bullet.parent) {
+			that.txt_1.text = '里面多藏了5颗弹药';
+			that.txt_2.text = '助力开局';
+			that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('bullet') }, this);
+		} else {
+			that.txt_1.text = '你将可以看清';
+			that.txt_2.text = '发射后的拐弯路线';
+		}
+
 	}
 	public chooseFun(type) {
 		let that = this;
@@ -99,10 +143,16 @@ class playBefore extends eui.Component implements eui.UIComponent {
 				userDataMaster.tool[item].num--;
 			}
 		}
+		egret.Tween.removeAllTweens();
 		sceneMaster.changeScene(new runningScene(this.level, {}, this.choose));
 	}
 	public videoFun() {
 		let that = this;
+		if (this.level <= userDataMaster.level) {
+			// 旧关卡免体力开始
+			that.startFun(false);
+			return;
+		}
 		if (!userDataMaster.dayFreeLife) {
 			//今天视频次数用完
 			platform.showModal({
@@ -126,7 +176,7 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	}
 	public closeFun() {
 		if (sceneMaster.littleModal) {
-          sceneMaster.closeLittleModal()
+			sceneMaster.closeLittleModal()
 		} else {
 			sceneMaster.closeModal()
 		}

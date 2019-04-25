@@ -35,7 +35,8 @@
 		"cloudCom": "resource/page/cloudCom.exml",
 		"giftModal": "resource/modal/giftModal.exml",
 		"squareGuide": "resource/modal/squareGuide.exml",
-		"toolGuide": "resource/modal/toolGuide.exml"
+		"toolGuide": "resource/modal/toolGuide.exml",
+		"chooseSex": "resource/modal/chooseSex.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
@@ -53,6 +54,7 @@
 		"resource/eui_skins/ToggleSwitchSkin.exml",
 		"resource/eui_skins/VScrollBarSkin.exml",
 		"resource/eui_skins/VSliderSkin.exml",
+		"resource/modal/chooseSex.exml",
 		"resource/modal/getLifeModal.exml",
 		"resource/modal/getSuccess.exml",
 		"resource/modal/giftModal.exml",

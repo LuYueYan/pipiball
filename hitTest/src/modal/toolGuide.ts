@@ -24,6 +24,7 @@ class toolGuide extends eui.Component implements eui.UIComponent {
 	public init() {
 		let that = this;
 		that.txt_2.text = that.arr[that.type];
+		
 	}
 
 }

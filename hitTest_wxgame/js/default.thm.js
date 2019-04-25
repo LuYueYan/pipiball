@@ -10,7 +10,7 @@ var egret = window.egret;window.skins={};
                 window.generateEUI = {};
                 generateEUI.paths = {};
                 generateEUI.styles = undefined;
-                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","runningScene":"resource/page/runningScene.exml","startScene":"resource/page/startScene.exml","rankModal":"resource/modal/rankModal.exml","rankItem":"resource/modal/rankItem.exml","getLifr":"resource/eui_skins/getLifr.exml","getLifeModal":"resource/modal/getLifeModal.exml","moreItem":"resource/modal/moreItem.exml","moreScroller":"resource/modal/moreScroller.exml","rebornModal":"resource/modal/rebornModal.exml","gameOver":"resource/page/gameOver.exml","levelUpModal":"resource/modal/levelUpModal.exml","getSuccess":"resource/modal/getSuccess.exml","playBefore":"resource/modal/playBefore.exml","myShop":"resource/modal/myShop.exml","shopItem":"resource/modal/shopItem.exml","teachModal":"resource/modal/teachModal.exml","moreComponent":"resource/modal/moreComponent.exml","levelCom":"resource/page/levelCom.exml","levelItem":"resource/modal/levelItem.exml","cloudCom":"resource/page/cloudCom.exml","giftModal":"resource/modal/giftModal.exml","squareGuide":"resource/modal/squareGuide.exml","toolGuide":"resource/modal/toolGuide.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
+                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","runningScene":"resource/page/runningScene.exml","startScene":"resource/page/startScene.exml","rankModal":"resource/modal/rankModal.exml","rankItem":"resource/modal/rankItem.exml","getLifr":"resource/eui_skins/getLifr.exml","getLifeModal":"resource/modal/getLifeModal.exml","moreItem":"resource/modal/moreItem.exml","moreScroller":"resource/modal/moreScroller.exml","rebornModal":"resource/modal/rebornModal.exml","gameOver":"resource/page/gameOver.exml","levelUpModal":"resource/modal/levelUpModal.exml","getSuccess":"resource/modal/getSuccess.exml","playBefore":"resource/modal/playBefore.exml","myShop":"resource/modal/myShop.exml","shopItem":"resource/modal/shopItem.exml","teachModal":"resource/modal/teachModal.exml","moreComponent":"resource/modal/moreComponent.exml","levelCom":"resource/page/levelCom.exml","levelItem":"resource/modal/levelItem.exml","cloudCom":"resource/page/cloudCom.exml","giftModal":"resource/modal/giftModal.exml","squareGuide":"resource/modal/squareGuide.exml","toolGuide":"resource/modal/toolGuide.exml","chooseSex":"resource/modal/chooseSex.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
 	__extends(ButtonSkin, _super);
 	function ButtonSkin() {
 		_super.call(this);
@@ -644,6 +644,102 @@ var egret = window.egret;window.skins={};
 		return t;
 	};
 	return VSliderSkin;
+})(eui.Skin);generateEUI.paths['resource/modal/chooseSex.exml'] = window.chooseSexSkin = (function (_super) {
+	__extends(chooseSexSkin, _super);
+	function chooseSexSkin() {
+		_super.call(this);
+		this.skinParts = ["bgRect","bg_1","img_1","gender_1","bg_2","img_2","gender_2","sureBtn"];
+		
+		this.height = 1334;
+		this.width = 750;
+		this.elementsContent = [this.bgRect_i(),this._Image1_i(),this.gender_1_i(),this.gender_2_i(),this.sureBtn_i()];
+	}
+	var _proto = chooseSexSkin.prototype;
+
+	_proto.bgRect_i = function () {
+		var t = new eui.Rect();
+		this.bgRect = t;
+		t.fillAlpha = 0.7;
+		t.height = 1334;
+		t.width = 750;
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto._Image1_i = function () {
+		var t = new eui.Image();
+		t.horizontalCenter = 0;
+		t.source = "img_text_tittle_png";
+		t.y = 126;
+		return t;
+	};
+	_proto.gender_1_i = function () {
+		var t = new eui.Group();
+		this.gender_1 = t;
+		t.horizontalCenter = 0;
+		t.y = 202;
+		t.elementsContent = [this.bg_1_i(),this.img_1_i()];
+		return t;
+	};
+	_proto.bg_1_i = function () {
+		var t = new eui.Image();
+		this.bg_1 = t;
+		t.source = "img_bg_gender_01_png";
+		t.visible = false;
+		t.x = 0;
+		t.y = 70;
+		return t;
+	};
+	_proto.img_1_i = function () {
+		var t = new eui.Image();
+		this.img_1 = t;
+		t.anchorOffsetX = 140;
+		t.anchorOffsetY = 164;
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.source = "img_role_boy_03_png";
+		t.y = 164;
+		return t;
+	};
+	_proto.gender_2_i = function () {
+		var t = new eui.Group();
+		this.gender_2 = t;
+		t.horizontalCenter = 0;
+		t.y = 581.66;
+		t.elementsContent = [this.bg_2_i(),this.img_2_i()];
+		return t;
+	};
+	_proto.bg_2_i = function () {
+		var t = new eui.Image();
+		this.bg_2 = t;
+		t.source = "img_bg_gender_01_png";
+		t.visible = false;
+		t.x = 0;
+		t.y = 67;
+		return t;
+	};
+	_proto.img_2_i = function () {
+		var t = new eui.Image();
+		this.img_2 = t;
+		t.anchorOffsetX = 140;
+		t.anchorOffsetY = 164;
+		t.horizontalCenter = 0;
+		t.source = "img_role_girl_03_png";
+		t.y = 164;
+		return t;
+	};
+	_proto.sureBtn_i = function () {
+		var t = new eui.Image();
+		this.sureBtn = t;
+		t.horizontalCenter = 0;
+		t.source = "btn_gender_sure_png";
+		t.touchEnabled = true;
+		t.visible = false;
+		t.y = 986;
+		return t;
+	};
+	return chooseSexSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/getLifeModal.exml'] = window.getLifeModalSkin = (function (_super) {
 	__extends(getLifeModalSkin, _super);
 	var getLifeModalSkin$Skin1 = 	(function (_super) {
@@ -1860,53 +1956,13 @@ var egret = window.egret;window.skins={};
 	return myShopSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/playBefore.exml'] = window.playBeforeSkin = (function (_super) {
 	__extends(playBeforeSkin, _super);
-	var playBeforeSkin$Skin7 = 	(function (_super) {
-		__extends(playBeforeSkin$Skin7, _super);
-		function playBeforeSkin$Skin7() {
-			_super.call(this);
-			this.skinParts = ["labelDisplay"];
-			
-			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
-			this.states = [
-				new eui.State ("up",
-					[
-					])
-				,
-				new eui.State ("down",
-					[
-					])
-				,
-				new eui.State ("disabled",
-					[
-					])
-			];
-		}
-		var _proto = playBeforeSkin$Skin7.prototype;
-
-		_proto._Image1_i = function () {
-			var t = new eui.Image();
-			t.percentHeight = 100;
-			t.source = "btn_start_01_png";
-			t.percentWidth = 100;
-			return t;
-		};
-		_proto.labelDisplay_i = function () {
-			var t = new eui.Label();
-			this.labelDisplay = t;
-			t.horizontalCenter = 0;
-			t.verticalCenter = 0;
-			return t;
-		};
-		return playBeforeSkin$Skin7;
-	})(eui.Skin);
-
 	function playBeforeSkin() {
 		_super.call(this);
-		this.skinParts = ["titleText","glassLight","glassNum","glassAdd","glassChoose","glass","bulletLight","bulletNum","bulletAdd","bulletChoose","bullet","startBtn","closeBtn","videoBtn"];
+		this.skinParts = ["titleText","glassLight","glassNum","glassAdd","glassChoose","glass","bulletLight","bulletNum","bulletAdd","bulletChoose","bullet","chooseGroup","startBtn","videoBtn","closeBtn","txt_1","txt_2","guide"];
 		
 		this.height = 750;
 		this.width = 605;
-		this.elementsContent = [this._Image1_i(),this.titleText_i(),this._Label1_i(),this.glass_i(),this.bullet_i(),this.startBtn_i(),this.closeBtn_i(),this.videoBtn_i()];
+		this.elementsContent = [this._Image1_i(),this.titleText_i(),this._Label1_i(),this.chooseGroup_i(),this._Group1_i(),this.closeBtn_i(),this.guide_i()];
 	}
 	var _proto = playBeforeSkin.prototype;
 
@@ -1940,13 +1996,27 @@ var egret = window.egret;window.skins={};
 		t.y = 195;
 		return t;
 	};
+	_proto.chooseGroup_i = function () {
+		var t = new eui.Group();
+		this.chooseGroup = t;
+		t.horizontalCenter = 0;
+		t.y = 288;
+		t.layout = this._HorizontalLayout1_i();
+		t.elementsContent = [this.glass_i(),this.bullet_i()];
+		return t;
+	};
+	_proto._HorizontalLayout1_i = function () {
+		var t = new eui.HorizontalLayout();
+		t.gap = 60;
+		return t;
+	};
 	_proto.glass_i = function () {
 		var t = new eui.Group();
 		this.glass = t;
 		t.height = 160;
 		t.width = 160;
-		t.x = 128.5;
-		t.y = 288;
+		t.x = 0;
+		t.y = 0;
 		t.elementsContent = [this._Rect1_i(),this.glassLight_i(),this._Image2_i(),this.glassNum_i(),this.glassAdd_i(),this.glassChoose_i()];
 		return t;
 	};
@@ -2016,8 +2086,8 @@ var egret = window.egret;window.skins={};
 		this.bullet = t;
 		t.height = 160;
 		t.width = 160;
-		t.x = 356;
-		t.y = 288;
+		t.x = 227.5;
+		t.y = 0;
 		t.elementsContent = [this._Rect2_i(),this.bulletLight_i(),this._Image3_i(),this.bulletNum_i(),this.bulletAdd_i(),this.bulletChoose_i()];
 		return t;
 	};
@@ -2082,15 +2152,34 @@ var egret = window.egret;window.skins={};
 		t.y = 108;
 		return t;
 	};
+	_proto._Group1_i = function () {
+		var t = new eui.Group();
+		t.horizontalCenter = 0.5;
+		t.y = 490;
+		t.layout = this._HorizontalLayout2_i();
+		t.elementsContent = [this.startBtn_i(),this.videoBtn_i()];
+		return t;
+	};
+	_proto._HorizontalLayout2_i = function () {
+		var t = new eui.HorizontalLayout();
+		return t;
+	};
 	_proto.startBtn_i = function () {
-		var t = new tweenButton();
+		var t = new eui.Image();
 		this.startBtn = t;
-		t.anchorOffsetX = 111;
-		t.anchorOffsetY = 56;
-		t.label = "";
-		t.x = 166;
-		t.y = 561;
-		t.skinName = playBeforeSkin$Skin7;
+		t.source = "btn_start_01_png";
+		t.touchEnabled = true;
+		t.x = 244;
+		t.y = 10;
+		return t;
+	};
+	_proto.videoBtn_i = function () {
+		var t = new eui.Image();
+		this.videoBtn = t;
+		t.source = "btn_before_01_png";
+		t.touchEnabled = true;
+		t.x = 234;
+		t.y = 0;
 		return t;
 	};
 	_proto.closeBtn_i = function () {
@@ -2102,15 +2191,42 @@ var egret = window.egret;window.skins={};
 		t.y = 15.44;
 		return t;
 	};
-	_proto.videoBtn_i = function () {
+	_proto.guide_i = function () {
+		var t = new eui.Group();
+		this.guide = t;
+		t.visible = false;
+		t.x = 131;
+		t.y = 95;
+		t.elementsContent = [this._Image4_i(),this.txt_1_i(),this.txt_2_i()];
+		return t;
+	};
+	_proto._Image4_i = function () {
 		var t = new eui.Image();
-		this.videoBtn = t;
-		t.anchorOffsetX = 131;
-		t.anchorOffsetY = 56;
-		t.source = "btn_before_01_png";
-		t.touchEnabled = true;
-		t.x = 420;
-		t.y = 561;
+		t.source = "img_bg_text_guide_png";
+		return t;
+	};
+	_proto.txt_1_i = function () {
+		var t = new eui.Label();
+		this.txt_1 = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0.5;
+		t.size = 26;
+		t.text = "点击试试神奇道具";
+		t.textColor = 0xff6358;
+		t.y = 78;
+		return t;
+	};
+	_proto.txt_2_i = function () {
+		var t = new eui.Label();
+		this.txt_2 = t;
+		t.bold = true;
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0.5;
+		t.size = 26;
+		t.text = "弹跳视野";
+		t.textColor = 0xff6358;
+		t.y = 117;
 		return t;
 	};
 	return playBeforeSkin;
@@ -2281,9 +2397,9 @@ var egret = window.egret;window.skins={};
 	return rankItemSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/rankModal.exml'] = window.rankModalSkin = (function (_super) {
 	__extends(rankModalSkin, _super);
-	var rankModalSkin$Skin8 = 	(function (_super) {
-		__extends(rankModalSkin$Skin8, _super);
-		function rankModalSkin$Skin8() {
+	var rankModalSkin$Skin7 = 	(function (_super) {
+		__extends(rankModalSkin$Skin7, _super);
+		function rankModalSkin$Skin7() {
 			_super.call(this);
 			this.skinParts = ["labelDisplay"];
 			
@@ -2302,7 +2418,7 @@ var egret = window.egret;window.skins={};
 					])
 			];
 		}
-		var _proto = rankModalSkin$Skin8.prototype;
+		var _proto = rankModalSkin$Skin7.prototype;
 
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
@@ -2318,7 +2434,7 @@ var egret = window.egret;window.skins={};
 			t.verticalCenter = 0;
 			return t;
 		};
-		return rankModalSkin$Skin8;
+		return rankModalSkin$Skin7;
 	})(eui.Skin);
 
 	function rankModalSkin() {
@@ -2426,7 +2542,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.x = 30;
 		t.y = 40;
-		t.skinName = rankModalSkin$Skin8;
+		t.skinName = rankModalSkin$Skin7;
 		return t;
 	};
 	_proto.myRank_i = function () {
@@ -2444,9 +2560,9 @@ var egret = window.egret;window.skins={};
 	return rankModalSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/rebornModal.exml'] = window.rebornModalSkin = (function (_super) {
 	__extends(rebornModalSkin, _super);
-	var rebornModalSkin$Skin9 = 	(function (_super) {
-		__extends(rebornModalSkin$Skin9, _super);
-		function rebornModalSkin$Skin9() {
+	var rebornModalSkin$Skin8 = 	(function (_super) {
+		__extends(rebornModalSkin$Skin8, _super);
+		function rebornModalSkin$Skin8() {
 			_super.call(this);
 			this.skinParts = ["labelDisplay"];
 			
@@ -2465,7 +2581,7 @@ var egret = window.egret;window.skins={};
 					])
 			];
 		}
-		var _proto = rebornModalSkin$Skin9.prototype;
+		var _proto = rebornModalSkin$Skin8.prototype;
 
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
@@ -2481,7 +2597,7 @@ var egret = window.egret;window.skins={};
 			t.verticalCenter = 0;
 			return t;
 		};
-		return rebornModalSkin$Skin9;
+		return rebornModalSkin$Skin8;
 	})(eui.Skin);
 
 	function rebornModalSkin() {
@@ -2539,7 +2655,7 @@ var egret = window.egret;window.skins={};
 		t.horizontalCenter = 0;
 		t.label = "";
 		t.y = 569;
-		t.skinName = rebornModalSkin$Skin9;
+		t.skinName = rebornModalSkin$Skin8;
 		return t;
 	};
 	return rebornModalSkin;
@@ -3095,6 +3211,46 @@ var egret = window.egret;window.skins={};
 	return cloudComSkin;
 })(eui.Skin);generateEUI.paths['resource/page/gameOver.exml'] = window.gameOverSkin = (function (_super) {
 	__extends(gameOverSkin, _super);
+	var gameOverSkin$Skin9 = 	(function (_super) {
+		__extends(gameOverSkin$Skin9, _super);
+		function gameOverSkin$Skin9() {
+			_super.call(this);
+			this.skinParts = ["labelDisplay"];
+			
+			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = gameOverSkin$Skin9.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			t.percentHeight = 100;
+			t.source = "btn_challenge_png";
+			t.percentWidth = 100;
+			return t;
+		};
+		_proto.labelDisplay_i = function () {
+			var t = new eui.Label();
+			this.labelDisplay = t;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
+			return t;
+		};
+		return gameOverSkin$Skin9;
+	})(eui.Skin);
+
 	var gameOverSkin$Skin10 = 	(function (_super) {
 		__extends(gameOverSkin$Skin10, _super);
 		function gameOverSkin$Skin10() {
@@ -3121,7 +3277,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "btn_challenge_png";
+			t.source = "btn_share_01_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -3161,46 +3317,6 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "btn_share_01_png";
-			t.percentWidth = 100;
-			return t;
-		};
-		_proto.labelDisplay_i = function () {
-			var t = new eui.Label();
-			this.labelDisplay = t;
-			t.horizontalCenter = 0;
-			t.verticalCenter = 0;
-			return t;
-		};
-		return gameOverSkin$Skin11;
-	})(eui.Skin);
-
-	var gameOverSkin$Skin12 = 	(function (_super) {
-		__extends(gameOverSkin$Skin12, _super);
-		function gameOverSkin$Skin12() {
-			_super.call(this);
-			this.skinParts = ["labelDisplay"];
-			
-			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
-			this.states = [
-				new eui.State ("up",
-					[
-					])
-				,
-				new eui.State ("down",
-					[
-					])
-				,
-				new eui.State ("disabled",
-					[
-					])
-			];
-		}
-		var _proto = gameOverSkin$Skin12.prototype;
-
-		_proto._Image1_i = function () {
-			var t = new eui.Image();
-			t.percentHeight = 100;
 			t.source = "btn_home_02_png";
 			t.percentWidth = 100;
 			return t;
@@ -3212,7 +3328,7 @@ var egret = window.egret;window.skins={};
 			t.verticalCenter = 0;
 			return t;
 		};
-		return gameOverSkin$Skin12;
+		return gameOverSkin$Skin11;
 	})(eui.Skin);
 
 	function gameOverSkin() {
@@ -3294,7 +3410,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.x = 192;
 		t.y = 721;
-		t.skinName = gameOverSkin$Skin10;
+		t.skinName = gameOverSkin$Skin9;
 		return t;
 	};
 	_proto.shareBtn_i = function () {
@@ -3305,7 +3421,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.x = 444;
 		t.y = 721;
-		t.skinName = gameOverSkin$Skin11;
+		t.skinName = gameOverSkin$Skin10;
 		return t;
 	};
 	_proto.homeBtn_i = function () {
@@ -3316,7 +3432,7 @@ var egret = window.egret;window.skins={};
 		t.horizontalCenter = 0;
 		t.label = "";
 		t.y = 865.5;
-		t.skinName = gameOverSkin$Skin12;
+		t.skinName = gameOverSkin$Skin11;
 		return t;
 	};
 	_proto.moreGroup_i = function () {
@@ -3362,7 +3478,7 @@ var egret = window.egret;window.skins={};
 		var t = new eui.Group();
 		this.content = t;
 		t.anchorOffsetY = 0;
-		t.height = 624.24;
+		t.height = 1039.24;
 		t.width = 750;
 		t.elementsContent = [this._Rect1_i(),this._Image1_i(),this._Image2_i(),this.head_i()];
 		return t;
@@ -3395,10 +3511,19 @@ var egret = window.egret;window.skins={};
 		t.width = 150;
 		t.x = 339;
 		t.y = 424;
-		t.elementsContent = [this._Image3_i(),this.headmask_i(),this.headimg_i()];
+		t.elementsContent = [this._Image3_i(),this._Image4_i(),this.headmask_i(),this.headimg_i()];
 		return t;
 	};
 	_proto._Image3_i = function () {
+		var t = new eui.Image();
+		t.height = 200;
+		t.horizontalCenter = 0;
+		t.source = "img_light_star_png";
+		t.verticalCenter = 0;
+		t.width = 200;
+		return t;
+	};
+	_proto._Image4_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
 		t.source = "img_bg_head_png";
@@ -3863,21 +3988,22 @@ var egret = window.egret;window.skins={};
 	_proto.hero_i = function () {
 		var t = new eui.Group();
 		this.hero = t;
-		t.anchorOffsetX = 40;
-		t.anchorOffsetY = 162;
-		t.height = 162;
-		t.width = 119;
-		t.x = 446;
-		t.y = 1129;
+		t.anchorOffsetX = 55;
+		t.anchorOffsetY = 160;
+		t.height = 180;
+		t.width = 154;
+		t.x = 378;
+		t.y = 1127;
 		t.elementsContent = [this.heroImg_i()];
 		return t;
 	};
 	_proto.heroImg_i = function () {
 		var t = new eui.Image();
 		this.heroImg = t;
+		t.horizontalCenter = 0;
 		t.scaleX = 1;
 		t.scaleY = 1;
-		t.source = "img_role_boy_png";
+		t.source = "img_role_1_png";
 		return t;
 	};
 	_proto.rayGroup_i = function () {
@@ -3893,6 +4019,46 @@ var egret = window.egret;window.skins={};
 	return runningSceneSkin;
 })(eui.Skin);generateEUI.paths['resource/page/startScene.exml'] = window.startSceneSkin = (function (_super) {
 	__extends(startSceneSkin, _super);
+	var startSceneSkin$Skin12 = 	(function (_super) {
+		__extends(startSceneSkin$Skin12, _super);
+		function startSceneSkin$Skin12() {
+			_super.call(this);
+			this.skinParts = ["labelDisplay"];
+			
+			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
+			this.states = [
+				new eui.State ("up",
+					[
+					])
+				,
+				new eui.State ("down",
+					[
+					])
+				,
+				new eui.State ("disabled",
+					[
+					])
+			];
+		}
+		var _proto = startSceneSkin$Skin12.prototype;
+
+		_proto._Image1_i = function () {
+			var t = new eui.Image();
+			t.percentHeight = 100;
+			t.source = "icn_home_05_png";
+			t.percentWidth = 100;
+			return t;
+		};
+		_proto.labelDisplay_i = function () {
+			var t = new eui.Label();
+			this.labelDisplay = t;
+			t.horizontalCenter = 0;
+			t.verticalCenter = 0;
+			return t;
+		};
+		return startSceneSkin$Skin12;
+	})(eui.Skin);
+
 	var startSceneSkin$Skin13 = 	(function (_super) {
 		__extends(startSceneSkin$Skin13, _super);
 		function startSceneSkin$Skin13() {
@@ -3919,7 +4085,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "icn_home_05_png";
+			t.source = "icn_home_06_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -3959,7 +4125,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "icn_home_06_png";
+			t.source = "icn_home_01_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -3999,7 +4165,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "icn_home_01_png";
+			t.source = "icn_home_02_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -4039,7 +4205,7 @@ var egret = window.egret;window.skins={};
 		_proto._Image1_i = function () {
 			var t = new eui.Image();
 			t.percentHeight = 100;
-			t.source = "icn_home_02_png";
+			t.source = "icn_home_03_png";
 			t.percentWidth = 100;
 			return t;
 		};
@@ -4053,53 +4219,13 @@ var egret = window.egret;window.skins={};
 		return startSceneSkin$Skin16;
 	})(eui.Skin);
 
-	var startSceneSkin$Skin17 = 	(function (_super) {
-		__extends(startSceneSkin$Skin17, _super);
-		function startSceneSkin$Skin17() {
-			_super.call(this);
-			this.skinParts = ["labelDisplay"];
-			
-			this.elementsContent = [this._Image1_i(),this.labelDisplay_i()];
-			this.states = [
-				new eui.State ("up",
-					[
-					])
-				,
-				new eui.State ("down",
-					[
-					])
-				,
-				new eui.State ("disabled",
-					[
-					])
-			];
-		}
-		var _proto = startSceneSkin$Skin17.prototype;
-
-		_proto._Image1_i = function () {
-			var t = new eui.Image();
-			t.percentHeight = 100;
-			t.source = "icn_home_03_png";
-			t.percentWidth = 100;
-			return t;
-		};
-		_proto.labelDisplay_i = function () {
-			var t = new eui.Label();
-			this.labelDisplay = t;
-			t.horizontalCenter = 0;
-			t.verticalCenter = 0;
-			return t;
-		};
-		return startSceneSkin$Skin17;
-	})(eui.Skin);
-
 	function startSceneSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","liftText","lifeGroup","goldText","goldGroup","openLife","openShare","openBullet","openShop","openRank","red_dot","openGift","navGroup","moreGroup"];
+		this.skinParts = ["bgImg","liftText","lifeGroup","goldText","goldGroup","openLife","life_dot","openShare","openBullet","openShop","openRank","red_dot","openGift","navGroup","moreGroup","tip_1","tip_2"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.bgImg_i(),this.lifeGroup_i(),this.goldGroup_i(),this.openLife_i(),this.openShare_i(),this.navGroup_i(),this._Image6_i(),this._Rect1_i(),this.moreGroup_i()];
+		this.elementsContent = [this.bgImg_i(),this.lifeGroup_i(),this.goldGroup_i(),this.openLife_i(),this.life_dot_i(),this.openShare_i(),this.navGroup_i(),this._Image6_i(),this._Rect1_i(),this.moreGroup_i(),this._Rect2_i(),this.tip_1_i(),this.tip_2_i()];
 	}
 	var _proto = startSceneSkin.prototype;
 
@@ -4150,6 +4276,7 @@ var egret = window.egret;window.skins={};
 		this.goldGroup = t;
 		t.anchorOffsetX = 0;
 		t.anchorOffsetY = 0;
+		t.cacheAsBitmap = true;
 		t.height = 70;
 		t.width = 236;
 		t.x = 263;
@@ -4186,8 +4313,16 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetY = 62.5;
 		t.label = "";
 		t.x = 670;
-		t.y = 675.5;
-		t.skinName = startSceneSkin$Skin13;
+		t.y = 755.5;
+		t.skinName = startSceneSkin$Skin12;
+		return t;
+	};
+	_proto.life_dot_i = function () {
+		var t = new eui.Image();
+		this.life_dot = t;
+		t.source = "img_red_dot_png";
+		t.x = 700;
+		t.y = 697;
 		return t;
 	};
 	_proto.openShare_i = function () {
@@ -4197,8 +4332,8 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetY = 62.5;
 		t.label = "";
 		t.x = 670;
-		t.y = 836.5;
-		t.skinName = startSceneSkin$Skin14;
+		t.y = 916.5;
+		t.skinName = startSceneSkin$Skin13;
 		return t;
 	};
 	_proto.navGroup_i = function () {
@@ -4225,7 +4360,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.verticalCenter = 0;
 		t.x = 65;
-		t.skinName = startSceneSkin$Skin15;
+		t.skinName = startSceneSkin$Skin14;
 		return t;
 	};
 	_proto.openShop_i = function () {
@@ -4236,7 +4371,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.verticalCenter = 0;
 		t.x = 235;
-		t.skinName = startSceneSkin$Skin16;
+		t.skinName = startSceneSkin$Skin15;
 		return t;
 	};
 	_proto.openRank_i = function () {
@@ -4247,7 +4382,7 @@ var egret = window.egret;window.skins={};
 		t.label = "";
 		t.verticalCenter = 0;
 		t.x = 395;
-		t.skinName = startSceneSkin$Skin17;
+		t.skinName = startSceneSkin$Skin16;
 		return t;
 	};
 	_proto.openGift_i = function () {
@@ -4293,9 +4428,9 @@ var egret = window.egret;window.skins={};
 	};
 	_proto._Image6_i = function () {
 		var t = new eui.Image();
-		t.horizontalCenter = 0;
+		t.horizontalCenter = 0.5;
 		t.source = "img_game_name_png";
-		t.y = 210;
+		t.y = 256;
 		return t;
 	};
 	_proto._Rect1_i = function () {
@@ -4305,7 +4440,7 @@ var egret = window.egret;window.skins={};
 		t.fillColor = 0xffffff;
 		t.height = 500;
 		t.width = 140;
-		t.y = 419;
+		t.y = 499;
 		return t;
 	};
 	_proto.moreGroup_i = function () {
@@ -4315,7 +4450,42 @@ var egret = window.egret;window.skins={};
 		t.height = 458;
 		t.width = 140;
 		t.x = 0;
-		t.y = 444;
+		t.y = 524;
+		return t;
+	};
+	_proto._Rect2_i = function () {
+		var t = new eui.Rect();
+		t.fillAlpha = 0.3;
+		t.height = 60;
+		t.horizontalCenter = 0;
+		t.width = 750;
+		t.y = 170;
+		return t;
+	};
+	_proto.tip_1_i = function () {
+		var t = new eui.Label();
+		this.tip_1 = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.height = 60;
+		t.size = 28;
+		t.text = "当你打不过了，去找新的植物炮弹帮助你吧";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.x = 321;
+		t.y = 170;
+		return t;
+	};
+	_proto.tip_2_i = function () {
+		var t = new eui.Label();
+		this.tip_2 = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.height = 60;
+		t.size = 28;
+		t.text = "当你打不过了，去找新的植物炮弹帮助你吧";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.x = 750;
+		t.y = 170;
 		return t;
 	};
 	return startSceneSkin;

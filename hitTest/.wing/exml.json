@@ -125,5 +125,10 @@
         "path": "modal\\toolGuide.ts",
         "class": "toolGuide",
         "parentPath": ""
+    },
+    "16a5260d2dc": {
+        "path": "component\\chooseSex.ts",
+        "class": "chooseSex",
+        "parentPath": ""
     }
 }

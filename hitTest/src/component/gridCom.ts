@@ -110,7 +110,7 @@ class gridCom {
 			that.conTimes.num++;
 			if (that.conTimes.num > 2) {
 				let con = new egret.BitmapText();
-				con.font = this.font;
+				con.font = RES.getRes('blue_text_fnt');
 				con.text = 'X' + that.conTimes.num;
 				con.x = this.img.x + 50;
 				con.y = this.img.y - 50;

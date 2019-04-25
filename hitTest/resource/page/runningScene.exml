@@ -51,8 +51,8 @@
 	<e:Image id="bulletImg" source="img_bullet_a2_png" x="540" y="1207" width="95" height="85"/>
 	<e:BitmapLabel id="bulletNum" x="630" y="1266" text="X5" font="stripe_text_fnt"/>
 	<e:Image source="img_bg_game_01_jpg" y="195" horizontalCenter="0"/>
-	<e:Group id="hero" x="446" y="1129" anchorOffsetX="40" anchorOffsetY="162" width="119" height="162">
-		<e:Image id="heroImg" source="img_role_boy_png" scaleX="1" scaleY="1"/>
+	<e:Group id="hero" x="378" y="1127" anchorOffsetX="55" anchorOffsetY="160" width="154" height="180">
+		<e:Image id="heroImg" scaleX="1" scaleY="1" horizontalCenter="0" source="img_role_1_png"/>
 	</e:Group>
 	<e:Group id="rayGroup" width="690" height="914" anchorOffsetY="0" y="195" horizontalCenter="0">
 	</e:Group>

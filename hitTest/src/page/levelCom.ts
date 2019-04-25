@@ -26,14 +26,17 @@ class levelCom extends eui.Component implements eui.UIComponent {
 		that.sourceArr = new eui.ArrayCollection(userDataMaster.levelArr);
 		that.dataGroup = new eui.DataGroup();
 		that.dataGroup.dataProvider = that.sourceArr;
-		that.dataGroup.useVirtualLayout = true;
 		let layout = new eui.VerticalLayout();
 		layout.gap = 0;
 		that.dataGroup.layout = layout;
-		that.dataGroup.itemRenderer = levelItem;
+
 		that.dataGroup.y = 424;
+		that.dataGroup.percentWidth=750;
+		that.dataGroup.percentHeight=130 ;
 		that.content.height = that.dataGroup.y + 130 * userDataMaster.levelArr.length + 300;
-		that.content.addChildAt(that.dataGroup,3);
+		that.content.addChildAt(that.dataGroup, 3);
+		that.dataGroup.itemRenderer = levelItem;
+		that.dataGroup.useVirtualLayout = true;
 		if (userDataMaster.levelStar.length > 1) {
 			this.scroller.viewport.scrollV = 130 * (userDataMaster.levelStar.length - 1);
 		}
