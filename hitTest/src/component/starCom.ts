@@ -36,8 +36,6 @@ class starCom {
 		}
 		that.addChild(this.gif);
 		this.gif.gotoAndPlay(1, 1);
-
-
 		callback && callback();
 	}
 	private createBitmapByName(name: string): egret.Bitmap {

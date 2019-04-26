@@ -10,7 +10,7 @@ var egret = window.egret;window.skins={};
                 window.generateEUI = {};
                 generateEUI.paths = {};
                 generateEUI.styles = undefined;
-                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","runningScene":"resource/page/runningScene.exml","startScene":"resource/page/startScene.exml","rankModal":"resource/modal/rankModal.exml","rankItem":"resource/modal/rankItem.exml","getLifr":"resource/eui_skins/getLifr.exml","getLifeModal":"resource/modal/getLifeModal.exml","moreItem":"resource/modal/moreItem.exml","moreScroller":"resource/modal/moreScroller.exml","rebornModal":"resource/modal/rebornModal.exml","gameOver":"resource/page/gameOver.exml","levelUpModal":"resource/modal/levelUpModal.exml","getSuccess":"resource/modal/getSuccess.exml","playBefore":"resource/modal/playBefore.exml","myShop":"resource/modal/myShop.exml","shopItem":"resource/modal/shopItem.exml","teachModal":"resource/modal/teachModal.exml","moreComponent":"resource/modal/moreComponent.exml","levelCom":"resource/page/levelCom.exml","levelItem":"resource/modal/levelItem.exml","cloudCom":"resource/page/cloudCom.exml","giftModal":"resource/modal/giftModal.exml","squareGuide":"resource/modal/squareGuide.exml","toolGuide":"resource/modal/toolGuide.exml","chooseSex":"resource/modal/chooseSex.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
+                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","runningScene":"resource/page/runningScene.exml","startScene":"resource/page/startScene.exml","rankModal":"resource/modal/rankModal.exml","rankItem":"resource/modal/rankItem.exml","getLifr":"resource/eui_skins/getLifr.exml","getLifeModal":"resource/modal/getLifeModal.exml","moreItem":"resource/modal/moreItem.exml","moreScroller":"resource/modal/moreScroller.exml","rebornModal":"resource/modal/rebornModal.exml","gameOver":"resource/page/gameOver.exml","levelUpModal":"resource/modal/levelUpModal.exml","getSuccess":"resource/modal/getSuccess.exml","playBefore":"resource/modal/playBefore.exml","myShop":"resource/modal/myShop.exml","shopItem":"resource/modal/shopItem.exml","teachModal":"resource/modal/teachModal.exml","moreComponent":"resource/modal/moreComponent.exml","levelCom":"resource/page/levelCom.exml","levelItem":"resource/modal/levelItem.exml","cloudCom":"resource/page/cloudCom.exml","giftModal":"resource/modal/giftModal.exml","squareGuide":"resource/modal/squareGuide.exml","toolGuide":"resource/modal/toolGuide.exml","chooseSex":"resource/modal/chooseSex.exml","dangerModal":"resource/modal/dangerModal.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
 	__extends(ButtonSkin, _super);
 	function ButtonSkin() {
 		_super.call(this);
@@ -740,6 +740,84 @@ var egret = window.egret;window.skins={};
 		return t;
 	};
 	return chooseSexSkin;
+})(eui.Skin);generateEUI.paths['resource/modal/dangerModal.exml'] = window.dangerModalSkin = (function (_super) {
+	__extends(dangerModalSkin, _super);
+	function dangerModalSkin() {
+		_super.call(this);
+		this.skinParts = ["light","useBtn","ignoreBtn"];
+		
+		this.height = 720;
+		this.width = 580;
+		this.elementsContent = [this._Image1_i(),this._Label1_i(),this._Rect1_i(),this.light_i(),this._Image2_i(),this.useBtn_i(),this.ignoreBtn_i()];
+	}
+	var _proto = dangerModalSkin.prototype;
+
+	_proto._Image1_i = function () {
+		var t = new eui.Image();
+		t.horizontalCenter = 0;
+		t.source = "img_bg_danger_png";
+		t.verticalCenter = 0;
+		return t;
+	};
+	_proto._Label1_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0;
+		t.text = "可连消两行方块";
+		t.textColor = 0x6c371a;
+		t.y = 182.66;
+		return t;
+	};
+	_proto._Rect1_i = function () {
+		var t = new eui.Rect();
+		t.ellipseWidth = 50;
+		t.fillAlpha = 0;
+		t.fillColor = 0xf1d09f;
+		t.height = 160;
+		t.horizontalCenter = 0;
+		t.strokeColor = 0xf1d09f;
+		t.strokeWeight = 3;
+		t.width = 160;
+		t.y = 280;
+		return t;
+	};
+	_proto.light_i = function () {
+		var t = new eui.Image();
+		this.light = t;
+		t.height = 250;
+		t.horizontalCenter = 1;
+		t.source = "img_light_star_png";
+		t.width = 250;
+		t.y = 236;
+		return t;
+	};
+	_proto._Image2_i = function () {
+		var t = new eui.Image();
+		t.horizontalCenter = 0.5;
+		t.source = "img_magic_png";
+		t.y = 294.35;
+		return t;
+	};
+	_proto.useBtn_i = function () {
+		var t = new eui.Image();
+		this.useBtn = t;
+		t.horizontalCenter = 0;
+		t.source = "btn_use_magic_png";
+		t.touchEnabled = true;
+		t.y = 496.99;
+		return t;
+	};
+	_proto.ignoreBtn_i = function () {
+		var t = new eui.Label();
+		this.ignoreBtn = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0.5;
+		t.text = "放弃>";
+		t.textColor = 0xd1402c;
+		t.y = 629.66;
+		return t;
+	};
+	return dangerModalSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/getLifeModal.exml'] = window.getLifeModalSkin = (function (_super) {
 	__extends(getLifeModalSkin, _super);
 	var getLifeModalSkin$Skin1 = 	(function (_super) {
@@ -3554,7 +3632,7 @@ var egret = window.egret;window.skins={};
 	__extends(runningSceneSkin, _super);
 	function runningSceneSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","scoreText","levelText","star_1","star_2","star_3","scoreProccess","amountText","amountPro","hammer_img","hammer_text","hammer_add","hammer_num","hammer","hat_img","hat_text","hat_add","hat_num","hat","lamp_img","lamp_text","lamp_add","lamp_num","lamp","toolBottom","bulletImg","bulletNum","heroImg","hero","rayGroup"];
+		this.skinParts = ["bgImg","scoreText","levelText","star_1","star_2","star_3","scoreProccess","amountText","amountPro","hammer_img","hammer_lock","hammer_text","hammer_add","hammer_num","hammer","hat_img","hat_lock","hat_text","hat_add","hat_num","hat","lamp_img","lamp_lock","lamp_text","lamp_add","lamp_num","lamp","toolBottom","bulletImg","bulletNum","heroImg","hero","rayGroup"];
 		
 		this.height = 1334;
 		this.width = 750;
@@ -3731,7 +3809,7 @@ var egret = window.egret;window.skins={};
 		t.width = 110;
 		t.x = 0;
 		t.y = 0;
-		t.elementsContent = [this._Image7_i(),this.hammer_img_i(),this.hammer_text_i(),this.hammer_add_i(),this.hammer_num_i()];
+		t.elementsContent = [this._Image7_i(),this.hammer_img_i(),this.hammer_lock_i(),this.hammer_text_i(),this.hammer_add_i(),this.hammer_num_i()];
 		return t;
 	};
 	_proto._Image7_i = function () {
@@ -3755,6 +3833,17 @@ var egret = window.egret;window.skins={};
 		t.source = "img_prop_c1_png";
 		t.top = -6;
 		t.width = 71;
+		return t;
+	};
+	_proto.hammer_lock_i = function () {
+		var t = new eui.Image();
+		this.hammer_lock = t;
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.source = "icn_lock_png";
+		t.top = 0;
+		t.visible = false;
 		return t;
 	};
 	_proto.hammer_text_i = function () {
@@ -3797,7 +3886,7 @@ var egret = window.egret;window.skins={};
 		t.width = 110;
 		t.x = 121;
 		t.y = 0;
-		t.elementsContent = [this._Image8_i(),this.hat_img_i(),this.hat_text_i(),this.hat_add_i(),this.hat_num_i()];
+		t.elementsContent = [this._Image8_i(),this.hat_img_i(),this.hat_lock_i(),this.hat_text_i(),this.hat_add_i(),this.hat_num_i()];
 		return t;
 	};
 	_proto._Image8_i = function () {
@@ -3821,6 +3910,17 @@ var egret = window.egret;window.skins={};
 		t.source = "img_prop_d1_png";
 		t.width = 81;
 		t.y = 0;
+		return t;
+	};
+	_proto.hat_lock_i = function () {
+		var t = new eui.Image();
+		this.hat_lock = t;
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.source = "icn_lock_png";
+		t.top = 0;
+		t.visible = false;
 		return t;
 	};
 	_proto.hat_text_i = function () {
@@ -3863,7 +3963,7 @@ var egret = window.egret;window.skins={};
 		t.width = 110;
 		t.x = 242;
 		t.y = 0;
-		t.elementsContent = [this._Image9_i(),this.lamp_img_i(),this.lamp_text_i(),this.lamp_add_i(),this.lamp_num_i()];
+		t.elementsContent = [this._Image9_i(),this.lamp_img_i(),this.lamp_lock_i(),this.lamp_text_i(),this.lamp_add_i(),this.lamp_num_i()];
 		return t;
 	};
 	_proto._Image9_i = function () {
@@ -3887,6 +3987,17 @@ var egret = window.egret;window.skins={};
 		t.source = "img_prop_e1_png";
 		t.top = -10;
 		t.width = 72;
+		return t;
+	};
+	_proto.lamp_lock_i = function () {
+		var t = new eui.Image();
+		this.lamp_lock = t;
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.source = "icn_lock_png";
+		t.top = 0;
+		t.visible = false;
 		return t;
 	};
 	_proto.lamp_text_i = function () {

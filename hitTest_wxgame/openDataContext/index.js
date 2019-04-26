@@ -73,14 +73,14 @@ class Rank {
   //页码
   page = 1;
   //每页显示行数
-  pageSize = 6;
+  pageSize = 5;
   //最高分
   maxScore = 0;
   maxLevel = 0; //最高阶级
   star = 0; //星星数
   myRank=1;//我的排名
   currentScore = 0; //当前分数
-  currentLevel = 0; //当前阶级
+
   passIndex = 0; //即将超越的好友index
   //好友排行数组
   friendList = [];
@@ -107,6 +107,7 @@ class Rank {
   //初始化当前用户信息
   initUser(openid) {
     this.openid = openid
+    console.log(6546546, openid)
   }
 
   //初始化画布
@@ -151,7 +152,7 @@ class Rank {
               break;
           }
         }
-        if (maxScore > 0 && cloudWeek == that.currentWeek) {
+        if (maxScore > 0 ) {
           that.maxScore = maxScore;
           that.maxLevel = maxLevel;
           that.star = star;
@@ -191,12 +192,12 @@ class Rank {
 
           }
           //挑选本周数据
-          for (let i = 0; i < res.data.length; i++) {
-            if (!res.data[i].week || res.data[i].week != that.currentWeek) {
-              res.data.splice(i, 1);
-              i--;
-            }
-          }
+          // for (let i = 0; i < res.data.length; i++) {
+          //   if (!res.data[i].week || res.data[i].week != that.currentWeek) {
+          //     res.data.splice(i, 1);
+          //     i--;
+          //   }
+          // }
           //排序
           function sortScore(a, b) {
             if (a.maxLevel !== b.maxLevel) {
@@ -212,10 +213,10 @@ class Rank {
               //我的排名
               that.myRank = i + 1;
             }
-            if (that.friendList[i].maxLevel > that.currentLevel || that.friendList[i].maxScore > that.currentScore) {
-              that.passIndex = i;
-              break;
-            }
+            // if (that.friendList[i].maxLevel > that.currentLevel || that.friendList[i].maxScore > that.currentScore) {
+            //   that.passIndex = i;
+            //   break;
+            // }
           }
           callback && callback()
         }
@@ -461,7 +462,7 @@ class Rank {
     this.context.textAlign = 'center';
     this.context.fillText('您当前为：第'+that.myRank+'名', 300, 35);
     let pageAll = Math.ceil(that.friendList.length / that.pageSize);
-    this.context.fillText(that.page + ' / ' + pageAll, 300, 720);
+    this.context.fillText(that.page + ' / ' + pageAll, 300, 715);
     for (let i = 0; i < list.length; i++) {
       let x = 0,
         y = 60,

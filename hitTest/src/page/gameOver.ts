@@ -60,6 +60,7 @@ class gameOver extends eui.Component implements eui.UIComponent {
 		CallbackMaster.openShare(null, false);
 	}
 	public homeFun() {
+		egret.Tween.removeAllTweens()
 		sceneMaster.changeScene(new startScene());
 	}
 	public playFun() {

@@ -130,5 +130,10 @@
         "path": "component\\chooseSex.ts",
         "class": "chooseSex",
         "parentPath": ""
+    },
+    "16a57560681": {
+        "path": "modal\\dangerModal.ts",
+        "class": "dangerModal",
+        "parentPath": ""
     }
 }

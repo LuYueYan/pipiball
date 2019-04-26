@@ -40,7 +40,7 @@ class gridCom {
 		this.txt.width = this.itemW;
 		this.txt.textAlign = 'center';
 		this.txt.anchorOffsetX = this.img.width / 2;
-		this.txt.anchorOffsetY = this.img.height / 1.9;
+		this.txt.anchorOffsetY = this.img.height/1.5 ;
 		this.txt.scaleX = 0.8, this.txt.scaleY = 0.8;
 	}
 	public createBody(x, y, that) {
@@ -63,7 +63,7 @@ class gridCom {
 			let self = this;
 			setTimeout(function () {
 				self.boxBody.velocity = [0.5, 0];
-			}, 100);
+			}, 500);
 		}
 		this.boxBody.fixedRotation = false;
 		this.boxBody.displays = [this.img, this.txt];
@@ -119,7 +119,7 @@ class gridCom {
 				con.scaleX = 0;
 				con.scaleY = 0;
 				that.addChild(con);
-				egret.Tween.get(con).to({ scaleX: 1.5, scaleY: 1.5 }, 500).wait(1000).to({ alpha: 0 }, 200).call(() => {
+				egret.Tween.get(con).to({ scaleX: 1.5, scaleY: 1.5 }, 300).wait(800).to({ alpha: 0 }, 200).call(() => {
 					con.parent && con.parent.removeChild(con);
 				});
 			}

@@ -16,7 +16,7 @@ class beeCom {
 		this.against = userDataMaster.bulletArr[userDataMaster.bulletIndex].target;
 	}
 	public createBody(that, x = 7.5, y = 0) {
-		var vertices = [[0.25, -0.63], [0.25, 0.63], [-0.25, 0.63], [-0.25, -0.63]];
+		var vertices = [[0.1, -0.63], [0.1, 0.63], [-0.1, 0.63], [-0.1, -0.63]];
 		var boxShape = new p2.Convex({ vertices: vertices });
 		// var boxShape: p2.Shape = new p2.Box({ width: 0.5, height: 1.26 });
 		//不碰撞同类

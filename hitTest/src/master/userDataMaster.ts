@@ -9,11 +9,11 @@ class userDataMaster {
 	public static levelStar = [];//过关星星情况 n颗星
 	public static bulletIndex = 0;//当前使用的炮弹
 	public static tool = {
-		bullet: { level: 1, unlock: true, num: 0 },
-		glass: { level: 1, unlock: true, num: 0 },
-		hammer: { level: 2, unlock: false, num: 0 },
-		hat: { level: 10, unlock: false, num: 0 },
-		lamp: { level: 15, unlock: false, num: 0 }
+		bullet: { level: 5, unlock: true, num: 1 },
+		glass: { level: 1, unlock: true, num: 1 },
+		hammer: { level: 2, unlock: false, num: 1 },
+		hat: { level: 10, unlock: false, num: 1 },
+		lamp: { level: 15, unlock: false, num: 1 }
 	};//道具数量
 	public static bulletArr = [
 		{ id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 1000, powerImg: 1, txt: '', target: {} },

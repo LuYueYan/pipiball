@@ -12,16 +12,19 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	public toolBottom: eui.Group;
 	public hammer: eui.Group;
 	public hammer_img: eui.Image;
+	public hammer_lock: eui.Image;
 	public hammer_text: eui.Label;
 	public hammer_add: eui.Image;
 	public hammer_num: eui.BitmapLabel;
 	public hat: eui.Group;
 	public hat_img: eui.Image;
+	public hat_lock: eui.Image;
 	public hat_text: eui.Label;
 	public hat_add: eui.Image;
 	public hat_num: eui.BitmapLabel;
 	public lamp: eui.Group;
 	public lamp_img: eui.Image;
+	public lamp_lock: eui.Image;
 	public lamp_text: eui.Label;
 	public lamp_add: eui.Image;
 	public lamp_num: eui.BitmapLabel;
@@ -30,6 +33,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	public hero: eui.Group;
 	public heroImg: eui.Image;
 	public rayGroup: eui.Group;
+
 
 
 
@@ -61,7 +65,9 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		reborn: 0,//复活次数
 		gold: 0,//获得的金币数量
 		star: 0,//星星数量
-		line: 0
+		line: 0,//已创建多少行
+		danger: 0,//危险状态，用来控制消除多行后方块不下落 0--未使用 1--使用中 2--使用过
+		reborning: 0//复活状态，用来控制消除多行后方块不下落 0--未使用 1--使用中 2--使用过
 	};
 	public tooling = null;//正在使用的道具名称
 	public lampShow;//使用红绿灯道具时页面上方出现的红绿灯
@@ -137,7 +143,6 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				that.addChild(gif);
 				gif.gotoAndPlay(1, 1);
 				gif.addEventListener(egret.Event.COMPLETE, (e: egret.Event) => {
-					console.log(662222)
 					for (let i = 0, len = 5; i < len; i++) {
 						setTimeout(function () {
 							let bee = new beeCom();
@@ -162,11 +167,32 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		}
 		if (that.chooseTool.glass) {
 			//使用弹跳视野道具
-
 			setTimeout(function () {
+				let gif = movieMaster.getGif('glass');
+				gif.x = 375 - 300 / 2;
+				gif.y = 600;
+				that.addChild(gif);
+				that.swapChildren(gif, that.hero);
+				gif.gotoAndPlay(1, 1);
+				gif.addEventListener(egret.Event.COMPLETE, (e: egret.Event) => {
+					console.log(878762)
+					egret.Tween.get(gif).to({ y: 900 }, 1000).to({ alpha: 0 }, 500).call(() => {
+						that.swapChildren(gif, that.hero);
+						gif.parent && gif.parent.removeChild(gif);
+						that.hero.rotation = -30;
+						let glass = that.createBitmapByName('img_glass');
+						glass.x = 27;
+						glass.y = 68;
+						that.hero.addChild(glass);
+						setTimeout(function () {
+							that.hero.rotation = 0;
+						}, 500);
+					});
+
+				}, this);
 
 			}, t);
-			t += 3000;
+			t += 4000;
 		}
 		setTimeout(function () {
 			that.prepare = true;
@@ -209,7 +235,8 @@ class runningScene extends eui.Component implements eui.UIComponent {
 					that[tool[i] + '_num'].visible = true;
 					that[tool[i] + '_num'].text = 'X' + item.num;
 				}
-				if (i == 0 || !item.unlock) {
+				that[tool[i] + '_lock'].parent && that[tool[i] + '_lock'].parent.removeChild(that[tool[i] + '_lock']);
+				if (!item.unlock) {
 					//首次解锁
 					userDataMaster.tool[tool[i]].unlock = true;
 					//引导内容
@@ -233,7 +260,8 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				that[tool[i]].addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.judgeTool(tool[i], i) }, this);
 			} else {
 				//未达到解锁关卡
-				that[tool[i] + '_img'].texture = RES.getRes('icn_lock_png');
+				that[tool[i] + '_img'].parent && that[tool[i] + '_img'].parent.removeChild(that[tool[i] + '_img']);
+				that[tool[i] + '_lock'].visible = true;
 				that[tool[i] + '_text'].visible = true;
 				that[tool[i] + '_add'].visible = false;
 			}
@@ -398,7 +426,6 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	public updateProccess(conTimes) {
 		//更新关卡进度
 		let that = this;
-
 		//得分
 		that.myData.score += conTimes.score;
 		if (conTimes.num > 2) {
@@ -448,6 +475,8 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	public createGif(name, t, wait) {
 		let that = this;
 		let group = new eui.Group();
+		group.width = 600;
+		group.height = 450;
 		group.anchorOffsetX = 600 / 2;
 		group.anchorOffsetY = 450 / 2;
 		group.x = 375;
@@ -474,15 +503,16 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		let that = this;
 		if (that.myData.amount >= that.levelInfo.amount) {
 			//通关~~~~
-			that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
+
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
 
-			that.createGif('img_text_a4', 5, 5000);
+			that.createGif('img_text_a4', 5, 2000);
 			setTimeout(function () {
+				that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
 				sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData))
-			}, 5000);
+			}, 2000);
 		}
 		if (that.levelInfo.existAmount >= that.levelInfo.amount) {
 			//本关卡数量已足够
@@ -586,11 +616,10 @@ class runningScene extends eui.Component implements eui.UIComponent {
 								that.conTimes.score += that.gridArr[i].initNum;
 								that.gridArr[i].updateText(that, that.gridArr[i].initNum, () => {
 									that.hitDown();
+									that.updateProccess(that.conTimes)
 									suc();
 								})
 							});
-
-
 					}
 
 					break;
@@ -661,7 +690,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				bee.velocity = [dx / that.factor, -dy / that.factor];
 				bee.gravityScale = 0;
 				that.updateSpeed(bee);
-			}, 150 * i);
+			}, 100 * i);
 		}
 	}
 	public testRay() {
@@ -829,7 +858,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 					return;
 				}
 				for (let k = 0; k < that.gridArr.length; k++) {
-					if (that.gridArr[k].boxBody.id == hittedBody.id) {
+					if (that.gridArr[k].boxBody.id == hittedBody.id && that.shooting) {
 						if (that.gridArr[k].type == 3) {
 							//是球
 							if (!that.gridArr[k].isRemoved) {
@@ -960,19 +989,40 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				if ((i == len - 1) && num == len && that.shooting && that.shootPoint.beeNum == len) {
 					console.log('enter', that.shooting)
 					that.updateProccess(that.conTimes);
+					that.conTimes = { num: 0, score: 0 };//初始化之前的连击次数
 					that.shooting = false;
 					that.shootPoint.floor = false;
 					if (that.tooling != 'lamp') {
 						that.tooling = null;
 						if (that.hatPower) {
-							that.hero.removeChildAt(1);
+							let num = that.hero.numChildren;
+							that.hero.removeChildAt(num - 1);
 							that.hatPower = false;
 						}
-
 					}
 					setTimeout(function () {
-						that.updateGrids();
-						that.updateBee()
+						if (that.myData.danger == 1 || that.myData.reborning == 1) {
+							if (that.myData.danger == 1) {
+								that.myData.danger = 2;
+							} else {
+								that.myData.reborning = 2;
+							}
+							if (that.myData.amount >= that.levelInfo.amount) {
+								//通关~~~~
+								// that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
+								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
+								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+
+								that.createGif('img_text_a4', 5, 2000);
+								setTimeout(function () {
+									sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData))
+								}, 2000);
+							}
+						} else {
+							that.updateGrids();
+						}
+						that.updateBee();
 					}, 100);
 				}
 			} else {
@@ -1028,6 +1078,8 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			})
 			return;
 		}
+		let reborn = false;
+		let danger = false;
 		for (let len = that.gridArr.length, i = len - 1; i >= 0; i--) {
 			if (that.gridArr[i].isRemoved) {
 				if (that.gridArr[i].img.parent && that.gridArr[i].type == 4) {
@@ -1037,31 +1089,105 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				that.gridArr.splice(i, 1);
 				continue;
 			}
+			that.gridArr[i].boxBody.position[1] -= that.adaptParams.itemWidth / that.factor;
 			let y = that.gridArr[i].boxBody.position[1];
-			if (y <= that.getPosition(that.adaptParams.itemWidth * 7.5)) {
+			if (y <= that.getPosition(that.adaptParams.itemWidth * 8)) {
 				//游戏结束
 				console.log('gameOver');
-				that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
-				that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
-				that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
-				that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
-				if (that.myData.reborn >= 1) {
-					//已复活
-					sceneMaster.openModal(new gameOver(that.levelInfo.level, that.myData))
-				} else {
-					let reborn = new rebornModal(that.levelInfo.level, that.myData);
-					sceneMaster.openModal(reborn);
-					reborn.rebornBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.rebornFun, this);
-				}
-				return;
-			} else if (y <= that.getPosition(that.adaptParams.itemWidth * 6.5)) {
+				reborn = true;
+
+			} else if (y <= that.getPosition(that.adaptParams.itemWidth * 7) && !sceneMaster.modal) {
 				//危险警告
 				console.log('danger');
+				danger = true;
 			}
-			that.gridArr[i].boxBody.position[1] = y - that.adaptParams.itemWidth / that.factor;
+
+		}
+		if (reborn) {
+			that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
+			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
+			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+			if (that.myData.reborn >= 1) {
+				//已复活
+				sceneMaster.openModal(new gameOver(that.levelInfo.level, that.myData))
+			} else {
+				let reborn = new rebornModal(that.levelInfo.level, that.myData);
+				sceneMaster.openModal(reborn);
+				that.shooting = false;
+				reborn.rebornBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.rebornFun, this);
+			}
+		} else if (danger) {
+			let img_line_danger = that.createBitmapByName('img_line_danger');
+			img_line_danger.x = (750 - img_line_danger.width) / 2;
+			img_line_danger.y = that.adaptParams.gridAreaTop + that.adaptParams.itemWidth * 8 - 10;
+			that.addChild(img_line_danger);
+			egret.Tween.get(img_line_danger).to({ alpha: 0 }, 300).to({ alpha: 1 }, 300)
+				.to({ alpha: 0 }, 300).to({ alpha: 1 }, 300).call(() => {
+					img_line_danger.parent && img_line_danger.parent.removeChild(img_line_danger);
+					if (that.myData.danger == 0) {
+						let danger = new dangerModal();
+						sceneMaster.openModal(danger);
+						danger.useBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+							CallbackMaster.openShare(() => {
+								sceneMaster.closeModal();
+								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
+								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+								that.shooting = false;
+								that.clearRows(2);
+							})
+						}, this);
+					}
+				});
 		}
 		that.createGrids();
 
+	}
+	public clearRows(num) {
+		let that = this;
+		if (num == 2) {
+			that.myData.danger = 1;
+		} else {
+			that.myData.reborning = 1;
+		}
+		let len = that.gridArr.length;
+		let dy = that.adaptParams.itemWidth / that.factor;
+		let end = 0;
+		if (len > 0) {
+			end = that.gridArr[0].boxBody.position[1] + dy * num;
+		}
+		for (let i = 0; i < len; i++) {
+			if (that.gridArr[i].boxBody.position[1] <= end) {
+				if (that.gridArr[i].type == 4) {
+					//    星星
+					that.gridArr[i].updateText(that, () => {
+						that.gridArr[i].img.parent && that.gridArr[i].img.parent.removeChild(that.gridArr[i].img);
+					});
+				} else if (that.gridArr[i].type == 3) {
+					//球
+					let nx = that.gridArr[i].boxBody.position[0];
+					that.gridArr[i].updateText(that, () => {
+						let b = new beeCom();
+						b.createBody(that, nx);
+						that.beeArr.push(b);
+						that.myData.beeNum++;
+						that.bulletNum.text = 'X' + that.myData.beeNum;
+					})
+				} else {
+					that.gridArr[i].updateText(that, that.gridArr[i].initNum, () => {
+						that.hitDown();
+					});
+				}
+
+			} else {
+				break;
+			}
+		}
+		that.shooting = true;
+		that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
+		that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+		that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
 	}
 	public rebornFun() {
 		//复活
@@ -1078,29 +1204,50 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			sceneMaster.closeModal();
 			that.currentTimer = egret.getTimer();
 			that.addEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
-			for (let len = that.gridArr.length, i = len - 1; i >= 0; i--) {
-				if (that.gridArr[i].isRemoved) {
-					if (that.gridArr[i].img.parent && that.gridArr[i].type == 4) {
-						that.world.removeBody(that.gridArr[i].boxBody);
-						that.gridArr[i].img.parent.removeChild(that.gridArr[i].img);
-					}
-					that.gridArr.splice(i, 1);
-					continue;
-				}
-				let y = that.gridArr[i].boxBody.position[1];
-				that.gridArr[i].boxBody.position[1] = y + that.adaptParams.itemWidth / that.factor * 3;
-			}
-			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
-			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
-			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
-			// sceneMaster.changeScene(new runningScene(that.levelInfo.level, that.myData, that.chooseTool));
+			that.clearRows(3)
+			// for (let len = that.gridArr.length, i = len - 1; i >= 0; i--) {
+			// 	if (that.gridArr[i].isRemoved) {
+			// 		if (that.gridArr[i].img.parent && that.gridArr[i].type == 4) {
+			// 			that.world.removeBody(that.gridArr[i].boxBody);
+			// 			that.gridArr[i].img.parent.removeChild(that.gridArr[i].img);
+			// 		}
+			// 		that.gridArr.splice(i, 1);
+			// 		continue;
+			// 	}
+			// 	let y = that.gridArr[i].boxBody.position[1];
+			// 	that.gridArr[i].boxBody.position[1] = y + that.adaptParams.itemWidth / that.factor * 3;
+			// }
+
 		}
 	}
 	public updateSpeed(bee) {
 		//更新速度，保持匀速运动
+		if (bee.position[0] < this.getPosition(-20, 2)) {
+			console.log('左边出墙了')
+			bee.velocity[0] = -bee.velocity[0];
+			bee.position[0] = this.getPosition(20, 2);
+
+		}
+		if (bee.position[0] > this.getPosition(692, 2)) {
+			console.log('右边出墙了')
+			bee.velocity[0] = -bee.velocity[0];
+			bee.position[0] = this.getPosition(652, 2);
+
+		}
+		if (bee.position[1] > this.getPosition(-10)) {
+			console.log('上边出墙了')
+			bee.velocity[1] = -bee.velocity[1];
+			bee.position[1] = this.getPosition(20);
+
+		}
+		if (bee.position[1] < this.getPosition(945)) {
+			console.log('下边出墙了')
+			bee.position[1] = this.getPosition(910);
+		}
+
 		let velocity = bee.velocity;
 		if (Math.abs(velocity[1]) < 0.5) {
-			console.log('垂直速度为', velocity[1])
+			// console.log('垂直速度为', velocity[1])
 			velocity[1] = -0.5;
 		}
 		let k = Math.sqrt(this.ballSpeed / (velocity[0] * velocity[0] + velocity[1] * velocity[1]));

@@ -130,7 +130,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 			that.moreGroup.addChild(dataGroup);
 
 			that.moreComponent = moreComponent.getInstance();
-			that.moreComponent.y = 380;
+			that.moreComponent.y = 350;
 			that.addChild(that.moreComponent)
 			that.moreComponent.changeArea.texture = RES.getRes('btn_more_game_png');
 		} else {

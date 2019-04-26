@@ -11,6 +11,7 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 
 	public level;
 	public info: any;
+	public gif;
 	public constructor(level, info: any) {
 		super();
 		this.level = level;
@@ -42,6 +43,12 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 		}
 
 		let that = this;
+
+		that.gif = movieMaster.getGif('through');
+		that.gif.y = -300;
+		that.addChild(that.gif);
+		that.gif.gotoAndPlay(1, -1);
+
 		for (let i = 1; i <= this.info.star; i++) {
 			setTimeout(function () {
 				that['star_' + i].texture = RES.getRes('img_star_a1_png');
@@ -58,6 +65,12 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 
 			}
 		});
+		platform.openDataContext.postMessage({
+			type: "updateScore",
+			score: that.info.score,
+			level: that.level,
+			star:that.info.star
+		});
 		this.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.videoFun, this);
 		this.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.getFun, this);
 	}
@@ -72,13 +85,17 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 		let that = this;
 		function suc() {
 			userDataMaster.myGold = userDataMaster.gold + that.info.gold * 2;
+			that.gif.stop();
+			egret.Tween.removeAllTweens();
 			sceneMaster.changeScene(new startScene());
-			sceneMaster.openModal(new getSuccess('img_diamond_big_png','X'+ that.info.gold * 2));
+			sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + that.info.gold * 2));
 		}
 	}
 	public getFun() {
 		userDataMaster.myGold = userDataMaster.gold + this.info.gold;
+		this.gif.stop();
+		egret.Tween.removeAllTweens();
 		sceneMaster.changeScene(new startScene());
-		sceneMaster.openModal(new getSuccess('img_diamond_big_png','X'+ this.info.gold ));
+		sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + this.info.gold));
 	}
 }
