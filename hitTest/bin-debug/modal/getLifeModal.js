@@ -52,8 +52,12 @@ var getLifeModal = (function (_super) {
         AdMaster.useVideo(function () {
             suc();
         }, function () {
-            CallbackMaster.openShare(function () {
-                suc();
+            // CallbackMaster.openShare(() => {
+            // 	suc();
+            // })
+            platform.showModal({
+                title: '温馨提示',
+                content: '暂时没有视频可以观看哦~'
             });
         });
         function suc() {
@@ -80,3 +84,4 @@ var getLifeModal = (function (_super) {
     return getLifeModal;
 }(eui.Component));
 __reflect(getLifeModal.prototype, "getLifeModal", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=getLifeModal.js.map

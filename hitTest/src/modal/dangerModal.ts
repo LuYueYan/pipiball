@@ -18,7 +18,7 @@ class dangerModal extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
-		egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 5000);
+		egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
 		that.useBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.useFun, this);
 		that.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.ignoreFun, this)
 	}

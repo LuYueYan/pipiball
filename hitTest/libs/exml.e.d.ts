@@ -52,15 +52,23 @@ declare module skins{
 	class VSliderSkin extends eui.Skin{
 	}
 }
+declare class chooseSexSkin extends eui.Skin{
+}
+declare class dangerModalSkin extends eui.Skin{
+}
 declare class getLifeModalSkin extends eui.Skin{
 }
 declare class getSuccessSkin extends eui.Skin{
 }
+declare class giftModalSkin extends eui.Skin{
+}
+declare class levelItemSkin extends eui.Skin{
+}
 declare class levelUpModalSkin extends eui.Skin{
 }
-declare class moreItemSkin extends eui.Skin{
+declare class moreComponentSkin extends eui.Skin{
 }
-declare class moreScrollerSkin extends eui.Skin{
+declare class moreItemSkin extends eui.Skin{
 }
 declare class myShopSkin extends eui.Skin{
 }
@@ -74,9 +82,17 @@ declare class rebornModalSkin extends eui.Skin{
 }
 declare class shopItemSkin extends eui.Skin{
 }
+declare class squareGuideSkin extends eui.Skin{
+}
 declare class teachModalSkin extends eui.Skin{
 }
+declare class toolGuideSkin extends eui.Skin{
+}
+declare class cloudComSkin extends eui.Skin{
+}
 declare class gameOverSkin extends eui.Skin{
+}
+declare class levelComSkin extends eui.Skin{
 }
 declare class runningSceneSkin extends eui.Skin{
 }

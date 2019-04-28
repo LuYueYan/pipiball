@@ -42,10 +42,14 @@ var levelUpModal = (function (_super) {
             userDataMaster.levelStar[this.level - 1] = this.info.star;
         }
         var that = this;
+        that.gif = movieMaster.getGif('through');
+        that.gif.y = -300;
+        that.addChild(that.gif);
+        that.gif.gotoAndPlay(1, -1);
         var _loop_1 = function (i) {
             setTimeout(function () {
                 that['star_' + i].texture = RES.getRes('img_star_a1_png');
-            }, i * 1000);
+            }, i * 300);
         };
         for (var i = 1; i <= this.info.star; i++) {
             _loop_1(i);
@@ -59,6 +63,12 @@ var levelUpModal = (function (_super) {
         ServiceMaster.post(ServiceMaster.getScore, params, function (res) {
             if (parseInt(res.code) === 1 && res.data) {
             }
+        });
+        platform.openDataContext.postMessage({
+            type: "updateScore",
+            score: that.info.score,
+            level: that.level,
+            star: that.info.star
         });
         this.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.videoFun, this);
         this.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.getFun, this);
@@ -74,15 +84,20 @@ var levelUpModal = (function (_super) {
         var that = this;
         function suc() {
             userDataMaster.myGold = userDataMaster.gold + that.info.gold * 2;
+            that.gif.stop();
+            egret.Tween.removeAllTweens();
             sceneMaster.changeScene(new startScene());
             sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + that.info.gold * 2));
         }
     };
     levelUpModal.prototype.getFun = function () {
         userDataMaster.myGold = userDataMaster.gold + this.info.gold;
+        this.gif.stop();
+        egret.Tween.removeAllTweens();
         sceneMaster.changeScene(new startScene());
         sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + this.info.gold));
     };
     return levelUpModal;
 }(eui.Component));
 __reflect(levelUpModal.prototype, "levelUpModal", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=levelUpModal.js.map

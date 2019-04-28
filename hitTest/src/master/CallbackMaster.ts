@@ -86,17 +86,13 @@ class CallbackMaster {
 	}
 	public static shareInfo = [
 		{
-			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/share_img/share_1.jpg',
-			title: '球球精灵要饿坏了，快点来喂养吧~'
+			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_1.jpg',
+			title: '瞄准！射击！看谁能够消灭所有方块~'
 		},
 		{
-			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/share_img/share_2.jpg',
-			title: '快来测试一下你的手速是几阶吧？听说单身10年的人手速才达到5阶'
-		},
-		{
-			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/share_img/share_3.jpg?t=1',
-			title: '给你采集了一大袋能量果，快来领一份吧~'
-		},
+			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_2.jpg',
+			title: '我能让射击视线自个儿拐弯，你行吗？'
+		}
 	]
 	public static openShare(Callback: Function = null, judge = true, query = '', shareType = 0) {
 		//参数1---回调函数 参数2---是否判断分享成功，默认判断 参数3----附加的参数  4--分享类型
@@ -104,13 +100,13 @@ class CallbackMaster {
 		if (CallbackMaster.hasChecked) {
 			//如果审核通过了
 			let s = CallbackMaster.shareInfo[0];
-			if (shareType == 0) {
+			// if (shareType == 0) {
 				//默认随机分享
 				s = CallbackMaster.shareInfo[Math.floor(Math.random() * 2)];
-			} else {
-				s.imageUrl = CallbackMaster.shareInfo[2].imageUrl;
-				s.title = (userDataMaster.myInfo.nickName || '') + CallbackMaster.shareInfo[2].title;
-			}
+			// } else {
+			// 	s.imageUrl = CallbackMaster.shareInfo[2].imageUrl;
+			// 	s.title = (userDataMaster.myInfo.nickName || '') + CallbackMaster.shareInfo[2].title;
+			// }
 
 			let obj = {
 				title: s.title,

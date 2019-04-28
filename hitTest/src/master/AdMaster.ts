@@ -170,7 +170,6 @@ class AdMaster {
 		//分享/观看视频获取道具
 
 		if (AdMaster.cacheVideoAd) {
-
 			if (!AdMaster.noVideo) {
 				let v = true;
 				AdMaster.openVideoAd((res) => {

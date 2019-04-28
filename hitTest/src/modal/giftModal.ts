@@ -1,4 +1,5 @@
 class giftModal extends eui.Component implements eui.UIComponent {
+	public bgImg: eui.Image;
 	public closeBtn: eui.Image;
 	public bg_0: eui.Image;
 	public bg_1: eui.Image;
@@ -9,6 +10,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 	public bg_6: eui.Image;
 	public bg_7: eui.Image;
 	public getBtn: eui.Image;
+
 
 	public terval = null;
 	public current = 0;
@@ -40,11 +42,12 @@ class giftModal extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
+		that.bgImg.height=that.stage.stageHeight;
 		if (userDataMaster.todayGift) {
 			that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
 			that.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.getFun, this);
 		} else {
-			that.getBtn.texture = RES.getRes('btn_lottery_03_png');
+			// that.getBtn.texture = RES.getRes('btn_lottery_03_png');
 		}
 		that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
 		that.terval = setInterval(() => { that.timer(that) }, 1000);

@@ -8,7 +8,7 @@ class levelItem extends eui.ItemRenderer implements eui.UIComponent {
 	public levelText: eui.BitmapLabel;
 
 	public static point = [
-		{ x: 230, y:-30 },
+		{ x: 230, y: -30 },
 		{ x: 142, y: 0 },
 		{ x: 262, y: -6 },
 		{ x: 422, y: -40 },
@@ -34,11 +34,10 @@ class levelItem extends eui.ItemRenderer implements eui.UIComponent {
 		this.bodyGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
 	}
 	public jumpFun() {
-		egret.Tween.removeAllTweens();
 		sceneMaster.openModal(new playBefore(this.data.level));
 	}
 	protected dataChanged(): void {
-		let n = (this.data.level + 1) % levelItem.point.length + 1;
+		let n = (this.data.level + 2) % levelItem.point.length + 1;
 		this.map.texture = RES.getRes('img_map_0' + n + '_png');
 		this.bodyGroup.x = levelItem.point[n - 1].x;
 		this.bodyGroup.y = levelItem.point[n - 1].y;
@@ -54,9 +53,18 @@ class levelItem extends eui.ItemRenderer implements eui.UIComponent {
 			this.bgImg.texture = RES.getRes('img_wood_01_png');
 		} else {
 			//未达到
-			this.removeChild(this.star_1);
-			this.removeChild(this.star_2);
-			this.removeChild(this.star_3);
+			this.bodyGroup.removeChild(this.star_1);
+			this.bodyGroup.removeChild(this.star_2);
+			this.bodyGroup.removeChild(this.star_3);
+			this.bodyGroup.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this)
+		}
+		if (this.data.level > userDataMaster.levelArr.length) {
+			//敬请期待
+			this.levelText.text = '';
+			let img = new eui.Image(RES.getRes('img_expect_png'));
+			img.horizontalCenter=0;
+			img.y=20;
+			this.bodyGroup.addChild(img)
 			this.bodyGroup.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this)
 		}
 		this.cacheAsBitmap = true;

@@ -123,3 +123,4 @@ var rankModal = (function (_super) {
     return rankModal;
 }(eui.Component));
 __reflect(rankModal.prototype, "rankModal", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=rankModal.js.map

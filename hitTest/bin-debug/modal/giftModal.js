@@ -80,7 +80,7 @@ var giftModal = (function (_super) {
                         break;
                     default:
                 }
-                userDataMaster.dayGift.num++;
+                userDataMaster.dayGift.num == 0 ? userDataMaster.dayGift.num++ : '';
                 that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
                 sceneMaster.openLittleModal(new getSuccess(item.name, 'X' + item.num));
                 that.canTap = true;
@@ -127,3 +127,4 @@ var giftModal = (function (_super) {
     return giftModal;
 }(eui.Component));
 __reflect(giftModal.prototype, "giftModal", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=giftModal.js.map

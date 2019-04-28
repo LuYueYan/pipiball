@@ -46,7 +46,7 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 
 		that.gif = movieMaster.getGif('through');
 		that.gif.y = -300;
-		that.addChild(that.gif);
+		that.addChildAt(that.gif,0);
 		that.gif.gotoAndPlay(1, -1);
 
 		for (let i = 1; i <= this.info.star; i++) {

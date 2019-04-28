@@ -59,11 +59,14 @@ var gameOver = (function (_super) {
         CallbackMaster.openShare(null, false);
     };
     gameOver.prototype.homeFun = function () {
+        egret.Tween.removeAllTweens();
         sceneMaster.changeScene(new startScene());
     };
     gameOver.prototype.playFun = function () {
-        sceneMaster.changeScene(new runningScene(this.level));
+        var level = this.level;
+        sceneMaster.openLittleModal(new playBefore(level));
     };
     return gameOver;
 }(eui.Component));
 __reflect(gameOver.prototype, "gameOver", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=gameOver.js.map

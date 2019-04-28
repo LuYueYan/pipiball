@@ -67,12 +67,16 @@ class Main extends eui.UILayer {
 
     private async loadResource() {
         try {
-            const loadingView = new LoadingUI();
+             await RES.loadConfig("resource/default.res.json", "resource/");
+            await RES.loadGroup("preload");
+            const loadingView = new LoadingUI(this.stage.stageHeight);
             this.stage.addChild(loadingView);
-            await RES.loadConfig("resource/default.res.json", "resource/");
             await this.loadTheme();
-            await RES.loadGroup("preload", 0, loadingView);
-            this.stage.removeChild(loadingView);
+            await RES.loadGroup("load", 0, loadingView);
+             let that=this;
+            setTimeout(function () {
+                that.stage.removeChild(loadingView);
+            }, 1000);
         }
         catch (e) {
             console.error(e);
@@ -91,7 +95,7 @@ class Main extends eui.UILayer {
         })
     }
 
-    private textfield: egret.TextField;
+   
     /**
      * 创建场景界面
      * Create scene interface
@@ -102,6 +106,7 @@ class Main extends eui.UILayer {
         sceneMaster.init(this.stage);
         sceneMaster.changeScene(new startScene());
         movieMaster.init();
+        soundMaster.init();
     }
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
@@ -114,15 +119,4 @@ class Main extends eui.UILayer {
         return result;
     }
 
-    /**
-     * 点击按钮
-     * Click the button
-     */
-    private onButtonClick(e: egret.TouchEvent) {
-        let panel = new eui.Panel();
-        panel.title = "Title";
-        panel.horizontalCenter = 0;
-        panel.verticalCenter = 0;
-        this.addChild(panel);
-    }
 }

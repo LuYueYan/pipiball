@@ -33,22 +33,75 @@ var playBefore = (function (_super) {
     };
     playBefore.prototype.init = function () {
         var that = this;
+        if (this.level == 5 && userDataMaster.level == 4) {
+            //道具bullet首次出现 第五关
+            that.guide.visible = true;
+            that.guide.x = 240;
+            that.txt_1.text = '点击试试新的道具';
+            that.txt_1.text = '超级弹药筒';
+            that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
+        }
+        else if (this.level == 1 && userDataMaster.level == 0) {
+            //道具glass首次出现 第一关
+            that.guide.visible = true;
+            that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
+        }
+        else {
+            that.removeChild(that.guide);
+            if (this.level <= userDataMaster.level) {
+                //已通过的老关卡
+                that.startBtn.parent.removeChild(that.startBtn);
+                that.videoBtn.texture = RES.getRes('btn_start_04_png');
+            }
+            else {
+                that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
+                if (userDataMaster.dayFreeLife.num >= 3) {
+                    that.videoBtn.texture = RES.getRes('btn_before_02_png');
+                }
+            }
+            if (this.level >= 5) {
+                //出现炸弹
+                if (userDataMaster.tool.bullet.num <= 0) {
+                    that.bulletNum.visible = false;
+                    that.bulletAdd.visible = true;
+                }
+                that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('bullet'); }, this);
+            }
+            else {
+                that.bullet.parent.removeChild(that.bullet);
+            }
+            that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
+            that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
+            that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('glass'); }, this);
+        }
         if (userDataMaster.tool.glass.num <= 0) {
             that.glassNum.visible = false;
             that.glassAdd.visible = true;
         }
-        if (userDataMaster.tool.bullet.num <= 0) {
-            that.bulletNum.visible = false;
-            that.bulletAdd.visible = true;
-        }
         that.titleText.text = '第' + this.level + '关';
-        that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
+    };
+    playBefore.prototype.guideFun = function () {
+        var that = this;
+        that.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
         that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
+        that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
         that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('glass'); }, this);
-        that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('bullet'); }, this);
+        if (that.startBtn && that.startBtn.parent) {
+            that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
+        }
+        if (that.bullet.parent) {
+            that.txt_1.text = '里面多藏了5颗弹药';
+            that.txt_2.text = '助力开局';
+            that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('bullet'); }, this);
+        }
+        else {
+            that.txt_1.text = '你将可以看清';
+            that.txt_2.text = '发射后的拐弯路线';
+        }
     };
     playBefore.prototype.chooseFun = function (type) {
         var that = this;
+        console.log(type);
         if (!that.choose[type] && userDataMaster.tool[type].num <= 0) {
             //是否有道具，没有的话视频购买
             AdMaster.useVideo(function () {
@@ -91,18 +144,48 @@ var playBefore = (function (_super) {
                 userDataMaster.tool[item].num--;
             }
         }
+        egret.Tween.removeAllTweens();
         sceneMaster.changeScene(new runningScene(this.level, {}, this.choose));
     };
     playBefore.prototype.videoFun = function () {
         var that = this;
-        AdMaster.useVideo(function () {
+        if (this.level <= userDataMaster.level) {
+            // 旧关卡免体力开始
             that.startFun(false);
-        }, function () {
+            return;
+        }
+        if (!userDataMaster.dayFreeLife) {
+            //今天视频次数用完
+            platform.showModal({
+                title: '温馨提醒',
+                content: '今日免体力次数已用完，请明日再来'
+            });
+        }
+        if (userDataMaster.dayFreeLife.num < 3) {
             CallbackMaster.openShare(function () {
                 that.startFun(false);
             });
-        });
+        }
+        else {
+            AdMaster.useVideo(function () {
+                that.startFun(false);
+            }, function () {
+                platform.showModal({
+                    title: '温馨提示',
+                    content: '暂时没有视频可以观看哦~'
+                });
+            });
+        }
+    };
+    playBefore.prototype.closeFun = function () {
+        if (sceneMaster.littleModal) {
+            sceneMaster.closeLittleModal();
+        }
+        else {
+            sceneMaster.closeModal();
+        }
     };
     return playBefore;
 }(eui.Component));
 __reflect(playBefore.prototype, "playBefore", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=playBefore.js.map

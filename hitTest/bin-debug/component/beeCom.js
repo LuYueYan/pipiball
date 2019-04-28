@@ -13,15 +13,22 @@ var beeCom = (function () {
         this.img.height = 63;
         this.img.anchorOffsetX = this.img.width / 2;
         this.img.anchorOffsetY = this.img.height / 2;
+        this.against = userDataMaster.bulletArr[userDataMaster.bulletIndex].target;
     };
-    beeCom.prototype.createBody = function (that, x) {
+    beeCom.prototype.createBody = function (that, x, y) {
         if (x === void 0) { x = 7.5; }
-        var boxShape = new p2.Box({ width: 1.16, height: 1.26 });
+        if (y === void 0) { y = 0; }
+        var vertices = [[0.25, -0.63], [0.25, 0.63], [-0.25, 0.63], [-0.25, -0.63]];
+        var boxShape = new p2.Convex({ vertices: vertices });
+        // var boxShape: p2.Shape = new p2.Box({ width: 0.5, height: 1.26 });
         //不碰撞同类
         boxShape.collisionGroup = 1;
         boxShape.collisionMask = 2;
-        this.boxBody = new p2.Body({ mass: 100, position: [x, that.getPosition(900)] });
-        this.boxBody.gravityScale = 0;
+        if (y == 0) {
+            y = that.getPosition(900);
+        }
+        this.boxBody = new p2.Body({ mass: 100, position: [x, y] });
+        this.boxBody.gravityScale = 1;
         this.boxBody.addShape(boxShape);
         that.world.addBody(this.boxBody);
         this.boxBody.displays = [this.img];
@@ -33,9 +40,9 @@ var beeCom = (function () {
         //伤害值改变
         this.power = num;
         if (num == 2) {
-            this.img.texture = RES.getRes('img_elf_32_png');
+            this.img.texture = RES.getRes('img_lightning_02_png');
         }
-        else {
+        else if (num == 1) {
             this.img.texture = RES.getRes(userDataMaster.bulletArr[userDataMaster.bulletIndex].img + '_png');
         }
     };
@@ -51,3 +58,4 @@ var beeCom = (function () {
 }());
 __reflect(beeCom.prototype, "beeCom");
 window['beeCom'] = beeCom;
+//# sourceMappingURL=beeCom.js.map

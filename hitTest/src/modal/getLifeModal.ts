@@ -28,7 +28,7 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 			}
 			that.timeText.text = '还差' + that.getFormat(userDataMaster.seconds) + '恢复1点体力';
 		}, 1000);
-        that.shareTimes.text="("+userDataMaster.dayShareLife.num+"/5)";
+		that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
 		this.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.closeFun, this);
 		this.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.videoFun, this);
 		this.shareBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.shareFun, this);
@@ -46,26 +46,32 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 		AdMaster.useVideo(() => {
 			suc();
 		}, () => {
-			CallbackMaster.openShare(() => {
-				suc();
-			})
+			// CallbackMaster.openShare(() => {
+			// 	suc();
+			// })
+			platform.showModal({
+				title: '温馨提示',
+				content: '暂未开通视频奖励'
+			});
 		});
 		function suc() {
 			userDataMaster.myLife++;
 		}
 	}
 	public shareFun() {
+		let that=this;
 		if (userDataMaster.todayShareLife) {
 			CallbackMaster.openShare(() => {
 				//    体力加1
 				userDataMaster.dayShareLife.num++;
-				userDataMaster.myLife = userDataMaster.life + 1;;
+				userDataMaster.myLife = userDataMaster.life + 1;
+				that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
 			})
 		} else {
 			//今日获取次数已用完，请明日再来
 			platform.showModal({
-				title:'温馨提示',
-				content:'今日获取次数已用完，请明日再来'
+				title: '温馨提示',
+				content: '今日获取次数已用完，请明日再来'
 			})
 		}
 

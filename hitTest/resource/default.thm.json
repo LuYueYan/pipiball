@@ -37,7 +37,8 @@
 		"squareGuide": "resource/modal/squareGuide.exml",
 		"toolGuide": "resource/modal/toolGuide.exml",
 		"chooseSex": "resource/modal/chooseSex.exml",
-		"dangerModal": "resource/modal/dangerModal.exml"
+		"dangerModal": "resource/modal/dangerModal.exml",
+		"tipsCom": "resource/modal/tipsCom.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
@@ -72,6 +73,7 @@
 		"resource/modal/shopItem.exml",
 		"resource/modal/squareGuide.exml",
 		"resource/modal/teachModal.exml",
+		"resource/modal/tipsCom.exml",
 		"resource/modal/toolGuide.exml",
 		"resource/page/cloudCom.exml",
 		"resource/page/gameOver.exml",

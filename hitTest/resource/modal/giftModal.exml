@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="giftModalSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
 	<w:Config id="16a2fadf349" ></w:Config>
-	<e:Image source="img_bg_lottery_00_jpg" horizontalCenter="0" top="0"/>
+	<e:Image id="bgImg" source="img_bg_scene_png" horizontalCenter="0" top="0"/>
+	<e:Image horizontalCenter="0" top="46" source="img_bg_lottery_00_png"/>
 	<e:Image id="closeBtn" source="btn_home_01_png" x="30" y="40" touchEnabled="true"/>
 	<e:Group width="551.51" height="557.58" y="423.8" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0">
 		<e:Group height="178" width="178" left="0" top="0">

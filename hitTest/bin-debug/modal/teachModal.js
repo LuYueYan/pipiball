@@ -35,3 +35,4 @@ var teachModal = (function (_super) {
     return teachModal;
 }(eui.Component));
 __reflect(teachModal.prototype, "teachModal", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=teachModal.js.map

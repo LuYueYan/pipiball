@@ -10,7 +10,7 @@ var egret = window.egret;window.skins={};
                 window.generateEUI = {};
                 generateEUI.paths = {};
                 generateEUI.styles = undefined;
-                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","runningScene":"resource/page/runningScene.exml","startScene":"resource/page/startScene.exml","rankModal":"resource/modal/rankModal.exml","rankItem":"resource/modal/rankItem.exml","getLifr":"resource/eui_skins/getLifr.exml","getLifeModal":"resource/modal/getLifeModal.exml","moreItem":"resource/modal/moreItem.exml","moreScroller":"resource/modal/moreScroller.exml","rebornModal":"resource/modal/rebornModal.exml","gameOver":"resource/page/gameOver.exml","levelUpModal":"resource/modal/levelUpModal.exml","getSuccess":"resource/modal/getSuccess.exml","playBefore":"resource/modal/playBefore.exml","myShop":"resource/modal/myShop.exml","shopItem":"resource/modal/shopItem.exml","teachModal":"resource/modal/teachModal.exml","moreComponent":"resource/modal/moreComponent.exml","levelCom":"resource/page/levelCom.exml","levelItem":"resource/modal/levelItem.exml","cloudCom":"resource/page/cloudCom.exml","giftModal":"resource/modal/giftModal.exml","squareGuide":"resource/modal/squareGuide.exml","toolGuide":"resource/modal/toolGuide.exml","chooseSex":"resource/modal/chooseSex.exml","dangerModal":"resource/modal/dangerModal.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
+                generateEUI.skins = {"eui.Button":"resource/eui_skins/ButtonSkin.exml","eui.CheckBox":"resource/eui_skins/CheckBoxSkin.exml","eui.HScrollBar":"resource/eui_skins/HScrollBarSkin.exml","eui.HSlider":"resource/eui_skins/HSliderSkin.exml","eui.Panel":"resource/eui_skins/PanelSkin.exml","eui.TextInput":"resource/eui_skins/TextInputSkin.exml","eui.ProgressBar":"resource/eui_skins/ProgressBarSkin.exml","eui.RadioButton":"resource/eui_skins/RadioButtonSkin.exml","eui.Scroller":"resource/eui_skins/ScrollerSkin.exml","eui.ToggleSwitch":"resource/eui_skins/ToggleSwitchSkin.exml","eui.VScrollBar":"resource/eui_skins/VScrollBarSkin.exml","eui.VSlider":"resource/eui_skins/VSliderSkin.exml","eui.ItemRenderer":"resource/eui_skins/ItemRendererSkin.exml","runningScene":"resource/page/runningScene.exml","startScene":"resource/page/startScene.exml","rankModal":"resource/modal/rankModal.exml","rankItem":"resource/modal/rankItem.exml","getLifr":"resource/eui_skins/getLifr.exml","getLifeModal":"resource/modal/getLifeModal.exml","moreItem":"resource/modal/moreItem.exml","moreScroller":"resource/modal/moreScroller.exml","rebornModal":"resource/modal/rebornModal.exml","gameOver":"resource/page/gameOver.exml","levelUpModal":"resource/modal/levelUpModal.exml","getSuccess":"resource/modal/getSuccess.exml","playBefore":"resource/modal/playBefore.exml","myShop":"resource/modal/myShop.exml","shopItem":"resource/modal/shopItem.exml","teachModal":"resource/modal/teachModal.exml","moreComponent":"resource/modal/moreComponent.exml","levelCom":"resource/page/levelCom.exml","levelItem":"resource/modal/levelItem.exml","cloudCom":"resource/page/cloudCom.exml","giftModal":"resource/modal/giftModal.exml","squareGuide":"resource/modal/squareGuide.exml","toolGuide":"resource/modal/toolGuide.exml","chooseSex":"resource/modal/chooseSex.exml","dangerModal":"resource/modal/dangerModal.exml","tipsCom":"resource/modal/tipsCom.exml"};generateEUI.paths['resource/eui_skins/ButtonSkin.exml'] = window.skins.ButtonSkin = (function (_super) {
 	__extends(ButtonSkin, _super);
 	function ButtonSkin() {
 		_super.call(this);
@@ -648,36 +648,25 @@ var egret = window.egret;window.skins={};
 	__extends(chooseSexSkin, _super);
 	function chooseSexSkin() {
 		_super.call(this);
-		this.skinParts = ["bgRect","bg_1","img_1","gender_1","bg_2","img_2","gender_2","sureBtn"];
+		this.skinParts = ["bg_1","img_1","gender_1","bg_2","img_2","gender_2","sureBtn"];
 		
-		this.height = 1334;
+		this.height = 1003;
 		this.width = 750;
-		this.elementsContent = [this.bgRect_i(),this._Image1_i(),this.gender_1_i(),this.gender_2_i(),this.sureBtn_i()];
+		this.elementsContent = [this._Image1_i(),this.gender_1_i(),this.gender_2_i(),this.sureBtn_i()];
 	}
 	var _proto = chooseSexSkin.prototype;
 
-	_proto.bgRect_i = function () {
-		var t = new eui.Rect();
-		this.bgRect = t;
-		t.fillAlpha = 0.7;
-		t.height = 1334;
-		t.width = 750;
-		t.x = 0;
-		t.y = 0;
-		return t;
-	};
 	_proto._Image1_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
 		t.source = "img_text_tittle_png";
-		t.y = 126;
 		return t;
 	};
 	_proto.gender_1_i = function () {
 		var t = new eui.Group();
 		this.gender_1 = t;
 		t.horizontalCenter = 0;
-		t.y = 202;
+		t.y = 79.27;
 		t.elementsContent = [this.bg_1_i(),this.img_1_i()];
 		return t;
 	};
@@ -706,7 +695,7 @@ var egret = window.egret;window.skins={};
 		var t = new eui.Group();
 		this.gender_2 = t;
 		t.horizontalCenter = 0;
-		t.y = 581.66;
+		t.y = 458.93;
 		t.elementsContent = [this.bg_2_i(),this.img_2_i()];
 		return t;
 	};
@@ -736,7 +725,7 @@ var egret = window.egret;window.skins={};
 		t.source = "btn_gender_sure_png";
 		t.touchEnabled = true;
 		t.visible = false;
-		t.y = 986;
+		t.y = 863;
 		return t;
 	};
 	return chooseSexSkin;
@@ -784,11 +773,13 @@ var egret = window.egret;window.skins={};
 	_proto.light_i = function () {
 		var t = new eui.Image();
 		this.light = t;
+		t.anchorOffsetX = 125;
+		t.anchorOffsetY = 125;
 		t.height = 250;
 		t.horizontalCenter = 1;
 		t.source = "img_light_star_png";
 		t.width = 250;
-		t.y = 236;
+		t.y = 365;
 		return t;
 	};
 	_proto._Image2_i = function () {
@@ -1179,19 +1170,27 @@ var egret = window.egret;window.skins={};
 	__extends(giftModalSkin, _super);
 	function giftModalSkin() {
 		_super.call(this);
-		this.skinParts = ["closeBtn","bg_0","bg_1","bg_2","bg_3","bg_4","bg_5","bg_6","bg_7","getBtn"];
+		this.skinParts = ["bgImg","closeBtn","bg_0","bg_1","bg_2","bg_3","bg_4","bg_5","bg_6","bg_7","getBtn"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this._Image1_i(),this.closeBtn_i(),this._Group9_i()];
+		this.elementsContent = [this.bgImg_i(),this._Image1_i(),this.closeBtn_i(),this._Group9_i()];
 	}
 	var _proto = giftModalSkin.prototype;
 
+	_proto.bgImg_i = function () {
+		var t = new eui.Image();
+		this.bgImg = t;
+		t.horizontalCenter = 0;
+		t.source = "img_bg_scene_png";
+		t.top = 0;
+		return t;
+	};
 	_proto._Image1_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
-		t.source = "img_bg_lottery_00_jpg";
-		t.top = 0;
+		t.source = "img_bg_lottery_00_png";
+		t.top = 46;
 		return t;
 	};
 	_proto.closeBtn_i = function () {
@@ -1554,6 +1553,7 @@ var egret = window.egret;window.skins={};
 		this.bodyGroup = t;
 		t.cacheAsBitmap = true;
 		t.percentHeight = 100;
+		t.width = 124;
 		t.elementsContent = [this.bgImg_i(),this.star_1_i(),this.star_2_i(),this.star_3_i(),this.levelText_i()];
 		return t;
 	};
@@ -1581,9 +1581,9 @@ var egret = window.egret;window.skins={};
 		var t = new eui.Image();
 		this.star_2 = t;
 		t.height = 34;
+		t.horizontalCenter = 0;
 		t.source = "img_star_b2_png";
 		t.width = 34;
-		t.x = 45;
 		t.y = 0;
 		return t;
 	};
@@ -2036,11 +2036,11 @@ var egret = window.egret;window.skins={};
 	__extends(playBeforeSkin, _super);
 	function playBeforeSkin() {
 		_super.call(this);
-		this.skinParts = ["titleText","glassLight","glassNum","glassAdd","glassChoose","glass","bulletLight","bulletNum","bulletAdd","bulletChoose","bullet","chooseGroup","startBtn","videoBtn","closeBtn","txt_1","txt_2","guide"];
+		this.skinParts = ["titleText","startBtn","videoBtn","closeBtn","glassLight","glassNum","glassAdd","glassChoose","glass","bulletLight","bulletNum","bulletAdd","bulletChoose","bullet","txt_1","txt_2","guide"];
 		
 		this.height = 750;
 		this.width = 605;
-		this.elementsContent = [this._Image1_i(),this.titleText_i(),this._Label1_i(),this.chooseGroup_i(),this._Group1_i(),this.closeBtn_i(),this.guide_i()];
+		this.elementsContent = [this._Image1_i(),this.titleText_i(),this._Label1_i(),this._Group1_i(),this.closeBtn_i(),this.glass_i(),this.bullet_i(),this.guide_i()];
 	}
 	var _proto = playBeforeSkin.prototype;
 
@@ -2074,18 +2074,43 @@ var egret = window.egret;window.skins={};
 		t.y = 195;
 		return t;
 	};
-	_proto.chooseGroup_i = function () {
+	_proto._Group1_i = function () {
 		var t = new eui.Group();
-		this.chooseGroup = t;
-		t.horizontalCenter = 0;
-		t.y = 288;
+		t.horizontalCenter = 0.5;
+		t.y = 490;
 		t.layout = this._HorizontalLayout1_i();
-		t.elementsContent = [this.glass_i(),this.bullet_i()];
+		t.elementsContent = [this.startBtn_i(),this.videoBtn_i()];
 		return t;
 	};
 	_proto._HorizontalLayout1_i = function () {
 		var t = new eui.HorizontalLayout();
-		t.gap = 60;
+		return t;
+	};
+	_proto.startBtn_i = function () {
+		var t = new eui.Image();
+		this.startBtn = t;
+		t.source = "btn_start_01_png";
+		t.touchEnabled = true;
+		t.x = 244;
+		t.y = 10;
+		return t;
+	};
+	_proto.videoBtn_i = function () {
+		var t = new eui.Image();
+		this.videoBtn = t;
+		t.source = "btn_before_01_png";
+		t.touchEnabled = true;
+		t.x = 234;
+		t.y = 0;
+		return t;
+	};
+	_proto.closeBtn_i = function () {
+		var t = new eui.Image();
+		this.closeBtn = t;
+		t.source = "btn_close_png";
+		t.touchEnabled = true;
+		t.x = 555;
+		t.y = 15.44;
 		return t;
 	};
 	_proto.glass_i = function () {
@@ -2093,8 +2118,8 @@ var egret = window.egret;window.skins={};
 		this.glass = t;
 		t.height = 160;
 		t.width = 160;
-		t.x = 0;
-		t.y = 0;
+		t.x = 113;
+		t.y = 288;
 		t.elementsContent = [this._Rect1_i(),this.glassLight_i(),this._Image2_i(),this.glassNum_i(),this.glassAdd_i(),this.glassChoose_i()];
 		return t;
 	};
@@ -2113,6 +2138,8 @@ var egret = window.egret;window.skins={};
 	_proto.glassLight_i = function () {
 		var t = new eui.Image();
 		this.glassLight = t;
+		t.anchorOffsetX = 150;
+		t.anchorOffsetY = 150;
 		t.height = 300;
 		t.horizontalCenter = 0;
 		t.source = "img_light_star_png";
@@ -2123,11 +2150,11 @@ var egret = window.egret;window.skins={};
 	};
 	_proto._Image2_i = function () {
 		var t = new eui.Image();
+		t.height = 117.5;
 		t.horizontalCenter = 0;
-		t.scaleX = 0.4;
-		t.scaleY = 0.4;
 		t.source = "img_gift_04_png";
 		t.verticalCenter = 0;
+		t.width = 136;
 		return t;
 	};
 	_proto.glassNum_i = function () {
@@ -2164,8 +2191,8 @@ var egret = window.egret;window.skins={};
 		this.bullet = t;
 		t.height = 160;
 		t.width = 160;
-		t.x = 227.5;
-		t.y = 0;
+		t.x = 333;
+		t.y = 288;
 		t.elementsContent = [this._Rect2_i(),this.bulletLight_i(),this._Image3_i(),this.bulletNum_i(),this.bulletAdd_i(),this.bulletChoose_i()];
 		return t;
 	};
@@ -2184,6 +2211,8 @@ var egret = window.egret;window.skins={};
 	_proto.bulletLight_i = function () {
 		var t = new eui.Image();
 		this.bulletLight = t;
+		t.anchorOffsetX = 150;
+		t.anchorOffsetY = 150;
 		t.height = 300;
 		t.horizontalCenter = 0;
 		t.source = "img_light_star_png";
@@ -2194,11 +2223,11 @@ var egret = window.egret;window.skins={};
 	};
 	_proto._Image3_i = function () {
 		var t = new eui.Image();
-		t.horizontalCenter = 0;
-		t.scaleX = 0.4;
-		t.scaleY = 0.4;
+		t.height = 117.5;
+		t.horizontalCenter = 0.5;
 		t.source = "img_gift_05_png";
-		t.verticalCenter = 0;
+		t.verticalCenter = -5;
+		t.width = 79;
 		return t;
 	};
 	_proto.bulletNum_i = function () {
@@ -2230,51 +2259,15 @@ var egret = window.egret;window.skins={};
 		t.y = 108;
 		return t;
 	};
-	_proto._Group1_i = function () {
-		var t = new eui.Group();
-		t.horizontalCenter = 0.5;
-		t.y = 490;
-		t.layout = this._HorizontalLayout2_i();
-		t.elementsContent = [this.startBtn_i(),this.videoBtn_i()];
-		return t;
-	};
-	_proto._HorizontalLayout2_i = function () {
-		var t = new eui.HorizontalLayout();
-		return t;
-	};
-	_proto.startBtn_i = function () {
-		var t = new eui.Image();
-		this.startBtn = t;
-		t.source = "btn_start_01_png";
-		t.touchEnabled = true;
-		t.x = 244;
-		t.y = 10;
-		return t;
-	};
-	_proto.videoBtn_i = function () {
-		var t = new eui.Image();
-		this.videoBtn = t;
-		t.source = "btn_before_01_png";
-		t.touchEnabled = true;
-		t.x = 234;
-		t.y = 0;
-		return t;
-	};
-	_proto.closeBtn_i = function () {
-		var t = new eui.Image();
-		this.closeBtn = t;
-		t.source = "btn_close_png";
-		t.touchEnabled = true;
-		t.x = 555;
-		t.y = 15.44;
-		return t;
-	};
 	_proto.guide_i = function () {
 		var t = new eui.Group();
 		this.guide = t;
-		t.visible = false;
-		t.x = 131;
-		t.y = 95;
+		t.anchorOffsetX = 170;
+		t.anchorOffsetY = 201;
+		t.scaleX = 0;
+		t.scaleY = 0;
+		t.x = 280;
+		t.y = 262;
 		t.elementsContent = [this._Image4_i(),this.txt_1_i(),this.txt_2_i()];
 		return t;
 	};
@@ -2288,11 +2281,11 @@ var egret = window.egret;window.skins={};
 		this.txt_1 = t;
 		t.bold = true;
 		t.fontFamily = "Microsoft YaHei";
-		t.horizontalCenter = 0.5;
-		t.size = 26;
+		t.horizontalCenter = 0;
+		t.size = 32;
 		t.text = "点击试试神奇道具";
-		t.textColor = 0xff6358;
-		t.y = 78;
+		t.textColor = 0x6c371a;
+		t.y = 35;
 		return t;
 	};
 	_proto.txt_2_i = function () {
@@ -2300,11 +2293,11 @@ var egret = window.egret;window.skins={};
 		this.txt_2 = t;
 		t.bold = true;
 		t.fontFamily = "Microsoft YaHei";
-		t.horizontalCenter = 0.5;
-		t.size = 26;
+		t.horizontalCenter = 0;
+		t.size = 32;
 		t.text = "弹跳视野";
-		t.textColor = 0xff6358;
-		t.y = 117;
+		t.textColor = 0x6c371a;
+		t.y = 87.5;
 		return t;
 	};
 	return playBeforeSkin;
@@ -2517,11 +2510,11 @@ var egret = window.egret;window.skins={};
 
 	function rankModalSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","friendGroup","worldGroup","friend","world","lastPage","nextPage","pageText","goHome","myRank"];
+		this.skinParts = ["bgImg","goHome","friendGroup","worldGroup","friend","world","lastPage","nextPage","pageText","myRank","contentGroup"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.bgImg_i(),this.friendGroup_i(),this.worldGroup_i(),this.friend_i(),this.world_i(),this._Group1_i(),this.goHome_i(),this.myRank_i()];
+		this.elementsContent = [this.bgImg_i(),this.goHome_i(),this.contentGroup_i()];
 	}
 	var _proto = rankModalSkin.prototype;
 
@@ -2529,8 +2522,31 @@ var egret = window.egret;window.skins={};
 		var t = new eui.Image();
 		this.bgImg = t;
 		t.height = 1334;
-		t.source = "img_bg_ranking_01_jpg";
-		t.width = 750;
+		t.horizontalCenter = 0;
+		t.source = "img_bg_scene_png";
+		t.top = 0;
+		return t;
+	};
+	_proto.goHome_i = function () {
+		var t = new eui.Button();
+		this.goHome = t;
+		t.label = "";
+		t.x = 30;
+		t.y = 40;
+		t.skinName = rankModalSkin$Skin7;
+		return t;
+	};
+	_proto.contentGroup_i = function () {
+		var t = new eui.Group();
+		this.contentGroup = t;
+		t.x = 0;
+		t.y = 143;
+		t.elementsContent = [this._Image1_i(),this.friendGroup_i(),this.worldGroup_i(),this.friend_i(),this.world_i(),this._Group1_i(),this.myRank_i()];
+		return t;
+	};
+	_proto._Image1_i = function () {
+		var t = new eui.Image();
+		t.source = "img_bg_ranking_01_png";
 		t.x = 0;
 		t.y = 0;
 		return t;
@@ -2541,9 +2557,9 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetX = 0;
 		t.anchorOffsetY = 0;
 		t.height = 740;
-		t.horizontalCenter = 0;
 		t.width = 588;
-		t.y = 300;
+		t.x = 81;
+		t.y = 156.92;
 		return t;
 	};
 	_proto.worldGroup_i = function () {
@@ -2553,10 +2569,10 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetY = 0;
 		t.cacheAsBitmap = true;
 		t.height = 690;
-		t.horizontalCenter = 0;
 		t.visible = false;
 		t.width = 588;
-		t.y = 348;
+		t.x = 81;
+		t.y = 204.92;
 		return t;
 	};
 	_proto.friend_i = function () {
@@ -2565,7 +2581,7 @@ var egret = window.egret;window.skins={};
 		t.source = "btn_tittle_a1_png";
 		t.touchEnabled = true;
 		t.x = 100;
-		t.y = 218;
+		t.y = 74.92;
 		return t;
 	};
 	_proto.world_i = function () {
@@ -2574,15 +2590,15 @@ var egret = window.egret;window.skins={};
 		t.source = "btn_tittle_b2_png";
 		t.touchEnabled = true;
 		t.x = 400;
-		t.y = 218;
+		t.y = 74.92;
 		return t;
 	};
 	_proto._Group1_i = function () {
 		var t = new eui.Group();
 		t.anchorOffsetX = 0;
-		t.horizontalCenter = -0.5;
 		t.width = 168;
-		t.y = 984;
+		t.x = 291;
+		t.y = 840.92;
 		t.elementsContent = [this.lastPage_i(),this.nextPage_i(),this.pageText_i()];
 		return t;
 	};
@@ -2614,25 +2630,16 @@ var egret = window.egret;window.skins={};
 		t.visible = false;
 		return t;
 	};
-	_proto.goHome_i = function () {
-		var t = new eui.Button();
-		this.goHome = t;
-		t.label = "";
-		t.x = 30;
-		t.y = 40;
-		t.skinName = rankModalSkin$Skin7;
-		return t;
-	};
 	_proto.myRank_i = function () {
 		var t = new eui.Label();
 		this.myRank = t;
 		t.fontFamily = "Microsoft YaHei";
-		t.horizontalCenter = 0;
 		t.size = 24;
 		t.text = "您当前为：第10名";
 		t.textColor = 0x9d7236;
 		t.visible = false;
-		t.y = 305;
+		t.x = 277;
+		t.y = 161.92;
 		return t;
 	};
 	return rankModalSkin;
@@ -2845,10 +2852,10 @@ var egret = window.egret;window.skins={};
 	__extends(squareGuideSkin, _super);
 	function squareGuideSkin() {
 		_super.call(this);
-		this.skinParts = ["txt_1","txt_2","txtGroup","img","kownBtn"];
+		this.skinParts = ["txt_1","txt_2","txtGroup","img","knowBtn"];
 		
-		this.height = 600;
-		this.elementsContent = [this.txtGroup_i(),this.img_i(),this.kownBtn_i()];
+		this.height = 700;
+		this.elementsContent = [this.txtGroup_i(),this.img_i(),this.knowBtn_i()];
 	}
 	var _proto = squareGuideSkin.prototype;
 
@@ -2857,7 +2864,7 @@ var egret = window.egret;window.skins={};
 		this.txtGroup = t;
 		t.cacheAsBitmap = true;
 		t.x = 0;
-		t.y = 0;
+		t.y = 100;
 		t.elementsContent = [this._Image1_i(),this.txt_1_i(),this.txt_2_i()];
 		return t;
 	};
@@ -2873,12 +2880,12 @@ var egret = window.egret;window.skins={};
 		this.txt_1 = t;
 		t.bold = true;
 		t.fontFamily = "Microsoft YaHei";
-		t.size = 24;
+		t.horizontalCenter = 0;
+		t.size = 32;
 		t.text = "爆炸方块现身";
 		t.textAlign = "center";
-		t.textColor = 0xff3e43;
-		t.x = 100;
-		t.y = 67;
+		t.textColor = 0x6c371a;
+		t.y = 39;
 		return t;
 	};
 	_proto.txt_2_i = function () {
@@ -2886,31 +2893,33 @@ var egret = window.egret;window.skins={};
 		this.txt_2 = t;
 		t.bold = true;
 		t.fontFamily = "Microsoft YaHei";
-		t.size = 24;
+		t.horizontalCenter = 0;
+		t.size = 32;
 		t.text = "可引爆周围的方块";
 		t.textAlign = "center";
-		t.textColor = 0xff3e43;
-		t.x = 76;
-		t.y = 106;
+		t.textColor = 0x6c371a;
+		t.y = 94;
 		return t;
 	};
 	_proto.img_i = function () {
 		var t = new eui.Image();
 		this.img = t;
-		t.horizontalCenter = 0;
+		t.horizontalCenter = 0.5;
 		t.source = "img_diamonds_big_01_png";
-		t.y = 217;
+		t.y = 315;
 		return t;
 	};
-	_proto.kownBtn_i = function () {
+	_proto.knowBtn_i = function () {
 		var t = new eui.Label();
-		this.kownBtn = t;
+		this.knowBtn = t;
+		t.bold = true;
+		t.border = false;
 		t.fontFamily = "Microsoft YaHei";
-		t.size = 22;
+		t.horizontalCenter = 0;
+		t.size = 40;
 		t.text = "知道了";
 		t.touchEnabled = true;
-		t.x = 138.5;
-		t.y = 453;
+		t.y = 551;
 		return t;
 	};
 	return squareGuideSkin;
@@ -2918,17 +2927,18 @@ var egret = window.egret;window.skins={};
 	__extends(teachModalSkin, _super);
 	function teachModalSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","closeBtn"];
+		this.skinParts = ["bgImg","closeBtn","contentGroup"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.bgImg_i(),this.closeBtn_i(),this._Image1_i(),this._Image2_i(),this._Group1_i(),this._Group2_i(),this._Group3_i(),this._Group4_i(),this._Group5_i(),this._Group6_i()];
+		this.elementsContent = [this.bgImg_i(),this.closeBtn_i(),this.contentGroup_i()];
 	}
 	var _proto = teachModalSkin.prototype;
 
 	_proto.bgImg_i = function () {
 		var t = new eui.Image();
 		this.bgImg = t;
+		t.height = 1334;
 		t.horizontalCenter = 0;
 		t.source = "img_bg_prop_01_jpg";
 		t.top = 0;
@@ -2943,25 +2953,33 @@ var egret = window.egret;window.skins={};
 		t.y = 40;
 		return t;
 	};
+	_proto.contentGroup_i = function () {
+		var t = new eui.Group();
+		this.contentGroup = t;
+		t.horizontalCenter = 0;
+		t.y = 241;
+		t.elementsContent = [this._Image1_i(),this._Image2_i(),this._Group1_i(),this._Group2_i(),this._Group3_i(),this._Group4_i(),this._Group5_i(),this._Group6_i()];
+		return t;
+	};
 	_proto._Image1_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
 		t.source = "img_text_02_png";
-		t.y = 241;
+		t.y = 0;
 		return t;
 	};
 	_proto._Image2_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
 		t.source = "img_text_03_png";
-		t.y = 559;
+		t.y = 318;
 		return t;
 	};
 	_proto._Group1_i = function () {
 		var t = new eui.Group();
+		t.left = 0;
 		t.width = 220;
-		t.x = 109.5;
-		t.y = 288;
+		t.y = 47;
 		t.elementsContent = [this._Image3_i(),this._Image4_i(),this._Label1_i(),this._Label2_i()];
 		return t;
 	};
@@ -2969,7 +2987,7 @@ var egret = window.egret;window.skins={};
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
 		t.source = "img_bg_prop_02_png";
-		t.y = 0;
+		t.top = 0;
 		return t;
 	};
 	_proto._Image4_i = function () {
@@ -3001,9 +3019,9 @@ var egret = window.egret;window.skins={};
 	};
 	_proto._Group2_i = function () {
 		var t = new eui.Group();
+		t.right = 0;
 		t.width = 220;
-		t.x = 433;
-		t.y = 288;
+		t.y = 47;
 		t.elementsContent = [this._Image5_i(),this._Image6_i(),this._Label3_i(),this._Label4_i()];
 		return t;
 	};
@@ -3043,9 +3061,9 @@ var egret = window.egret;window.skins={};
 	};
 	_proto._Group3_i = function () {
 		var t = new eui.Group();
+		t.left = 0;
 		t.width = 220;
-		t.x = 109.5;
-		t.y = 604;
+		t.y = 363;
 		t.elementsContent = [this._Image7_i(),this._Image8_i(),this._Label5_i(),this._Label6_i()];
 		return t;
 	};
@@ -3085,10 +3103,10 @@ var egret = window.egret;window.skins={};
 	};
 	_proto._Group4_i = function () {
 		var t = new eui.Group();
+		t.right = 0;
 		t.width = 220;
-		t.x = 433;
-		t.y = 604;
-		t.elementsContent = [this._Image9_i(),this._Label7_i(),this._Label8_i()];
+		t.y = 363;
+		t.elementsContent = [this._Image9_i(),this._Image10_i(),this._Label7_i(),this._Label8_i()];
 		return t;
 	};
 	_proto._Image9_i = function () {
@@ -3096,6 +3114,13 @@ var egret = window.egret;window.skins={};
 		t.horizontalCenter = 0;
 		t.source = "img_bg_prop_02_png";
 		t.y = 0;
+		return t;
+	};
+	_proto._Image10_i = function () {
+		var t = new eui.Image();
+		t.horizontalCenter = 0;
+		t.source = "img_prop_d1_png";
+		t.y = 49.34;
 		return t;
 	};
 	_proto._Label7_i = function () {
@@ -3120,24 +3145,24 @@ var egret = window.egret;window.skins={};
 	};
 	_proto._Group5_i = function () {
 		var t = new eui.Group();
+		t.left = 0;
 		t.width = 220;
-		t.x = 109.5;
-		t.y = 863;
-		t.elementsContent = [this._Image10_i(),this._Image11_i(),this._Label9_i(),this._Label10_i()];
+		t.y = 622;
+		t.elementsContent = [this._Image11_i(),this._Image12_i(),this._Label9_i(),this._Label10_i()];
 		return t;
 	};
-	_proto._Image10_i = function () {
+	_proto._Image11_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
 		t.source = "img_bg_prop_02_png";
 		t.y = 0;
 		return t;
 	};
-	_proto._Image11_i = function () {
+	_proto._Image12_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
-		t.source = "img_prop_c1_png";
-		t.y = 44;
+		t.source = "img_prop_e1_png";
+		t.y = 32.03;
 		return t;
 	};
 	_proto._Label9_i = function () {
@@ -3163,19 +3188,19 @@ var egret = window.egret;window.skins={};
 	_proto._Group6_i = function () {
 		var t = new eui.Group();
 		t.width = 220;
-		t.x = 433;
-		t.y = 863;
-		t.elementsContent = [this._Image12_i(),this._Image13_i(),this._Label11_i()];
+		t.x = 324;
+		t.y = 622;
+		t.elementsContent = [this._Image13_i(),this._Image14_i(),this._Label11_i()];
 		return t;
 	};
-	_proto._Image12_i = function () {
+	_proto._Image13_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
 		t.source = "img_bg_prop_02_png";
 		t.y = 0;
 		return t;
 	};
-	_proto._Image13_i = function () {
+	_proto._Image14_i = function () {
 		var t = new eui.Image();
 		t.horizontalCenter = 0;
 		t.source = "img_unknown_01_png";
@@ -3193,6 +3218,84 @@ var egret = window.egret;window.skins={};
 		return t;
 	};
 	return teachModalSkin;
+})(eui.Skin);generateEUI.paths['resource/modal/tipsCom.exml'] = window.tipsComSkin = (function (_super) {
+	__extends(tipsComSkin, _super);
+	function tipsComSkin() {
+		_super.call(this);
+		this.skinParts = ["reckMask_1","reckMask_2","tip_1","tip_2"];
+		
+		this.height = 120;
+		this.width = 650;
+		this.elementsContent = [this._Rect1_i(),this.reckMask_1_i(),this.reckMask_2_i(),this.tip_1_i(),this.tip_2_i()];
+	}
+	var _proto = tipsComSkin.prototype;
+
+	_proto._Rect1_i = function () {
+		var t = new eui.Rect();
+		t.anchorOffsetX = 0;
+		t.blendMode = "normal";
+		t.ellipseWidth = 70;
+		t.fillAlpha = 0.4;
+		t.fillColor = 0x003919;
+		t.height = 60;
+		t.horizontalCenter = 0;
+		t.verticalCenter = 0;
+		t.width = 650;
+		return t;
+	};
+	_proto.reckMask_1_i = function () {
+		var t = new eui.Rect();
+		this.reckMask_1 = t;
+		t.anchorOffsetX = 0;
+		t.blendMode = "normal";
+		t.ellipseWidth = 70;
+		t.fillAlpha = 1;
+		t.fillColor = 0x003919;
+		t.height = 60;
+		t.horizontalCenter = 0;
+		t.verticalCenter = 0;
+		t.width = 650;
+		return t;
+	};
+	_proto.reckMask_2_i = function () {
+		var t = new eui.Rect();
+		this.reckMask_2 = t;
+		t.anchorOffsetX = 0;
+		t.blendMode = "normal";
+		t.ellipseWidth = 70;
+		t.fillAlpha = 1;
+		t.fillColor = 0x003919;
+		t.height = 60;
+		t.horizontalCenter = 0;
+		t.verticalCenter = 0;
+		t.width = 650;
+		return t;
+	};
+	_proto.tip_1_i = function () {
+		var t = new eui.Label();
+		this.tip_1 = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0;
+		t.size = 24;
+		t.text = "当你打不过了，去找新的植物炮弹帮助你吧";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.y = 48;
+		return t;
+	};
+	_proto.tip_2_i = function () {
+		var t = new eui.Label();
+		this.tip_2 = t;
+		t.fontFamily = "Microsoft YaHei";
+		t.horizontalCenter = 0;
+		t.size = 24;
+		t.text = "当你打不过了，去找新的植物炮弹帮助你吧";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.y = 90;
+		return t;
+	};
+	return tipsComSkin;
 })(eui.Skin);generateEUI.paths['resource/modal/toolGuide.exml'] = window.toolGuideSkin = (function (_super) {
 	__extends(toolGuideSkin, _super);
 	function toolGuideSkin() {
@@ -3200,7 +3303,7 @@ var egret = window.egret;window.skins={};
 		this.skinParts = ["txt_1","txt_2","txt_3","txtGroup"];
 		
 		this.height = 310;
-		this.width = 343;
+		this.width = 386;
 		this.elementsContent = [this.txtGroup_i()];
 	}
 	var _proto = toolGuideSkin.prototype;
@@ -3225,12 +3328,12 @@ var egret = window.egret;window.skins={};
 		this.txt_1 = t;
 		t.bold = true;
 		t.fontFamily = "Microsoft YaHei";
-		t.size = 24;
+		t.horizontalCenter = 0.5;
+		t.size = 32;
 		t.text = "oh~新道具";
 		t.textAlign = "center";
-		t.textColor = 0xFF3E43;
-		t.x = 110;
-		t.y = 70;
+		t.textColor = 0x6c371a;
+		t.y = 38;
 		return t;
 	};
 	_proto.txt_2_i = function () {
@@ -3238,12 +3341,12 @@ var egret = window.egret;window.skins={};
 		this.txt_2 = t;
 		t.bold = true;
 		t.fontFamily = "Microsoft YaHei";
-		t.size = 24;
+		t.horizontalCenter = 0;
+		t.size = 32;
 		t.text = "可使弹药威力翻倍";
 		t.textAlign = "center";
-		t.textColor = 0xFF3E43;
-		t.x = 75;
-		t.y = 116;
+		t.textColor = 0x6c371a;
+		t.y = 93;
 		return t;
 	};
 	_proto.txt_3_i = function () {
@@ -3251,13 +3354,13 @@ var egret = window.egret;window.skins={};
 		this.txt_3 = t;
 		t.bold = true;
 		t.fontFamily = "Microsoft YaHei";
-		t.size = 24;
+		t.size = 32;
 		t.text = "快点击使用吧~";
 		t.textAlign = "center";
-		t.textColor = 0xFF3E43;
+		t.textColor = 0x6c371a;
 		t.visible = false;
 		t.x = 90;
-		t.y = 92;
+		t.y = 64;
 		return t;
 	};
 	return toolGuideSkin;
@@ -3529,7 +3632,7 @@ var egret = window.egret;window.skins={};
 	__extends(levelComSkin, _super);
 	function levelComSkin() {
 		_super.call(this);
-		this.skinParts = ["headmask","headimg","head","content","scroller"];
+		this.skinParts = ["light","headmask","headimg","head","content","scroller"];
 		
 		this.height = 1334;
 		this.width = 750;
@@ -3541,6 +3644,7 @@ var egret = window.egret;window.skins={};
 		var t = new eui.Scroller();
 		this.scroller = t;
 		t.anchorOffsetY = 0;
+		t.bounces = true;
 		t.height = 1184;
 		t.horizontalCenter = 0;
 		t.width = 750;
@@ -3558,7 +3662,7 @@ var egret = window.egret;window.skins={};
 		t.anchorOffsetY = 0;
 		t.height = 1039.24;
 		t.width = 750;
-		t.elementsContent = [this._Rect1_i(),this._Image1_i(),this._Image2_i(),this.head_i()];
+		t.elementsContent = [this._Rect1_i(),this._Image1_i(),this._Image2_i(),this._Image3_i(),this.head_i()];
 		return t;
 	};
 	_proto._Rect1_i = function () {
@@ -3582,6 +3686,13 @@ var egret = window.egret;window.skins={};
 		t.y = 294;
 		return t;
 	};
+	_proto._Image3_i = function () {
+		var t = new eui.Image();
+		t.source = "img_map_03_png";
+		t.x = 10;
+		t.y = 424;
+		return t;
+	};
 	_proto.head_i = function () {
 		var t = new eui.Group();
 		this.head = t;
@@ -3589,16 +3700,17 @@ var egret = window.egret;window.skins={};
 		t.width = 150;
 		t.x = 339;
 		t.y = 424;
-		t.elementsContent = [this._Image3_i(),this._Image4_i(),this.headmask_i(),this.headimg_i()];
+		t.elementsContent = [this.light_i(),this._Image4_i(),this.headmask_i(),this.headimg_i()];
 		return t;
 	};
-	_proto._Image3_i = function () {
+	_proto.light_i = function () {
 		var t = new eui.Image();
-		t.height = 200;
+		this.light = t;
+		t.anchorOffsetX = 138;
+		t.anchorOffsetY = 139.5;
 		t.horizontalCenter = 0;
-		t.source = "img_light_star_png";
+		t.source = "head_light_png";
 		t.verticalCenter = 0;
-		t.width = 200;
 		return t;
 	};
 	_proto._Image4_i = function () {
@@ -3632,11 +3744,11 @@ var egret = window.egret;window.skins={};
 	__extends(runningSceneSkin, _super);
 	function runningSceneSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","scoreText","levelText","star_1","star_2","star_3","scoreProccess","amountText","amountPro","hammer_img","hammer_lock","hammer_text","hammer_add","hammer_num","hammer","hat_img","hat_lock","hat_text","hat_add","hat_num","hat","lamp_img","lamp_lock","lamp_text","lamp_add","lamp_num","lamp","toolBottom","bulletImg","bulletNum","heroImg","hero","rayGroup"];
+		this.skinParts = ["bgImg","scoreText","levelText","star_1","star_2","star_3","scoreProccess","amountText","amountPro","hammer_img","hammer_lock","hammer_text","hammer_add","hammer_num","hammer","hat_img","hat_lock","hat_text","hat_add","hat_num","hat","lamp_img","lamp_lock","lamp_text","lamp_add","lamp_num","lamp","toolBottom","bulletImg","bulletNum","heroImg","hero","rayGroup","homeBtn"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.bgImg_i(),this._Image1_i(),this.scoreText_i(),this.scoreProccess_i(),this._Group1_i(),this._Image6_i(),this.toolBottom_i(),this.bulletImg_i(),this.bulletNum_i(),this._Image12_i(),this.hero_i(),this.rayGroup_i()];
+		this.elementsContent = [this.bgImg_i(),this._Image1_i(),this.scoreText_i(),this.scoreProccess_i(),this._Group1_i(),this._Image6_i(),this.toolBottom_i(),this.bulletImg_i(),this.bulletNum_i(),this._Image12_i(),this.hero_i(),this.rayGroup_i(),this.homeBtn_i()];
 	}
 	var _proto = runningSceneSkin.prototype;
 
@@ -4127,6 +4239,15 @@ var egret = window.egret;window.skins={};
 		t.y = 195;
 		return t;
 	};
+	_proto.homeBtn_i = function () {
+		var t = new eui.Image();
+		this.homeBtn = t;
+		t.right = 0;
+		t.source = "game_img_home_png";
+		t.touchEnabled = true;
+		t.y = 151;
+		return t;
+	};
 	return runningSceneSkin;
 })(eui.Skin);generateEUI.paths['resource/page/startScene.exml'] = window.startSceneSkin = (function (_super) {
 	__extends(startSceneSkin, _super);
@@ -4332,11 +4453,11 @@ var egret = window.egret;window.skins={};
 
 	function startSceneSkin() {
 		_super.call(this);
-		this.skinParts = ["bgImg","liftText","lifeGroup","goldText","goldGroup","openLife","life_dot","openShare","openBullet","openShop","openRank","red_dot","openGift","navGroup","moreGroup","tip_1","tip_2"];
+		this.skinParts = ["bgImg","liftText","lifeGroup","goldText","goldGroup","openLife","life_dot","openShare","openBullet","bullet_new_icon","openShop","openRank","red_dot","openGift","navGroup","moreGroup"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.bgImg_i(),this.lifeGroup_i(),this.goldGroup_i(),this.openLife_i(),this.life_dot_i(),this.openShare_i(),this.navGroup_i(),this._Image6_i(),this._Rect1_i(),this.moreGroup_i(),this._Rect2_i(),this.tip_1_i(),this.tip_2_i()];
+		this.elementsContent = [this.bgImg_i(),this.lifeGroup_i(),this.goldGroup_i(),this.openLife_i(),this.life_dot_i(),this.openShare_i(),this.navGroup_i(),this._Image6_i(),this._Rect1_i(),this.moreGroup_i(),this._tipsCom1_i()];
 	}
 	var _proto = startSceneSkin.prototype;
 
@@ -4456,7 +4577,7 @@ var egret = window.egret;window.skins={};
 		t.horizontalCenter = 0;
 		t.y = 1159;
 		t.layout = this._BasicLayout1_i();
-		t.elementsContent = [this.openBullet_i(),this.openShop_i(),this.openRank_i(),this.openGift_i()];
+		t.elementsContent = [this.openBullet_i(),this.bullet_new_icon_i(),this.openShop_i(),this.openRank_i(),this.openGift_i()];
 		return t;
 	};
 	_proto._BasicLayout1_i = function () {
@@ -4472,6 +4593,14 @@ var egret = window.egret;window.skins={};
 		t.verticalCenter = 0;
 		t.x = 65;
 		t.skinName = startSceneSkin$Skin14;
+		return t;
+	};
+	_proto.bullet_new_icon_i = function () {
+		var t = new eui.Image();
+		this.bullet_new_icon = t;
+		t.source = "bullet_new_icon_png";
+		t.x = 90;
+		t.y = -8;
 		return t;
 	};
 	_proto.openShop_i = function () {
@@ -4564,39 +4693,10 @@ var egret = window.egret;window.skins={};
 		t.y = 524;
 		return t;
 	};
-	_proto._Rect2_i = function () {
-		var t = new eui.Rect();
-		t.fillAlpha = 0.3;
-		t.height = 60;
+	_proto._tipsCom1_i = function () {
+		var t = new tipsCom();
 		t.horizontalCenter = 0;
-		t.width = 750;
-		t.y = 170;
-		return t;
-	};
-	_proto.tip_1_i = function () {
-		var t = new eui.Label();
-		this.tip_1 = t;
-		t.fontFamily = "Microsoft YaHei";
-		t.height = 60;
-		t.size = 28;
-		t.text = "当你打不过了，去找新的植物炮弹帮助你吧";
-		t.textAlign = "center";
-		t.verticalAlign = "middle";
-		t.x = 321;
-		t.y = 170;
-		return t;
-	};
-	_proto.tip_2_i = function () {
-		var t = new eui.Label();
-		this.tip_2 = t;
-		t.fontFamily = "Microsoft YaHei";
-		t.height = 60;
-		t.size = 28;
-		t.text = "当你打不过了，去找新的植物炮弹帮助你吧";
-		t.textAlign = "center";
-		t.verticalAlign = "middle";
-		t.x = 750;
-		t.y = 170;
+		t.y = 136.35;
 		return t;
 	};
 	return startSceneSkin;

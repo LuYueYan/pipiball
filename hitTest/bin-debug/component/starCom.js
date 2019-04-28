@@ -8,10 +8,10 @@ var starCom = (function () {
         this.init();
     }
     starCom.prototype.init = function () {
-        this.img = this.createBitmapByName('star');
+        this.img = this.createBitmapByName('img_lightning_01');
     };
     starCom.prototype.createBody = function (x, y, that) {
-        var boxShape = new p2.Box({ width: 1.8, height: 1.8 });
+        var boxShape = new p2.Box({ width: 1.92, height: 1.92 });
         boxShape.collisionGroup = 2;
         boxShape.collisionMask = 5;
         boxShape.sensor = true; //作为传感器，被穿透
@@ -26,8 +26,17 @@ var starCom = (function () {
         //碰撞后做出反应
         var self = this;
         self.isRemoved = true;
-        egret.Tween.removeTweens(self.img);
-        egret.Tween.get(self.img).to({ scaleX: 1.5, scaleY: 1.5 }, 100).to({ scaleX: 1, scaleY: 1 }, 100);
+        if (!this.gif) {
+            var gif_1 = movieMaster.getGif('lightning');
+            gif_1.x = this.img.x - 180 / 2;
+            gif_1.y = this.img.y - 180 / 2;
+            this.gif = gif_1;
+            gif_1.addEventListener(egret.Event.COMPLETE, function (e) {
+                gif_1.parent && gif_1.parent.removeChild(gif_1);
+            }, this);
+        }
+        that.addChild(this.gif);
+        this.gif.gotoAndPlay(1, 1);
         callback && callback();
     };
     starCom.prototype.createBitmapByName = function (name) {
@@ -42,3 +51,4 @@ var starCom = (function () {
 }());
 __reflect(starCom.prototype, "starCom");
 window['starCom'] = starCom;
+//# sourceMappingURL=starCom.js.map

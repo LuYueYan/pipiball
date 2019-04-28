@@ -107,7 +107,7 @@ class Rank {
   //初始化当前用户信息
   initUser(openid) {
     this.openid = openid
-    console.log(6546546, openid)
+    // console.log(6546546, openid)
   }
 
   //初始化画布

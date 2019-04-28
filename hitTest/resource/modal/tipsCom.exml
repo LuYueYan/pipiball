@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="tipsComSkin" width="650" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="16a5d765336" ></w:Config>
+	<e:Rect width="650" height="60" fillAlpha="0.4" anchorOffsetX="0" fillColor="0x003919" ellipseWidth="70" horizontalCenter="0" verticalCenter="0" blendMode="normal"/>
+	<e:Rect id="reckMask_1" width="650" height="60" fillAlpha="1" anchorOffsetX="0" fillColor="0x003919" ellipseWidth="70" horizontalCenter="0" verticalCenter="0" blendMode="normal"/>
+	<e:Rect id="reckMask_2" width="650" height="60" fillAlpha="1" anchorOffsetX="0" fillColor="0x003919" ellipseWidth="70" horizontalCenter="0" verticalCenter="0" blendMode="normal"/>
+	<e:Label id="tip_1" text="当你打不过了，去找新的植物炮弹帮助你吧" verticalAlign="middle" textAlign="center" fontFamily="Microsoft YaHei" size="24" horizontalCenter="0" y="48"/>
+	<e:Label id="tip_2" text="当你打不过了，去找新的植物炮弹帮助你吧" verticalAlign="middle" textAlign="center" fontFamily="Microsoft YaHei" size="24" horizontalCenter="0" y="90"/>
+</e:Skin>

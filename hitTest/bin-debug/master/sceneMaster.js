@@ -57,25 +57,26 @@ var sceneMaster = (function () {
                 sceneMaster.scene.removeChild(sceneMaster.modal);
                 sceneMaster.modalBg.parent && sceneMaster.scene.removeChild(sceneMaster.modalBg);
                 sceneMaster.modal = null;
-                sceneMaster.littleModal = null;
             });
         }
+        sceneMaster.closeLittleModal();
     };
     sceneMaster.openLittleModal = function (littleModal, littleBg) {
         if (littleBg === void 0) { littleBg = true; }
         //在弹窗上打开小弹窗
         if (sceneMaster.littleModal) {
             //已存在一个小弹窗
-            sceneMaster.modal.removeChild(sceneMaster.littleModal);
+            sceneMaster.scene.removeChild(sceneMaster.littleModal);
         }
         if (littleBg) {
-            sceneMaster.modal.addChild(sceneMaster.littleBg);
+            sceneMaster.scene.addChild(sceneMaster.littleBg);
         }
         sceneMaster.littleModal = littleModal;
         littleModal.scaleX = 0, littleModal.scaleY = 0;
-        sceneMaster.modal.addChild(littleModal);
+        sceneMaster.scene.addChild(littleModal);
         setTimeout(function () {
-            littleModal.x = 375, littleModal.y = littleModal.height / 2 + 300;
+            littleModal.x = 375,
+                littleModal.y = littleModal.height / 2 + 300;
             littleModal.anchorOffsetX = littleModal.width / 2, littleModal.anchorOffsetY = littleModal.height / 2;
             egret.Tween.get(littleModal).to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
         }, 50);
@@ -84,12 +85,13 @@ var sceneMaster = (function () {
         //关闭小弹窗
         if (sceneMaster.littleModal) {
             //存在一个小弹窗
-            sceneMaster.modal.removeChild(sceneMaster.littleModal);
+            sceneMaster.scene.removeChild(sceneMaster.littleModal);
             sceneMaster.littleModal = null;
-            sceneMaster.littleBg.parent && sceneMaster.modal.removeChild(sceneMaster.littleBg);
+            sceneMaster.littleBg.parent && sceneMaster.scene.removeChild(sceneMaster.littleBg);
         }
     };
     sceneMaster.stageHeight = 1334; //舞台高度
     return sceneMaster;
 }());
 __reflect(sceneMaster.prototype, "sceneMaster");
+//# sourceMappingURL=sceneMaster.js.map

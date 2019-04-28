@@ -15,7 +15,7 @@ var ballCom = (function () {
         this.img.anchorOffsetY = this.img.height / 2;
     };
     ballCom.prototype.createBody = function (x, y, that) {
-        var boxShape = new p2.Box({ width: 1.8, height: 1.8 });
+        var boxShape = new p2.Box({ width: 1.92, height: 1.92 });
         boxShape.collisionGroup = 2;
         boxShape.collisionMask = 5;
         boxShape.sensor = true; //作为传感器，被穿透
@@ -30,8 +30,14 @@ var ballCom = (function () {
         if (callback === void 0) { callback = null; }
         //销毁
         var self = this;
-        egret.Tween.removeTweens(this.img);
-        egret.Tween.get(this.img).to({ scaleX: 1.3, scaleY: 1.3 }, 200).to({ scaleX: 1, scaleY: 1 }, 100);
+        var gif = movieMaster.getGif('bullet');
+        gif.x = this.img.x - 200 / 2;
+        gif.y = this.img.y - 200 / 2;
+        that.addChild(gif);
+        gif.gotoAndPlay(1, 1);
+        gif.addEventListener(egret.Event.COMPLETE, function (e) {
+            gif.parent && gif.parent.removeChild(gif);
+        }, this);
         self.boxBody.shapes[0].collisionMask = 0;
         self.isRemoved = true;
         setTimeout(function () {
@@ -62,3 +68,4 @@ var ballCom = (function () {
 }());
 __reflect(ballCom.prototype, "ballCom");
 window['ballCom'] = ballCom;
+//# sourceMappingURL=ballCom.js.map

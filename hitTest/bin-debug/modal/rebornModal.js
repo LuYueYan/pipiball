@@ -49,3 +49,4 @@ var rebornModal = (function (_super) {
     return rebornModal;
 }(eui.Component));
 __reflect(rebornModal.prototype, "rebornModal", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=rebornModal.js.map

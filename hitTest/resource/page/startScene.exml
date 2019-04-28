@@ -36,6 +36,7 @@
 			</e:Skin>
 			</ns1:skinName>
 		</ns1:tweenButton>
+		<e:Image id="bullet_new_icon" source="bullet_new_icon_png" x="90" y="-8"/>
 		<ns1:tweenButton id="openShop" label="" x="235" anchorOffsetX="65" anchorOffsetY="67.5" verticalCenter="0">
 			<ns1:skinName>
 			<e:Skin states="up,down,disabled">
@@ -65,7 +66,5 @@
 	<e:Image source="img_game_name_png" y="256" horizontalCenter="0.5"/>
 	<e:Rect width="140" height="500" y="499" ellipseWidth="20" fillColor="0xffffff" fillAlpha="0.3"/>
 	<e:Group id="moreGroup" width="140" height="458" y="524" anchorOffsetY="0" x="0"/>
-	<e:Rect width="750" height="60" y="170" fillAlpha="0.3" horizontalCenter="0"/>
-	<e:Label id="tip_1" text="当你打不过了，去找新的植物炮弹帮助你吧" y="170" height="60" verticalAlign="middle" textAlign="center" fontFamily="Microsoft YaHei" size="28" x="321"/>
-	<e:Label id="tip_2" text="当你打不过了，去找新的植物炮弹帮助你吧" y="170" height="60" verticalAlign="middle" textAlign="center" fontFamily="Microsoft YaHei" size="28" x="750"/>
+	<ns1:tipsCom y="136.35" horizontalCenter="0"/>
 </e:Skin>

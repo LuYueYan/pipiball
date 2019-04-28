@@ -135,5 +135,10 @@
         "path": "modal\\dangerModal.ts",
         "class": "dangerModal",
         "parentPath": ""
+    },
+    "16a5d765336": {
+        "path": "modal\\tipsCom.ts",
+        "class": "tipsCom",
+        "parentPath": ""
     }
 }

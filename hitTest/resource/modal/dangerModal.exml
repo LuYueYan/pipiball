@@ -4,7 +4,7 @@
 	<e:Image source="img_bg_danger_png" horizontalCenter="0" verticalCenter="0"/>
 	<e:Label text="可连消两行方块" y="182.66" textColor="0x6c371a" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
 	<e:Rect width="160" height="160" y="280" fillColor="0xf1d09f" fillAlpha="0" strokeColor="0xf1d09f" strokeWeight="3" ellipseWidth="50" horizontalCenter="0"/>
-	<e:Image id="light" source="img_light_star_png" y="236" width="250" height="250" horizontalCenter="1"/>
+	<e:Image id="light" source="img_light_star_png" y="365" width="250" height="250" horizontalCenter="1" anchorOffsetX="125" anchorOffsetY="125"/>
 	<e:Image source="img_magic_png" y="294.35" horizontalCenter="0.5"/>
 	<e:Image id="useBtn" source="btn_use_magic_png" y="496.99" horizontalCenter="0" touchEnabled="true"/>
 	<e:Label id="ignoreBtn" text="放弃&gt;" y="629.66" fontFamily="Microsoft YaHei" textColor="0xd1402c" horizontalCenter="0.5"/>

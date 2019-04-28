@@ -1,5 +1,4 @@
 class chooseSex extends eui.Component implements eui.UIComponent {
-	public bgRect: eui.Rect;
 	public gender_1: eui.Group;
 	public bg_1: eui.Image;
 	public img_1: eui.Image;
@@ -7,6 +6,7 @@ class chooseSex extends eui.Component implements eui.UIComponent {
 	public bg_2: eui.Image;
 	public img_2: eui.Image;
 	public sureBtn: eui.Image;
+
 
 
 	public choose = 0;
@@ -25,7 +25,6 @@ class chooseSex extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
-		that.bgRect.height = that.stage.stageHeight;
 		that.gender_1.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseGender(1) }, this);
 		that.gender_2.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseGender(2) }, this);
 		that.sureBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.sureFun, this);
@@ -53,8 +52,9 @@ class chooseSex extends eui.Component implements eui.UIComponent {
 			that['img_' + other].scaleY = 0.8;
 		}
 		userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
-		userDataMaster.createLoginBtn(244, 986, 262, 112, () => {
-			that.parent && that.parent.removeChild(that);
+		let top = that.sureBtn.y + that.y - that.anchorOffsetY;
+		userDataMaster.createLoginBtn(244, top, 262, 112, () => {
+			sceneMaster.closeModal();
 		})
 	}
 

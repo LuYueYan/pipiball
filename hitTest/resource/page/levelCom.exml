@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="levelComSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
 	<w:Config id="16a2e29f645" ></w:Config>
-	<e:Scroller id="scroller" width="750" anchorOffsetY="0" horizontalCenter="0" height="1184">
+	<e:Scroller id="scroller" width="750" anchorOffsetY="0" horizontalCenter="0" height="1184" bounces="true">
 		<e:Group>
 			<e:Group id="content" width="750" height="1039.24" anchorOffsetY="0">
 				<e:Rect width="750" height="164" fillColor="0xaddc8b"/>
 				<e:Image source="img_map_01_png" horizontalCenter="0" y="164"/>
 				<e:Image source="img_map_02_png" x="0" y="294"/>
+				<e:Image x="10" y="424" source="img_map_03_png"/>
 				<e:Group id="head" width="150" height="150" x="339" y="424">
-					<e:Image horizontalCenter="0" verticalCenter="0" source="img_light_star_png" width="200" height="200"/>
+					<e:Image id="light" horizontalCenter="0" verticalCenter="0" source="head_light_png" anchorOffsetX="138" anchorOffsetY="139.5"/>
 					<e:Image source="img_bg_head_png" horizontalCenter="0" verticalCenter="0"/>
 					<e:Rect id="headmask" width="80" height="80" horizontalCenter="0" verticalCenter="0" ellipseWidth="15"/>
 					<e:Image id="headimg" width="80" height="80" horizontalCenter="0" verticalCenter="0"/>

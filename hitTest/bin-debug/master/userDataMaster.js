@@ -58,6 +58,24 @@ var userDataMaster = (function () {
         userDataMaster.myCollection = new eui.ArrayCollection(sourceArr);
         userDataMaster.login();
         userDataMaster.getRecommand();
+        userDataMaster.createLevelArr();
+    };
+    userDataMaster.createLevelArr = function () {
+        var arr = [];
+        var bigArr = [5, 8, 11, 14, 15];
+        var goldArr = [6, 8, 11, 13];
+        for (var i = 1; i <= 100; i++) {
+            var small = i < 5 ? i : 5;
+            var big = i > bigArr.length ? i + 10 : bigArr[i - 1];
+            var line = big - small + 1;
+            var amount = Math.ceil((line * 7) / 2);
+            var gold = i < 5 ? goldArr[i - 1] : i + 8;
+            var bullet = i > 30 ? 8 : Math.floor((i - 1) / 10) + 5;
+            var item = { level: i, amount: amount, existAmount: 0, small: small, score: amount + 1000, gold: gold, bullet: bullet };
+            //score是达到一颗星的最小分数
+            arr.push(item);
+        }
+        userDataMaster.levelArr = arr;
     };
     userDataMaster.getGameData = function (uid) {
         var that = this;
@@ -107,11 +125,14 @@ var userDataMaster = (function () {
                         if (info.tool) {
                             userDataMaster.tool = info.tool;
                         }
-                        if (info.bulletArr) {
-                            userDataMaster.bulletArr = info.bulletArr;
+                        if (info.bulletSateArr) {
+                            userDataMaster.bulletSateArr = info.bulletSateArr;
                         }
                         if (info.bulletIndex) {
                             userDataMaster.bulletIndex = info.bulletIndex;
+                        }
+                        if (info.dayFreeLife) {
+                            userDataMaster.dayFreeLife = info.dayFreeLife;
                         }
                     }
                 }
@@ -229,7 +250,7 @@ var userDataMaster = (function () {
             //获取今日抽奖次数
             if (userDataMaster.dayGift.day == userDataMaster.getToday()) {
                 if (userDataMaster.dayGift.num >= 2) {
-                    //每日抽奖两次 一次免费 一次视频
+                    //每日抽奖n次 一次免费 n次视频
                     return false;
                 }
             }
@@ -241,7 +262,25 @@ var userDataMaster = (function () {
         enumerable: true,
         configurable: true
     });
-    userDataMaster.createLoginBtn = function (left, top, width, height) {
+    Object.defineProperty(userDataMaster, "todayFreeLife", {
+        get: function () {
+            //获取今日免体力开局次数
+            if (userDataMaster.dayFreeLife.day == userDataMaster.getToday()) {
+                if (userDataMaster.dayFreeLife.num >= 8) {
+                    //每日前三次分享，后5次看视频
+                    return false;
+                }
+            }
+            else {
+                userDataMaster.dayFreeLife = { day: userDataMaster.getToday(), num: 0 };
+            }
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    userDataMaster.createLoginBtn = function (left, top, width, height, callback) {
+        if (callback === void 0) { callback = null; }
         return __awaiter(this, void 0, void 0, function () {
             var that, scale, _a;
             return __generator(this, function (_b) {
@@ -272,15 +311,16 @@ var userDataMaster = (function () {
                     case 1:
                         _a.userInfoBtn = _b.sent();
                         userDataMaster.userInfoBtn.onTap(function (res) {
-                            userDataMaster.updateUser(res);
+                            userDataMaster.updateUser(res, callback);
                         });
                         return [2 /*return*/];
                 }
             });
         });
     };
-    userDataMaster.updateUser = function (res) {
+    userDataMaster.updateUser = function (res, callback) {
         if (res === void 0) { res = null; }
+        if (callback === void 0) { callback = null; }
         return __awaiter(this, void 0, void 0, function () {
             var userInfo, params;
             return __generator(this, function (_a) {
@@ -290,7 +330,7 @@ var userDataMaster = (function () {
                 params = {
                     uid: userDataMaster.getMyInfo.uid,
                     nickName: userInfo.nickName,
-                    gender: userInfo.gender,
+                    gender: userDataMaster.myInfo.gender,
                     avatarUrl: userInfo.avatarUrl
                 };
                 ServiceMaster.post(ServiceMaster.updateUser, params, function (suc) {
@@ -299,6 +339,7 @@ var userDataMaster = (function () {
                         userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
                         userDataMaster.loginCallback && userDataMaster.loginCallback();
                         userDataMaster.loginCallback = null;
+                        callback && callback();
                     }
                 });
                 return [2 /*return*/];
@@ -347,79 +388,39 @@ var userDataMaster = (function () {
         var day = date.getDate() > 9 ? (date.getDate()) + '' : '0' + date.getDate();
         return date.getFullYear() + '-' + month + '-' + day;
     };
-    userDataMaster.myInfo = { uid: 0, openId: '', is_new_user: true, nickName: '', avatarUrl: '' }; //用户信息
+    userDataMaster.myInfo = { uid: 0, openId: '', is_new_user: true, nickName: '', avatarUrl: '', gender: 0 }; //用户信息
     userDataMaster.gold = 500; //金币
     userDataMaster.life = 5; //体力
-    userDataMaster.level = 1; //关卡
+    userDataMaster.level = 0; //已达成的关卡
     userDataMaster.closeDate = 0; //上次关闭游戏的时间点
     userDataMaster.seconds = 0; //获取体力剩余秒数
     userDataMaster.terval = null; //计时器
     userDataMaster.levelStar = []; //过关星星情况 n颗星
     userDataMaster.bulletIndex = 0; //当前使用的炮弹
     userDataMaster.tool = {
-        bullet: { level: 1, unlock: true, num: 0 },
-        glass: { level: 1, unlock: true, num: 0 },
-        hammer: { level: 2, unlock: false, num: 0 },
-        hat: { level: 10, unlock: false, num: 0 },
-        lamp: { level: 15, unlock: false, num: 0 }
+        bullet: { level: 5, unlock: true, num: 1 },
+        glass: { level: 1, unlock: true, num: 1 },
+        hammer: { level: 2, unlock: false, num: 1 },
+        hat: { level: 10, unlock: false, num: 1 },
+        lamp: { level: 15, unlock: false, num: 1 }
     }; //道具数量
     userDataMaster.bulletArr = [
-        { id: 0, img: 'img_bullet_a2', title: '仙人掌', price: 1000, state: 1 },
-        { id: 1, img: 'img_bullet_b3', title: '仙人掌', price: 300, state: 0 },
-        { id: 2, img: 'img_bullet_c3', title: '仙人掌', price: 500, state: 0 },
-        { id: 3, img: 'img_bullet_d3', title: '仙人掌', price: 1000, state: 0 },
-        { id: 4, img: 'img_bullet_e3', title: '仙人掌', price: 2000, state: 0 },
-        { id: 5, img: 'img_bullet_f3', title: '仙人掌', price: 3000, state: 0 },
-        { id: 6, img: 'img_bullet_g3', title: '仙人掌', price: 5000, state: 0 },
+        { id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 1000, powerImg: 1, txt: '', target: {} },
+        { id: 1, img: 'img_bullet_b3', title: '蘑菇炮', price: 500, powerImg: 3, txt: '对炸弹方块威力+2', target: { type_5: 2 } },
+        { id: 2, img: 'img_bullet_c3', title: '大头炮', price: 1000, powerImg: 3, txt: '对移动方块威力+2', target: { type_6: 2 } },
+        { id: 3, img: 'img_bullet_d3', title: '小南瓜', price: 5000, powerImg: 2, txt: '对普通方块威力+1', target: { type_1: 1, type_2: 1 } },
+        { id: 4, img: 'img_bullet_e3', title: '包菜君', price: 5000, powerImg: 2, txt: '对所有方块威力+1', target: { type_1: 1, type_2: 1, type_5: 1, type_6: 1 } }
     ];
-    userDataMaster.levelArr = [
-        { level: 1, amount: 10, existAmount: 0, score: 20 },
-        { level: 2, amount: 20, existAmount: 0, score: 40 },
-        { level: 3, amount: 30, existAmount: 0, score: 60 },
-        { level: 4, amount: 40, existAmount: 0, score: 100 },
-        { level: 5, amount: 40, existAmount: 0, score: 200 },
-        { level: 6, amount: 10, existAmount: 0, score: 20 },
-        { level: 7, amount: 20, existAmount: 0, score: 40 },
-        { level: 8, amount: 30, existAmount: 0, score: 60 },
-        { level: 9, amount: 40, existAmount: 0, score: 100 },
-        { level: 10, amount: 40, existAmount: 0, score: 200 },
-        { level: 11, amount: 10, existAmount: 0, score: 20 },
-        { level: 12, amount: 20, existAmount: 0, score: 40 },
-        { level: 13, amount: 30, existAmount: 0, score: 60 },
-        { level: 14, amount: 40, existAmount: 0, score: 100 },
-        { level: 15, amount: 40, existAmount: 0, score: 200 },
-        { level: 16, amount: 10, existAmount: 0, score: 20 },
-        { level: 17, amount: 20, existAmount: 0, score: 40 },
-        { level: 18, amount: 30, existAmount: 0, score: 60 },
-        { level: 19, amount: 40, existAmount: 0, score: 100 },
-        { level: 20, amount: 40, existAmount: 0, score: 200 },
-        { level: 21, amount: 10, existAmount: 0, score: 20 },
-        { level: 22, amount: 20, existAmount: 0, score: 40 },
-        { level: 23, amount: 30, existAmount: 0, score: 60 },
-        { level: 24, amount: 40, existAmount: 0, score: 100 },
-        { level: 25, amount: 40, existAmount: 0, score: 200 },
-        { level: 26, amount: 10, existAmount: 0, score: 20 },
-        { level: 27, amount: 20, existAmount: 0, score: 40 },
-        { level: 28, amount: 30, existAmount: 0, score: 60 },
-        { level: 29, amount: 40, existAmount: 0, score: 100 },
-        { level: 30, amount: 40, existAmount: 0, score: 200 },
-        { level: 31, amount: 10, existAmount: 0, score: 20 },
-        { level: 32, amount: 20, existAmount: 0, score: 40 },
-        { level: 33, amount: 30, existAmount: 0, score: 60 },
-        { level: 34, amount: 40, existAmount: 0, score: 100 },
-        { level: 35, amount: 40, existAmount: 0, score: 200 },
-        { level: 36, amount: 10, existAmount: 0, score: 20 },
-        { level: 37, amount: 20, existAmount: 0, score: 40 },
-        { level: 38, amount: 30, existAmount: 0, score: 60 },
-        { level: 39, amount: 40, existAmount: 0, score: 100 },
-        { level: 40, amount: 40, existAmount: 0, score: 200 }
-    ];
+    userDataMaster.bulletSateArr = [1, 0, 0, 0, 0]; //炸弹状态
+    userDataMaster.levelArr = []; //关卡信息数组
     userDataMaster.shareUid = 0; //分享人id
     userDataMaster.requestTimes = 0; //请求游戏数据的次数
     userDataMaster.dayShareLife = { day: '', num: 0 }; //每日通过分享获得体力
     userDataMaster.dayGift = { day: '', num: 0 }; //每日抽奖次数
+    userDataMaster.dayFreeLife = { day: '', num: 0 }; //每日免体力开局次数
     userDataMaster.loginCallback = null; //弹窗登录成功的回调
     return userDataMaster;
 }());
 __reflect(userDataMaster.prototype, "userDataMaster");
 window['userDataMaster'] = userDataMaster;
+//# sourceMappingURL=userDataMaster.js.map

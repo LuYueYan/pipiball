@@ -64,7 +64,8 @@ var CallbackMaster = (function () {
                 tool: userDataMaster.tool,
                 dayGift: userDataMaster.dayGift,
                 bulletIndex: userDataMaster.bulletIndex,
-                bulletArr: userDataMaster.bulletArr
+                bulletSateArr: userDataMaster.bulletSateArr,
+                dayFreeLife: userDataMaster.dayFreeLife
             };
             var params = {
                 uid: userDataMaster.getMyInfo.uid,
@@ -166,3 +167,4 @@ var CallbackMaster = (function () {
     return CallbackMaster;
 }());
 __reflect(CallbackMaster.prototype, "CallbackMaster");
+//# sourceMappingURL=CallbackMaster.js.map

@@ -1,5 +1,7 @@
 class rankModal extends eui.Component implements eui.UIComponent {
 	public bgImg: eui.Image;
+	public goHome: eui.Button;
+	public contentGroup: eui.Group;
 	public friendGroup: eui.Group;
 	public worldGroup: eui.Group;
 	public friend: eui.Image;
@@ -7,7 +9,6 @@ class rankModal extends eui.Component implements eui.UIComponent {
 	public lastPage: eui.Image;
 	public nextPage: eui.Image;
 	public pageText: eui.Label;
-	public goHome: eui.Button;
 	public myRank: eui.Label;
 
 
@@ -33,7 +34,9 @@ class rankModal extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
-		// this.bgImg.height = this.stage.stageHeight;
+		let dy = that.stage.stageHeight - 1334;
+		that.bgImg.height += dy;
+		that.contentGroup.y += dy *0.5;
 		platform.openDataContext.postMessage({
 			type: "rank",
 			width: 588,

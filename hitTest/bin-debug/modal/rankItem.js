@@ -49,3 +49,4 @@ var rankItem = (function (_super) {
     return rankItem;
 }(eui.ItemRenderer));
 __reflect(rankItem.prototype, "rankItem", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=rankItem.js.map

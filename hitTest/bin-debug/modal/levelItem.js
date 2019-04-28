@@ -11,9 +11,7 @@ r.prototype = e.prototype, t.prototype = new r();
 var levelItem = (function (_super) {
     __extends(levelItem, _super);
     function levelItem() {
-        var _this = _super.call(this) || this;
-        _this.point = [200, 142, 230, 452, 452, 185, 130, 260, 390];
-        return _this;
+        return _super.call(this) || this;
     }
     levelItem.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);
@@ -30,9 +28,10 @@ var levelItem = (function (_super) {
         sceneMaster.openModal(new playBefore(this.data.level));
     };
     levelItem.prototype.dataChanged = function () {
-        var n = (this.data.level + 1) % this.point.length + 1;
+        var n = (this.data.level + 1) % levelItem.point.length + 1;
         this.map.texture = RES.getRes('img_map_0' + n + '_png');
-        this.bodyGroup.x = this.point[n - 1];
+        this.bodyGroup.x = levelItem.point[n - 1].x;
+        this.bodyGroup.y = levelItem.point[n - 1].y;
         this.levelText.text = this.data.level + '';
         if (this.data.level <= userDataMaster.levelStar.length) {
             //已过关的
@@ -54,7 +53,19 @@ var levelItem = (function (_super) {
         }
         this.cacheAsBitmap = true;
     };
+    levelItem.point = [
+        { x: 230, y: -30 },
+        { x: 142, y: 0 },
+        { x: 262, y: -6 },
+        { x: 422, y: -40 },
+        { x: 480, y: 0 },
+        { x: 255, y: -30 },
+        { x: 120, y: -30 },
+        { x: 260, y: 0 },
+        { x: 390, y: -26 },
+    ];
     return levelItem;
 }(eui.ItemRenderer));
 __reflect(levelItem.prototype, "levelItem", ["eui.UIComponent", "egret.DisplayObject"]);
 window['levelItem'] = levelItem;
+//# sourceMappingURL=levelItem.js.map

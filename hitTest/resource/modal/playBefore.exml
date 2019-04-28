@@ -4,38 +4,33 @@
 	<e:Image source="img_bg_start_png" horizontalCenter="0" verticalCenter="0"/>
 	<e:Label id="titleText" text="第6关" y="59.44" bold="true" size="40" fontFamily="Microsoft YaHei" horizontalCenter="0" border="false" strokeColor="0x603005" stroke="2"/>
 	<e:Label text="借助道具，让你赢得更漂亮~" y="195" fontFamily="Microsoft YaHei" textColor="0x6c371a" horizontalCenter="0"/>
-	<e:Group id="chooseGroup" y="288" horizontalCenter="0">
-		<e:Group id="glass" x="0" y="0" width="160" height="160">
-			<e:Rect width="160" height="160" fillColor="0xfdf4e3" strokeColor="0xf1d09f" strokeWeight="4" ellipseWidth="60" horizontalCenter="0" verticalCenter="0"/>
-			<e:Image id="glassLight" source="img_light_star_png" height="300" width="300" horizontalCenter="0" verticalCenter="0" visible="false"/>
-			<e:Image source="img_gift_04_png" horizontalCenter="0" verticalCenter="0" scaleX="0.4" scaleY="0.4"/>
-			<e:BitmapLabel id="glassNum" x="95" y="112" font="stripe_text_fnt" text="X1" scaleX="0.7" scaleY="0.7"/>
-			<e:Image id="glassAdd" x="102" y="108" source="btn_more_png" visible="false"/>
-			<e:Image id="glassChoose" x="118" y="108" source="img_select_png" visible="false"/>
-		</e:Group>
-		<e:Group id="bullet" x="227.5" y="0" width="160" height="160">
-			<e:Rect width="160" height="160" fillColor="0xFDF4E3" strokeColor="0xF1D09F" strokeWeight="4" ellipseWidth="60" horizontalCenter="0" verticalCenter="0"/>
-			<e:Image id="bulletLight" source="img_light_star_png" height="300" width="300" horizontalCenter="0" verticalCenter="0" visible="false"/>
-			<e:Image source="img_gift_05_png" horizontalCenter="0" verticalCenter="0" scaleX="0.4" scaleY="0.4"/>
-			<e:BitmapLabel id="bulletNum" x="95" y="112" font="stripe_text_fnt" text="X1" scaleX="0.7" scaleY="0.7"/>
-			<e:Image id="bulletAdd" x="102" y="108" source="btn_more_png" visible="false"/>
-			<e:Image id="bulletChoose" x="118" y="108" source="img_select_png" visible="false"/>
-		</e:Group>
-		<e:layout>
-			<e:HorizontalLayout gap="60"/>
-		</e:layout>
-	</e:Group>
 	<e:Group y="490" horizontalCenter="0.5">
 		<e:Image id="startBtn" x="244" y="10" touchEnabled="true" source="btn_start_01_png"/>
 		<e:Image id="videoBtn" x="234" y="0" touchEnabled="true" source="btn_before_01_png"/>
 		<e:layout>
-			<e:HorizontalLayout/>
+		<e:HorizontalLayout/>
 		</e:layout>
 	</e:Group>
 	<e:Image id="closeBtn" source="btn_close_png" x="555" y="15.44" touchEnabled="true"/>
-	<e:Group id="guide" y="95" x="131" visible="false">
+	<e:Group id="glass" x="113" y="288" width="160" height="160">
+		<e:Rect width="160" height="160" fillColor="0xfdf4e3" strokeColor="0xf1d09f" strokeWeight="4" ellipseWidth="60" horizontalCenter="0" verticalCenter="0"/>
+		<e:Image id="glassLight" source="img_light_star_png" height="300" width="300" horizontalCenter="0" verticalCenter="0" anchorOffsetX="150" anchorOffsetY="150" visible="false"/>
+		<e:Image source="img_gift_04_png" horizontalCenter="0" verticalCenter="0" width="136" height="117.5"/>
+		<e:BitmapLabel id="glassNum" x="95" y="112" font="stripe_text_fnt" text="X1" scaleX="0.7" scaleY="0.7"/>
+		<e:Image id="glassAdd" x="102" y="108" source="btn_more_png" visible="false"/>
+		<e:Image id="glassChoose" x="118" y="108" source="img_select_png" visible="false"/>
+	</e:Group>
+	<e:Group id="bullet" x="333" y="288" width="160" height="160">
+		<e:Rect width="160" height="160" fillColor="0xFDF4E3" strokeColor="0xF1D09F" strokeWeight="4" ellipseWidth="60" horizontalCenter="0" verticalCenter="0"/>
+		<e:Image id="bulletLight" source="img_light_star_png" height="300" width="300" horizontalCenter="0" verticalCenter="0" anchorOffsetX="150" anchorOffsetY="150" visible="false"/>
+		<e:Image source="img_gift_05_png" horizontalCenter="0.5" verticalCenter="-5" width="79" height="117.5"/>
+		<e:BitmapLabel id="bulletNum" x="95" y="112" font="stripe_text_fnt" text="X1" scaleX="0.7" scaleY="0.7"/>
+		<e:Image id="bulletAdd" x="102" y="108" source="btn_more_png" visible="false"/>
+		<e:Image id="bulletChoose" x="118" y="108" source="img_select_png" visible="false"/>
+	</e:Group>
+	<e:Group id="guide" y="262" anchorOffsetX="170" anchorOffsetY="201" x="280" scaleX="0" scaleY="0">
 		<e:Image source="img_bg_text_guide_png"/>
-		<e:Label id="txt_1" text="点击试试神奇道具" y="78" textColor="0xff6358" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="26" bold="true"/>
-		<e:Label id="txt_2" text="弹跳视野" y="117" size="26" fontFamily="Microsoft YaHei" textColor="0xff6358" bold="true" horizontalCenter="0.5"/>
+		<e:Label id="txt_1" text="点击试试神奇道具" y="35" fontFamily="Microsoft YaHei" size="32" bold="true" horizontalCenter="0" textColor="0x6c371a"/>
+		<e:Label id="txt_2" text="弹跳视野" y="87.5" size="32" fontFamily="Microsoft YaHei" bold="true" horizontalCenter="0" textColor="0x6c371a"/>
 	</e:Group>
 </e:Skin>

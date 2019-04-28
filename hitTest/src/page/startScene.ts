@@ -9,17 +9,12 @@ class startScene extends eui.Component implements eui.UIComponent {
 	public openShare: tweenButton;
 	public navGroup: eui.Group;
 	public openBullet: tweenButton;
+	public bullet_new_icon: eui.Image;
 	public openShop: tweenButton;
 	public openRank: tweenButton;
 	public openGift: eui.Group;
 	public red_dot: eui.Image;
 	public moreGroup: eui.Group;
-	public tip_1: eui.Label;
-	public tip_2: eui.Label;
-
-
-
-
 
 	public targetArr = [
 		'lifeGroup',
@@ -51,71 +46,43 @@ class startScene extends eui.Component implements eui.UIComponent {
 		let that = this;
 		that.bgImg.height = that.stage.stageHeight;
 		that.navGroup.y += that.stage.stageHeight - 1334;
-		this.liftText.text = userDataMaster.life + '/5';
-		this.goldText.text = userDataMaster.gold + '';
-		this.createRecommand();
+		that.liftText.text = userDataMaster.life + '/5';
+		that.goldText.text = userDataMaster.gold + '';
+		that.createRecommand();
 
 		let scroll = new levelCom();
-		this.addChildAt(scroll, 1);
-		scroll.scroller.height = this.stage.stageHeight;
+		that.addChildAt(scroll, 1);
+		scroll.scroller.height = that.stage.stageHeight;
 
 		let cloud_top = new cloudCom('cloud_top');
-		this.addChildAt(cloud_top, 2);
+		that.addChildAt(cloud_top, 2);
 
 		let cloud_bottom = new cloudCom('cloud_bottom');
-		this.addChildAt(cloud_bottom, 3);
-		cloud_bottom.y = this.stage.stageHeight - cloud_bottom.height;
+		that.addChildAt(cloud_bottom, 3);
+		cloud_bottom.y = that.stage.stageHeight - cloud_bottom.height;
+		egret.Tween.get(that.bullet_new_icon, { loop: true }).to({ y: -20 }, 1000).to({ y: -8 }, 1000);
 		setTimeout(function () {
-			if (!(userDataMaster.myInfo.gender && userDataMaster.myInfo.gender > 0)) {
-				that.addChild(new chooseSex());
-			}
+			that.chooseSex(0);
 		}, 1000);
+
 		that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.judgeFun, that);
 		userDataMaster.myCollection.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.dataChange, this);
-		that.createscrollText();
+
 	}
-	public createscrollText() {
-		let arr = [
-			'当你打不过了，去找新的植物炮弹帮助你吧',
-			'你知道吗？包菜君可以说是最厉害的弹药了',
-			'某些道具要到特定关卡才会开启哦',
-			'开局道具记得选，整局游戏都能用，很强',
-			'游戏中不要吝啬使用左下角的道具',
-			'偷偷告诉你，旧关卡不消耗体力，还能赚宝石',
-			'没有体力，点击“获取体力”，它会帮助你',
-			'“免费礼物”有好东西，多去看看'
-		];
+	public chooseSex(num) {
 		let that = this;
-		let index_1 = 0;
-		let index_2 = 1;
-		let dx = that.tip_1.x - (-that.tip_1.width);
-		let dt = that.tip_1.x + that.tip_1.width - 750;
-		animation_1();
-		function animation_1() {
-			let dt = that.tip_1.x + that.tip_1.width - 750 + 50;
+		if (userDataMaster.myInfo.uid) {
+			//静默登录成功
+			if (!(userDataMaster.myInfo.gender && userDataMaster.myInfo.gender > 0)) {
+				sceneMaster.openModal(new chooseSex());
+			}
+		} else if (num++ < 5) {
 			setTimeout(function () {
-				animation_2();
-			}, dt * 10);
-			let dx_1 = that.tip_1.x + that.tip_1.width;
-			egret.Tween.get(that.tip_1).to({ x: -that.tip_1.width }, dx_1 * 10).call(() => {
-				index_1 = index_2 + 1 < arr.length - 1 ? index_2 + 1 : 0;
-				that.tip_1.text = arr[index_1];
-				that.tip_1.x = 750;
-			});
-		}
-		function animation_2() {
-			let dt = that.tip_2.x + that.tip_2.width - 750 + 50;
-			setTimeout(function () {
-				animation_1();
-			}, dt * 10);
-			let dx_2 = that.tip_2.x + that.tip_2.width;
-			egret.Tween.get(that.tip_2).to({ x: -that.tip_2.width }, dx_2 * 10).call(() => {
-				index_2 = index_1 + 1 < arr.length - 1 ? index_1 + 1 : 0;
-				that.tip_2.text = arr[index_2];
-				that.tip_2.x = 750;
-			});
+				that.chooseSex(num)
+			}, 1000);
 		}
 	}
+
 	public createRecommand(n = 0) {
 		let that = this;
 		if (userDataMaster.recommand && userDataMaster.recommand['1'] && userDataMaster.recommand['1'].games) {
@@ -189,6 +156,8 @@ class startScene extends eui.Component implements eui.UIComponent {
 	}
 	public openBulletFun() {
 		let that = this;
+		egret.Tween.removeTweens(that.bullet_new_icon);
+		that.bullet_new_icon.parent && that.bullet_new_icon.parent.removeChild(that.bullet_new_icon);
 		sceneMaster.openModal(new myShop());
 	}
 	public openShopFun() {

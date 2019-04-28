@@ -39,6 +39,7 @@ var startScene = (function (_super) {
     startScene.prototype.init = function () {
         var that = this;
         that.bgImg.height = that.stage.stageHeight;
+        that.navGroup.y += that.stage.stageHeight - 1334;
         this.liftText.text = userDataMaster.life + '/5';
         this.goldText.text = userDataMaster.gold + '';
         this.createRecommand();
@@ -50,8 +51,56 @@ var startScene = (function (_super) {
         var cloud_bottom = new cloudCom('cloud_bottom');
         this.addChildAt(cloud_bottom, 3);
         cloud_bottom.y = this.stage.stageHeight - cloud_bottom.height;
+        setTimeout(function () {
+            if (!(userDataMaster.myInfo.gender && userDataMaster.myInfo.gender > 0)) {
+                that.addChild(new chooseSex());
+            }
+        }, 1000);
         that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.judgeFun, that);
         userDataMaster.myCollection.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.dataChange, this);
+        that.createscrollText();
+    };
+    startScene.prototype.createscrollText = function () {
+        var arr = [
+            '当你打不过了，去找新的植物炮弹帮助你吧',
+            '你知道吗？包菜君可以说是最厉害的弹药了',
+            '某些道具要到特定关卡才会开启哦',
+            '开局道具记得选，整局游戏都能用，很强',
+            '游戏中不要吝啬使用左下角的道具',
+            '偷偷告诉你，旧关卡不消耗体力，还能赚宝石',
+            '没有体力，点击“获取体力”，它会帮助你',
+            '“免费礼物”有好东西，多去看看'
+        ];
+        var that = this;
+        var index_1 = 0;
+        var index_2 = 1;
+        var dx = that.tip_1.x - (-that.tip_1.width);
+        var dt = that.tip_1.x + that.tip_1.width - 750;
+        animation_1();
+        function animation_1() {
+            var dt = that.tip_1.x + that.tip_1.width - 750 + 50;
+            setTimeout(function () {
+                animation_2();
+            }, dt * 10);
+            var dx_1 = that.tip_1.x + that.tip_1.width;
+            egret.Tween.get(that.tip_1).to({ x: -that.tip_1.width }, dx_1 * 10).call(function () {
+                index_1 = index_2 + 1 < arr.length - 1 ? index_2 + 1 : 0;
+                that.tip_1.text = arr[index_1];
+                that.tip_1.x = 750;
+            });
+        }
+        function animation_2() {
+            var dt = that.tip_2.x + that.tip_2.width - 750 + 50;
+            setTimeout(function () {
+                animation_1();
+            }, dt * 10);
+            var dx_2 = that.tip_2.x + that.tip_2.width;
+            egret.Tween.get(that.tip_2).to({ x: -that.tip_2.width }, dx_2 * 10).call(function () {
+                index_2 = index_1 + 1 < arr.length - 1 ? index_1 + 1 : 0;
+                that.tip_2.text = arr[index_2];
+                that.tip_2.x = 750;
+            });
+        }
     };
     startScene.prototype.createRecommand = function (n) {
         if (n === void 0) { n = 0; }
@@ -67,7 +116,7 @@ var startScene = (function (_super) {
             dataGroup.itemRenderer = moreItem;
             that.moreGroup.addChild(dataGroup);
             that.moreComponent = moreComponent.getInstance();
-            that.moreComponent.y = 147;
+            that.moreComponent.y = 350;
             that.addChild(that.moreComponent);
             that.moreComponent.changeArea.texture = RES.getRes('btn_more_game_png');
         }
@@ -90,8 +139,8 @@ var startScene = (function (_super) {
         for (var _i = 0, _a = that.targetArr; _i < _a.length; _i++) {
             var item = _a[_i];
             var t = that[item];
-            var x = e.stageX - (t.x - t.anchorOffsetX);
-            var y = e.stageY - (t.y - t.anchorOffsetY);
+            var x = e.stageX - (t.x - t.anchorOffsetX + t.parent.x);
+            var y = e.stageY - (t.y - t.anchorOffsetY + t.parent.y);
             if (x > 0 && x < t.width && y > 0 && y < t.height) {
                 that[item + 'Fun'] && that[item + 'Fun']();
                 return;
@@ -118,6 +167,7 @@ var startScene = (function (_super) {
     };
     startScene.prototype.openLifeFun = function () {
         var that = this;
+        that.life_dot.visible = false;
         sceneMaster.openModal(new getLifeModal());
     };
     startScene.prototype.openShareFun = function () {
@@ -144,3 +194,4 @@ var startScene = (function (_super) {
     return startScene;
 }(eui.Component));
 __reflect(startScene.prototype, "startScene", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=startScene.js.map

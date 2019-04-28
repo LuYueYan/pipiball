@@ -21,6 +21,8 @@ var shopItem = (function (_super) {
     };
     shopItem.prototype.dataChanged = function () {
         this.img.texture = RES.getRes(this.data.img + '_png');
+        this.power.texture = RES.getRes('img_power_0' + this.data.powerImg + '_png');
+        this.txt.text = this.data.txt;
         if (this.data.id == 0) {
             //第一个
             this.bgImg.texture = RES.getRes('img_bg_bullet_01_png');
@@ -28,12 +30,12 @@ var shopItem = (function (_super) {
         else {
             this.bgImg.texture = RES.getRes('img_bg_bullet_02_png');
         }
-        if (this.data.state == 0 && userDataMaster.gold < this.data.price) {
+        if (userDataMaster.bulletSateArr[this.data.id] == 0 && userDataMaster.gold < this.data.price) {
             //未购买&&金币不足
             this.btn.texture = RES.getRes('btn_insufficient_png');
         }
         else {
-            var s = this.data.state == 0 ? 'btn_buy' : 'btn_use';
+            var s = userDataMaster.bulletSateArr[this.data.id] == 0 ? 'btn_buy' : 'btn_use';
             this.btn.texture = RES.getRes(s + '_png');
         }
         if (this.data.id == userDataMaster.bulletIndex) {
@@ -46,10 +48,10 @@ var shopItem = (function (_super) {
     };
     shopItem.prototype.getFun = function () {
         //状态值 0--未购买 1--已购买
-        if (this.data.state == 0) {
+        if (userDataMaster.bulletSateArr[this.data.id] == 0) {
             if (userDataMaster.gold >= this.data.price) {
                 //金币足够购买
-                userDataMaster.bulletArr[this.data.id].state = 1;
+                userDataMaster.bulletSateArr[this.data.id] = 1;
                 userDataMaster.myGold = userDataMaster.gold - this.data.price;
                 var item = userDataMaster.bulletArr[this.data.id];
                 sceneMaster.openLittleModal(new getSuccess(item.img + '_png', item.title));
@@ -67,7 +69,7 @@ var shopItem = (function (_super) {
                 });
             }
         }
-        else if (this.data.state == 1) {
+        else if (userDataMaster.bulletSateArr[this.data.id] == 1) {
             //使用
             userDataMaster.myBulleIndex = this.data.id;
             console.log('使用这个');
@@ -76,3 +78,4 @@ var shopItem = (function (_super) {
     return shopItem;
 }(eui.ItemRenderer));
 __reflect(shopItem.prototype, "shopItem", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=shopItem.js.map

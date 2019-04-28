@@ -31,3 +31,4 @@ var cloudCom = (function (_super) {
     return cloudCom;
 }(eui.Component));
 __reflect(cloudCom.prototype, "cloudCom", ["eui.UIComponent", "egret.DisplayObject"]);
+//# sourceMappingURL=cloudCom.js.map

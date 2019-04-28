@@ -9,8 +9,8 @@ class userDataMaster {
 	public static levelStar = [];//过关星星情况 n颗星
 	public static bulletIndex = 0;//当前使用的炮弹
 	public static tool = {
-		bullet: { level: 5, unlock: true, num: 1 },
-		glass: { level: 1, unlock: true, num: 1 },
+		bullet: { level: 5, unlock: false, num: 1 },//unlock---是否已经引导过
+		glass: { level: 1, unlock: false, num: 1 },
 		hammer: { level: 2, unlock: false, num: 1 },
 		hat: { level: 10, unlock: false, num: 1 },
 		lamp: { level: 15, unlock: false, num: 1 }
@@ -68,7 +68,7 @@ class userDataMaster {
 			let amount = Math.ceil((line * 7) / 2);
 			let gold = i < 5 ? goldArr[i - 1] : i + 8;
 			let bullet=i>30?8:Math.floor((i-1)/10)+5;
-			let item = { level: i, amount: amount, existAmount: 0, small: small, score: amount + 1000, gold: gold,bullet:bullet };
+			let item = { level: i, amount: amount,  small: small, score: amount + 1000, gold: gold,bullet:bullet };
 			//score是达到一颗星的最小分数
 			arr.push(item);
 		}
@@ -308,6 +308,7 @@ class userDataMaster {
 
 					//测试测试………………
 					// userDataMaster.myInfo.is_new_user = true;
+					// userDataMaster.myInfo.gender=0;
 					// userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
 					//初始化用户openid
 					platform.openDataContext.postMessage({

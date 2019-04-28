@@ -125,6 +125,7 @@ class gridCom {
 			}
 			let res = {};//被销毁的对象，分数之类的信息
 			if (this.type == 5) {
+				soundMaster.playSingleMusic('boom_sound');
 				//是炸弹 判断被炸毁的区域
 				let d = that.adaptParams.itemWidth / that.factor;
 				for (let i = 0, len = that.gridArr.length; i < len; i++) {
@@ -132,7 +133,7 @@ class gridCom {
 					let dx = Math.floor(Math.abs(item.boxBody.position[0] - this.boxBody.position[0]) * 100) / 100;
 					let dy = Math.floor(Math.abs(item.boxBody.position[1] - this.boxBody.position[1]) * 100) / 100;
 					if (item.boxBody.id != this.boxBody.id && (dx <= d && dy <= d)) {
-						console.log('boom', item.type)
+						// console.log('boom', item.type)
 						if (item.type == 3) {
 							//精灵
 							if (!item.isRemoved) {
