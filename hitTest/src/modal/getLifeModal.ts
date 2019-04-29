@@ -22,7 +22,7 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 	public init() {
 		let that = this;
 		let terval = setInterval(() => {
-			if (userDataMaster.life >= 5 && userDataMaster.seconds <= 0) {
+			if (userDataMaster.life >= 5) {
 				clearInterval(terval);
 				userDataMaster.seconds = 0;
 			}
@@ -66,6 +66,7 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 				userDataMaster.dayShareLife.num++;
 				userDataMaster.myLife = userDataMaster.life + 1;
 				that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
+				sceneMaster.openLittleModal(new getSuccess('img_gift_01_png',''))
 			})
 		} else {
 			//今日获取次数已用完，请明日再来

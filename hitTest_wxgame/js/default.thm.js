@@ -1113,7 +1113,7 @@ var egret = window.egret;window.skins={};
 	_proto.img_i = function () {
 		var t = new eui.Image();
 		this.img = t;
-		t.horizontalCenter = 0.5;
+		t.horizontalCenter = 0;
 		t.source = "img_gift_02_png";
 		t.y = 211.69;
 		return t;

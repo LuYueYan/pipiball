@@ -447,7 +447,14 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		that.amountPro.width = that.myData.amount / that.levelInfo.amount * 100;
 		if (that.myData.amount >= that.levelInfo.amount && hammer && that.gridArr.length <= 1) {
 			//通关成功
-			sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData))
+			setTimeout(function () {
+				that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
+				that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
+				that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+				that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+				sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData))
+			}, 500);
+
 			// console.log('level up')
 		}
 	}
@@ -551,7 +558,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				break;
 			}
 			let g;
-			let type = Math.random()<0.7?1:2;
+			let type = Math.random() < 0.7 ? 1 : 2;
 			let ran = Math.random();
 			if (that.levelInfo.level >= 3 && that.levelInfo.level < 6) {
 				//可以出现爆炸
@@ -681,6 +688,9 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		that.shootPoint.ey = e.stageY;
 		that.shootPoint.speedy = 1;
 		that.rayGroup.removeChildren();
+		if (e.stageY > that.adaptParams.itemWidth * 8 + that.adaptParams.gridAreaTop) {
+			return;
+		}
 		that.testRay()
 	}
 
@@ -688,6 +698,10 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		let that = this;
 
 		if (that.shooting || (that.hammerShow && that.hammerShow.parent)) {
+			return;
+		}
+		if (e.stageY > that.adaptParams.itemWidth * 8 + that.adaptParams.gridAreaTop) {
+			console.log('低于发射水平')
 			return;
 		}
 		if (that.lampShow && that.lampShow.parent && (!that.tooling || that.tooling != 'lamp')) {
@@ -729,6 +743,11 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		let by = (that.stage.stageHeight - that.shootPoint.by) / that.factor;
 		let ex = that.shootPoint.ex / that.factor;
 		let ey = (that.stage.stageHeight - that.shootPoint.ey) / that.factor;
+		if (ey <= by) {
+			//小于发射水平线
+			console.log('小于发射水平线');
+			return;
+		}
 		let dx = ex - bx;
 		let dy = ey - by;//ey<by的
 		var ray = new p2.Ray({
@@ -1021,7 +1040,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 					// console.log('enter', that.shooting)
 					if (that.myData.danger != 1 && that.myData.reborning != 1) {
 						//不是复活和危险
-						let conTimes = that.conTimes
+						let conTimes = that.conTimes;
 						that.updateProccess(conTimes);
 					}
 
@@ -1052,6 +1071,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 
 								that.createGif('img_text_a4', 5, 2000);
 								setTimeout(function () {
+									that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
 									sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData))
 								}, 2000);
 							}
@@ -1136,8 +1156,12 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				//危险警告
 				// console.log('danger');
 				danger = true;
+				if (that.myData.danger == 0) {
+					that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
+					that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+					that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+				}
 			}
-
 		}
 		if (reborn) {
 			that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
@@ -1167,12 +1191,14 @@ class runningScene extends eui.Component implements eui.UIComponent {
 						danger.useBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 							CallbackMaster.openShare(() => {
 								sceneMaster.closeModal();
-								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
-								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
-								that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
 								that.shooting = false;
 								that.clearRows(2);
 							})
+						}, this);
+						danger.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+							that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
+							that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
+							that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
 						}, this);
 					}
 				});

@@ -51,9 +51,18 @@ class levelCom extends eui.Component implements eui.UIComponent {
 			that.headimg.mask = that.headmask;
 			egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
 			that.head.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-				sceneMaster.openModal(new playBefore(userDataMaster.level+1));
+				sceneMaster.openModal(new playBefore(userDataMaster.level + 1));
 			}, this)
 		}, 300);
+
+		let userInfo = new eui.ArrayCollection([userDataMaster.myInfo]);
+		userInfo.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.dataChange, this)
+
+	}
+	public dataChange(e: eui.CollectionEvent) {
+		let that = this;
+		that.headimg.source = userDataMaster.myInfo.avatarUrl;
+		that.headimg.mask = that.headmask;
 	}
 
 }

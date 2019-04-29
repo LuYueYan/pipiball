@@ -195,7 +195,13 @@ class playBefore extends eui.Component implements eui.UIComponent {
 				console.log('体力不足')
 				platform.showModal({
 					title: '温馨提示',
-					content: '您的体力不足'
+					content: '您的体力不足',
+					success(res){
+						if(res.confirm){
+							console.log('getlife')
+							sceneMaster.openModal(new getLifeModal())
+						}
+					}
 				})
 				return;
 			}

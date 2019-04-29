@@ -67,8 +67,8 @@ class userDataMaster {
 			let line = big - small + 1;
 			let amount = Math.ceil((line * 7) / 2);
 			let gold = i < 5 ? goldArr[i - 1] : i + 8;
-			let bullet=i>30?8:Math.floor((i-1)/10)+5;
-			let item = { level: i, amount: amount,  small: small, score: amount + 1000, gold: gold,bullet:bullet };
+			let bullet = i > 30 ? 8 : Math.floor((i - 1) / 10) + 5;
+			let item = { level: i, amount: amount, small: small, score: amount + 1000, gold: gold, bullet: bullet };
 			//score是达到一颗星的最小分数
 			arr.push(item);
 		}
@@ -85,7 +85,7 @@ class userDataMaster {
 						if (info.gold) {
 							userDataMaster.gold = info.gold;
 						}
-						if (info.life) {
+						if (info.life>=0) {
 							userDataMaster.life = info.life;
 						}
 						if (info.level) {
@@ -98,13 +98,16 @@ class userDataMaster {
 								let closeDate = info.closeDate;
 								let n = (new Date().getTime() - closeDate) / 1000 / 5 / 60;
 								let c = userDataMaster.life + Math.floor(n);
+								console.log(userDataMaster.life,info.life)
+								console.log('closeDate', info.closeDate, n, c);
 								if (c >= 5) {
 									userDataMaster.myLife = c;
 								} else {
 									userDataMaster.life = c;
 									userDataMaster.myCollection.replaceItemAt(c, 1);
-									let t = n / 1000 - Math.floor(n) * 5 * 60;
-									userDataMaster.updateTime(t);
+									let t = Math.floor((n - Math.floor(n)) * 5 * 60);
+									console.log('exist', t)
+									userDataMaster.updateTime(300 - t);
 								}
 							}
 						}
