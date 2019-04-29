@@ -3,11 +3,11 @@ class rebornModal extends eui.Component implements eui.UIComponent {
 	public num: eui.Image;
 	public rebornBtn: tweenButton;
 
-    public level;
+	public level;
 	public myData;
-	public constructor(level,myData) {
+	public constructor(level, myData) {
 		super();
-		this.level=level;
+		this.level = level;
 		this.myData = myData;
 	}
 
@@ -27,6 +27,9 @@ class rebornModal extends eui.Component implements eui.UIComponent {
 	public init() {
 		let that = this;
 		that.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ignoreFun, this);
+		setTimeout(function () {
+			that.ignoreBtn.visible = true;
+		}, 5000);
 		var t = 5;
 		var terval = setInterval(() => {
 			if (t > 0) {
@@ -40,7 +43,7 @@ class rebornModal extends eui.Component implements eui.UIComponent {
 
 	}
 	public ignoreFun() {
-		sceneMaster.openModal(new gameOver(this.level,this.myData));
+		sceneMaster.openModal(new gameOver(this.level, this.myData));
 	}
 
 }

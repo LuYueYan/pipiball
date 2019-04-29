@@ -6,7 +6,7 @@ class CallbackMaster {
 	public static hasChecked: boolean = false;
 
 	public static saveShareSuc = null;//保存上次分享的回调
-	public static shareFailText = '分享到不同的群才能获得奖励哦~';//分享失败的弹窗文案
+	public static shareFailText = '好友信号连接失败，请重试！';//分享失败的弹窗文案
 	public constructor() {
 	}
 	public static init() {
@@ -34,7 +34,7 @@ class CallbackMaster {
 				//超过三秒，算分享成功
 				CallbackMaster.shareSuc && CallbackMaster.shareSuc();
 				CallbackMaster.saveShareSuc = null;
-				CallbackMaster.shareFailText = '分享到不同的群才能获得奖励哦~';
+				CallbackMaster.shareFailText = '好友信号连接失败，请重试！';
 			} else {
 				CallbackMaster.saveShareSuc = CallbackMaster.shareSuc;
 				//分享失败弹窗
@@ -46,7 +46,7 @@ class CallbackMaster {
 						if (res.confirm) {
 							CallbackMaster.openShare(CallbackMaster.saveShareSuc)
 						} else {
-							CallbackMaster.shareFailText = '分享到不同的群才能获得奖励哦~';
+							CallbackMaster.shareFailText = '好友信号连接失败，请重试！';
 						}
 					}
 				}
@@ -63,9 +63,10 @@ class CallbackMaster {
 				gold: userDataMaster.gold,
 				level: userDataMaster.level,
 				life: userDataMaster.life,
-				closeDate: new Date().getTime() - (60 * 5 * 1000 - userDataMaster.seconds * 1000),
+				closeDate: new Date().getTime() - (60 * 15 * 1000 - userDataMaster.seconds * 1000),
 				levelStar: userDataMaster.levelStar,
 				dayShareLife: userDataMaster.dayShareLife,
+				dayShareGold: userDataMaster.dayShareGold,
 				tool: userDataMaster.tool,
 				dayGift: userDataMaster.dayGift,
 				bulletIndex: userDataMaster.bulletIndex,
@@ -86,11 +87,11 @@ class CallbackMaster {
 	}
 	public static shareInfo = [
 		{
-			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_1.jpg',
+			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_1.png',
 			title: '瞄准！射击！看谁能够消灭所有方块~'
 		},
 		{
-			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_2.jpg',
+			imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_2.png',
 			title: '我能让射击视线自个儿拐弯，你行吗？'
 		}
 	]

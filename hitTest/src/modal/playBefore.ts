@@ -5,18 +5,19 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	public closeBtn: eui.Image;
 	public glass: eui.Group;
 	public glassLight: eui.Image;
+	public glassImg: eui.Image;
 	public glassNum: eui.BitmapLabel;
 	public glassAdd: eui.Image;
 	public glassChoose: eui.Image;
 	public bullet: eui.Group;
 	public bulletLight: eui.Image;
+	public bulletImg: eui.Image;
 	public bulletNum: eui.BitmapLabel;
 	public bulletAdd: eui.Image;
 	public bulletChoose: eui.Image;
 	public guide: eui.Group;
 	public txt_1: eui.Label;
 	public txt_2: eui.Label;
-
 
 	public guideBg;
 	public level;
@@ -68,12 +69,14 @@ class playBefore extends eui.Component implements eui.UIComponent {
 				}
 			}
 		}
+		egret.Tween.get(that.glassImg, { loop: true }).to({ scaleX: 1.2, scaleY: 1.2 }, 1000).to({ scaleX: 1, scaleY: 1 }, 1000);
 		if (this.level >= 5) {
 			//出现炸弹
 			if (userDataMaster.tool.bullet.num <= 0) {
 				that.bulletNum.visible = false;
 				that.bulletAdd.visible = true;
 			}
+			egret.Tween.get(that.bulletImg, { loop: true }).to({ scaleX: 1.2, scaleY: 1.2 }, 1000).to({ scaleX: 1, scaleY: 1 }, 1000);
 			that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('bullet') }, this);
 		} else {
 			that.glass.x = (that.width - that.glass.width) / 2;
@@ -101,7 +104,7 @@ class playBefore extends eui.Component implements eui.UIComponent {
 				that.guideBg.horitionalCenter = 0;
 				that.guideBg.alpha = 0.5;
 				that.addChildAt(that.guideBg, guideIndex);
-				egret.Tween.get(that.guide).wait(1000).to({ scaleX: 1, scaleY: 1 }, 1000,egret.Ease.elasticOut);
+				egret.Tween.get(that.guide).wait(1000).to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut);
 			}
 		}
 		if (userDataMaster.tool.glass.num <= 0) {
@@ -177,18 +180,18 @@ class playBefore extends eui.Component implements eui.UIComponent {
 			that[type + 'Num'].text = 'X' + tool[type].num;
 		}
 	}
-    public get factor():number{
+	public get factor(): number {
 		return 0;
 	}
-	    public set factor(value:number) {
-        this.img.x = (1 - value) * (1 - value) * (-150) + 2 * value * (1 - value) * 100 + value * value * 150;
-        this.img.y = (1 - value) * (1 - value) * (-200) + 2 * value * (1 - value) * 200 + value * value * 550;
-		this.img.scaleX=1-value;
-		this.img.scaleY=1-value;
-    }
+	public set factor(value: number) {
+		this.img.x = (1 - value) * (1 - value) * (-150) + 2 * value * (1 - value) * 100 + value * value * 150;
+		this.img.y = (1 - value) * (1 - value) * (-200) + 2 * value * (1 - value) * 200 + value * value * 550;
+		this.img.scaleX = 1 - value;
+		this.img.scaleY = 1 - value;
+	}
 	public startFun(life = true) {
-		let that=this;
-		let t=0;
+		let that = this;
+		let t = 0;
 		if (life) {
 			//使用体力开始
 			if (userDataMaster.life <= 0) {
@@ -196,24 +199,24 @@ class playBefore extends eui.Component implements eui.UIComponent {
 				platform.showModal({
 					title: '温馨提示',
 					content: '您的体力不足',
-					success(res){
-						if(res.confirm){
-							console.log('getlife')
+					success(res) {
+						if (res.confirm) {
+							sceneMaster.changeScene(new startScene())
 							sceneMaster.openModal(new getLifeModal())
 						}
 					}
 				})
 				return;
 			}
-			t=500;
-			let img=new eui.Image(RES.getRes('img_strength_01_png'));
-			img.anchorOffsetX=img.width/2;
-			img.anchorOffsetY=img.height/2;
-			img.y=-200;
-			img.x=-100;
+			t = 500;
+			let img = new eui.Image(RES.getRes('img_strength_01_png'));
+			img.anchorOffsetX = img.width / 2;
+			img.anchorOffsetY = img.height / 2;
+			img.y = -200;
+			img.x = -100;
 			that.addChild(img);
-			that.img=img;
-			egret.Tween.get(that).to({factor: 1}, t);
+			that.img = img;
+			egret.Tween.get(that).to({ factor: 1 }, t);
 			userDataMaster.myLife = userDataMaster.life - 1;
 		}
 		setTimeout(function () {
@@ -257,6 +260,10 @@ class playBefore extends eui.Component implements eui.UIComponent {
 		}
 	}
 	public closeFun() {
+		egret.Tween.removeTweens(this.glassImg);
+		if (this.bulletImg && this.bulletImg.parent) {
+			egret.Tween.removeTweens(this.bulletImg);
+		}
 		if (sceneMaster.littleModal) {
 			sceneMaster.closeLittleModal()
 		} else {

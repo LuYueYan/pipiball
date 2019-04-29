@@ -6,11 +6,11 @@ class gameOver extends eui.Component implements eui.UIComponent {
 	public homeBtn: tweenButton;
 	public moreGroup: eui.Group;
 
-    public level;
+	public level;
 	public myData;
-	public constructor(level,myData) {
+	public constructor(level, myData) {
 		super();
-		this.level=level;
+		this.level = level;
 		this.myData = myData;
 	}
 
@@ -30,7 +30,13 @@ class gameOver extends eui.Component implements eui.UIComponent {
 	public init() {
 		let that = this;
 		let dataGroup = new eui.DataGroup();
-		let list = userDataMaster.recommand['1'].games.slice(0, 4);
+		let list = []
+		if (userDataMaster.recommand['2'] && userDataMaster.recommand['2'].games) {
+			list = userDataMaster.recommand['2'].games.slice(0, 4);
+		} else {
+			list = userDataMaster.recommand['1'].games.slice(0, 4);
+		}
+
 		let source = new eui.ArrayCollection(list);
 		dataGroup.dataProvider = source;
 		let layout = new eui.HorizontalLayout();
@@ -38,15 +44,15 @@ class gameOver extends eui.Component implements eui.UIComponent {
 		dataGroup.layout = layout;
 		dataGroup.itemRenderer = moreItem;
 		that.moreGroup.addChild(dataGroup);
-        
-		let params={
-           uid:userDataMaster.myInfo.uid,
-		   level:this.level,
-		   score:that.myData.score,
-		   star:that.myData.star
+
+		let params = {
+			uid: userDataMaster.myInfo.uid,
+			level: this.level,
+			score: that.myData.score,
+			star: that.myData.star
 		}
 		ServiceMaster.post(ServiceMaster.getScore, params, function (res) {
-			if (parseInt(res.code) === 1 && res.data) { 
+			if (parseInt(res.code) === 1 && res.data) {
 
 			}
 		});
@@ -64,7 +70,7 @@ class gameOver extends eui.Component implements eui.UIComponent {
 		sceneMaster.changeScene(new startScene());
 	}
 	public playFun() {
-		let  level=this.level;
+		let level = this.level;
 		sceneMaster.openLittleModal(new playBefore(level));
 	}
 }

@@ -14,6 +14,9 @@ class gridCom {
 		this.num = num;
 		this.initNum = num;
 		this.type = type;
+		if (type == 2) {
+			this.type = 1;
+		}
 		this.init();
 	}
 
@@ -40,7 +43,7 @@ class gridCom {
 		this.txt.width = this.itemW;
 		this.txt.textAlign = 'center';
 		this.txt.anchorOffsetX = this.img.width / 2;
-		this.txt.anchorOffsetY = this.img.height/1.5 ;
+		this.txt.anchorOffsetY = this.img.height / 1.5;
 		this.txt.scaleX = 0.8, this.txt.scaleY = 0.8;
 	}
 	public createBody(x, y, that) {
@@ -62,7 +65,7 @@ class gridCom {
 			this.boxBody.gravityScale = 0;
 			let self = this;
 			setTimeout(function () {
-				self.boxBody.velocity = [0.5, 0];
+				self.boxBody.velocity = [0.8, 0];
 			}, 500);
 		}
 		this.boxBody.fixedRotation = false;

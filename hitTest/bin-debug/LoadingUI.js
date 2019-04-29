@@ -38,21 +38,69 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var LoadingUI = (function (_super) {
     __extends(LoadingUI, _super);
-    function LoadingUI() {
+    function LoadingUI(stageHeight) {
+        if (stageHeight === void 0) { stageHeight = 1334; }
         var _this = _super.call(this) || this;
+        _this.stageHeight = 1334;
+        _this.stageHeight = stageHeight;
         _this.createView();
         return _this;
     }
     LoadingUI.prototype.createView = function () {
-        // this.textField = new egret.TextField();
-        // this.addChild(this.textField);
-        // this.textField.y = 300;
-        // this.textField.width = 480;
-        // this.textField.height = 100;
-        // this.textField.textAlign = "center";
+        var dy = this.stageHeight - 1334;
+        var bgImg = this.createBitmapByName('img_bg_loading_jpg');
+        bgImg.height = this.stageHeight;
+        this.addChild(bgImg);
+        var tip = this.createBitmapByName('img_text_08_png');
+        tip.x = (750 - tip.width) / 2;
+        tip.y = 140;
+        this.addChild(tip);
+        var proBg = this.createBitmapByName('img_bg_01_png');
+        proBg.x = 66;
+        proBg.y = 1180 + dy;
+        this.addChild(proBg);
+        this.pro = this.createBitmapByName('img_bg_02_png');
+        this.pro.width = 0;
+        this.pro.x = 75;
+        this.pro.y = 1189 + dy;
+        this.addChild(this.pro);
+        this.textField = new egret.TextField();
+        this.addChild(this.textField);
+        this.textField.y = 1150 + dy;
+        this.textField.x = 84 - 30;
+        this.textField.width = 100;
+        this.textField.height = 200;
+        this.textField.size = 30;
+        this.textField.textColor = 0xffffff;
+        this.textField.bold = true;
+        var text = new egret.TextField();
+        this.addChild(text);
+        text.y = 1240 + dy;
+        text.text = '抵制不良游戏  拒绝盗版游戏  注意自我保护  谨防受骗上当';
+        text.width = 750;
+        text.size = 22;
+        text.textColor = 0x2f842f;
+        text.textAlign = 'center';
+        var text1 = new egret.TextField();
+        this.addChild(text1);
+        text1.y = 1280 + dy;
+        text1.text = '适度游戏益脑  沉迷游戏伤身  合理安排时间  享受健康生活';
+        text1.width = 750;
+        text1.size = 22;
+        text1.textColor = 0x2f842f;
+        text1.textAlign = 'center';
     };
     LoadingUI.prototype.onProgress = function (current, total) {
-        // this.textField.text = `Loading...${current}/${total}`;
+        var percent = Math.floor(current / total * 100);
+        this.pro.width = 600 * percent / 100;
+        this.textField.text = percent + '%';
+        this.textField.x = 84 - 30 + this.pro.width;
+    };
+    LoadingUI.prototype.createBitmapByName = function (name) {
+        var result = new egret.Bitmap();
+        var texture = RES.getRes(name);
+        result.texture = texture;
+        return result;
     };
     return LoadingUI;
 }(egret.Sprite));

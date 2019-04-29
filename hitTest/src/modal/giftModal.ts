@@ -43,12 +43,13 @@ class giftModal extends eui.Component implements eui.UIComponent {
 	public init() {
 		let that = this;
 		that.bgImg.height=that.stage.stageHeight;
-		if (userDataMaster.todayGift) {
-			that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
-			that.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.getFun, this);
+		egret.Tween.get(that.getBtn,{loop:true}).to({scaleX:1.2,scaleY:1.2},1000).to({scaleX:1,scaleY:1},1000);
+		if (userDataMaster.dayGift.num>0) {
+			that.getBtn.texture = RES.getRes('btn_lottery_0' + 2 + '_png');
 		} else {
 			// that.getBtn.texture = RES.getRes('btn_lottery_03_png');
 		}
+		that.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.getFun, this);
 		that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
 		that.terval = setInterval(() => { that.timer(that) }, 1000);
 	}
@@ -85,7 +86,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 					default:
 				}
 				userDataMaster.dayGift.num == 0 ? userDataMaster.dayGift.num++ : '';
-				that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
+				that.getBtn.texture = RES.getRes('btn_lottery_0' + 2 + '_png');
 				sceneMaster.openLittleModal(new getSuccess(item.name, 'X' + item.num));
 				that.canTap = true;
 			}, ran);
@@ -100,14 +101,21 @@ class giftModal extends eui.Component implements eui.UIComponent {
 	public getFun() {
 		let that = this;
 
-		if (!that.canTap || !userDataMaster.todayGift) {
+		if (!that.canTap) {
+			return;
+		}
+		if(!userDataMaster.todayGift){
+			platform.showModal({
+				title:'温馨提示',
+				content:'暂未开通视频奖励'
+			})
 			return;
 		}
 		egret.Tween.removeTweens(that.getBtn);
 		egret.Tween.get(that.getBtn).to({ scaleX: 0.8, scaleY: 0.8 }, 60).to({ scaleX: 1, scaleY: 1 }, 60);
 		if (userDataMaster.dayGift.num == 0) {
 			suc();
-		} else if (userDataMaster.dayGift.num == 1) {
+		} else if (userDataMaster.dayGift.num >0) {
 			AdMaster.useVideo(() => {
 				suc();
 			}, () => {
@@ -119,6 +127,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 		function suc() {
 			that.canTap = false;
 			that.speed = 50;
+			userDataMaster.dayGift.num++;
 			clearInterval(that.terval);
 			that.terval = setInterval(() => { that.timer(that) }, that.speed)
 			setTimeout(function () {
@@ -127,6 +136,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 		}
 	}
 	public closeFun() {
+		egret.Tween.removeTweens(this.getBtn);
 		sceneMaster.closeModal();
 	}
 

@@ -24,7 +24,6 @@ var chooseSex = (function (_super) {
     };
     chooseSex.prototype.init = function () {
         var that = this;
-        that.bgRect.height = that.stage.stageHeight;
         that.gender_1.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseGender(1); }, this);
         that.gender_2.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseGender(2); }, this);
         that.sureBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.sureFun, this);
@@ -52,8 +51,9 @@ var chooseSex = (function (_super) {
             that['img_' + other].scaleY = 0.8;
         }
         userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
-        userDataMaster.createLoginBtn(244, 986, 262, 112, function () {
-            that.parent && that.parent.removeChild(that);
+        var top = that.sureBtn.y + that.y - that.anchorOffsetY;
+        userDataMaster.createLoginBtn(244, top, 262, 112, function () {
+            sceneMaster.closeModal();
         });
     };
     return chooseSex;

@@ -26,7 +26,9 @@ var teachModal = (function (_super) {
         }
     };
     teachModal.prototype.init = function () {
-        this.bgImg.height = this.stage.stageHeight;
+        var dy = this.stage.stageHeight - 1334;
+        this.bgImg.height += dy;
+        this.contentGroup.y += dy * 0.5;
         this.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.closeFun, this);
     };
     teachModal.prototype.closeFun = function () {

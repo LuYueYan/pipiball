@@ -31,6 +31,9 @@ class moreComponent extends eui.Component implements eui.UIComponent {
 	}
 	private init() {
 		let list = userDataMaster.recommand['1'].games;
+		for(let i=0;i<list.length;i++){
+			list[i].color=0x603005;
+		}
 		this.sourceArr = new eui.ArrayCollection(list);
 		// this.loadData()
 		this.dataGroup = new eui.DataGroup();
@@ -41,8 +44,8 @@ class moreComponent extends eui.Component implements eui.UIComponent {
 		this.dataGroup.useVirtualLayout = true;
 
 		let layout: eui.TileLayout = new eui.TileLayout();
-		layout.horizontalGap = 30;
-		layout.verticalGap = 40;
+		layout.horizontalGap =0;
+		layout.verticalGap = 15;
 		this.dataGroup.layout = layout;
 		this.content.addChild(this.dataGroup);
 		this.dataGroup.itemRenderer = moreItem;

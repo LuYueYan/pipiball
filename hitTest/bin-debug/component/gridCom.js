@@ -13,6 +13,9 @@ var gridCom = (function () {
         this.num = num;
         this.initNum = num;
         this.type = type;
+        if (type == 2) {
+            this.type = 1;
+        }
         this.init();
     }
     gridCom.prototype.init = function () {
@@ -63,7 +66,7 @@ var gridCom = (function () {
             this.boxBody.gravityScale = 0;
             var self_1 = this;
             setTimeout(function () {
-                self_1.boxBody.velocity = [0.5, 0];
+                self_1.boxBody.velocity = [0.8, 0];
             }, 500);
         }
         this.boxBody.fixedRotation = false;
@@ -127,6 +130,7 @@ var gridCom = (function () {
             }
             var res = {}; //被销毁的对象，分数之类的信息
             if (this.type == 5) {
+                soundMaster.playSingleMusic('boom_sound');
                 //是炸弹 判断被炸毁的区域
                 var d = that.adaptParams.itemWidth / that.factor;
                 var _loop_1 = function (i, len) {

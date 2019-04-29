@@ -88,6 +88,9 @@ class startScene extends eui.Component implements eui.UIComponent {
 		if (userDataMaster.recommand && userDataMaster.recommand['1'] && userDataMaster.recommand['1'].games) {
 			let dataGroup = new eui.DataGroup();
 			let list = userDataMaster.recommand['1'].games.slice(0, 3);
+			for (let i = 0; i < list.length; i++) {
+				list[i].color_1 = 0x164E33;
+			}
 			let source = new eui.ArrayCollection(list);
 			dataGroup.dataProvider = source;
 			let layout = new eui.VerticalLayout();
@@ -132,6 +135,13 @@ class startScene extends eui.Component implements eui.UIComponent {
 		that.openLifeFun();
 	}
 	public goldGroupFun() {
+		if (!userDataMaster.todayShareGold) {
+			platform.showModal({
+				title: '温馨提示',
+				content: '今日获取次数已达上限，请明日再来'
+			});
+			return;
+		}
 		AdMaster.useVideo(() => {
 			suc();
 		}, () => {
@@ -141,8 +151,9 @@ class startScene extends eui.Component implements eui.UIComponent {
 		});
 		let that = this;
 		function suc() {
-			userDataMaster.myGold = userDataMaster.gold + 10;
-			sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + 10));
+			userDataMaster.dayShareGold.num++;
+			userDataMaster.myGold = userDataMaster.gold + 20;
+			sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + 20));
 		}
 	}
 	public openLifeFun() {

@@ -6,7 +6,7 @@
 		<e:Image source="btn_remain_strength_png" horizontalCenter="0" verticalCenter="0"/>
 		<e:BitmapLabel id="liftText" x="66" font="stripe_text_fnt" text="5/5" scaleX="0.6" scaleY="0.6" width="250" verticalCenter="0" textAlign="center"/>
 	</e:Group>
-	<e:Group id="goldGroup" width="236" height="70" x="263" y="60" anchorOffsetY="0" anchorOffsetX="0" cacheAsBitmap="true">
+	<e:Group id="goldGroup" width="236" height="70" x="263" y="60" anchorOffsetY="0" anchorOffsetX="0" cacheAsBitmap="false">
 		<e:Image source="btn_remain_diamond_png" verticalCenter="0" horizontalCenter="0"/>
 		<e:BitmapLabel id="goldText" x="70" font="stripe_text_fnt" text="66" scaleX="0.6" scaleY="0.6" anchorOffsetX="0" width="250" textAlign="center" verticalCenter="-3" rotation="359.88"/>
 	</e:Group>
@@ -63,8 +63,8 @@
 			<e:BasicLayout/>
 		</e:layout>
 	</e:Group>
-	<e:Image source="img_game_name_png" y="256" horizontalCenter="0.5"/>
+	<e:Image source="img_game_name_png" y="241" horizontalCenter="0.5"/>
 	<e:Rect width="140" height="500" y="499" ellipseWidth="20" fillColor="0xffffff" fillAlpha="0.3"/>
 	<e:Group id="moreGroup" width="140" height="458" y="524" anchorOffsetY="0" x="0"/>
-	<ns1:tipsCom y="136.35" horizontalCenter="0"/>
+	<ns1:tipsCom y="119.35" horizontalCenter="0"/>
 </e:Skin>

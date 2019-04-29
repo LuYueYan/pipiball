@@ -29,9 +29,9 @@ var squareGuide = (function (_super) {
         if (this.type == 2) {
             this.txt_1.text = "难度升级";
             this.txt_2.text = "出现会移动的方块";
-            this.img.texture = RES.getRes('img_diamonds_big_02');
+            this.img.texture = RES.getRes('img_diamonds_big_02_png');
         }
-        egret.Tween.get(this.txtGroup, { loop: true }).to({ y: -100 }, 500).to({ y: 0 }, 500);
+        egret.Tween.get(this.txtGroup, { loop: true }).to({ y: 50 }, 500).to({ y: 100 }, 500);
         this.knowBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.knowFun, this);
     };
     squareGuide.prototype.knowFun = function () {

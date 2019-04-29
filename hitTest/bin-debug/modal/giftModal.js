@@ -38,13 +38,15 @@ var giftModal = (function (_super) {
     };
     giftModal.prototype.init = function () {
         var that = this;
-        if (userDataMaster.todayGift) {
-            that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
-            that.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.getFun, this);
+        that.bgImg.height = that.stage.stageHeight;
+        egret.Tween.get(that.getBtn, { loop: true }).to({ scaleX: 1.2, scaleY: 1.2 }, 1000).to({ scaleX: 1, scaleY: 1 }, 1000);
+        if (userDataMaster.dayGift.num > 0) {
+            that.getBtn.texture = RES.getRes('btn_lottery_0' + 2 + '_png');
         }
         else {
-            that.getBtn.texture = RES.getRes('btn_lottery_03_png');
+            // that.getBtn.texture = RES.getRes('btn_lottery_03_png');
         }
+        that.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.getFun, this);
         that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
         that.terval = setInterval(function () { that.timer(that); }, 1000);
     };
@@ -81,7 +83,7 @@ var giftModal = (function (_super) {
                     default:
                 }
                 userDataMaster.dayGift.num == 0 ? userDataMaster.dayGift.num++ : '';
-                that.getBtn.texture = RES.getRes('btn_lottery_0' + (userDataMaster.dayGift.num + 1) + '_png');
+                that.getBtn.texture = RES.getRes('btn_lottery_0' + 2 + '_png');
                 sceneMaster.openLittleModal(new getSuccess(item.name, 'X' + item.num));
                 that.canTap = true;
             }, ran);
@@ -94,7 +96,14 @@ var giftModal = (function (_super) {
     };
     giftModal.prototype.getFun = function () {
         var that = this;
-        if (!that.canTap || !userDataMaster.todayGift) {
+        if (!that.canTap) {
+            return;
+        }
+        if (!userDataMaster.todayGift) {
+            platform.showModal({
+                title: '温馨提示',
+                content: '暂未开通视频奖励'
+            });
             return;
         }
         egret.Tween.removeTweens(that.getBtn);
@@ -102,7 +111,7 @@ var giftModal = (function (_super) {
         if (userDataMaster.dayGift.num == 0) {
             suc();
         }
-        else if (userDataMaster.dayGift.num == 1) {
+        else if (userDataMaster.dayGift.num > 0) {
             AdMaster.useVideo(function () {
                 suc();
             }, function () {
@@ -114,6 +123,7 @@ var giftModal = (function (_super) {
         function suc() {
             that.canTap = false;
             that.speed = 50;
+            userDataMaster.dayGift.num++;
             clearInterval(that.terval);
             that.terval = setInterval(function () { that.timer(that); }, that.speed);
             setTimeout(function () {
@@ -122,6 +132,7 @@ var giftModal = (function (_super) {
         }
     };
     giftModal.prototype.closeFun = function () {
+        egret.Tween.removeTweens(this.getBtn);
         sceneMaster.closeModal();
     };
     return giftModal;

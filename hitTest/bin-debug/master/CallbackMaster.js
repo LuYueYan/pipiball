@@ -27,7 +27,7 @@ var CallbackMaster = (function () {
                 //超过三秒，算分享成功
                 CallbackMaster.shareSuc && CallbackMaster.shareSuc();
                 CallbackMaster.saveShareSuc = null;
-                CallbackMaster.shareFailText = '分享到不同的群才能获得奖励哦~';
+                CallbackMaster.shareFailText = '好友信号连接失败，请重试！';
             }
             else {
                 CallbackMaster.saveShareSuc = CallbackMaster.shareSuc;
@@ -41,7 +41,7 @@ var CallbackMaster = (function () {
                             CallbackMaster.openShare(CallbackMaster.saveShareSuc);
                         }
                         else {
-                            CallbackMaster.shareFailText = '分享到不同的群才能获得奖励哦~';
+                            CallbackMaster.shareFailText = '好友信号连接失败，请重试！';
                         }
                     }
                 };
@@ -58,9 +58,10 @@ var CallbackMaster = (function () {
                 gold: userDataMaster.gold,
                 level: userDataMaster.level,
                 life: userDataMaster.life,
-                closeDate: new Date().getTime() - (60 * 5 * 1000 - userDataMaster.seconds * 1000),
+                closeDate: new Date().getTime() - (60 * 15 * 1000 - userDataMaster.seconds * 1000),
                 levelStar: userDataMaster.levelStar,
                 dayShareLife: userDataMaster.dayShareLife,
+                dayShareGold: userDataMaster.dayShareGold,
                 tool: userDataMaster.tool,
                 dayGift: userDataMaster.dayGift,
                 bulletIndex: userDataMaster.bulletIndex,
@@ -87,14 +88,13 @@ var CallbackMaster = (function () {
         if (CallbackMaster.hasChecked) {
             //如果审核通过了
             var s = CallbackMaster.shareInfo[0];
-            if (shareType == 0) {
-                //默认随机分享
-                s = CallbackMaster.shareInfo[Math.floor(Math.random() * 2)];
-            }
-            else {
-                s.imageUrl = CallbackMaster.shareInfo[2].imageUrl;
-                s.title = (userDataMaster.myInfo.nickName || '') + CallbackMaster.shareInfo[2].title;
-            }
+            // if (shareType == 0) {
+            //默认随机分享
+            s = CallbackMaster.shareInfo[Math.floor(Math.random() * 2)];
+            // } else {
+            // 	s.imageUrl = CallbackMaster.shareInfo[2].imageUrl;
+            // 	s.title = (userDataMaster.myInfo.nickName || '') + CallbackMaster.shareInfo[2].title;
+            // }
             var obj = {
                 title: s.title,
                 imageUrl: s.imageUrl,
@@ -149,20 +149,16 @@ var CallbackMaster = (function () {
     //审核是否通过
     CallbackMaster.hasChecked = false;
     CallbackMaster.saveShareSuc = null; //保存上次分享的回调
-    CallbackMaster.shareFailText = '分享到不同的群才能获得奖励哦~'; //分享失败的弹窗文案
+    CallbackMaster.shareFailText = '好友信号连接失败，请重试！'; //分享失败的弹窗文案
     CallbackMaster.shareInfo = [
         {
-            imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/share_img/share_1.jpg',
-            title: '球球精灵要饿坏了，快点来喂养吧~'
+            imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_1.png',
+            title: '瞄准！射击！看谁能够消灭所有方块~'
         },
         {
-            imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/share_img/share_2.jpg',
-            title: '快来测试一下你的手速是几阶吧？听说单身10年的人手速才达到5阶'
-        },
-        {
-            imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/share_img/share_3.jpg?t=1',
-            title: '给你采集了一大袋能量果，快来领一份吧~'
-        },
+            imageUrl: 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_2.png',
+            title: '我能让射击视线自个儿拐弯，你行吗？'
+        }
     ];
     return CallbackMaster;
 }());

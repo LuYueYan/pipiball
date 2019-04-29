@@ -35,7 +35,9 @@ var rankModal = (function (_super) {
     rankModal.prototype.init = function () {
         var _this = this;
         var that = this;
-        // this.bgImg.height = this.stage.stageHeight;
+        var dy = that.stage.stageHeight - 1334;
+        that.bgImg.height += dy;
+        that.contentGroup.y += dy * 0.5;
         platform.openDataContext.postMessage({
             type: "rank",
             width: 588,

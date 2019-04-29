@@ -33,18 +33,21 @@ var playBefore = (function (_super) {
     };
     playBefore.prototype.init = function () {
         var that = this;
+        var guideIndex = 0;
         if (this.level == 5 && userDataMaster.level == 4) {
             //道具bullet首次出现 第五关
+            guideIndex = 6;
             that.guide.visible = true;
-            that.guide.x = 240;
+            that.guide.x = 400;
             that.txt_1.text = '点击试试新的道具';
             that.txt_1.text = '超级弹药筒';
-            that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
+            // that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
         }
         else if (this.level == 1 && userDataMaster.level == 0) {
             //道具glass首次出现 第一关
+            guideIndex = 5;
             that.guide.visible = true;
-            that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
+            // that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
         }
         else {
             that.removeChild(that.guide);
@@ -54,25 +57,50 @@ var playBefore = (function (_super) {
                 that.videoBtn.texture = RES.getRes('btn_start_04_png');
             }
             else {
-                that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
                 if (userDataMaster.dayFreeLife.num >= 3) {
                     that.videoBtn.texture = RES.getRes('btn_before_02_png');
                 }
             }
-            if (this.level >= 5) {
-                //出现炸弹
-                if (userDataMaster.tool.bullet.num <= 0) {
-                    that.bulletNum.visible = false;
-                    that.bulletAdd.visible = true;
-                }
-                that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('bullet'); }, this);
+        }
+        egret.Tween.get(that.glassImg, { loop: true }).to({ scaleX: 1.2, scaleY: 1.2 }, 1000).to({ scaleX: 1, scaleY: 1 }, 1000);
+        if (this.level >= 5) {
+            //出现炸弹
+            if (userDataMaster.tool.bullet.num <= 0) {
+                that.bulletNum.visible = false;
+                that.bulletAdd.visible = true;
             }
-            else {
-                that.bullet.parent.removeChild(that.bullet);
+            egret.Tween.get(that.bulletImg, { loop: true }).to({ scaleX: 1.2, scaleY: 1.2 }, 1000).to({ scaleX: 1, scaleY: 1 }, 1000);
+            that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('bullet'); }, this);
+        }
+        else {
+            that.glass.x = (that.width - that.glass.width) / 2;
+            that.bullet.parent.removeChild(that.bullet);
+        }
+        if (that.startBtn.parent) {
+            that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
+        }
+        that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
+        that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
+        that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('glass'); }, this);
+        if (that.guide.parent) {
+            var guide = false;
+            if (guideIndex == 5 && !userDataMaster.tool.glass.unlock) {
+                //弹跳视野
+                userDataMaster.tool.glass.unlock = true;
+                guide = true;
             }
-            that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
-            that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
-            that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('glass'); }, this);
+            else if (guideIndex == 6 && !userDataMaster.tool.bullet.unlock) {
+                //bullet
+                userDataMaster.tool.bullet.unlock = true;
+                guide = true;
+            }
+            if (guide) {
+                that.guideBg = new eui.Rect(that.width + 100, that.height, 0x0c0300);
+                that.guideBg.horitionalCenter = 0;
+                that.guideBg.alpha = 0.5;
+                that.addChildAt(that.guideBg, guideIndex);
+                egret.Tween.get(that.guide).wait(1000).to({ scaleX: 1, scaleY: 1 }, 1000, egret.Ease.elasticOut);
+            }
         }
         if (userDataMaster.tool.glass.num <= 0) {
             that.glassNum.visible = false;
@@ -80,28 +108,26 @@ var playBefore = (function (_super) {
         }
         that.titleText.text = '第' + this.level + '关';
     };
-    playBefore.prototype.guideFun = function () {
-        var that = this;
-        that.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
-        that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
-        that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
-        that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('glass'); }, this);
-        if (that.startBtn && that.startBtn.parent) {
-            that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
-        }
-        if (that.bullet.parent) {
-            that.txt_1.text = '里面多藏了5颗弹药';
-            that.txt_2.text = '助力开局';
-            that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('bullet'); }, this);
-        }
-        else {
-            that.txt_1.text = '你将可以看清';
-            that.txt_2.text = '发射后的拐弯路线';
-        }
-    };
+    // public guideFun() {
+    // 	let that = this;
+    // 	that.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.guideFun, this);
+    // 	that.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.videoFun, this);
+    // 	that.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.closeFun, this);
+    // 	that.glass.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('glass') }, this);
+    // 	if (that.startBtn && that.startBtn.parent) {
+    // 		that.startBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, this);
+    // 	}
+    // 	if (that.bullet.parent) {
+    // 		that.txt_1.text = '里面多藏了5颗弹药';
+    // 		that.txt_2.text = '助力开局';
+    // 		that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('bullet') }, this);
+    // 	} else {
+    // 		that.txt_1.text = '你将可以看清';
+    // 		that.txt_2.text = '发射后的拐弯路线';
+    // 	}
+    // }
     playBefore.prototype.chooseFun = function (type) {
         var that = this;
-        console.log(type);
         if (!that.choose[type] && userDataMaster.tool[type].num <= 0) {
             //是否有道具，没有的话视频购买
             AdMaster.useVideo(function () {
@@ -114,10 +140,33 @@ var playBefore = (function (_super) {
             return;
         }
         else {
+            if (that.guideBg && that.guideBg.parent && that.choose[type]) {
+                return;
+            }
             that.choose[type] = !that.choose[type];
             that[type + 'Choose'].visible = that.choose[type];
             that[type + 'Light'].visible = that.choose[type];
+            if (that.choose[type]) {
+                egret.Tween.get(that[type + 'Light'], { loop: true }).to({ rotation: 360 }, 3000);
+            }
+            else {
+                egret.Tween.removeTweens(that[type + 'Light']);
+            }
             that[type + 'Num'].visible = !that.choose[type];
+            if (that.guideBg && that.guideBg.parent) {
+                if (that.bullet.parent) {
+                    that.txt_1.text = '里面多藏了5颗弹药';
+                    that.txt_2.text = '助力开局';
+                    that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.chooseFun('bullet'); }, this);
+                }
+                else {
+                    that.txt_1.text = '你将可以看清';
+                    that.txt_2.text = '发射后的拐弯路线';
+                }
+                setTimeout(function () {
+                    that.guideBg.parent && that.guideBg.parent.removeChild(that.guideBg);
+                }, 2000);
+            }
         }
         function suc() {
             //道具+1
@@ -129,23 +178,59 @@ var playBefore = (function (_super) {
             that[type + 'Num'].text = 'X' + tool[type].num;
         }
     };
+    Object.defineProperty(playBefore.prototype, "factor", {
+        get: function () {
+            return 0;
+        },
+        set: function (value) {
+            this.img.x = (1 - value) * (1 - value) * (-150) + 2 * value * (1 - value) * 100 + value * value * 150;
+            this.img.y = (1 - value) * (1 - value) * (-200) + 2 * value * (1 - value) * 200 + value * value * 550;
+            this.img.scaleX = 1 - value;
+            this.img.scaleY = 1 - value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     playBefore.prototype.startFun = function (life) {
         if (life === void 0) { life = true; }
+        var that = this;
+        var t = 0;
         if (life) {
             //使用体力开始
             if (userDataMaster.life <= 0) {
                 console.log('体力不足');
+                platform.showModal({
+                    title: '温馨提示',
+                    content: '您的体力不足',
+                    success: function (res) {
+                        if (res.confirm) {
+                            sceneMaster.changeScene(new startScene());
+                            sceneMaster.openModal(new getLifeModal());
+                        }
+                    }
+                });
                 return;
             }
+            t = 500;
+            var img = new eui.Image(RES.getRes('img_strength_01_png'));
+            img.anchorOffsetX = img.width / 2;
+            img.anchorOffsetY = img.height / 2;
+            img.y = -200;
+            img.x = -100;
+            that.addChild(img);
+            that.img = img;
+            egret.Tween.get(that).to({ factor: 1 }, t);
             userDataMaster.myLife = userDataMaster.life - 1;
         }
-        for (var item in this.choose) {
-            if (this.choose[item]) {
-                userDataMaster.tool[item].num--;
+        setTimeout(function () {
+            for (var item in that.choose) {
+                if (that.choose[item]) {
+                    userDataMaster.tool[item].num--;
+                }
             }
-        }
-        egret.Tween.removeAllTweens();
-        sceneMaster.changeScene(new runningScene(this.level, {}, this.choose));
+            egret.Tween.removeAllTweens();
+            sceneMaster.changeScene(new runningScene(that.level, {}, that.choose));
+        }, t);
     };
     playBefore.prototype.videoFun = function () {
         var that = this;
@@ -172,12 +257,16 @@ var playBefore = (function (_super) {
             }, function () {
                 platform.showModal({
                     title: '温馨提示',
-                    content: '暂时没有视频可以观看哦~'
+                    content: '暂未开通视频奖励'
                 });
             });
         }
     };
     playBefore.prototype.closeFun = function () {
+        egret.Tween.removeTweens(this.glassImg);
+        if (this.bulletImg && this.bulletImg.parent) {
+            egret.Tween.removeTweens(this.bulletImg);
+        }
         if (sceneMaster.littleModal) {
             sceneMaster.closeLittleModal();
         }

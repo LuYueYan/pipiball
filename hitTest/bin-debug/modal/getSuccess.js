@@ -33,7 +33,7 @@ var getSuccess = (function (_super) {
     getSuccess.prototype.init = function () {
         this.img.texture = RES.getRes(this.imgName);
         this.txt.text = '' + this.title;
-        egret.Tween.get(this.light, { loop: true }).to({ rotation: 360 }, 5000);
+        egret.Tween.get(this.light, { loop: true }).to({ rotation: 360 }, 3000);
         this.knowBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.knowFun, this);
         this.ifShare.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ifShareFun, this);
     };

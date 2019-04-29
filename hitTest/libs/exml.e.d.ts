@@ -86,6 +86,8 @@ declare class squareGuideSkin extends eui.Skin{
 }
 declare class teachModalSkin extends eui.Skin{
 }
+declare class tipsComSkin extends eui.Skin{
+}
 declare class toolGuideSkin extends eui.Skin{
 }
 declare class cloudComSkin extends eui.Skin{

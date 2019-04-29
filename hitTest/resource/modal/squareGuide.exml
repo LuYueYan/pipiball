@@ -6,6 +6,7 @@
 		<e:Label id="txt_1" text="爆炸方块现身" y="39" fontFamily="Microsoft YaHei" size="32" textAlign="center" bold="true" textColor="0x6c371a" horizontalCenter="0"/>
 		<e:Label id="txt_2" text="可引爆周围的方块" y="94" textAlign="center" size="32" fontFamily="Microsoft YaHei" textColor="0x6c371a" bold="true" horizontalCenter="0"/>
 	</e:Group>
-	<e:Image id="img" source="img_diamonds_big_01_png" y="315" horizontalCenter="0.5"/>
-	<e:Label id="knowBtn" text="知道了" y="551" fontFamily="Microsoft YaHei" size="40" touchEnabled="true" horizontalCenter="0" border="false" bold="true"/>
+	<e:Image id="img" source="img_diamonds_big_01_png" y="338" horizontalCenter="0.5"/>
+	<e:Rect width="150" height="60" anchorOffsetX="0" anchorOffsetY="0" fillAlpha="0" strokeColor="0xffffff" strokeWeight="2" horizontalCenter="0" verticalCenter="304" x="118" y="635" ellipseWidth="65"/>
+	<e:Label id="knowBtn" text="知道了" fontFamily="Microsoft YaHei" size="28" touchEnabled="true" border="false" bold="true" horizontalCenter="0" verticalCenter="304" x="139" y="647" width="150" height="60" verticalAlign="middle" textAlign="center"/>
 </e:Skin>

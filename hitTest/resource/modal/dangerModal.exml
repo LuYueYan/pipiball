@@ -7,5 +7,5 @@
 	<e:Image id="light" source="img_light_star_png" y="365" width="250" height="250" horizontalCenter="1" anchorOffsetX="125" anchorOffsetY="125"/>
 	<e:Image source="img_magic_png" y="294.35" horizontalCenter="0.5"/>
 	<e:Image id="useBtn" source="btn_use_magic_png" y="496.99" horizontalCenter="0" touchEnabled="true"/>
-	<e:Label id="ignoreBtn" text="放弃&gt;" y="629.66" fontFamily="Microsoft YaHei" textColor="0xd1402c" horizontalCenter="0.5"/>
+	<e:Label id="ignoreBtn" text="放弃&gt;" y="629.66" fontFamily="Microsoft YaHei" textColor="0xd1402c" horizontalCenter="0.5" visible="false"/>
 </e:Skin>

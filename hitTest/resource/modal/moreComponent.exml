@@ -5,7 +5,7 @@
 		<e:Image id="changeArea" x="454.36" y="69" touchEnabled="true" source="btn_more_game_png"/>
 		<e:Image x="579.48" y="61.38" id="tipImg" source="img_red_dot_png"/>
 		<e:Image source="img_bg_game_more_png" left="0" top="0"/>
-		<e:Group id="content" width="400" height="608" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" verticalCenter="0">
+		<e:Group id="content" width="422" height="591" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="-10.5" y="53">
 		</e:Group>
 	</e:Group>
 </e:Skin>

@@ -22,9 +22,12 @@ var dangerModal = (function (_super) {
     };
     dangerModal.prototype.init = function () {
         var that = this;
-        egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 5000);
+        egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
         that.useBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.useFun, this);
         that.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.ignoreFun, this);
+        setTimeout(function () {
+            that.ignoreBtn.visible = true;
+        }, 3000);
     };
     dangerModal.prototype.useFun = function () {
         egret.Tween.removeTweens(this.light);

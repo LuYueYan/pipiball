@@ -41,6 +41,10 @@ class moreItem extends eui.ItemRenderer implements eui.UIComponent {
 	protected dataChanged(): void {
 		this.title.text = this.data.name;
 		this.image.source = this.data.image || '';
+		if (this.data.color) {
+			this.title.textColor = this.data.color;
+		}
+		
 		// this.image.mask = this.imgMask;
 		// this.title.textColor = this.data.color || 0xFBF6E3;
 	}

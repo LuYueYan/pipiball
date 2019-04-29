@@ -3,7 +3,12 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 	public videoBtn: tweenButton;
 	public shareBtn: tweenButton;
 	public shareTimes: eui.Label;
-	public timeText: eui.Label;
+	public timeText_0: eui.Label;
+	public timeText_1: eui.Label;
+	public timeText_2: eui.Label;
+	public timeText_3: eui.Label;
+	public timeText_4: eui.Label;
+
 	public constructor() {
 		super();
 	}
@@ -26,7 +31,8 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 				clearInterval(terval);
 				userDataMaster.seconds = 0;
 			}
-			that.timeText.text = '还差' + that.getFormat(userDataMaster.seconds) + '恢复1点体力';
+			that.getFormat(userDataMaster.seconds);
+			// that.timeText.text = '还差' + that.getFormat(userDataMaster.seconds) + '恢复1点体力';
 		}, 1000);
 		that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
 		this.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.closeFun, this);
@@ -34,10 +40,15 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 		this.shareBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.shareFun, this);
 	}
 	public getFormat(t) {
-		let n = Math.floor(t / 60);
+		let f = Math.floor(t / 60);
+		let n=f<10?'0'+f:f;
 		let s = t % 60;
 		let c = s < 10 ? '0' + s : s + '';
-		return '0' + n + ':' + c;
+		let res = n + ':' + c;
+		for (let i = 0, len = res.length; i < len; i++) {
+			this['timeText_' + i].text = res[i];
+		}
+		// return res;
 	}
 	public closeFun() {
 		sceneMaster.closeModal();
@@ -59,14 +70,14 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 		}
 	}
 	public shareFun() {
-		let that=this;
+		let that = this;
 		if (userDataMaster.todayShareLife) {
 			CallbackMaster.openShare(() => {
 				//    体力加1
 				userDataMaster.dayShareLife.num++;
 				userDataMaster.myLife = userDataMaster.life + 1;
 				that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
-				sceneMaster.openLittleModal(new getSuccess('img_gift_01_png',''))
+				sceneMaster.openLittleModal(new getSuccess('img_gift_01_png', ''))
 			})
 		} else {
 			//今日获取次数已用完，请明日再来

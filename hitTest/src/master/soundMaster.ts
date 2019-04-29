@@ -1,4 +1,5 @@
 class soundMaster {
+    public static bg_sound: egret.Sound;
     public static boom_sound: egret.Sound;//
     public static hit_sound: egret.Sound;//
 
@@ -11,12 +12,23 @@ class soundMaster {
 
     }
     public static init() {
+        RES.getResByUrl('https://lixi.h5.app81.com/minigame/game_lixi/shooting/bg.mp3', (res) => {
+            soundMaster.bg_sound = res;
+            soundMaster.playBgMusic();
+        });
         RES.getResByUrl('https://lixi.h5.app81.com/minigame/game_lixi/shooting/boom.mp3', (res) => {
             soundMaster.boom_sound = res;
         });
         RES.getResByUrl('https://lixi.h5.app81.com/minigame/game_lixi/shooting/hit.mp3', (res) => {
             soundMaster.hit_sound = res;
         });
+    }
+    public static playBgMusic() {
+        if (soundMaster.isMusic) {
+            setInterval(() => {
+                soundMaster.bg_sound.play(0, 1);
+            }, 5000);
+        }
     }
     public static playSingleMusic(type) {
         if (soundMaster[type] && soundMaster.isMusic) {

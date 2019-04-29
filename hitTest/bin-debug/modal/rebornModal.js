@@ -31,6 +31,9 @@ var rebornModal = (function (_super) {
     rebornModal.prototype.init = function () {
         var that = this;
         that.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ignoreFun, this);
+        setTimeout(function () {
+            that.ignoreBtn.visible = true;
+        }, 5000);
         var t = 5;
         var terval = setInterval(function () {
             if (t > 0) {

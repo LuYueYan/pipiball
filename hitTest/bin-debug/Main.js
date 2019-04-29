@@ -114,32 +114,50 @@ var Main = (function (_super) {
     };
     Main.prototype.loadResource = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var loadingView, e_1;
+            var loadingView_1, that_1, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 4, , 5]);
-                        loadingView = new LoadingUI();
-                        this.stage.addChild(loadingView);
+                        _a.trys.push([0, 5, , 6]);
                         return [4 /*yield*/, RES.loadConfig("resource/default.res.json", "resource/")];
                     case 1:
                         _a.sent();
-                        return [4 /*yield*/, this.loadTheme()];
+                        return [4 /*yield*/, RES.loadGroup("preload")];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, RES.loadGroup("preload", 0, loadingView)];
+                        loadingView_1 = new LoadingUI(this.stage.stageHeight);
+                        this.stage.addChild(loadingView_1);
+                        return [4 /*yield*/, this.loadTheme()];
                     case 3:
                         _a.sent();
-                        this.stage.removeChild(loadingView);
-                        return [3 /*break*/, 5];
+                        return [4 /*yield*/, RES.loadGroup("load", 0, loadingView_1)];
                     case 4:
+                        _a.sent();
+                        that_1 = this;
+                        setTimeout(function () {
+                            that_1.checkSuccess(loadingView_1, 0);
+                        }, 1000);
+                        return [3 /*break*/, 6];
+                    case 5:
                         e_1 = _a.sent();
                         console.error(e_1);
-                        return [3 /*break*/, 5];
-                    case 5: return [2 /*return*/];
+                        return [3 /*break*/, 6];
+                    case 6: return [2 /*return*/];
                 }
             });
         });
+    };
+    Main.prototype.checkSuccess = function (loadingView, times) {
+        var that = this;
+        if (userDataMaster.getDataSuccess) {
+            that.stage.removeChild(loadingView);
+        }
+        else if (times < 5) {
+            times++;
+            setTimeout(function () {
+                that.checkSuccess(loadingView, times);
+            }, 1000);
+        }
     };
     Main.prototype.loadTheme = function () {
         var _this = this;
@@ -162,6 +180,7 @@ var Main = (function (_super) {
         sceneMaster.init(this.stage);
         sceneMaster.changeScene(new startScene());
         movieMaster.init();
+        soundMaster.init();
     };
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
@@ -172,17 +191,6 @@ var Main = (function (_super) {
         var texture = RES.getRes(name);
         result.texture = texture;
         return result;
-    };
-    /**
-     * 点击按钮
-     * Click the button
-     */
-    Main.prototype.onButtonClick = function (e) {
-        var panel = new eui.Panel();
-        panel.title = "Title";
-        panel.horizontalCenter = 0;
-        panel.verticalCenter = 0;
-        this.addChild(panel);
     };
     return Main;
 }(eui.UILayer));

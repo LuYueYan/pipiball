@@ -24,11 +24,10 @@ var levelItem = (function (_super) {
         this.bodyGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
     };
     levelItem.prototype.jumpFun = function () {
-        egret.Tween.removeAllTweens();
         sceneMaster.openModal(new playBefore(this.data.level));
     };
     levelItem.prototype.dataChanged = function () {
-        var n = (this.data.level + 1) % levelItem.point.length + 1;
+        var n = (this.data.level + 2) % levelItem.point.length + 1;
         this.map.texture = RES.getRes('img_map_0' + n + '_png');
         this.bodyGroup.x = levelItem.point[n - 1].x;
         this.bodyGroup.y = levelItem.point[n - 1].y;
@@ -46,9 +45,18 @@ var levelItem = (function (_super) {
         }
         else {
             //未达到
-            this.removeChild(this.star_1);
-            this.removeChild(this.star_2);
-            this.removeChild(this.star_3);
+            this.bodyGroup.removeChild(this.star_1);
+            this.bodyGroup.removeChild(this.star_2);
+            this.bodyGroup.removeChild(this.star_3);
+            this.bodyGroup.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
+        }
+        if (this.data.level > userDataMaster.levelArr.length) {
+            //敬请期待
+            this.levelText.text = '';
+            var img = new eui.Image(RES.getRes('img_expect_png'));
+            img.horizontalCenter = 0;
+            img.y = 20;
+            this.bodyGroup.addChild(img);
             this.bodyGroup.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
         }
         this.cacheAsBitmap = true;

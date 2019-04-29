@@ -28,11 +28,12 @@ var getLifeModal = (function (_super) {
     getLifeModal.prototype.init = function () {
         var that = this;
         var terval = setInterval(function () {
-            if (userDataMaster.life >= 5 && userDataMaster.seconds <= 0) {
+            if (userDataMaster.life >= 5) {
                 clearInterval(terval);
                 userDataMaster.seconds = 0;
             }
-            that.timeText.text = '还差' + that.getFormat(userDataMaster.seconds) + '恢复1点体力';
+            that.getFormat(userDataMaster.seconds);
+            // that.timeText.text = '还差' + that.getFormat(userDataMaster.seconds) + '恢复1点体力';
         }, 1000);
         that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
         this.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.closeFun, this);
@@ -40,10 +41,15 @@ var getLifeModal = (function (_super) {
         this.shareBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.shareFun, this);
     };
     getLifeModal.prototype.getFormat = function (t) {
-        var n = Math.floor(t / 60);
+        var f = Math.floor(t / 60);
+        var n = f < 10 ? '0' + f : f;
         var s = t % 60;
         var c = s < 10 ? '0' + s : s + '';
-        return '0' + n + ':' + c;
+        var res = n + ':' + c;
+        for (var i = 0, len = res.length; i < len; i++) {
+            this['timeText_' + i].text = res[i];
+        }
+        // return res;
     };
     getLifeModal.prototype.closeFun = function () {
         sceneMaster.closeModal();
@@ -57,7 +63,7 @@ var getLifeModal = (function (_super) {
             // })
             platform.showModal({
                 title: '温馨提示',
-                content: '暂时没有视频可以观看哦~'
+                content: '暂未开通视频奖励'
             });
         });
         function suc() {
@@ -65,12 +71,14 @@ var getLifeModal = (function (_super) {
         }
     };
     getLifeModal.prototype.shareFun = function () {
+        var that = this;
         if (userDataMaster.todayShareLife) {
             CallbackMaster.openShare(function () {
                 //    体力加1
                 userDataMaster.dayShareLife.num++;
                 userDataMaster.myLife = userDataMaster.life + 1;
-                ;
+                that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
+                sceneMaster.openLittleModal(new getSuccess('img_gift_01_png', ''));
             });
         }
         else {

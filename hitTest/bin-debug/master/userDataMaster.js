@@ -71,7 +71,7 @@ var userDataMaster = (function () {
             var amount = Math.ceil((line * 7) / 2);
             var gold = i < 5 ? goldArr[i - 1] : i + 8;
             var bullet = i > 30 ? 8 : Math.floor((i - 1) / 10) + 5;
-            var item = { level: i, amount: amount, existAmount: 0, small: small, score: amount + 1000, gold: gold, bullet: bullet };
+            var item = { level: i, amount: amount, small: small, score: amount + 1000, gold: gold, bullet: bullet };
             //score是达到一颗星的最小分数
             arr.push(item);
         }
@@ -88,7 +88,7 @@ var userDataMaster = (function () {
                         if (info.gold) {
                             userDataMaster.gold = info.gold;
                         }
-                        if (info.life) {
+                        if (info.life >= 0) {
                             userDataMaster.life = info.life;
                         }
                         if (info.level) {
@@ -99,7 +99,7 @@ var userDataMaster = (function () {
                             if (info.life < 5) {
                                 //上次退出时体力没满
                                 var closeDate = info.closeDate;
-                                var n = (new Date().getTime() - closeDate) / 1000 / 5 / 60;
+                                var n = (new Date().getTime() - closeDate) / 1000 / 15 / 60;
                                 var c = userDataMaster.life + Math.floor(n);
                                 if (c >= 5) {
                                     userDataMaster.myLife = c;
@@ -107,8 +107,9 @@ var userDataMaster = (function () {
                                 else {
                                     userDataMaster.life = c;
                                     userDataMaster.myCollection.replaceItemAt(c, 1);
-                                    var t = n / 1000 - Math.floor(n) * 5 * 60;
-                                    userDataMaster.updateTime(t);
+                                    var t = Math.floor((n - Math.floor(n)) * 15 * 60);
+                                    console.log('exist', t);
+                                    userDataMaster.updateTime(900 - t);
                                 }
                             }
                         }
@@ -118,6 +119,10 @@ var userDataMaster = (function () {
                         if (info.dayShareLife) {
                             userDataMaster.dayShareLife = info.dayShareLife;
                             userDataMaster.todayShareLife; //更新今日次数
+                        }
+                        if (info.dayShareGold) {
+                            userDataMaster.dayShareGold = info.dayShareGold;
+                            userDataMaster.todayShareGold; //更新今日次数
                         }
                         if (info.dayGift) {
                             userDataMaster.dayGift = info.dayGift;
@@ -135,15 +140,9 @@ var userDataMaster = (function () {
                             userDataMaster.dayFreeLife = info.dayFreeLife;
                         }
                     }
+                    userDataMaster.getDataSuccess = true;
                 }
             });
-        }
-        else {
-            if (userDataMaster.requestTimes < 5) {
-                setTimeout(function () {
-                    userDataMaster.login();
-                }, 2000);
-            }
         }
     };
     userDataMaster.getRecommand = function () {
@@ -166,13 +165,12 @@ var userDataMaster = (function () {
     Object.defineProperty(userDataMaster, "myLife", {
         set: function (life) {
             //更新体力
-            userDataMaster.life = life > 5 ? 5 : life;
+            userDataMaster.life = life;
             userDataMaster.myCollection.replaceItemAt(life, 1);
             if (life < 5 && !userDataMaster.terval) {
-                userDataMaster.seconds = 300;
+                userDataMaster.seconds = 900;
                 userDataMaster.updateTime();
             }
-            console.log('lifechange', life, userDataMaster.life);
         },
         enumerable: true,
         configurable: true
@@ -205,17 +203,18 @@ var userDataMaster = (function () {
         configurable: true
     });
     userDataMaster.updateTime = function (t) {
-        if (t === void 0) { t = 300; }
-        console.log('t', t);
+        if (t === void 0) { t = 900; }
         clearInterval(userDataMaster.terval);
+        userDataMaster.seconds = 900;
         userDataMaster.terval = setInterval(function () {
             t--;
             userDataMaster.seconds = t;
             if (t <= 0) {
-                console.log('t=0', t);
                 clearInterval(userDataMaster.terval);
                 userDataMaster.terval = null;
-                userDataMaster.myLife = userDataMaster.life + 1;
+                if (userDataMaster.life < 5) {
+                    userDataMaster.myLife = userDataMaster.life + 1;
+                }
             }
         }, 1000);
     };
@@ -245,12 +244,28 @@ var userDataMaster = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(userDataMaster, "todayShareGold", {
+        get: function () {
+            //    获取今天分享获得砖石状态
+            if (userDataMaster.dayShareGold.day == userDataMaster.getToday()) {
+                if (userDataMaster.dayShareGold.num >= 2) {
+                    return false;
+                }
+            }
+            else {
+                userDataMaster.dayShareGold = { day: userDataMaster.getToday(), num: 0 };
+            }
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(userDataMaster, "todayGift", {
         get: function () {
             //获取今日抽奖次数
             if (userDataMaster.dayGift.day == userDataMaster.getToday()) {
                 if (userDataMaster.dayGift.num >= 2) {
-                    //每日抽奖n次 一次免费 n次视频
+                    //每日抽奖3次 一次免费 2次分享
                     return false;
                 }
             }
@@ -367,6 +382,7 @@ var userDataMaster = (function () {
                                 userDataMaster.getMyInfo = suc.data;
                                 //测试测试………………
                                 // userDataMaster.myInfo.is_new_user = true;
+                                // userDataMaster.myInfo.gender=0;
                                 // userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
                                 //初始化用户openid
                                 platform.openDataContext.postMessage({
@@ -374,8 +390,14 @@ var userDataMaster = (function () {
                                     openid: suc.data.openId
                                 });
                                 userDataMaster.getGameData(suc.data.uid);
+                                userDataMaster.requestTimes = 5;
                             }
                         });
+                        setTimeout(function () {
+                            if (userDataMaster.requestTimes < 5) {
+                                userDataMaster.login();
+                            }
+                        }, 5000);
                         return [2 /*return*/];
                 }
             });
@@ -398,8 +420,8 @@ var userDataMaster = (function () {
     userDataMaster.levelStar = []; //过关星星情况 n颗星
     userDataMaster.bulletIndex = 0; //当前使用的炮弹
     userDataMaster.tool = {
-        bullet: { level: 5, unlock: true, num: 1 },
-        glass: { level: 1, unlock: true, num: 1 },
+        bullet: { level: 5, unlock: false, num: 1 },
+        glass: { level: 1, unlock: false, num: 1 },
         hammer: { level: 2, unlock: false, num: 1 },
         hat: { level: 10, unlock: false, num: 1 },
         lamp: { level: 15, unlock: false, num: 1 }
@@ -416,9 +438,11 @@ var userDataMaster = (function () {
     userDataMaster.shareUid = 0; //分享人id
     userDataMaster.requestTimes = 0; //请求游戏数据的次数
     userDataMaster.dayShareLife = { day: '', num: 0 }; //每日通过分享获得体力
+    userDataMaster.dayShareGold = { day: '', num: 0 }; //每日通过分享获得钻石
     userDataMaster.dayGift = { day: '', num: 0 }; //每日抽奖次数
     userDataMaster.dayFreeLife = { day: '', num: 0 }; //每日免体力开局次数
     userDataMaster.loginCallback = null; //弹窗登录成功的回调
+    userDataMaster.getDataSuccess = false; //获取数据成功
     return userDataMaster;
 }());
 __reflect(userDataMaster.prototype, "userDataMaster");

@@ -14,26 +14,22 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	public hammer_img: eui.Image;
 	public hammer_lock: eui.Image;
 	public hammer_text: eui.Label;
-	public hammer_add: eui.Image;
-	public hammer_num: eui.BitmapLabel;
 	public hat: eui.Group;
 	public hat_img: eui.Image;
 	public hat_lock: eui.Image;
 	public hat_text: eui.Label;
-	public hat_add: eui.Image;
-	public hat_num: eui.BitmapLabel;
 	public lamp: eui.Group;
 	public lamp_img: eui.Image;
 	public lamp_lock: eui.Image;
 	public lamp_text: eui.Label;
-	public lamp_add: eui.Image;
-	public lamp_num: eui.BitmapLabel;
 	public bulletImg: eui.Image;
 	public bulletNum: eui.BitmapLabel;
 	public hero: eui.Group;
 	public heroImg: eui.Image;
 	public rayGroup: eui.Group;
 	public homeBtn: eui.Image;
+
+
 
 
 	public arcPro: egret.Shape = new egret.Shape();//弧形进度条
@@ -255,12 +251,12 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		for (let i = 0; i < tool.length; i++) {
 			let item = userDataMaster.tool[tool[i]];
 			if (userDataMaster.level + 1 >= item.level) {
-				if (item.num > 0) {
-					that[tool[i] + '_add'].visible = false;
-					that[tool[i] + '_num'].visible = true;
-					that[tool[i] + '_num'].text = 'X' + item.num;
-				}
+				//已解锁
 				that[tool[i] + '_lock'].parent && that[tool[i] + '_lock'].parent.removeChild(that[tool[i] + '_lock']);
+				let y = that[tool[i] + '_img'].y;
+				setTimeout(function () {
+					egret.Tween.get(that[tool[i] + '_img'], { loop: true }).wait(5000).to({ scaleX: 1, scaleY: 1 }, 500).to({ scaleX: 0.8, scaleY: 0.8 }, 500);
+				}, i * 1500);
 				if (!item.unlock) {
 					//首次解锁
 					userDataMaster.tool[tool[i]].unlock = true;
@@ -285,10 +281,9 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				that[tool[i]].addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.judgeTool(tool[i], i) }, this);
 			} else {
 				//未达到解锁关卡
-				that[tool[i] + '_img'].parent && that[tool[i] + '_img'].parent.removeChild(that[tool[i] + '_img']);
+				that[tool[i] + '_img'].parent && that[tool[i]].removeChild(that[tool[i] + '_img']);
 				that[tool[i] + '_lock'].visible = true;
 				that[tool[i] + '_text'].visible = true;
-				that[tool[i] + '_add'].visible = false;
 			}
 		}
 
@@ -309,15 +304,12 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			//使用道具
 			that.tooling = type;
 			userDataMaster.tool[type].num--;
-			that[type + '_add'].visible = true;
-			that[type + '_num'].visible = false;
-
 			if (type == 'hammer') {
 				//锤子
 				let group = new eui.Group();
 				that.addChildAt(group, 9);
-				let rect = new eui.Rect(that.stage.stageWidth, that.stage.stageHeight, 0x000000);
-				rect.alpha = 0.7;
+				let rect = new eui.Rect(that.stage.stageWidth, that.stage.stageHeight, 0x0c0300);
+				rect.alpha = 0.85;
 				group.addChild(rect);
 				let text = that.createBitmapByName('img_text_05');
 				text.x = 375 - text.width / 2;
@@ -401,9 +393,6 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		}
 		function suc() {
 			userDataMaster.tool[type].num++;
-			that[type + '_add'].visible = false;
-			that[type + '_num'].visible = true;
-			that[type + '_num'].text = 'X' + userDataMaster.tool[type].num;
 			that.judgeTool(type, i);
 		}
 	}
@@ -563,9 +552,9 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			if (that.levelInfo.level >= 3 && that.levelInfo.level < 6) {
 				//可以出现爆炸
 				let r = Math.random();
-				if (r < 0.2) {
+				if (r < 0.15) {
 					type = 5;
-				} else if (r < 0.8) {
+				} else if (r < 0.7) {
 					type = 1;
 				} else {
 					type = 2;
@@ -574,9 +563,9 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			if (that.levelInfo.level >= 6) {
 				//可以出现爆炸、冰块
 				let r = Math.random();
-				if (r < 0.2) {
+				if (r < 0.1) {
 					type = 5;
-				} else if (r < 0.4) {
+				} else if (r < 0.3) {
 					type = 6;
 				} else if (r < 0.8) {
 					type = 1;
@@ -594,11 +583,11 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				ran = 0.2;
 				type = 6;
 			}
-			if (ran < 0.4 && (that.myData.existAmount < that.levelInfo.amount)) {
+			if (ran < 0.5 && (that.myData.existAmount < that.levelInfo.amount)) {
 				let num = Math.floor(that.levelInfo.small + that.myData.line);
 				g = new gridCom(num, type);
 				that.myData.existAmount++;
-			} else if (ran < 0.5) {
+			} else if (ran < 0.55) {
 				g = new ballCom();
 			} else if (ran < 0.6) {
 				g = new starCom();
@@ -1041,7 +1030,10 @@ class runningScene extends eui.Component implements eui.UIComponent {
 					if (that.myData.danger != 1 && that.myData.reborning != 1) {
 						//不是复活和危险
 						let conTimes = that.conTimes;
-						that.updateProccess(conTimes);
+						setTimeout(function () {
+							that.updateProccess(conTimes);
+						}, 300);
+
 					}
 
 					that.conTimes = { num: 0, score: 0 };//初始化之前的连击次数
@@ -1079,7 +1071,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 							that.updateGrids();
 						}
 						that.updateBee();
-					}, 300);
+					}, 100);
 				}
 			} else {
 				if (bee.gravityScale == 0) {
@@ -1093,7 +1085,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 
 		for (let len = that.gridArr.length, i = len - 1; i >= 0; i--) {
 			if (that.gridArr[i].type == 6 && Math.abs(that.gridArr[i].boxBody.velocity[0]) > 0) {
-				let k = that.gridArr[i].boxBody.velocity[0] > 0 ? 0.5 : -0.5;
+				let k = that.gridArr[i].boxBody.velocity[0] > 0 ? 0.8 : -0.8;
 				that.gridArr[i].boxBody.velocity[0] = k;
 			}
 		}
@@ -1168,15 +1160,18 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
 			that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
-			if (that.myData.reborn >= 1) {
-				//已复活
-				sceneMaster.openModal(new gameOver(that.levelInfo.level, that.myData))
-			} else {
-				let reborn = new rebornModal(that.levelInfo.level, that.myData);
-				sceneMaster.openModal(reborn);
-				that.shooting = false;
-				reborn.rebornBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.rebornFun, this);
-			}
+			setTimeout(function () {
+				if (that.myData.reborn >= 1) {
+					//已复活
+					sceneMaster.openModal(new gameOver(that.levelInfo.level, that.myData))
+				} else {
+					let reborn = new rebornModal(that.levelInfo.level, that.myData);
+					sceneMaster.openModal(reborn);
+					that.shooting = false;
+					reborn.rebornBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.rebornFun, that);
+				}
+			}, 200);
+
 		} else if (danger) {
 			let img_line_danger = that.createBitmapByName('img_line_danger');
 			img_line_danger.x = (750 - img_line_danger.width) / 2;
@@ -1246,6 +1241,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 						})
 					} else {
 						that.gridArr[i].updateText(that, that.gridArr[i].initNum, () => {
+							soundMaster.playSingleMusic('boom_sound');
 							that.hitDown();
 						});
 					}
@@ -1258,7 +1254,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that)
 			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
 			that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
-		}, 2000);
+		}, 500);
 
 	}
 	public rebornFun() {

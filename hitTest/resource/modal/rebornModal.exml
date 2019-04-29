@@ -2,7 +2,7 @@
 <e:Skin class="rebornModalSkin" width="750" height="700" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
 	<w:Config id="16a1058fdea" ></w:Config>
 	<e:Label text="死亡将损失1点体力" horizontalCenter="0" size="58" fontFamily="Microsoft YaHei" bold="true"/>
-	<e:Label id="ignoreBtn" text="不了&gt;" y="668" anchorOffsetY="0" touchEnabled="true" fontFamily="Microsoft YaHei" size="28" textColor="0xb1a09b" horizontalCenter="0"/>
+	<e:Label id="ignoreBtn" text="不了&gt;" y="668" anchorOffsetY="0" touchEnabled="true" fontFamily="Microsoft YaHei" size="28" textColor="0xb1a09b" horizontalCenter="0" visible="false"/>
 	<e:Image source="img_bg_strength_time_png" y="89" horizontalCenter="0"/>
 	<e:Image id="num" source="img_countdown_05_png" y="234.3" horizontalCenter="0"/>
 	<ns1:tweenButton id="rebornBtn" label="" y="569" anchorOffsetX="170" anchorOffsetY="56" horizontalCenter="0">

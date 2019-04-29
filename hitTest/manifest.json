@@ -11,7 +11,7 @@
 		"libs/physics/physics.js"
 	],
 	"game": [
-		"bin-debug/modal/getLifeModal.js",
+		"bin-debug/modal/getSuccess.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
@@ -31,8 +31,8 @@
 		"bin-debug/master/soundMaster.js",
 		"bin-debug/master/userDataMaster.js",
 		"bin-debug/modal/dangerModal.js",
+		"bin-debug/modal/getLifeModal.js",
 		"bin-debug/LoadingUI.js",
-		"bin-debug/modal/getSuccess.js",
 		"bin-debug/modal/giftModal.js",
 		"bin-debug/modal/levelItem.js",
 		"bin-debug/modal/levelUpModal.js",
@@ -46,6 +46,7 @@
 		"bin-debug/modal/shopItem.js",
 		"bin-debug/modal/squareGuide.js",
 		"bin-debug/modal/teachModal.js",
+		"bin-debug/modal/tipsCom.js",
 		"bin-debug/modal/toolGuide.js",
 		"bin-debug/page/cloudCom.js",
 		"bin-debug/page/gameOver.js",

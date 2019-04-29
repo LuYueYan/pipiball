@@ -23,27 +23,21 @@
 	<e:Group id="toolBottom" x="30" y="1190">
 		<e:Group id="hammer" x="0" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image id="hammer_img" scaleX="0.8" scaleY="0.8" source="img_prop_c1_png" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" top="-2"/>
+			<e:Image id="hammer_img" scaleX="0.8" scaleY="0.8" source="img_prop_c1_png" anchorOffsetX="53.5" anchorOffsetY="59" horizontalCenter="0" verticalCenter="0"/>
 			<e:Image id="hammer_lock" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png" visible="false"/>
 			<e:Label id="hammer_text" text="第2关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
-			<e:Image id="hammer_add" source="btn_more_png" x="77.68" y="76.54"/>
-			<e:BitmapLabel id="hammer_num" x="41.04" y="81.6" text="X11" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
 		<e:Group id="hat" x="121" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image id="hat_img" scaleX="0.8" scaleY="0.8" source="img_prop_d1_png" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" top="0"/>
+			<e:Image id="hat_img" scaleX="0.8" scaleY="0.8" source="img_prop_d1_png" anchorOffsetY="57.5" horizontalCenter="-0.5" anchorOffsetX="57" verticalCenter="0"/>
 			<e:Image id="hat_lock" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png" visible="false"/>
 			<e:Label id="hat_text" text="第10关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
-			<e:Image id="hat_add" source="btn_more_png" x="77.68" y="76.54"/>
-			<e:BitmapLabel id="hat_num" x="41.04" y="81.6" text="X11" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
 		<e:Group id="lamp" x="242" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image id="lamp_img" scaleX="0.8" scaleY="0.8" source="img_prop_e1_png" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="-0.5" top="-12"/>
+			<e:Image id="lamp_img" scaleX="0.8" scaleY="0.8" source="img_prop_e1_png" anchorOffsetX="42" anchorOffsetY="64.5" horizontalCenter="-0.5" y="48"/>
 			<e:Image id="lamp_lock" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png" visible="false"/>
 			<e:Label id="lamp_text" text="第15关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
-			<e:Image id="lamp_add" source="btn_more_png" x="77.68" y="76.54"/>
-			<e:BitmapLabel id="lamp_num" x="41.04" y="81.6" text="X1" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" width="100" textAlign="right" visible="false"/>
 		</e:Group>
 		<e:Group x="364" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="1.52" y="0" scaleX="1" scaleY="1"/>

@@ -67,19 +67,31 @@ class Main extends eui.UILayer {
 
     private async loadResource() {
         try {
-             await RES.loadConfig("resource/default.res.json", "resource/");
+            await RES.loadConfig("resource/default.res.json", "resource/");
             await RES.loadGroup("preload");
             const loadingView = new LoadingUI(this.stage.stageHeight);
             this.stage.addChild(loadingView);
             await this.loadTheme();
             await RES.loadGroup("load", 0, loadingView);
-             let that=this;
+            let that = this;
             setTimeout(function () {
-                that.stage.removeChild(loadingView);
+                that.checkSuccess(loadingView, 0);
+
             }, 1000);
         }
         catch (e) {
             console.error(e);
+        }
+    }
+    public checkSuccess(loadingView, times) {
+        let that = this;
+        if (userDataMaster.getDataSuccess) {
+            that.stage.removeChild(loadingView);
+        } else if (times < 5) {
+            times++;
+            setTimeout(function () {
+                that.checkSuccess(loadingView, times);
+            }, 1000);
         }
     }
 
@@ -95,7 +107,7 @@ class Main extends eui.UILayer {
         })
     }
 
-   
+
     /**
      * 创建场景界面
      * Create scene interface

@@ -31,6 +31,7 @@ var runningScene = (function (_super) {
         _this.myData = {
             beeNum: 5,
             amount: 0,
+            existAmount: 0,
             score: 0,
             reborn: 0,
             gold: 0,
@@ -45,7 +46,7 @@ var runningScene = (function (_super) {
         _this.shootPoint = { bx: 375, by: 1034, ex: 0, ey: 0, floor: false, beeNum: 0, speedy: 3 };
         _this.conTimes = { num: 0, score: 0 }; //连击次数
         _this.prepare = false; //开局准备好么有
-        console.log(level);
+        // console.log(level)
         _this.levelInfo = userDataMaster.levelArr[level - 1];
         if (myData && myData.beeNum) {
             _this.myData = myData;
@@ -84,6 +85,7 @@ var runningScene = (function (_super) {
         that.world.defaultContactMaterial.restitution = 1; //全局弹性系数
         that.createCeil();
         for (var i = 3; i > 0; i--) {
+            // console.log('创建砖块')
             that.createGrids(i, true);
         }
         for (var i = 1; i <= that.myData.star; i++) {
@@ -92,7 +94,6 @@ var runningScene = (function (_super) {
         that.scoreProccess.addChildAt(that.arcPro, 2);
         that.scoreText.text = that.myData.score + '';
         that.changeGraphics();
-        that.toolState();
         that.initBee();
         that.world.on("beginContact", that.onBeginContact, this);
         that.addEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, this);
@@ -117,7 +118,7 @@ var runningScene = (function (_super) {
                             that.shootPoint.beeNum++;
                             that.myData.beeNum++;
                             that.bulletNum.text = 'X' + that.myData.beeNum;
-                            console.log(6436);
+                            // console.log(6436)
                             if (i == len - 1) {
                                 egret.Tween.get(gif).to({ scaleX: 0, scaleY: 0 }, 1000).call(function () {
                                     gif.parent && gif.parent.removeChild(gif);
@@ -142,7 +143,7 @@ var runningScene = (function (_super) {
                 that.swapChildren(gif, that.hero);
                 gif.gotoAndPlay(1, 1);
                 gif.addEventListener(egret.Event.COMPLETE, function (e) {
-                    console.log(878762);
+                    // console.log(878762)
                     egret.Tween.get(gif).to({ y: 900 }, 1000).to({ alpha: 0 }, 500).call(function () {
                         that.swapChildren(gif, that.hero);
                         gif.parent && gif.parent.removeChild(gif);
@@ -162,20 +163,44 @@ var runningScene = (function (_super) {
         setTimeout(function () {
             that.prepare = true;
             that.updateBee();
+            if (userDataMaster.levelStar.length == 0 && that.levelInfo.level == 1) {
+                //新手第一关
+                that.userTip = that.createBitmapByName('new_user_text');
+                that.userTip.x = (that.stage.stageWidth - that.userTip.width) / 2;
+                that.userTip.y = 800;
+                that.addChild(that.userTip);
+                egret.Tween.get(that.userTip, { loop: true }).to({ alpha: 0 }, 1000).to({ alpha: 1 }, 1000);
+            }
+            if (userDataMaster.levelStar.length == 2 && that.levelInfo.level == 3) {
+                //炸弹引导
+                sceneMaster.openModal(new squareGuide());
+            }
+            if (userDataMaster.levelStar.length == 5 && that.levelInfo.level == 6) {
+                //冰块引导引导
+                sceneMaster.openModal(new squareGuide(2));
+            }
             that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that);
             that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that);
             that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
         }, t);
-        if (userDataMaster.levelStar.length == 2 && that.levelInfo.level == 3) {
-            //炸弹引导
-            sceneMaster.openModal(new squareGuide());
-        }
-        if (userDataMaster.levelStar.length == 5 && that.levelInfo.level == 6) {
-            //冰块引导引导
-            sceneMaster.openModal(new squareGuide(2));
-        }
+        that.toolState(t);
+        that.homeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.homeFun, this);
+        // console.log('达成关卡数', userDataMaster.levelStar.length, '  当前关卡', that.levelInfo.level)
         platform.onShow(function () {
             that.currentTimer = egret.getTimer();
+        });
+    };
+    runningScene.prototype.homeFun = function () {
+        var that = this;
+        platform.showModal({
+            title: '温馨提示',
+            content: '返回首页将会损失一点体力，是否继续？',
+            success: function (res) {
+                if (res.confirm) {
+                    that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
+                    sceneMaster.changeScene(new startScene());
+                }
+            }
         });
     };
     runningScene.prototype.initBee = function () {
@@ -188,19 +213,19 @@ var runningScene = (function (_super) {
         }
         that.updateBee();
     };
-    runningScene.prototype.toolState = function () {
+    runningScene.prototype.toolState = function (t) {
         //下方道具栏
         var that = this;
         var tool = ['hammer', 'hat', 'lamp'];
         var _loop_2 = function (i) {
             var item = userDataMaster.tool[tool[i]];
             if (userDataMaster.level + 1 >= item.level) {
-                if (item.num > 0) {
-                    that[tool[i] + '_add'].visible = false;
-                    that[tool[i] + '_num'].visible = true;
-                    that[tool[i] + '_num'].text = 'X' + item.num;
-                }
+                //已解锁
                 that[tool[i] + '_lock'].parent && that[tool[i] + '_lock'].parent.removeChild(that[tool[i] + '_lock']);
+                var y = that[tool[i] + '_img'].y;
+                setTimeout(function () {
+                    egret.Tween.get(that[tool[i] + '_img'], { loop: true }).wait(5000).to({ scaleX: 1, scaleY: 1 }, 500).to({ scaleX: 0.8, scaleY: 0.8 }, 500);
+                }, i * 1500);
                 if (!item.unlock) {
                     //首次解锁
                     userDataMaster.tool[tool[i]].unlock = true;
@@ -219,17 +244,16 @@ var runningScene = (function (_super) {
                             that.tg.txt_2.visible = false;
                             that.tg.txt_3.visible = true;
                         }, this);
-                    }, 500);
+                    }, t);
                     //
                 }
                 that[tool[i]].addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.judgeTool(tool[i], i); }, this_1);
             }
             else {
                 //未达到解锁关卡
-                that[tool[i] + '_img'].parent && that[tool[i] + '_img'].parent.removeChild(that[tool[i] + '_img']);
+                that[tool[i] + '_img'].parent && that[tool[i]].removeChild(that[tool[i] + '_img']);
                 that[tool[i] + '_lock'].visible = true;
                 that[tool[i] + '_text'].visible = true;
-                that[tool[i] + '_add'].visible = false;
             }
         };
         var this_1 = this;
@@ -253,14 +277,12 @@ var runningScene = (function (_super) {
             //使用道具
             that.tooling = type;
             userDataMaster.tool[type].num--;
-            that[type + '_add'].visible = true;
-            that[type + '_num'].visible = false;
             if (type == 'hammer') {
                 //锤子
                 var group = new eui.Group();
                 that.addChildAt(group, 9);
-                var rect = new eui.Rect(that.stage.stageWidth, that.stage.stageHeight, 0x000000);
-                rect.alpha = 0.7;
+                var rect = new eui.Rect(that.stage.stageWidth, that.stage.stageHeight, 0x0c0300);
+                rect.alpha = 0.85;
                 group.addChild(rect);
                 var text = that.createBitmapByName('img_text_05');
                 text.x = 375 - text.width / 2;
@@ -339,9 +361,7 @@ var runningScene = (function (_super) {
         }
         function suc() {
             userDataMaster.tool[type].num++;
-            that[type + '_add'].visible = false;
-            that[type + '_num'].visible = true;
-            that[type + '_num'].text = 'X' + userDataMaster.tool[type].num;
+            that.judgeTool(type, i);
         }
     };
     runningScene.prototype.createCeil = function () {
@@ -378,15 +398,23 @@ var runningScene = (function (_super) {
         }
         return p;
     };
-    runningScene.prototype.hitDown = function () {
+    runningScene.prototype.hitDown = function (hammer) {
+        if (hammer === void 0) { hammer = false; }
         //击掉方块
         var that = this;
         that.myData.amount++;
         that.amountText.text = that.myData.amount + '/' + that.levelInfo.amount;
         that.amountPro.width = that.myData.amount / that.levelInfo.amount * 100;
-        if (that.myData.amount >= that.levelInfo.amount) {
+        if (that.myData.amount >= that.levelInfo.amount && hammer && that.gridArr.length <= 1) {
             //通关成功
-            console.log('level up');
+            setTimeout(function () {
+                that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
+                that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that);
+                that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that);
+                that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+                sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData));
+            }, 500);
+            // console.log('level up')
         }
     };
     runningScene.prototype.updateProccess = function (conTimes) {
@@ -395,7 +423,7 @@ var runningScene = (function (_super) {
         //得分
         that.myData.score += conTimes.score;
         if (conTimes.num > 2) {
-            var score = 1125;
+            var score = conTimes.num * 250;
             var name_1 = 'img_text_a1';
             if (conTimes.num < 5) {
                 name_1 = 'img_text_a1';
@@ -480,25 +508,25 @@ var runningScene = (function (_super) {
                 sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData));
             }, 2000);
         }
-        if (that.levelInfo.existAmount >= that.levelInfo.amount) {
+        if (that.myData.existAmount >= that.levelInfo.amount) {
             //本关卡数量已足够
             return;
         }
         that.myData.line++;
         for (var col = 0; col < 7; col++) {
-            if (that.levelInfo.existAmount >= that.levelInfo.amount) {
+            if (that.myData.existAmount >= that.levelInfo.amount) {
                 break;
             }
             var g = void 0;
-            var type = 1;
+            var type = Math.random() < 0.7 ? 1 : 2;
             var ran = Math.random();
             if (that.levelInfo.level >= 3 && that.levelInfo.level < 6) {
                 //可以出现爆炸
                 var r = Math.random();
-                if (r < 0.2) {
+                if (r < 0.15) {
                     type = 5;
                 }
-                else if (r < 8) {
+                else if (r < 0.7) {
                     type = 1;
                 }
                 else {
@@ -508,10 +536,10 @@ var runningScene = (function (_super) {
             if (that.levelInfo.level >= 6) {
                 //可以出现爆炸、冰块
                 var r = Math.random();
-                if (r < 0.2) {
+                if (r < 0.1) {
                     type = 5;
                 }
-                else if (r < 0.4) {
+                else if (r < 0.3) {
                     type = 6;
                 }
                 else if (r < 0.8) {
@@ -531,12 +559,12 @@ var runningScene = (function (_super) {
                 ran = 0.2;
                 type = 6;
             }
-            if (ran < 0.4 && (that.levelInfo.existAmount < that.levelInfo.amount)) {
+            if (ran < 0.5 && (that.myData.existAmount < that.levelInfo.amount)) {
                 var num = Math.floor(that.levelInfo.small + that.myData.line);
                 g = new gridCom(num, type);
-                that.levelInfo.existAmount++;
+                that.myData.existAmount++;
             }
-            else if (ran < 0.5) {
+            else if (ran < 0.55) {
                 g = new ballCom();
             }
             else if (ran < 0.6) {
@@ -557,8 +585,6 @@ var runningScene = (function (_super) {
         }
         var that = this;
         if (that.hammerShow && that.tooling == 'hammer') {
-            //使用道具锥子中
-            console.log(4444);
             var _loop_3 = function (i, len) {
                 var hit = that.gridArr[i].img.hitTestPoint(e.stageX, e.stageY);
                 if (hit) {
@@ -587,7 +613,7 @@ var runningScene = (function (_super) {
                             img_1.parent && img_1.parent.removeChild(img_1);
                             that.conTimes.score += that.gridArr[i].initNum;
                             that.gridArr[i].updateText(that, that.gridArr[i].initNum, function () {
-                                that.hitDown();
+                                that.hitDown(true);
                                 that.updateProccess(that.conTimes);
                                 suc();
                             });
@@ -596,6 +622,8 @@ var runningScene = (function (_super) {
                     return "break";
                 }
             };
+            //使用道具锥子中
+            // console.log(4444)
             // that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that)
             // that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
             for (var i = 0, len = this.gridArr.length; i < len; i++) {
@@ -606,6 +634,10 @@ var runningScene = (function (_super) {
         }
         else {
             //正常发射
+            if (that.userTip && that.userTip.parent) {
+                egret.Tween.removeTweens(that.userTip);
+                that.userTip.parent.removeChild(that.userTip);
+            }
             this.touchMoveFun(e);
         }
         function suc() {
@@ -628,11 +660,18 @@ var runningScene = (function (_super) {
         that.shootPoint.ey = e.stageY;
         that.shootPoint.speedy = 1;
         that.rayGroup.removeChildren();
+        if (e.stageY > that.adaptParams.itemWidth * 8 + that.adaptParams.gridAreaTop) {
+            return;
+        }
         that.testRay();
     };
     runningScene.prototype.touchEndFun = function (e) {
         var that = this;
         if (that.shooting || (that.hammerShow && that.hammerShow.parent)) {
+            return;
+        }
+        if (e.stageY > that.adaptParams.itemWidth * 8 + that.adaptParams.gridAreaTop) {
+            console.log('低于发射水平');
             return;
         }
         if (that.lampShow && that.lampShow.parent && (!that.tooling || that.tooling != 'lamp')) {
@@ -676,6 +715,11 @@ var runningScene = (function (_super) {
         var by = (that.stage.stageHeight - that.shootPoint.by) / that.factor;
         var ex = that.shootPoint.ex / that.factor;
         var ey = (that.stage.stageHeight - that.shootPoint.ey) / that.factor;
+        if (ey <= by) {
+            //小于发射水平线
+            console.log('小于发射水平线');
+            return;
+        }
         var dx = ex - bx;
         var dy = ey - by; //ey<by的
         var ray = new p2.Ray({
@@ -863,6 +907,8 @@ var runningScene = (function (_super) {
                                 }
                                 var score = power > that.gridArr[k].num ? that.gridArr[k].num : power;
                                 that.conTimes.score += score;
+                                soundMaster.playSingleMusic('hit_sound');
+                                platform.vibrateShort({});
                                 that.gridArr[k].updateText(that, power, function (res) {
                                     //已被击碎  如果是炸弹，分数怎么算？？？
                                     that.hitDown();
@@ -940,8 +986,8 @@ var runningScene = (function (_super) {
             }
         }
         var num = 0;
-        for (var i_1 = 0, len_1 = this.beeArr.length; i_1 < len_1; i_1++) {
-            var bee = this.beeArr[i_1].boxBody;
+        var _loop_6 = function (i_1, len_1) {
+            var bee = this_2.beeArr[i_1].boxBody;
             if (bee.position[1] <= that.getPosition(856)) {
                 num++;
                 if (bee.gravityScale == 0) {
@@ -949,7 +995,7 @@ var runningScene = (function (_super) {
                     bee.angle = 0;
                     bee.displays[0].rotation = 0;
                     bee.gravityScale = 1;
-                    this.beeArr[i_1].powerUp(1);
+                    this_2.beeArr[i_1].powerUp(1);
                     if (!that.shootPoint.floor) {
                         //第一个球落地时更新下次发射点
                         that.shootPoint.floor = true;
@@ -962,7 +1008,13 @@ var runningScene = (function (_super) {
                 //全部落地了
                 if ((i_1 == len_1 - 1) && num == len_1 && that.shooting && that.shootPoint.beeNum == len_1) {
                     // console.log('enter', that.shooting)
-                    that.updateProccess(that.conTimes);
+                    if (that.myData.danger != 1 && that.myData.reborning != 1) {
+                        //不是复活和危险
+                        var conTimes_1 = that.conTimes;
+                        setTimeout(function () {
+                            that.updateProccess(conTimes_1);
+                        }, 300);
+                    }
                     that.conTimes = { num: 0, score: 0 }; //初始化之前的连击次数
                     that.shooting = false;
                     that.shootPoint.floor = false;
@@ -990,6 +1042,7 @@ var runningScene = (function (_super) {
                                 that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
                                 that.createGif('img_text_a4', 5, 2000);
                                 setTimeout(function () {
+                                    that.removeEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);
                                     sceneMaster.openModal(new levelUpModal(that.levelInfo.level, that.myData));
                                 }, 2000);
                             }
@@ -1003,17 +1056,21 @@ var runningScene = (function (_super) {
             }
             else {
                 if (bee.gravityScale == 0) {
-                    this.updateSpeed(bee);
+                    this_2.updateSpeed(bee);
                 }
                 else if (that.prepare) {
                     bee.velocity[1] = -that.shootPoint.speedy;
-                    this.beeArr[i_1].powerUp(1);
+                    this_2.beeArr[i_1].powerUp(1);
                 }
             }
+        };
+        var this_2 = this;
+        for (var i_1 = 0, len_1 = this.beeArr.length; i_1 < len_1; i_1++) {
+            _loop_6(i_1, len_1);
         }
         for (var len_2 = that.gridArr.length, i_2 = len_2 - 1; i_2 >= 0; i_2--) {
             if (that.gridArr[i_2].type == 6 && Math.abs(that.gridArr[i_2].boxBody.velocity[0]) > 0) {
-                var k = that.gridArr[i_2].boxBody.velocity[0] > 0 ? 0.5 : -0.5;
+                var k = that.gridArr[i_2].boxBody.velocity[0] > 0 ? 0.8 : -0.8;
                 that.gridArr[i_2].boxBody.velocity[0] = k;
             }
         }
@@ -1071,13 +1128,18 @@ var runningScene = (function (_super) {
             var y = that.gridArr[i].boxBody.position[1];
             if (y <= that.getPosition(that.adaptParams.itemWidth * 8)) {
                 //游戏结束
-                console.log('gameOver');
+                // console.log('gameOver');
                 reborn = true;
             }
             else if (y <= that.getPosition(that.adaptParams.itemWidth * 7) && !sceneMaster.modal) {
                 //危险警告
-                console.log('danger');
+                // console.log('danger');
                 danger = true;
+                if (that.myData.danger == 0) {
+                    that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that);
+                    that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that);
+                    that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+                }
             }
         }
         if (reborn) {
@@ -1085,16 +1147,18 @@ var runningScene = (function (_super) {
             that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that);
             that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that);
             that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
-            if (that.myData.reborn >= 1) {
-                //已复活
-                sceneMaster.openModal(new gameOver(that.levelInfo.level, that.myData));
-            }
-            else {
-                var reborn_1 = new rebornModal(that.levelInfo.level, that.myData);
-                sceneMaster.openModal(reborn_1);
-                that.shooting = false;
-                reborn_1.rebornBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.rebornFun, this);
-            }
+            setTimeout(function () {
+                if (that.myData.reborn >= 1) {
+                    //已复活
+                    sceneMaster.openModal(new gameOver(that.levelInfo.level, that.myData));
+                }
+                else {
+                    var reborn_1 = new rebornModal(that.levelInfo.level, that.myData);
+                    sceneMaster.openModal(reborn_1);
+                    that.shooting = false;
+                    reborn_1.rebornBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.rebornFun, that);
+                }
+            }, 200);
         }
         else if (danger) {
             var img_line_danger_1 = that.createBitmapByName('img_line_danger');
@@ -1110,17 +1174,26 @@ var runningScene = (function (_super) {
                     danger_1.useBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
                         CallbackMaster.openShare(function () {
                             sceneMaster.closeModal();
-                            that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that);
-                            that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that);
-                            that.rayGroup.removeEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
                             that.shooting = false;
                             that.clearRows(2);
                         });
                     }, _this);
+                    danger_1.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
+                        that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that);
+                        that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that);
+                        that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+                    }, _this);
                 }
             });
         }
-        that.createGrids();
+        if (that.gridArr.length == 0) {
+            for (var i = 3; i > 0; i--) {
+                that.createGrids(i);
+            }
+        }
+        else {
+            that.createGrids();
+        }
     };
     runningScene.prototype.clearRows = function (num) {
         var that = this;
@@ -1136,44 +1209,47 @@ var runningScene = (function (_super) {
         if (len > 0) {
             end = that.gridArr[0].boxBody.position[1] + dy * num;
         }
-        var _loop_6 = function (i) {
-            if (that.gridArr[i].boxBody.position[1] <= end) {
-                if (that.gridArr[i].type == 4) {
-                    //    星星
-                    that.gridArr[i].updateText(that, function () {
-                        that.gridArr[i].img.parent && that.gridArr[i].img.parent.removeChild(that.gridArr[i].img);
-                    });
-                }
-                else if (that.gridArr[i].type == 3) {
-                    //球
-                    var nx_2 = that.gridArr[i].boxBody.position[0];
-                    that.gridArr[i].updateText(that, function () {
-                        var b = new beeCom();
-                        b.createBody(that, nx_2);
-                        that.beeArr.push(b);
-                        that.myData.beeNum++;
-                        that.bulletNum.text = 'X' + that.myData.beeNum;
-                    });
+        setTimeout(function () {
+            var _loop_7 = function (i) {
+                if (that.gridArr[i].boxBody.position[1] <= end) {
+                    if (that.gridArr[i].type == 4) {
+                        //    星星
+                        that.gridArr[i].updateText(that, function () {
+                            that.gridArr[i].img.parent && that.gridArr[i].img.parent.removeChild(that.gridArr[i].img);
+                        });
+                    }
+                    else if (that.gridArr[i].type == 3) {
+                        //球
+                        var nx_2 = that.gridArr[i].boxBody.position[0];
+                        that.gridArr[i].updateText(that, function () {
+                            var b = new beeCom();
+                            b.createBody(that, nx_2);
+                            that.beeArr.push(b);
+                            that.myData.beeNum++;
+                            that.bulletNum.text = 'X' + that.myData.beeNum;
+                        });
+                    }
+                    else {
+                        that.gridArr[i].updateText(that, that.gridArr[i].initNum, function () {
+                            soundMaster.playSingleMusic('boom_sound');
+                            that.hitDown();
+                        });
+                    }
                 }
                 else {
-                    that.gridArr[i].updateText(that, that.gridArr[i].initNum, function () {
-                        that.hitDown();
-                    });
+                    return "break";
                 }
+            };
+            for (var i = 0; i < len; i++) {
+                var state_3 = _loop_7(i);
+                if (state_3 === "break")
+                    break;
             }
-            else {
-                return "break";
-            }
-        };
-        for (var i = 0; i < len; i++) {
-            var state_3 = _loop_6(i);
-            if (state_3 === "break")
-                break;
-        }
-        that.shooting = true;
-        that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that);
-        that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that);
-        that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+            that.shooting = true;
+            that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_BEGIN, that.touchBeginFun, that);
+            that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_MOVE, that.touchMoveFun, that);
+            that.rayGroup.addEventListener(egret.TouchEvent.TOUCH_END, that.touchEndFun, that);
+        }, 500);
     };
     runningScene.prototype.rebornFun = function () {
         //复活
@@ -1208,22 +1284,22 @@ var runningScene = (function (_super) {
     runningScene.prototype.updateSpeed = function (bee) {
         //更新速度，保持匀速运动
         if (bee.position[0] < this.getPosition(-20, 2)) {
-            console.log('左边出墙了');
+            // console.log('左边出墙了')
             bee.velocity[0] = -bee.velocity[0];
             bee.position[0] = this.getPosition(20, 2);
         }
         if (bee.position[0] > this.getPosition(692, 2)) {
-            console.log('右边出墙了');
+            // console.log('右边出墙了')
             bee.velocity[0] = -bee.velocity[0];
             bee.position[0] = this.getPosition(652, 2);
         }
         if (bee.position[1] > this.getPosition(-10)) {
-            console.log('上边出墙了');
+            // console.log('上边出墙了')
             bee.velocity[1] = -bee.velocity[1];
             bee.position[1] = this.getPosition(20);
         }
         if (bee.position[1] < this.getPosition(945)) {
-            console.log('下边出墙了');
+            // console.log('下边出墙了')
             bee.position[1] = this.getPosition(910);
         }
         var velocity = bee.velocity;

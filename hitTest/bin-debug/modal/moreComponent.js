@@ -28,6 +28,9 @@ var moreComponent = (function (_super) {
     };
     moreComponent.prototype.init = function () {
         var list = userDataMaster.recommand['1'].games;
+        for (var i = 0; i < list.length; i++) {
+            list[i].color = 0x603005;
+        }
         this.sourceArr = new eui.ArrayCollection(list);
         // this.loadData()
         this.dataGroup = new eui.DataGroup();
@@ -37,8 +40,8 @@ var moreComponent = (function (_super) {
         this.content.height = this.sourceArr.length * 170;
         this.dataGroup.useVirtualLayout = true;
         var layout = new eui.TileLayout();
-        layout.horizontalGap = 30;
-        layout.verticalGap = 40;
+        layout.horizontalGap = 0;
+        layout.verticalGap = 15;
         this.dataGroup.layout = layout;
         this.content.addChild(this.dataGroup);
         this.dataGroup.itemRenderer = moreItem;

@@ -12,7 +12,7 @@
 					<e:Image id="light" horizontalCenter="0" verticalCenter="0" source="head_light_png" anchorOffsetX="138" anchorOffsetY="139.5"/>
 					<e:Image source="img_bg_head_png" horizontalCenter="0" verticalCenter="0"/>
 					<e:Rect id="headmask" width="80" height="80" horizontalCenter="0" verticalCenter="0" ellipseWidth="15"/>
-					<e:Image id="headimg" width="80" height="80" horizontalCenter="0" verticalCenter="0"/>
+					<e:Image id="headimg" width="80" height="80" horizontalCenter="0" verticalCenter="0" touchEnabled="true"/>
 				</e:Group>
 			</e:Group>
 		</e:Group>

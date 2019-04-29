@@ -21,7 +21,19 @@ class levelCom extends eui.Component implements eui.UIComponent {
 
 	protected childrenCreated(): void {
 		super.childrenCreated();
-		this.init()
+		this.checkSuccess(0);
+
+	}
+	public checkSuccess(t) {
+		let that = this;
+		if (userDataMaster.getDataSuccess) {
+			that.init()
+		} else if (t < 5) {
+			t++;
+			setTimeout(function () {
+				that.checkSuccess(t);
+			}, 3000);
+		}
 	}
 	public init() {
 		let that = this;
@@ -55,9 +67,7 @@ class levelCom extends eui.Component implements eui.UIComponent {
 			}, this)
 		}, 300);
 
-		let userInfo = new eui.ArrayCollection([userDataMaster.myInfo]);
-		userInfo.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.dataChange, this)
-
+		userDataMaster.myCollection.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.dataChange, this);
 	}
 	public dataChange(e: eui.CollectionEvent) {
 		let that = this;

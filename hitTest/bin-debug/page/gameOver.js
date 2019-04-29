@@ -31,7 +31,13 @@ var gameOver = (function (_super) {
     gameOver.prototype.init = function () {
         var that = this;
         var dataGroup = new eui.DataGroup();
-        var list = userDataMaster.recommand['1'].games.slice(0, 4);
+        var list = [];
+        if (userDataMaster.recommand['2'] && userDataMaster.recommand['2'].games) {
+            list = userDataMaster.recommand['2'].games.slice(0, 4);
+        }
+        else {
+            list = userDataMaster.recommand['1'].games.slice(0, 4);
+        }
         var source = new eui.ArrayCollection(list);
         dataGroup.dataProvider = source;
         var layout = new eui.HorizontalLayout();
