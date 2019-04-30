@@ -142,13 +142,10 @@ class startScene extends eui.Component implements eui.UIComponent {
 			});
 			return;
 		}
-		AdMaster.useVideo(() => {
+	
+		CallbackMaster.openShare(() => {
 			suc();
-		}, () => {
-			CallbackMaster.openShare(() => {
-				suc();
-			})
-		});
+		})
 		let that = this;
 		function suc() {
 			userDataMaster.dayShareGold.num++;

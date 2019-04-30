@@ -26,6 +26,9 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
+		if (AdMaster.cacheBannerAd) {
+				AdMaster.openBannerAd({ width: 700, height: 300 });
+			}
 		let terval = setInterval(() => {
 			if (userDataMaster.life >= 5) {
 				clearInterval(terval);
@@ -51,22 +54,21 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 		// return res;
 	}
 	public closeFun() {
+		AdMaster.closeBannerAd();
 		sceneMaster.closeModal();
 	}
 	public videoFun() {
 		AdMaster.useVideo(() => {
 			suc();
 		}, () => {
-			// CallbackMaster.openShare(() => {
-			// 	suc();
-			// })
 			platform.showModal({
 				title: '温馨提示',
-				content: '暂未开通视频奖励'
+				content: '视频奖励次数已达上限'
 			});
 		});
 		function suc() {
-			userDataMaster.myLife++;
+			userDataMaster.myLife = userDataMaster.life + 1;
+			sceneMaster.openLittleModal(new getSuccess('img_gift_01_png', ''))
 		}
 	}
 	public shareFun() {

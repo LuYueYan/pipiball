@@ -30,6 +30,9 @@ class getSuccess extends eui.Component implements eui.UIComponent {
 		}
 	}
 	public init() {
+		if (AdMaster.cacheBannerAd) {
+				AdMaster.openBannerAd({ width: 700, height: 300 });
+			}
 		this.img.texture = RES.getRes(this.imgName);
 		this.txt.text = '' + this.title;
 		egret.Tween.get(this.light, { loop: true }).to({ rotation: 360 }, 3000);
@@ -38,6 +41,7 @@ class getSuccess extends eui.Component implements eui.UIComponent {
 
 	}
 	public knowFun() {
+		AdMaster.closeBannerAd();
 		egret.Tween.removeTweens(this.light);
 		if (this.shareType == 1) {
 			CallbackMaster.openShare(null, false);

@@ -30,6 +30,9 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 		}
 	}
 	public init() {
+		if (AdMaster.cacheBannerAd) {
+				AdMaster.openBannerAd({ width: 700, height: 300 });
+			}
 		this.scoreText.text = this.info.score + '';
 		this.levelText.text = '第' + this.level + '关';
 		this.goldText.text = 'X' + this.info.gold;
@@ -84,6 +87,7 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 		});
 		let that = this;
 		function suc() {
+			AdMaster.closeBannerAd()
 			userDataMaster.myGold = userDataMaster.gold + that.info.gold * 2;
 			that.gif.stop();
 			egret.Tween.removeAllTweens();
@@ -92,6 +96,7 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 		}
 	}
 	public getFun() {
+		AdMaster.closeBannerAd()
 		userDataMaster.myGold = userDataMaster.gold + this.info.gold;
 		this.gif.stop();
 		egret.Tween.removeAllTweens();

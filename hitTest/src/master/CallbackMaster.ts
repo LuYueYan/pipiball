@@ -13,7 +13,9 @@ class CallbackMaster {
 
 		//右上角分享
 		let obj = {
-			query: 'type=newUser&uid=' + userDataMaster.getMyInfo.uid
+			query: 'type=newUser&uid=' + userDataMaster.getMyInfo.uid,
+			title: CallbackMaster.shareInfo[0].title,
+			imageUrl: CallbackMaster.shareInfo[0].imageUrl,
 		};
 		platform.onShareAppMessage(obj);
 		platform.onShow((option) => {
@@ -102,8 +104,8 @@ class CallbackMaster {
 			//如果审核通过了
 			let s = CallbackMaster.shareInfo[0];
 			// if (shareType == 0) {
-				//默认随机分享
-				s = CallbackMaster.shareInfo[Math.floor(Math.random() * 2)];
+			//默认随机分享
+			s = CallbackMaster.shareInfo[Math.floor(Math.random() * 2)];
 			// } else {
 			// 	s.imageUrl = CallbackMaster.shareInfo[2].imageUrl;
 			// 	s.title = (userDataMaster.myInfo.nickName || '') + CallbackMaster.shareInfo[2].title;

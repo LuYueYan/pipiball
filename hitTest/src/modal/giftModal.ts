@@ -42,9 +42,9 @@ class giftModal extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
-		that.bgImg.height=that.stage.stageHeight;
-		egret.Tween.get(that.getBtn,{loop:true}).to({scaleX:1.2,scaleY:1.2},1000).to({scaleX:1,scaleY:1},1000);
-		if (userDataMaster.dayGift.num>0) {
+		that.bgImg.height = that.stage.stageHeight;
+		egret.Tween.get(that.getBtn, { loop: true }).to({ scaleX: 1.2, scaleY: 1.2 }, 1000).to({ scaleX: 1, scaleY: 1 }, 1000);
+		if (userDataMaster.dayGift.num > 0) {
 			that.getBtn.texture = RES.getRes('btn_lottery_0' + 2 + '_png');
 		} else {
 			// that.getBtn.texture = RES.getRes('btn_lottery_03_png');
@@ -104,10 +104,10 @@ class giftModal extends eui.Component implements eui.UIComponent {
 		if (!that.canTap) {
 			return;
 		}
-		if(!userDataMaster.todayGift){
+		if (!userDataMaster.todayGift) {
 			platform.showModal({
-				title:'温馨提示',
-				content:'暂未开通视频奖励'
+				title: '温馨提示',
+				content: '今日抽奖次数已用完，请明日再来'
 			})
 			return;
 		}
@@ -115,7 +115,12 @@ class giftModal extends eui.Component implements eui.UIComponent {
 		egret.Tween.get(that.getBtn).to({ scaleX: 0.8, scaleY: 0.8 }, 60).to({ scaleX: 1, scaleY: 1 }, 60);
 		if (userDataMaster.dayGift.num == 0) {
 			suc();
-		} else if (userDataMaster.dayGift.num >0) {
+		} else if (userDataMaster.dayGift.num < 3) {
+			// 分享
+			CallbackMaster.openShare(() => {
+				suc();
+			})
+		} else {
 			AdMaster.useVideo(() => {
 				suc();
 			}, () => {

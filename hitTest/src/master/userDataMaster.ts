@@ -1,6 +1,6 @@
 class userDataMaster {
 	public static myInfo: any = { uid: 0, openId: '', is_new_user: true, nickName: '', avatarUrl: '', gender: 0 };//用户信息
-	public static gold = 500;//金币
+	public static gold = 0;//金币
 	public static life = 5;//体力
 	public static level = 0;//已达成的关卡
 	public static closeDate = 0;//上次关闭游戏的时间点
@@ -56,7 +56,14 @@ class userDataMaster {
 		];
 		//用 ArrayCollection 包装
 		userDataMaster.myCollection = new eui.ArrayCollection(sourceArr);
+
+
+		// 测试----------------------0430
 		userDataMaster.login();
+		// userDataMaster.getGameData(userDataMaster.myInfo.uid)
+
+		// ----------------
+
 		userDataMaster.getRecommand();
 		userDataMaster.createLevelArr();
 	}
@@ -100,15 +107,13 @@ class userDataMaster {
 								//上次退出时体力没满
 								let closeDate = info.closeDate;
 								let n = (new Date().getTime() - closeDate) / 1000 / 15 / 60;
-								let c = userDataMaster.life + Math.floor(n);
-
+								let c = info.life + Math.floor(n);
 								if (c >= 5) {
-									userDataMaster.myLife = c;
+									userDataMaster.myLife = info.life > 5 ? info.life : 5;
 								} else {
 									userDataMaster.life = c;
 									userDataMaster.myCollection.replaceItemAt(c, 1);
 									let t = Math.floor((n - Math.floor(n)) * 15 * 60);
-									console.log('exist', t)
 									userDataMaster.updateTime(900 - t);
 								}
 							}
@@ -118,14 +123,15 @@ class userDataMaster {
 						}
 						if (info.dayShareLife) {
 							userDataMaster.dayShareLife = info.dayShareLife;
-							userDataMaster.todayShareLife;//更新今日次数
+							1 && userDataMaster.todayShareLife;//更新今日次数
 						}
 						if (info.dayShareGold) {
 							userDataMaster.dayShareGold = info.dayShareGold;
-							userDataMaster.todayShareGold;//更新今日次数
+							1 && userDataMaster.todayShareGold;//更新今日次数
 						}
 						if (info.dayGift) {
 							userDataMaster.dayGift = info.dayGift;
+							1 && userDataMaster.todayGift;
 						}
 						if (info.tool) {
 							userDataMaster.tool = info.tool;
@@ -184,7 +190,7 @@ class userDataMaster {
 		userDataMaster.tool = tool;
 		userDataMaster.myCollection.replaceItemAt(tool, 4);
 	}
-	
+
 	public static updateTime(t = 900) {
 
 		clearInterval(userDataMaster.terval);
@@ -235,8 +241,8 @@ class userDataMaster {
 	public static get todayGift() {
 		//获取今日抽奖次数
 		if (userDataMaster.dayGift.day == userDataMaster.getToday()) {
-			if (userDataMaster.dayGift.num >= 2) {
-				//每日抽奖3次 一次免费 2次分享
+			if (userDataMaster.dayGift.num >= 6) {
+				//每日抽奖3次 一次免费 2次分享 3视频
 				return false;
 			}
 		} else {
@@ -247,10 +253,10 @@ class userDataMaster {
 	public static get todayFreeLife() {
 		//获取今日免体力开局次数
 		if (userDataMaster.dayFreeLife.day == userDataMaster.getToday()) {
-			if (userDataMaster.dayFreeLife.num >= 8) {
-				//每日前三次分享，后5次看视频
-				return false;
-			}
+			// if (userDataMaster.dayFreeLife.num >= 8) {
+			// 	//每日前三次分享，后面无限看视频
+			// 	return false;
+			// }
 		} else {
 			userDataMaster.dayFreeLife = { day: userDataMaster.getToday(), num: 0 };
 		}
@@ -288,7 +294,7 @@ class userDataMaster {
 		let userInfo = res.userInfo;
 		userDataMaster.myInfo.nickName = userInfo.nickName;
 		userDataMaster.myInfo.avatarUrl = userInfo.avatarUrl;
-		userDataMaster.getMyInfo=userDataMaster.myInfo;
+		userDataMaster.getMyInfo = userDataMaster.myInfo;
 		let params: any = {
 			uid: userDataMaster.getMyInfo.uid,
 			nickName: userInfo.nickName,

@@ -29,6 +29,9 @@ class gameOver extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
+		if (AdMaster.cacheBannerAd) {
+			AdMaster.openBannerAd({ width: 700, height: 300 });
+		}
 		let dataGroup = new eui.DataGroup();
 		let list = []
 		if (userDataMaster.recommand['2'] && userDataMaster.recommand['2'].games) {
@@ -66,10 +69,12 @@ class gameOver extends eui.Component implements eui.UIComponent {
 		CallbackMaster.openShare(null, false);
 	}
 	public homeFun() {
+		AdMaster.closeBannerAd();
 		egret.Tween.removeAllTweens()
 		sceneMaster.changeScene(new startScene());
 	}
 	public playFun() {
+		AdMaster.closeBannerAd();
 		let level = this.level;
 		sceneMaster.openLittleModal(new playBefore(level));
 	}

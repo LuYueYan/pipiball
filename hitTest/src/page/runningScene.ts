@@ -382,14 +382,18 @@ class runningScene extends eui.Component implements eui.UIComponent {
 				that.lampShow = group;
 			}
 		} else {
-			///看视频获取
-			AdMaster.useVideo(() => {
+			//局中道具用分享
+			CallbackMaster.openShare(() => {
 				suc();
-			}, () => {
-				CallbackMaster.openShare(() => {
-					suc();
-				})
-			});
+			})
+			// ///看视频获取
+			// AdMaster.useVideo(() => {
+			// 	suc();
+			// }, () => {
+			// 	CallbackMaster.openShare(() => {
+			// 		suc();
+			// 	})
+			// });
 		}
 		function suc() {
 			userDataMaster.tool[type].num++;
@@ -1185,6 +1189,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 						sceneMaster.openModal(danger);
 						danger.useBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 							CallbackMaster.openShare(() => {
+								AdMaster.closeBannerAd()
 								sceneMaster.closeModal();
 								that.shooting = false;
 								that.clearRows(2);
@@ -1269,6 +1274,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 		});
 		function suc() {
 			that.myData.reborn++;
+			AdMaster.closeBannerAd()
 			sceneMaster.closeModal();
 			that.currentTimer = egret.getTimer();
 			that.addEventListener(egret.Event.ENTER_FRAME, that.onEnterFrame, that);

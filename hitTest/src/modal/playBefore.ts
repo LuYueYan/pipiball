@@ -43,6 +43,9 @@ class playBefore extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
+		if (AdMaster.cacheBannerAd) {
+			AdMaster.openBannerAd({ width: 700, height: 300 });
+		}
 		let guideIndex = 0;
 		if (this.level == 5 && userDataMaster.level == 4) {
 			//道具bullet首次出现 第五关
@@ -201,6 +204,7 @@ class playBefore extends eui.Component implements eui.UIComponent {
 					content: '您的体力不足',
 					success(res) {
 						if (res.confirm) {
+							AdMaster.closeBannerAd()
 							sceneMaster.changeScene(new startScene())
 							sceneMaster.openModal(new getLifeModal())
 						}
@@ -225,6 +229,7 @@ class playBefore extends eui.Component implements eui.UIComponent {
 					userDataMaster.tool[item].num--;
 				}
 			}
+			AdMaster.closeBannerAd()
 			egret.Tween.removeAllTweens();
 			sceneMaster.changeScene(new runningScene(that.level, {}, that.choose));
 		}, t);
@@ -237,29 +242,31 @@ class playBefore extends eui.Component implements eui.UIComponent {
 			that.startFun(false);
 			return;
 		}
-		if (!userDataMaster.dayFreeLife) {
+		if (!userDataMaster.todayFreeLife) {
 			//今天视频次数用完
 			platform.showModal({
 				title: '温馨提醒',
 				content: '今日免体力次数已用完，请明日再来'
 			});
-		}
-		if (userDataMaster.dayFreeLife.num < 3) {
+		} else if (userDataMaster.dayFreeLife.num < 3) {
 			CallbackMaster.openShare(() => {
+				userDataMaster.dayFreeLife.num++;
 				that.startFun(false);
 			})
 		} else {
 			AdMaster.useVideo(() => {
+				userDataMaster.dayFreeLife.num++;
 				that.startFun(false);
 			}, () => {
 				platform.showModal({
 					title: '温馨提示',
-					content: '暂未开通视频奖励'
+					content: '没有可以观看的视频'
 				});
 			});
 		}
 	}
 	public closeFun() {
+		AdMaster.closeBannerAd()
 		egret.Tween.removeTweens(this.glassImg);
 		if (this.bulletImg && this.bulletImg.parent) {
 			egret.Tween.removeTweens(this.bulletImg);

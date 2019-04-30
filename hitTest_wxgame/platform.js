@@ -34,8 +34,8 @@ class WxgamePlatform {
       });
       wx.onShareAppMessage(function() {
         return {
-          title: object.title || "我就是宇宙第一酷，酷跑酷跑一起奔跑吧！",
-          imageUrl: object.imageUrl || 'https://lixi.h5.app81.com/minigame/game_lixi/share_img/share_1.jpg',
+          title: object.title || "瞄准！射击！看谁能够消灭所有方块~",
+          imageUrl: object.imageUrl || 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_1.png',
           query: object.query || '',
           success: function(res) {
             if (object.success) object.success(res)
@@ -51,8 +51,8 @@ class WxgamePlatform {
   shareAppMessage(object) {
     return new Promise((resolve, reject) => {
       wx.shareAppMessage({
-        title: object.title || '我就是宇宙第一酷，酷跑酷跑一起奔跑吧！',
-        imageUrl: object.imageUrl || 'https://lixi.h5.app81.com/minigame/game_lixi/share_img/share_1.jpg',
+        title: object.title || '我能让射击视线自个儿拐弯，你行吗？',
+        imageUrl: object.imageUrl || 'https://lixi.h5.app81.com/minigame/game_lixi/shooting/share_2.png',
         query: object.query || '',
         success: function(res) {
           if (object.success) object.success(res)

@@ -152,7 +152,7 @@ class gridCom {
 						} else if (item.type == 4) {
 							//星星
 						} else if (!item.isRemoved) {
-							console.log(55555)
+							// console.log(55555)
 							item.updateText(that, item.num, callback);
 						}
 

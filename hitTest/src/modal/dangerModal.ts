@@ -18,6 +18,9 @@ class dangerModal extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
+		if (AdMaster.cacheBannerAd) {
+			AdMaster.openBannerAd({ width: 700, height: 300 });
+		}
 		egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
 		that.useBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.useFun, this);
 		that.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.ignoreFun, this);
@@ -29,6 +32,7 @@ class dangerModal extends eui.Component implements eui.UIComponent {
 		egret.Tween.removeTweens(this.light);
 	}
 	public ignoreFun() {
+		AdMaster.closeBannerAd();
 		egret.Tween.removeTweens(this.light);
 		sceneMaster.closeModal();
 	}

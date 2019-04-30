@@ -26,6 +26,9 @@ class rebornModal extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		let that = this;
+		if (AdMaster.cacheBannerAd) {
+				AdMaster.openBannerAd({ width: 700, height: 300 });
+			}
 		that.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ignoreFun, this);
 		setTimeout(function () {
 			that.ignoreBtn.visible = true;
@@ -43,6 +46,7 @@ class rebornModal extends eui.Component implements eui.UIComponent {
 
 	}
 	public ignoreFun() {
+		AdMaster.closeBannerAd()
 		sceneMaster.openModal(new gameOver(this.level, this.myData));
 	}
 

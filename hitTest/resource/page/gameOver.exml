@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="gameOverSkin" width="636" height="920" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
 	<w:Config id="16a105f96c8" ></w:Config>
-	<e:Image source="img_bg_bb_02_png" horizontalCenter="0" top="0" smoothing="true"/>
-	<e:Label text="闯关失败" y="142.08" bold="true" fontFamily="Microsoft YaHei" size="40" horizontalCenter="0" stroke="2" strokeColor="0x603005" textColor="0xffffff"/>
-	<e:Label id="levelText" text="第2关" y="266" fontFamily="Microsoft YaHei" size="36" textColor="0x6c371a" horizontalCenter="0"/>
-	<e:Rect width="400" height="100" y="335" horizontalCenter="0" fillColor="0xf6d7a8" ellipseWidth="40" strokeColor="0xf5a144" strokeWeight="1" strokeAlpha="0.5"/>
-	<e:Image source="img_remain_diamonds_png" x="169" y="352.5"/>
-	<e:BitmapLabel id="levelProccess" x="283.42" y="365" font="stripe_text_fnt" text="1 / 20"/>
-	<ns1:tweenButton id="playBtn" label="" x="192" y="721" anchorOffsetX="121" anchorOffsetY="56">
+	<e:Image source="img_bg_bb_02_png" horizontalCenter="0" top="-40" smoothing="true"/>
+	<e:Label text="闯关失败" y="102.08" bold="true" fontFamily="Microsoft YaHei" size="40" horizontalCenter="0" stroke="2" strokeColor="0x603005" textColor="0xffffff"/>
+	<e:Label id="levelText" text="第2关" y="226" fontFamily="Microsoft YaHei" size="36" textColor="0x6c371a" horizontalCenter="0"/>
+	<e:Rect width="400" height="100" y="295" horizontalCenter="0" fillColor="0xf6d7a8" ellipseWidth="40" strokeColor="0xf5a144" strokeWeight="1" strokeAlpha="0.5"/>
+	<e:Image source="img_remain_diamonds_png" x="169" y="312.5"/>
+	<e:BitmapLabel id="levelProccess" x="283.42" y="325" font="stripe_text_fnt" text="1 / 20"/>
+	<ns1:tweenButton id="playBtn" label="" x="192" y="681" anchorOffsetX="121" anchorOffsetY="56">
 		<ns1:skinName>
 		<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="btn_challenge_png"/>
@@ -15,7 +15,7 @@
 		</e:Skin>
 		</ns1:skinName>
 	</ns1:tweenButton>
-	<ns1:tweenButton id="shareBtn" label="" x="444" y="721" anchorOffsetX="121" anchorOffsetY="56">
+	<ns1:tweenButton id="shareBtn" label="" x="444" y="681" anchorOffsetX="121" anchorOffsetY="56">
 		<ns1:skinName>
 			<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="btn_share_01_png"/>
@@ -23,7 +23,7 @@
 			</e:Skin>
 		</ns1:skinName>
 	</ns1:tweenButton>
-	<ns1:tweenButton id="homeBtn" label="" y="865.5" horizontalCenter="0" anchorOffsetX="88" anchorOffsetY="18.5">
+	<ns1:tweenButton id="homeBtn" label="" y="825.5" horizontalCenter="0" anchorOffsetX="88" anchorOffsetY="18.5">
 		<ns1:skinName>
 			<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="btn_home_02_png"/>
@@ -31,6 +31,6 @@
 			</e:Skin>
 		</ns1:skinName>
 	</ns1:tweenButton>
-	<e:Group id="moreGroup" width="540" height="169.7" y="476" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0">
+	<e:Group id="moreGroup" width="540" height="169.7" y="436" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0">
 	</e:Group>
 </e:Skin>
