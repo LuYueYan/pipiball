@@ -102,6 +102,7 @@ class CallbackMaster {
 			// } else {
 			// }
 			let ran = Math.floor(Math.random() * CallbackMaster.share_title.length);
+		
 			let obj = {
 				title: CallbackMaster.share_title[ran],
 				imageUrl: CallbackMaster.share_img[ran],

@@ -496,11 +496,11 @@ class runningScene extends eui.Component implements eui.UIComponent {
 			that.star_1.texture = RES.getRes('img_star_b1_png');
 			that.myData.star = 1;
 		}
-		if (that.myData.star < 2 && that.myData.score >= that.levelInfo.score * 2) {
+		if (that.myData.star < 2 && that.myData.score >= that.levelInfo.score * 3) {
 			that.star_2.texture = RES.getRes('img_star_b1_png');
 			that.myData.star = 2;
 		}
-		if (that.myData.star < 3 && that.myData.score >= that.levelInfo.score * 3) {
+		if (that.myData.star < 3 && that.myData.score >= that.levelInfo.score * 6) {
 			that.star_3.texture = RES.getRes('img_star_b1_png');
 			that.myData.star = 3;
 		}
@@ -1345,7 +1345,7 @@ class runningScene extends eui.Component implements eui.UIComponent {
 	}
 	public changeGraphics() {
 		//percent 进度百分比
-		let percent = this.myData.score / (this.levelInfo.score * 3);
+		let percent = this.myData.score / (this.levelInfo.score * 6);
 		percent = percent > 1 ? 1 : percent;
 		let angle = percent * 2 * Math.PI * 3 / 4 + Math.PI * 0.55;
 		this.arcPro.graphics.clear();

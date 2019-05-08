@@ -7,9 +7,9 @@
 	<e:Group id="scoreProccess" x="38.68" y="36" height="120" width="120">
 		<e:Image source="star_bg_png" horizontalCenter="0" verticalCenter="0"/>
 		<e:Label text="关卡" y="28" textColor="0x603005" fontFamily="Microsoft YaHei" size="18" bold="true" horizontalCenter="0"/>
-		<e:Image id="star_1" x="-10.64" width="27" height="27" verticalCenter="-4" rotation="343.17" source="img_star_b2_png"/>
-		<e:Image id="star_2" x="38.02" y="-0.67" width="32" height="32" rotation="336.51" source="img_star_b2_png"/>
-		<e:Image id="star_3" x="98.99" y="49.33" width="35" height="35" rotation="28.08" source="img_star_b2_png"/>
+		<e:Image id="star_1" x="-7.64" width="27" height="27" verticalCenter="5" rotation="343.17" source="img_star_b2_png"/>
+		<e:Image id="star_2" x="36.02" y="-0.67" width="32" height="32" rotation="336.51" source="img_star_b2_png"/>
+		<e:Image id="star_3" x="98.99" y="48.33" width="35" height="35" rotation="28.08" source="img_star_b2_png"/>
 		<e:BitmapLabel id="levelText" y="52" text="1" textAlign="center" font="brown_text_fnt" horizontalCenter="0"/>
 	</e:Group>
 	<e:Group x="364" y="47">

@@ -77,12 +77,14 @@ class levelCom extends eui.Component implements eui.UIComponent {
 	}
 	public dataChange(e: eui.CollectionEvent) {
 		let that = this;
-		let n = (userDataMaster.level + 1 + 2) % levelItem.point.length + 1;
-		that.head.x = levelItem.point[n - 1].x;
-		that.head.y = that.dataGroup.y - that.head.height + levelItem.point[n - 1].y + 130 * userDataMaster.level;
-		that.headimg.source = userDataMaster.myInfo.avatarUrl;
-		that.headimg.mask = that.headmask;
-		that.sourceArr.refresh()
+		if (e.location == 2 || e.location == 5) {
+			let n = (userDataMaster.level + 1 + 2) % levelItem.point.length + 1;
+			that.head.x = levelItem.point[n - 1].x;
+			that.head.y = that.dataGroup.y - that.head.height + levelItem.point[n - 1].y + 130 * userDataMaster.level;
+			that.headimg.source = userDataMaster.myInfo.avatarUrl;
+			that.headimg.mask = that.headmask;
+			that.sourceArr.refresh()
+		}
 	}
 
 }

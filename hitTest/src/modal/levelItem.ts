@@ -31,7 +31,7 @@ class levelItem extends eui.ItemRenderer implements eui.UIComponent {
 		this.init()
 	}
 	public init() {
-		this.bodyGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
+		// this.bodyGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
 	}
 	public jumpFun() {
 		sceneMaster.openModal(new playBefore(this.data.level));
@@ -42,6 +42,12 @@ class levelItem extends eui.ItemRenderer implements eui.UIComponent {
 		this.bodyGroup.x = levelItem.point[n - 1].x;
 		this.bodyGroup.y = levelItem.point[n - 1].y;
 		this.levelText.text = this.data.level + '';
+		this.star_1.visible = true;
+		this.star_2.visible = true;
+		this.star_3.visible = true;
+		if (!this.bodyGroup.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+			this.bodyGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
+		}
 		if (this.data.level <= userDataMaster.levelStar.length) {
 			//已过关的
 			this.bgImg.texture = RES.getRes('img_wood_01_png');
@@ -53,17 +59,17 @@ class levelItem extends eui.ItemRenderer implements eui.UIComponent {
 			this.bgImg.texture = RES.getRes('img_wood_01_png');
 		} else {
 			//未达到
-			this.bodyGroup.removeChild(this.star_1);
-			this.bodyGroup.removeChild(this.star_2);
-			this.bodyGroup.removeChild(this.star_3);
-			this.bodyGroup.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this)
+			this.star_1.visible = false;
+			this.star_2.visible = false;
+			this.star_3.visible = false;
+			this.bodyGroup.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
 		}
 		if (this.data.level > userDataMaster.levelArr.length) {
 			//敬请期待
 			this.levelText.text = '';
 			let img = new eui.Image(RES.getRes('img_expect_png'));
-			img.horizontalCenter=0;
-			img.y=20;
+			img.horizontalCenter = 0;
+			img.y = 20;
 			this.bodyGroup.addChild(img)
 			this.bodyGroup.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this)
 		}
