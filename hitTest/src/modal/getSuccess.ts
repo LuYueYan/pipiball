@@ -44,7 +44,7 @@ class getSuccess extends eui.Component implements eui.UIComponent {
 		AdMaster.closeBannerAd();
 		egret.Tween.removeTweens(this.light);
 		if (this.shareType == 1) {
-			CallbackMaster.openShare(null, false);
+			CallbackMaster.openShare(null, -1);
 		}
 		if (sceneMaster.littleModal) {
 			sceneMaster.closeLittleModal();

@@ -13,7 +13,13 @@ class levelCom extends eui.Component implements eui.UIComponent {
 	public constructor() {
 		super();
 	}
-
+	public static shared: levelCom;
+	public static getInstance() {
+		if (!levelCom.shared) {
+			levelCom.shared = new levelCom();
+		}
+		return levelCom.shared;
+	}
 	protected partAdded(partName: string, instance: any): void {
 		super.partAdded(partName, instance);
 	}
@@ -61,7 +67,7 @@ class levelCom extends eui.Component implements eui.UIComponent {
 			that.head.y = that.dataGroup.y - that.head.height + levelItem.point[n - 1].y + 130 * userDataMaster.level;
 			that.headimg.source = userDataMaster.myInfo.avatarUrl;
 			that.headimg.mask = that.headmask;
-			egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
+			// egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
 			that.head.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
 				sceneMaster.openModal(new playBefore(userDataMaster.level + 1));
 			}, this)
@@ -71,8 +77,12 @@ class levelCom extends eui.Component implements eui.UIComponent {
 	}
 	public dataChange(e: eui.CollectionEvent) {
 		let that = this;
+		let n = (userDataMaster.level + 1 + 2) % levelItem.point.length + 1;
+		that.head.x = levelItem.point[n - 1].x;
+		that.head.y = that.dataGroup.y - that.head.height + levelItem.point[n - 1].y + 130 * userDataMaster.level;
 		that.headimg.source = userDataMaster.myInfo.avatarUrl;
 		that.headimg.mask = that.headmask;
+		that.sourceArr.refresh()
 	}
 
 }

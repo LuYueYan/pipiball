@@ -11,6 +11,8 @@
 	"libVersion": "game",
 	"appid": "wx71e87f6322967544",
 	"projectname": "hitTest_wxgame",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

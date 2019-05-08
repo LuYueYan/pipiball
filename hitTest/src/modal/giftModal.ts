@@ -17,6 +17,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 	public speed = 1000;
 	public choosing = false;
 	public canTap = true;
+	public shareCount = 0;
 	public dataArr = [
 		{ id: 0, name: 'img_gift_05_png', num: 1, type: 'bullet' },
 		{ id: 1, name: 'img_gift_02_png', num: 30, type: 'gold' },
@@ -119,14 +120,16 @@ class giftModal extends eui.Component implements eui.UIComponent {
 			// 分享
 			CallbackMaster.openShare(() => {
 				suc();
-			})
+			}, that.shareCount);
+			that.shareCount++;
 		} else {
 			AdMaster.useVideo(() => {
 				suc();
 			}, () => {
 				CallbackMaster.openShare(() => {
 					suc();
-				})
+				}, that.shareCount);
+				that.shareCount++;
 			});
 		}
 		function suc() {

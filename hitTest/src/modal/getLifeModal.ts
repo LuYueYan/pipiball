@@ -9,6 +9,7 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 	public timeText_3: eui.Label;
 	public timeText_4: eui.Label;
 
+	public shareCount = 0;
 	public constructor() {
 		super();
 	}
@@ -27,8 +28,8 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 	public init() {
 		let that = this;
 		if (AdMaster.cacheBannerAd) {
-				AdMaster.openBannerAd({ width: 700, height: 300 });
-			}
+			AdMaster.openBannerAd({ width: 700, height: 300 });
+		}
 		let terval = setInterval(() => {
 			if (userDataMaster.life >= 5) {
 				clearInterval(terval);
@@ -44,7 +45,7 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 	}
 	public getFormat(t) {
 		let f = Math.floor(t / 60);
-		let n=f<10?'0'+f:f;
+		let n = f < 10 ? '0' + f : f;
 		let s = t % 60;
 		let c = s < 10 ? '0' + s : s + '';
 		let res = n + ':' + c;
@@ -80,7 +81,8 @@ class getLifeModal extends eui.Component implements eui.UIComponent {
 				userDataMaster.myLife = userDataMaster.life + 1;
 				that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
 				sceneMaster.openLittleModal(new getSuccess('img_gift_01_png', ''))
-			})
+			}, that.shareCount);
+			that.shareCount++;
 		} else {
 			//今日获取次数已用完，请明日再来
 			platform.showModal({

@@ -66,7 +66,7 @@ class gameOver extends eui.Component implements eui.UIComponent {
 		this.playBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playFun, this);
 	}
 	public shareFun() {
-		CallbackMaster.openShare(null, false);
+		CallbackMaster.openShare(null, -1);
 	}
 	public homeFun() {
 		AdMaster.closeBannerAd();

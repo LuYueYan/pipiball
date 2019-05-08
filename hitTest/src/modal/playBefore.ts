@@ -21,6 +21,8 @@ class playBefore extends eui.Component implements eui.UIComponent {
 
 	public guideBg;
 	public level;
+	public shareCount_1=0;
+	public shareCount_2=0;
 	public choose = {
 		glass: false,
 		bullet: false
@@ -143,7 +145,8 @@ class playBefore extends eui.Component implements eui.UIComponent {
 			}, () => {
 				CallbackMaster.openShare(() => {
 					suc();
-				})
+				},that.shareCount_1);
+				that.shareCount_1++;
 			});
 			return;
 		} else {
@@ -204,7 +207,8 @@ class playBefore extends eui.Component implements eui.UIComponent {
 					content: '您的体力不足',
 					success(res) {
 						if (res.confirm) {
-							AdMaster.closeBannerAd()
+							AdMaster.closeBannerAd();
+							egret.Tween.removeAllTweens();
 							sceneMaster.changeScene(new startScene())
 							sceneMaster.openModal(new getLifeModal())
 						}
@@ -252,7 +256,8 @@ class playBefore extends eui.Component implements eui.UIComponent {
 			CallbackMaster.openShare(() => {
 				userDataMaster.dayFreeLife.num++;
 				that.startFun(false);
-			})
+			},that.shareCount_2);
+			that.shareCount_2++;
 		} else {
 			AdMaster.useVideo(() => {
 				userDataMaster.dayFreeLife.num++;

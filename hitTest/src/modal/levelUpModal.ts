@@ -12,6 +12,7 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 	public level;
 	public info: any;
 	public gif;
+	public shareCount = 0;
 	public constructor(level, info: any) {
 		super();
 		this.level = level;
@@ -31,8 +32,8 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 	}
 	public init() {
 		if (AdMaster.cacheBannerAd) {
-				AdMaster.openBannerAd({ width: 700, height: 300 });
-			}
+			AdMaster.openBannerAd({ width: 700, height: 300 });
+		}
 		this.scoreText.text = this.info.score + '';
 		this.levelText.text = '第' + this.level + '关';
 		this.goldText.text = 'X' + this.info.gold;
@@ -49,7 +50,7 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 
 		that.gif = movieMaster.getGif('through');
 		that.gif.y = -300;
-		that.addChildAt(that.gif,0);
+		that.addChildAt(that.gif, 0);
 		that.gif.gotoAndPlay(1, -1);
 
 		for (let i = 1; i <= this.info.star; i++) {
@@ -72,35 +73,41 @@ class levelUpModal extends eui.Component implements eui.UIComponent {
 			type: "updateScore",
 			score: that.info.score,
 			level: that.level,
-			star:that.info.star
+			star: that.info.star
 		});
 		this.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.videoFun, this);
-		this.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.getFun, this);
+		this.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.getFun(that.info.gold) }, this);
 	}
 	public videoFun() {
+		let that = this;
 		AdMaster.useVideo(() => {
-			suc();
+			that.getFun(that.info.gold * 2);
 		}, () => {
 			CallbackMaster.openShare(() => {
-				suc();
-			})
+				that.getFun(that.info.gold * 2);
+			}, that.shareCount);
+			that.shareCount++;
 		});
-		let that = this;
-		function suc() {
-			AdMaster.closeBannerAd()
-			userDataMaster.myGold = userDataMaster.gold + that.info.gold * 2;
-			that.gif.stop();
-			egret.Tween.removeAllTweens();
-			sceneMaster.changeScene(new startScene());
-			sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + that.info.gold * 2));
-		}
+		// let that = this;
+		// function suc() {
+		// 	AdMaster.closeBannerAd()
+		// 	userDataMaster.myGold = userDataMaster.gold + that.info.gold * 2;
+		// 	that.gif.stop();
+		// 	egret.Tween.removeAllTweens();
+		// 	sceneMaster.changeScene(new startScene());
+		// 	sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + that.info.gold * 2));
+		// }
 	}
-	public getFun() {
-		AdMaster.closeBannerAd()
-		userDataMaster.myGold = userDataMaster.gold + this.info.gold;
-		this.gif.stop();
+	public getFun(gold:number) {
+		let that = this;
+		AdMaster.closeBannerAd();
+		userDataMaster.myGold = userDataMaster.gold + gold;
+		that.gif.stop();
 		egret.Tween.removeAllTweens();
 		sceneMaster.changeScene(new startScene());
-		sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + this.info.gold));
+		setTimeout(function () {
+			sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + gold));
+		}, 50);
+
 	}
 }

@@ -60,9 +60,8 @@ class Main extends eui.UILayer {
     private async runGame() {
         DeviceMaster.init(this.stage.stageWidth, this.stage.stageHeight);
         userDataMaster.init();
-        await this.loadResource()
+        await this.loadResource();
         this.createGameScene();
-
     }
 
     private async loadResource() {
@@ -73,6 +72,9 @@ class Main extends eui.UILayer {
             this.stage.addChild(loadingView);
             await this.loadTheme();
             await RES.loadGroup("load", 0, loadingView);
+            await RES.getResByUrl('https://lixi.h5.app81.com/minigame/game_lixi/shooting/levelArr.json', (res) => {
+                userDataMaster.levelArr = res.list;
+            }, this, RES.ResourceItem.TYPE_JSON);
             let that = this;
             setTimeout(function () {
                 that.checkSuccess(loadingView, 0);
@@ -113,8 +115,8 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-        CallbackMaster.init();
         AdMaster.init();
+        CallbackMaster.init();
         sceneMaster.init(this.stage);
         sceneMaster.changeScene(new startScene());
         movieMaster.init();

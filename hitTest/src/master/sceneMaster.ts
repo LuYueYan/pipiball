@@ -19,6 +19,8 @@ class sceneMaster {
 		sceneMaster.littleBg = rect_2;
 	}
 	public static changeScene(scene) {
+		// console.log('changeScene')
+		sceneMaster.modal&&sceneMaster.modal.parent&&sceneMaster.modal.parent.removeChild(sceneMaster.modal);
 		sceneMaster.scene && sceneMaster.scene.parent && sceneMaster.stage.removeChild(sceneMaster.scene);
 		sceneMaster.scene = scene;
 		sceneMaster.stage.addChild(scene);
@@ -27,6 +29,7 @@ class sceneMaster {
 	}
 	public static openModal(modal, modalBg = true) {
 		//页面上加弹窗  modalBg--是否加动画
+		// console.log('openModal')
 		if (sceneMaster.modal) {
 			//已存在一个弹窗
 			sceneMaster.scene.removeChild(sceneMaster.modal);
@@ -66,7 +69,7 @@ class sceneMaster {
 		}
 		sceneMaster.closeLittleModal();
 	}
-	public static openLittleModal(littleModal, littleBg = true,y=300) {
+	public static openLittleModal(littleModal, littleBg = true, y = 300) {
 		//在弹窗上打开小弹窗
 		if (sceneMaster.littleModal) {
 			//已存在一个小弹窗
@@ -79,8 +82,8 @@ class sceneMaster {
 		littleModal.scaleX = 0, littleModal.scaleY = 0;
 		sceneMaster.scene.addChild(littleModal);
 		setTimeout(function () {
-			littleModal.x = 375, 
-			littleModal.y = littleModal.height / 2 + y;
+			littleModal.x = 375,
+				littleModal.y = littleModal.height / 2 + y;
 			littleModal.anchorOffsetX = littleModal.width / 2, littleModal.anchorOffsetY = littleModal.height / 2;
 			egret.Tween.get(littleModal).to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
 		}, 50);

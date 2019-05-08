@@ -54,7 +54,7 @@ class AdMaster {
 				// res.data.banner_id=['adunit-9770641ec26321d7'];
 				// res.data.video_id=['adunit-d0c0bc599cd9d2b6'];
 
-				if (res.data.edition_2 == 2) {
+				if (res.data.edition_1 == 2) {
 					//审核通过，允许分享
 					CallbackMaster.hasChecked = true;
 				}
@@ -71,6 +71,14 @@ class AdMaster {
 					AdMaster.randomCacheVideoAd()
 				}
 				AdMaster.INIT_STATUS = 2;
+				if (res.data.share_title) {
+					//分享标题list
+					CallbackMaster.share_title=res.data.share_title;
+				}
+				if (res.data.share_img) {
+					//分享图list
+					CallbackMaster.share_img=res.data.share_img;
+				}
 			}
 		}, function (err) {
 			AdMaster.INIT_STATUS = 3

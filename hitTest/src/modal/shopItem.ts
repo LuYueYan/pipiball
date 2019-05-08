@@ -53,8 +53,8 @@ class shopItem extends eui.ItemRenderer implements eui.UIComponent {
 				let item = userDataMaster.bulletArr[this.data.id];
 				sceneMaster.openLittleModal(new getSuccess(item.img + '_png', item.title))
 			} else {
-				console.log('金币不足');
-				let txt = new eui.Label('金币不足');
+				// console.log('砖石不足');
+				let txt = new eui.Label('砖石不足');
 				txt.size = 30;
 				txt.textColor = 0xffffff;
 				txt.x = (750 - txt.width) / 2;

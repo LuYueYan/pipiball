@@ -27,6 +27,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 		'openGift'
 	];
 	public moreComponent: moreComponent;
+	public shareCount = 0;
 	public constructor() {
 		super();
 	}
@@ -50,8 +51,10 @@ class startScene extends eui.Component implements eui.UIComponent {
 		that.goldText.text = userDataMaster.gold + '';
 		that.createRecommand();
 
-		let scroll = new levelCom();
+		let scroll = levelCom.getInstance();
 		that.addChildAt(scroll, 1);
+		egret.Tween.removeTweens(scroll.light);
+		egret.Tween.get(scroll.light, { loop: true }).to({ rotation: 360 }, 3000);
 		scroll.scroller.height = that.stage.stageHeight;
 
 		let cloud_top = new cloudCom('cloud_top');
@@ -135,6 +138,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 		that.openLifeFun();
 	}
 	public goldGroupFun() {
+		let that = this;
 		if (!userDataMaster.todayShareGold) {
 			platform.showModal({
 				title: '温馨提示',
@@ -142,11 +146,10 @@ class startScene extends eui.Component implements eui.UIComponent {
 			});
 			return;
 		}
-	
 		CallbackMaster.openShare(() => {
 			suc();
-		})
-		let that = this;
+		}, that.shareCount);
+		that.shareCount++;
 		function suc() {
 			userDataMaster.dayShareGold.num++;
 			userDataMaster.myGold = userDataMaster.gold + 20;
@@ -160,7 +163,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 	}
 	public openShareFun() {
 		let that = this;
-		CallbackMaster.openShare(null, false);
+		CallbackMaster.openShare(null, -1);
 	}
 	public openBulletFun() {
 		let that = this;

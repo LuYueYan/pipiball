@@ -169,6 +169,10 @@ class WxgamePlatform {
   vibrateShort(obj) {
     return wx.vibrateShort(obj)
   }
+  //辣鸡回收
+  triggerGC() {
+    wx.triggerGC()
+  }
 
   openDataContext = new WxgameOpenDataContext();
 }

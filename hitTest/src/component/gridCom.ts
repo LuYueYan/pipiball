@@ -6,6 +6,7 @@ class gridCom {
 	public num: number = 1;//需要击打的数量
 	public boxBody: p2.Body;
 	public type: number = 1;//类型 1--方形 2--三角型 5--炸弹 6--冰块
+	public squareType=1;//方块类型
 	public hitText: egret.Bitmap;//被击中时显示的数字
 	public destroyGif;//被销毁时的动画
 	public isRemoved = false;//是否已经被移除
@@ -23,7 +24,7 @@ class gridCom {
 	public init() {
 		if (this.type == 1) {
 			let x = 'img_diamonds_a1';
-			if (Math.random() > 0.7) {
+			if (Math.random() > 0.5) {
 				x = 'img_diamonds_c1';
 			}
 			this.img = this.createBitmapByName(x);
@@ -52,8 +53,9 @@ class gridCom {
 			var vertices = [[0.95, -0.95], [0.95, 0.95], [-0.95, 0.95]];//必须是逆时针方向的数组
 			boxShape = new p2.Convex({ vertices: vertices });
 		} else {
-			var vertices = [[0.95, -0.95], [0.95, 0.95], [-0.95, 0.95], [-0.95, -0.95]];
-			boxShape = new p2.Convex({ vertices: vertices });
+			// var vertices = [[0.95, -0.95], [0.95, 0.95], [-0.95, 0.95], [-0.95, -0.95]];
+			// boxShape = new p2.Convex({ vertices: vertices });
+			boxShape = new p2.Box({width:1.9,height:1.9 });
 		}
 		boxShape.collisionGroup = 6;
 		boxShape.collisionMask = 7;
@@ -64,9 +66,10 @@ class gridCom {
 			this.boxBody.type = p2.Body.DYNAMIC;
 			this.boxBody.gravityScale = 0;
 			let self = this;
+			let dt=200+(that.gridArr.length%4)*100;
 			setTimeout(function () {
-				self.boxBody.velocity = [0.8, 0];
-			}, 500);
+				self.boxBody.velocity = [-0.8, 0];
+		},dt);
 		}
 		this.boxBody.fixedRotation = false;
 		this.boxBody.displays = [this.img, this.txt];

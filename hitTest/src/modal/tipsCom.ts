@@ -36,14 +36,14 @@ class tipsCom extends eui.Component implements eui.UIComponent {
 		that.tip_2.text = arr[index_2];
 		that.tip_1.mask = that.reckMask_1;
 		that.tip_2.mask = that.reckMask_2;
-		egret.Tween.get(that.tip_1, { loop: true }).wait(5000).to({ y: 6 }, 42 * 10)
+		egret.Tween.get(that.tip_1, { loop: true }).wait(5000).to({ y: -30 }, 60 * 10)
 			.to({ y: 90 }, 0).call(() => {
 				index_1 = index_2 + 1 < arr.length - 1 ? index_2 + 1 : 0;
 				that.tip_1.text = arr[index_1];
-			}).wait(5000).to({ y: 48 }, 42 * 10);
+			}).wait(5000).to({ y: 30 }, 60 * 10);
 
-		egret.Tween.get(that.tip_2, { loop: true }).wait(5000).to({ y: 48 }, 42 * 10).wait(5000)
-			.to({ y: 6 }, 42 * 10).to({ y: 90 }, 0).call(() => {
+		egret.Tween.get(that.tip_2, { loop: true }).wait(5000).to({ y: 30 }, 60 * 10).wait(5000)
+			.to({ y: -30 }, 60 * 10).to({ y: 90 }, 0).call(() => {
 				index_2 = index_1 + 1 < arr.length - 1 ? index_1 + 1 : 0;
 				that.tip_2.text = arr[index_2];
 			});

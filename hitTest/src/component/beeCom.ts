@@ -12,18 +12,19 @@ class beeCom {
 		this.img.width = 58;
 		this.img.height = 63;
 		this.img.anchorOffsetX = this.img.width / 2;
-		this.img.anchorOffsetY = this.img.height / 2;
+		this.img.anchorOffsetY = this.img.height/4 ;
 		this.against = userDataMaster.bulletArr[userDataMaster.bulletIndex].target;
 	}
 	public createBody(that, x = 7.5, y = 0) {
-		var vertices = [[0.25, -0.63], [0.25, 0.63], [-0.25, 0.63], [-0.25, -0.63]];
-		var boxShape = new p2.Convex({ vertices: vertices });
-		// var boxShape: p2.Shape = new p2.Box({ width: 0.5, height: 1.26 });
+		// var vertices = [[0.25, -0.63], [0.25, 0.63], [-0.25, 0.63], [-0.25, -0.63]];
+		// 	var vertices = [[0.25, -0.63], [0, 0.63], [-0.25, -0.63]];
+		// var boxShape = new p2.Convex({ vertices: vertices });
+		var boxShape: p2.Shape = new p2.Circle({radius:0.25 });
 		//不碰撞同类
 		boxShape.collisionGroup = 1;
 		boxShape.collisionMask = 2;
 		if (y == 0) {
-			y = that.getPosition(900);
+			y = that.getPosition(880);
 		}
 		this.boxBody = new p2.Body({ mass: 100, position: [x, y] });
 		this.boxBody.gravityScale = 1;

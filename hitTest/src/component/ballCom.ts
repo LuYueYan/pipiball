@@ -2,6 +2,7 @@ class ballCom {
 	public img: egret.Bitmap;//图片
 	public boxBody: p2.Body;
 	public type = 3;//精灵
+	public squareType = 3;//精灵类型
 	public isRemoved = false;//是否已经被移除
 	public constructor() {
 		this.init()

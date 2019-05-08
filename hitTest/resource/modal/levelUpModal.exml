@@ -3,7 +3,7 @@
 	<w:Config id="16a108c9e1e" ></w:Config>
 	<e:Image source="img_bg_bb_01_png" horizontalCenter="0" top="0"/>
 	<e:Image id="light" source="img_light_star_png" x="46" y="-105"/>
-	<e:Label text="太棒了!" y="70.06" horizontalCenter="0" cacheAsBitmap="true" displayAsPassword="false" includeInLayout="true" stroke="3" strokeColor="0x603005" textAlign="center" touchEnabled="false" fontFamily="Microsoft YaHei" size="36" bold="true"/>
+	<e:Label text="太棒了!" y="49.06" horizontalCenter="0" cacheAsBitmap="true" displayAsPassword="false" includeInLayout="true" stroke="3" strokeColor="0x603005" textAlign="center" touchEnabled="false" fontFamily="Microsoft YaHei" size="36" bold="true" height="60" verticalAlign="middle" width="150"/>
 	<e:Image id="star_1" source="img_star_a2_png" x="155.37" y="176.65" width="92" height="92" rotation="350"/>
 	<e:Image id="star_2" source="img_star_a2_png" y="119.29" width="115" height="115" horizontalCenter="0"/>
 	<e:Image id="star_3" source="img_star_a2_png" x="419.34" y="159.36" width="92" height="92" rotation="10"/>

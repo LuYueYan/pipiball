@@ -3,6 +3,7 @@ class starCom {
 	public boxBody: p2.Body;
 	public type = 4;//星星
 	public isRemoved = false;//是否已经被移除
+	public squareType = 2;//星星类型
 	public gif;//动画
 	public constructor() {
 		this.init()

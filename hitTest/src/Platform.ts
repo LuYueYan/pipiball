@@ -49,6 +49,8 @@ declare interface Platform {
     //设置系统剪贴板的内容
     setClipboardData(object: Object): Promise<any>
     getLaunchOptionsSync()
+    //回收
+    triggerGC()
     //打开共享域
     openDataContext;
 }
@@ -97,6 +99,7 @@ class DebugPlatform implements Platform {
     async showModal(object: Object) { }
     async setClipboardData(object: Object) { }
     async getLaunchOptionsSync(){}
+    async triggerGC(){}
     openDataContext = {
         createDisplayObject: function (type, width, height) { },
         postMessage: function (data) { }
