@@ -4,11 +4,14 @@ class ballCom {
 	public type = 3;//精灵
 	public squareType = 3;//精灵类型
 	public isRemoved = false;//是否已经被移除
-	public constructor() {
+	public bulletIndex = userDataMaster.bulletIndex;
+	public constructor(bulletIndex) {
+		this.bulletIndex = bulletIndex;
 		this.init()
+		
 	}
 	public init() {
-		this.img = this.createBitmapByName(userDataMaster.bulletArr[userDataMaster.bulletIndex].img);
+		this.img = this.createBitmapByName(userDataMaster.bulletArr[this.bulletIndex].img);
 		this.img.width = 82,
 			this.img.height = 86;
 		this.img.anchorOffsetX = this.img.width / 2;

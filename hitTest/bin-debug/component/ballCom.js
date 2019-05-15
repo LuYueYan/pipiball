@@ -2,13 +2,16 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
 var ballCom = (function () {
-    function ballCom() {
+    function ballCom(bulletIndex) {
         this.type = 3; //精灵
+        this.squareType = 3; //精灵类型
         this.isRemoved = false; //是否已经被移除
+        this.bulletIndex = userDataMaster.bulletIndex;
+        this.bulletIndex = bulletIndex;
         this.init();
     }
     ballCom.prototype.init = function () {
-        this.img = this.createBitmapByName(userDataMaster.bulletArr[userDataMaster.bulletIndex].img);
+        this.img = this.createBitmapByName(userDataMaster.bulletArr[this.bulletIndex].img);
         this.img.width = 82,
             this.img.height = 86;
         this.img.anchorOffsetX = this.img.width / 2;
@@ -68,4 +71,3 @@ var ballCom = (function () {
 }());
 __reflect(ballCom.prototype, "ballCom");
 window['ballCom'] = ballCom;
-//# sourceMappingURL=ballCom.js.map

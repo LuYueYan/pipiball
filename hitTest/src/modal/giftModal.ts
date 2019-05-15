@@ -58,9 +58,9 @@ class giftModal extends eui.Component implements eui.UIComponent {
 		that['bg_' + that.current].texture = RES.getRes('img_bg_lottery_01_png');
 		that.current = that.current < 7 ? that.current + 1 : 0;
 		that['bg_' + that.current].texture = RES.getRes('img_bg_lottery_02_png');
-		if (!that.canTap && that.speed >= 1000) {
+		if (!that.canTap && that.speed >= 600) {
 			that.choosing = false;
-			let ran = Math.floor(Math.random() * 8 * 1000) + 5;
+			let ran = Math.floor(Math.random() * 8 * 600) + 5;
 			setTimeout(function () {
 				if (that.canTap) {
 					return;
@@ -93,7 +93,7 @@ class giftModal extends eui.Component implements eui.UIComponent {
 			}, ran);
 		}
 		if (that.choosing) {
-			that.speed += 100;
+			that.speed += 50;
 			clearInterval(that.terval);
 			that.terval = setInterval(() => { that.timer(that) }, that.speed)
 		}

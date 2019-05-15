@@ -22,6 +22,7 @@ var startScene = (function (_super) {
             'openRank',
             'openGift'
         ];
+        _this.shareCount = 0;
         return _this;
     }
     startScene.prototype.partAdded = function (partName, instance) {
@@ -43,8 +44,10 @@ var startScene = (function (_super) {
         that.liftText.text = userDataMaster.life + '/5';
         that.goldText.text = userDataMaster.gold + '';
         that.createRecommand();
-        var scroll = new levelCom();
+        var scroll = levelCom.getInstance();
         that.addChildAt(scroll, 1);
+        egret.Tween.removeTweens(scroll.light);
+        egret.Tween.get(scroll.light, { loop: true }).to({ rotation: 360 }, 3000);
         scroll.scroller.height = that.stage.stageHeight;
         var cloud_top = new cloudCom('cloud_top');
         that.addChildAt(cloud_top, 2);
@@ -125,6 +128,7 @@ var startScene = (function (_super) {
         that.openLifeFun();
     };
     startScene.prototype.goldGroupFun = function () {
+        var that = this;
         if (!userDataMaster.todayShareGold) {
             platform.showModal({
                 title: '温馨提示',
@@ -132,14 +136,10 @@ var startScene = (function (_super) {
             });
             return;
         }
-        AdMaster.useVideo(function () {
+        CallbackMaster.openShare(function () {
             suc();
-        }, function () {
-            CallbackMaster.openShare(function () {
-                suc();
-            });
-        });
-        var that = this;
+        }, that.shareCount);
+        that.shareCount++;
         function suc() {
             userDataMaster.dayShareGold.num++;
             userDataMaster.myGold = userDataMaster.gold + 20;
@@ -153,7 +153,7 @@ var startScene = (function (_super) {
     };
     startScene.prototype.openShareFun = function () {
         var that = this;
-        CallbackMaster.openShare(null, false);
+        CallbackMaster.openShare(null, -1);
     };
     startScene.prototype.openBulletFun = function () {
         var that = this;
@@ -177,4 +177,3 @@ var startScene = (function (_super) {
     return startScene;
 }(eui.Component));
 __reflect(startScene.prototype, "startScene", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=startScene.js.map

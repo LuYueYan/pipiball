@@ -10,6 +10,7 @@ class CallbackMaster {
 	public static shareFailText = '好友信号连接失败，再试试吧';//分享失败的弹窗文案
 	public static share_title = [];//分享标题
 	public static share_img = [];//分享图
+	public static playCallback = null;//游戏中onshow后的回调
 	public constructor() {
 	}
 	public static init() {
@@ -22,6 +23,7 @@ class CallbackMaster {
 		};
 		platform.onShareAppMessage(obj);
 		platform.onShow((option) => {
+			CallbackMaster.playCallback && CallbackMaster.playCallback();
 			let saveShareCount = CallbackMaster.shareCount + 1;
 			if (CallbackMaster.shareCount == 0) {
 				//这个分享按钮的第一次分享
@@ -78,6 +80,7 @@ class CallbackMaster {
 				dayGift: userDataMaster.dayGift,
 				bulletIndex: userDataMaster.bulletIndex,
 				bulletSateArr: userDataMaster.bulletSateArr,
+				bulletStateNum: userDataMaster.bulletStateNum,
 				dayFreeLife: userDataMaster.dayFreeLife
 			};
 			let params = {
@@ -102,7 +105,7 @@ class CallbackMaster {
 			// } else {
 			// }
 			let ran = Math.floor(Math.random() * CallbackMaster.share_title.length);
-		
+
 			let obj = {
 				title: CallbackMaster.share_title[ran],
 				imageUrl: CallbackMaster.share_img[ran],

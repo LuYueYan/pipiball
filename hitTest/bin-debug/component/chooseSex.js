@@ -59,4 +59,3 @@ var chooseSex = (function (_super) {
     return chooseSex;
 }(eui.Component));
 __reflect(chooseSex.prototype, "chooseSex", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=chooseSex.js.map

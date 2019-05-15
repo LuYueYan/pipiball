@@ -3,43 +3,57 @@
 	<w:Config id="16a1578fd7e" ></w:Config>
 	<e:Image id="bgImg" source="img_bg_prop_01_jpg" horizontalCenter="0" top="0" height="1334"/>
 	<e:Image id="closeBtn" source="btn_home_01_png" x="30" y="40" touchEnabled="true"/>
-	<e:Group id="contentGroup" y="241" horizontalCenter="0">
+	<e:Group id="contentGroup" y="295" anchorOffsetX="0" width="690" horizontalCenter="0" anchorOffsetY="0" height="842">
 		<e:Image source="img_text_02_png" y="0" horizontalCenter="0"/>
-		<e:Image source="img_text_03_png" y="318" horizontalCenter="0"/>
-		<e:Group y="47" width="220" left="0">
+		<e:Image source="img_text_03_png" y="296" horizontalCenter="0"/>
+		<e:Group y="67" width="340" left="0" anchorOffsetX="0" height="210">
 			<e:Image source="img_bg_prop_02_png" horizontalCenter="0" top="0"/>
-			<e:Image source="img_prop_a1_png" y="56" horizontalCenter="0"/>
-			<e:Label text="【开局使用】" y="191" textColor="0x9d7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
-			<e:Label text="可以看清弹药射击路线" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+			<e:Image source="img_prop_a1_png" left="19" verticalCenter="0"/>
+			<e:Label text="开局使用:" y="29" textColor="0x9d7236" size="22" fontFamily="Microsoft YaHei" bold="true" x="160"/>
+			<e:Label text="可以看清弹药射击路线" y="64" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" width="168" lineSpacing="10" x="160"/>
+			<e:Image id="glass_get" source="btn_cc_03_png" x="148" y="130"/>
+			<e:Rect width="36" height="36" x="2" y="8" ellipseWidth="36" fillColor="0xbc9d67" strokeColor="0xffffff" strokeWeight="2"/>
+			<e:Label id="glass_num" text="1" y="8" width="36" x="2" textAlign="center" height="36" verticalAlign="middle" fontFamily="Microsoft YaHei" size="26"/>
 		</e:Group>
-		<e:Group y="47" width="220" right="0">
+		<e:Group y="67" width="340" right="0" height="210">
 			<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
-			<e:Image source="img_prop_b1_png" y="44" horizontalCenter="0"/>
-			<e:Label text="【第5关解锁】" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
-			<e:Label text="装有5颗弹药的神奇筒" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+			<e:Image source="img_prop_b1_png" horizontalCenter="-90" verticalCenter="0"/>
+			<e:Label text="第5关解锁:" y="29" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" x="160" bold="true"/>
+			<e:Label text="装有5颗弹药的神奇筒" y="64" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" x="160" width="168" lineSpacing="10"/>
+			<e:Image id="bullet_get" source="btn_cc_03_png" x="148" y="130"/>
+			<e:Rect width="36" height="36" x="2" y="8" ellipseWidth="36" fillColor="0xBC9D67" strokeColor="0xFFFFFF" strokeWeight="2"/>
+			<e:Label id="bullet_num" text="1" y="8" width="36" x="2" textAlign="center" height="36" verticalAlign="middle" fontFamily="Microsoft YaHei" size="26"/>
 		</e:Group>
-		<e:Group y="363" width="220" left="0">
+		<e:Group y="357" width="340" left="0" height="210">
 			<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
-			<e:Image y="44" horizontalCenter="0" source="img_prop_c1_png"/>
-			<e:Label text="【第2关解锁】" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
-			<e:Label text="一锤可以粉碎任何砖块" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+			<e:Image y="44" horizontalCenter="-89.5" source="img_prop_c1_png"/>
+			<e:Label text="第2关解锁:" y="29" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" bold="true" x="160"/>
+			<e:Label text="一锤可以粉碎任何砖块" y="64" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" x="160" width="168" lineSpacing="10"/>
+			<e:Image id="hammer_get" source="btn_cc_04_png" x="148" y="130"/>
+			<e:Rect width="36" height="36" x="2" y="8" ellipseWidth="36" fillColor="0xBC9D67" strokeColor="0xFFFFFF" strokeWeight="2"/>
+			<e:Label id="hammer_num" text="1" y="8" width="36" x="2" textAlign="center" height="36" verticalAlign="middle" fontFamily="Microsoft YaHei" size="26"/>
 		</e:Group>
-		<e:Group y="363" width="220" right="0">
+		<e:Group y="357" width="340" right="0" height="210">
 			<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
-			<e:Image y="49.34" horizontalCenter="0" source="img_prop_d1_png"/>
-			<e:Label text="【第10关解锁】" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
-			<e:Label text="可使所有弹药伤害翻倍" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+			<e:Image y="49.34" horizontalCenter="-86" source="img_prop_d1_png"/>
+			<e:Label text="第10关解锁:" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" x="160" bold="true" y="29"/>
+			<e:Label text="可使所有弹药伤害翻倍" y="64" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" x="160" width="168" lineSpacing="10"/>
+			<e:Image id="hat_get" source="btn_cc_04_png" x="148" y="130"/>
+			<e:Rect width="36" height="36" x="2" y="8" ellipseWidth="36" fillColor="0xBC9D67" strokeColor="0xFFFFFF" strokeWeight="2"/>
+			<e:Label id="hat_num" text="1" y="8" width="36" x="2" textAlign="center" height="36" verticalAlign="middle" fontFamily="Microsoft YaHei" size="26"/>
 		</e:Group>
-		<e:Group y="622" width="220" left="0">
+		<e:Group y="598" width="340" left="0" height="210">
 			<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
-			<e:Image y="32.03" horizontalCenter="0" source="img_prop_e1_png"/>
-			<e:Label text="【第15关解锁】" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
-			<e:Label text="可暂停一次方块下落" y="222" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
+			<e:Image horizontalCenter="-92" source="img_prop_e1_png" verticalCenter="0.5"/>
+			<e:Label text="第15关解锁:" y="29" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" bold="true" x="160"/>
+			<e:Label text="可暂停一次方块下落" y="64" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" width="168" x="160" lineSpacing="10"/>
+			<e:Image id="lamp_get" source="btn_cc_04_png" x="148" y="130"/>
+			<e:Rect width="36" height="36" x="2" y="8" ellipseWidth="36" fillColor="0xBC9D67" strokeColor="0xFFFFFF" strokeWeight="2"/>
+			<e:Label id="lamp_num" text="1" y="8" width="36" x="2" textAlign="center" height="36" verticalAlign="middle" fontFamily="Microsoft YaHei" size="26"/>
 		</e:Group>
-		<e:Group x="324" y="622" width="220">
-			<e:Image source="img_bg_prop_02_png" y="0" horizontalCenter="0"/>
-			<e:Image source="img_unknown_01_png" y="51" horizontalCenter="0"/>
-			<e:Label text="敬请期待" y="191" textColor="0x9D7236" size="22" fontFamily="Microsoft YaHei" horizontalCenter="0"/>
-		</e:Group>
+	</e:Group>
+	<e:Group id="goldGroup" x="130" y="45.04">
+		<e:Image source="btn_remain_diamond_2_png" x="0" y="0"/>
+		<e:BitmapLabel id="goldText" width="239.7" x="70" y="16" text="6666" font="stripe_text_fnt" anchorOffsetX="0" scaleX="0.8" scaleY="0.8"/>
 	</e:Group>
 </e:Skin>

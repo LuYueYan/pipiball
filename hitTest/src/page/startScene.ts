@@ -11,10 +11,12 @@ class startScene extends eui.Component implements eui.UIComponent {
 	public openBullet: tweenButton;
 	public bullet_new_icon: eui.Image;
 	public openShop: tweenButton;
+	public tool_dot: eui.Image;
 	public openRank: tweenButton;
 	public openGift: eui.Group;
 	public red_dot: eui.Image;
 	public moreGroup: eui.Group;
+
 
 	public targetArr = [
 		'lifeGroup',
@@ -69,7 +71,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 		}, 1000);
 
 		that.addEventListener(egret.TouchEvent.TOUCH_TAP, that.judgeFun, that);
-		userDataMaster.myCollection.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.dataChange, this);
+		userDataMaster.myCollection.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, that.dataChange, that);
 
 	}
 	public chooseSex(num) {
@@ -89,23 +91,28 @@ class startScene extends eui.Component implements eui.UIComponent {
 	public createRecommand(n = 0) {
 		let that = this;
 		if (userDataMaster.recommand && userDataMaster.recommand['1'] && userDataMaster.recommand['1'].games) {
-			let dataGroup = new eui.DataGroup();
-			let list = userDataMaster.recommand['1'].games.slice(0, 3);
-			for (let i = 0; i < list.length; i++) {
-				list[i].color_1 = 0x164E33;
-			}
-			let source = new eui.ArrayCollection(list);
-			dataGroup.dataProvider = source;
-			let layout = new eui.VerticalLayout();
-			layout.gap = 20;
-			dataGroup.layout = layout;
-			dataGroup.itemRenderer = moreItem;
-			that.moreGroup.addChild(dataGroup);
+			// let dataGroup = new eui.DataGroup();
+			// let list = userDataMaster.recommand['1'].games.slice(0, 3);
+			// for (let i = 0; i < list.length; i++) {
+			// 	list[i].color_1 = 0x164E33;
+			// }
+			// let source = new eui.ArrayCollection(list);
+			// dataGroup.dataProvider = source;
+			// let layout = new eui.VerticalLayout();
+			// layout.gap = 20;
+			// dataGroup.layout = layout;
+			// dataGroup.itemRenderer = moreItem;
+			// that.moreGroup.addChild(dataGroup);
 
 			that.moreComponent = moreComponent.getInstance();
 			that.moreComponent.y = 350;
-			that.addChild(that.moreComponent)
+			that.addChild(that.moreComponent);
 			that.moreComponent.changeArea.texture = RES.getRes('btn_more_game_png');
+			for (let i = 1; i <= 3; i++) {
+				egret.Tween.removeTweens(that.moreComponent['group_' + i]);
+				that.moreComponent['group_' + i].rotation=0;
+				egret.Tween.get(that.moreComponent['group_' + i], { loop: true }).wait(3000).to({ rotation: -15 }, 300).to({ rotation: 15 }, 600).to({ rotation: 0 }, 300)
+			}
 		} else {
 			n++;
 			setTimeout(function () {
@@ -114,6 +121,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 		}
 	}
 	public dataChange(e: eui.CollectionEvent) {
+
 		this.liftText.text = userDataMaster.life + '/5';
 		this.goldText.text = userDataMaster.gold + '';
 	}
@@ -146,10 +154,13 @@ class startScene extends eui.Component implements eui.UIComponent {
 			});
 			return;
 		}
-		CallbackMaster.openShare(() => {
+		// CallbackMaster.openShare(() => {
+		// 	suc();
+		// }, that.shareCount);
+		// that.shareCount++;
+		AdMaster.useVideo(()=>{
 			suc();
-		}, that.shareCount);
-		that.shareCount++;
+		})
 		function suc() {
 			userDataMaster.dayShareGold.num++;
 			userDataMaster.myGold = userDataMaster.gold + 20;
@@ -173,6 +184,7 @@ class startScene extends eui.Component implements eui.UIComponent {
 	}
 	public openShopFun() {
 		let that = this;
+		that.tool_dot.parent && that.tool_dot.parent.removeChild(that.tool_dot);
 		sceneMaster.openModal(new teachModal());
 	}
 	public openRankFun() {

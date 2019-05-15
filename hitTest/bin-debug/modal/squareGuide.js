@@ -41,4 +41,3 @@ var squareGuide = (function (_super) {
     return squareGuide;
 }(eui.Component));
 __reflect(squareGuide.prototype, "squareGuide", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=squareGuide.js.map

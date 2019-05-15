@@ -10,6 +10,9 @@
 	<e:Label id="title" text="仙人球" x="273" y="103" size="32" fontFamily="Microsoft YaHei" textColor="0x874717" bold="true"/>
 	<e:Label id="txt" text="仙人球" x="276" y="152" size="22" fontFamily="Microsoft YaHei" textColor="0x874717"/>
 	<e:Label id="price" text="x1000" x="322.5" y="206.02" textColor="0xef4d52" fontFamily="Microsoft YaHei" size="24"/>
-	<e:Image source="icn_diamond_02_png" x="272.81" y="201.02"/>
-	<e:Image id="btn" x="494.33" y="133" source="btn_use_png"/>
+	<e:Label id="unlockText" text="已邀0/2位好友" x="277.5" y="206" textColor="0xEF4D52" fontFamily="Microsoft YaHei" size="24"/>
+	<e:Image id="icon" source="icn_diamond_02_png" x="272.81" y="201.02"/>
+	<e:Image id="normalbtn" x="494" y="104" source="btn_use_png"/>
+	<e:Image id="unlockBtn" source="btn_cc_01_png" x="494" y="102"/>
+	<e:Image id="tryBtn" source="btn_cc_00_png" x="494" y="184"/>
 </e:Skin>

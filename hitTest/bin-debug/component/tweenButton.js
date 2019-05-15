@@ -35,4 +35,3 @@ var tweenButton = (function (_super) {
 }(eui.Button));
 __reflect(tweenButton.prototype, "tweenButton");
 window['tweenButton'] = tweenButton;
-//# sourceMappingURL=tweenButton.js.map

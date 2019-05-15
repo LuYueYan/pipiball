@@ -9,6 +9,7 @@ var gridCom = (function () {
         this.initNum = 1; //保存初始的血量数值
         this.num = 1; //需要击打的数量
         this.type = 1; //类型 1--方形 2--三角型 5--炸弹 6--冰块
+        this.squareType = 1; //方块类型
         this.isRemoved = false; //是否已经被移除
         this.num = num;
         this.initNum = num;
@@ -21,7 +22,7 @@ var gridCom = (function () {
     gridCom.prototype.init = function () {
         if (this.type == 1) {
             var x = 'img_diamonds_a1';
-            if (Math.random() > 0.7) {
+            if (Math.random() > 0.5) {
                 x = 'img_diamonds_c1';
             }
             this.img = this.createBitmapByName(x);
@@ -54,8 +55,9 @@ var gridCom = (function () {
             boxShape = new p2.Convex({ vertices: vertices });
         }
         else {
-            var vertices = [[0.95, -0.95], [0.95, 0.95], [-0.95, 0.95], [-0.95, -0.95]];
-            boxShape = new p2.Convex({ vertices: vertices });
+            // var vertices = [[0.95, -0.95], [0.95, 0.95], [-0.95, 0.95], [-0.95, -0.95]];
+            // boxShape = new p2.Convex({ vertices: vertices });
+            boxShape = new p2.Box({ width: 1.9, height: 1.9 });
         }
         boxShape.collisionGroup = 6;
         boxShape.collisionMask = 7;
@@ -65,9 +67,10 @@ var gridCom = (function () {
             this.boxBody.type = p2.Body.DYNAMIC;
             this.boxBody.gravityScale = 0;
             var self_1 = this;
+            var dt = 200 + (that.gridArr.length % 4) * 100;
             setTimeout(function () {
-                self_1.boxBody.velocity = [0.8, 0];
-            }, 500);
+                self_1.boxBody.velocity = [-0.8, 0];
+            }, dt);
         }
         this.boxBody.fixedRotation = false;
         this.boxBody.displays = [this.img, this.txt];
@@ -75,9 +78,10 @@ var gridCom = (function () {
         that.addChild(this.txt);
         return this.boxBody;
     };
-    gridCom.prototype.updateText = function (that, n, callback) {
+    gridCom.prototype.updateText = function (that, n, callback, boom) {
         if (n === void 0) { n = 1; }
         if (callback === void 0) { callback = null; }
+        if (boom === void 0) { boom = false; }
         //n--击打次数
         var hitText = new egret.BitmapText();
         hitText.font = this.font;
@@ -103,8 +107,11 @@ var gridCom = (function () {
             this.txt.parent && this.txt.parent.removeChild(this.txt);
             //播放销毁的动画
             var g = this.type == 2 ? 1 : this.type;
+            if (boom) {
+                g = 5;
+            }
             var gif_1 = movieMaster.getGif('boom_' + g);
-            var w = this.type == 5 ? 250 : 200;
+            var w = g == 5 ? 250 : 200;
             gif_1.x = this.img.x - w / 2;
             gif_1.y = this.img.y - w / 2;
             that.addChild(gif_1);
@@ -132,6 +139,7 @@ var gridCom = (function () {
             if (this.type == 5) {
                 soundMaster.playSingleMusic('boom_sound');
                 //是炸弹 判断被炸毁的区域
+                var boomNum = 0;
                 var d = that.adaptParams.itemWidth / that.factor;
                 var _loop_1 = function (i, len) {
                     var item = that.gridArr[i];
@@ -139,25 +147,28 @@ var gridCom = (function () {
                     var dy = Math.floor(Math.abs(item.boxBody.position[1] - this_1.boxBody.position[1]) * 100) / 100;
                     if (item.boxBody.id != this_1.boxBody.id && (dx <= d && dy <= d)) {
                         // console.log('boom', item.type)
-                        if (item.type == 3) {
-                            //精灵
-                            if (!item.isRemoved) {
-                                that.shootPoint.beeNum++;
-                                var nx_1 = item.boxBody.position[0];
-                                item.updateText(that, function () {
-                                    var b = new beeCom();
-                                    b.createBody(that, nx_1);
-                                    that.beeArr.push(b);
-                                });
+                        boomNum++;
+                        setTimeout(function () {
+                            if (item.type == 3) {
+                                //精灵
+                                if (!item.isRemoved) {
+                                    that.shootPoint.beeNum++;
+                                    var nx_1 = item.boxBody.position[0];
+                                    item.updateText(that, function () {
+                                        var b = new beeCom(that.myData.bulletIndex);
+                                        b.createBody(that, nx_1);
+                                        that.beeArr.push(b);
+                                    });
+                                }
                             }
-                        }
-                        else if (item.type == 4) {
-                            //星星
-                        }
-                        else if (!item.isRemoved) {
-                            console.log(55555);
-                            item.updateText(that, item.num, callback);
-                        }
+                            else if (item.type == 4) {
+                                //星星
+                            }
+                            else if (!item.isRemoved) {
+                                // console.log(55555)
+                                item.updateText(that, item.num, callback, true);
+                            }
+                        }, boomNum * 100);
                     }
                 };
                 var this_1 = this;
@@ -180,4 +191,3 @@ var gridCom = (function () {
 }());
 __reflect(gridCom.prototype, "gridCom");
 window['gridCom'] = gridCom;
-//# sourceMappingURL=gridCom.js.map

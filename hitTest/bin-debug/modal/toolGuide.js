@@ -32,4 +32,3 @@ var toolGuide = (function (_super) {
     return toolGuide;
 }(eui.Component));
 __reflect(toolGuide.prototype, "toolGuide", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=toolGuide.js.map

@@ -15,6 +15,9 @@ var sceneMaster = (function () {
         sceneMaster.littleBg = rect_2;
     };
     sceneMaster.changeScene = function (scene) {
+        // console.log('changeScene')
+        CallbackMaster.playCallback = null;
+        sceneMaster.modal && sceneMaster.modal.parent && sceneMaster.modal.parent.removeChild(sceneMaster.modal);
         sceneMaster.scene && sceneMaster.scene.parent && sceneMaster.stage.removeChild(sceneMaster.scene);
         sceneMaster.scene = scene;
         sceneMaster.stage.addChild(scene);
@@ -24,6 +27,7 @@ var sceneMaster = (function () {
     sceneMaster.openModal = function (modal, modalBg) {
         if (modalBg === void 0) { modalBg = true; }
         //页面上加弹窗  modalBg--是否加动画
+        // console.log('openModal')
         if (sceneMaster.modal) {
             //已存在一个弹窗
             sceneMaster.scene.removeChild(sceneMaster.modal);
@@ -95,4 +99,3 @@ var sceneMaster = (function () {
     return sceneMaster;
 }());
 __reflect(sceneMaster.prototype, "sceneMaster");
-//# sourceMappingURL=sceneMaster.js.map

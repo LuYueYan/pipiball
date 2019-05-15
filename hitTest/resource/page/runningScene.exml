@@ -1,57 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="runningSceneSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
 	<w:Config id="169bcf4f973" ></w:Config>
-	<e:Image id="bgImg" source="img_bg_game_02_jpg" horizontalCenter="0" top="0" height="1334"/>
-	<e:Image source="img_bg_green_1_png" x="55" y="47"/>
-	<e:BitmapLabel id="scoreText" x="155" y="78" text="66" font="stripe_text_fnt" width="200" textAlign="center"/>
-	<e:Group id="scoreProccess" x="38.68" y="36" height="120" width="120">
-		<e:Image source="star_bg_png" horizontalCenter="0" verticalCenter="0"/>
-		<e:Label text="关卡" y="28" textColor="0x603005" fontFamily="Microsoft YaHei" size="18" bold="true" horizontalCenter="0"/>
-		<e:Image id="star_1" x="-7.64" width="27" height="27" verticalCenter="5" rotation="343.17" source="img_star_b2_png"/>
-		<e:Image id="star_2" x="36.02" y="-0.67" width="32" height="32" rotation="336.51" source="img_star_b2_png"/>
-		<e:Image id="star_3" x="98.99" y="48.33" width="35" height="35" rotation="28.08" source="img_star_b2_png"/>
-		<e:BitmapLabel id="levelText" y="52" text="1" textAlign="center" font="brown_text_fnt" horizontalCenter="0"/>
+	<e:Image id="bgImg" source="img_bg_game_02_jpg" horizontalCenter="0" top="0" height="1334" touchEnabled="false"/>
+	<e:Image y="213" source="img_bg_game_03_png" horizontalCenter="0" touchEnabled="false"/>
+	<e:Group x="35" y="50" height="70" width="600">
+		<e:Group id="goldGroup" x="0" y="0" touchEnabled="true">
+			<e:Image source="btn_remain_diamond_3_png" x="0" y="0" touchEnabled="false"/>
+			<e:BitmapLabel id="goldText" x="69.01" text="333" font="stripe_text_fnt" anchorOffsetX="0" scaleX="0.8" scaleY="0.8" y="19" touchEnabled="false"/>
+		</e:Group>
+		<e:Image source="img_bg_green_2_png" x="221.36" y="0" anchorOffsetY="0" anchorOffsetX="0" touchEnabled="false"/>
+		<e:Image source="img_diamonds_00_png" x="246.03" anchorOffsetX="0" anchorOffsetY="0" verticalCenter="0" touchEnabled="false"/>
+		<e:BitmapLabel id="amountText" x="384.37" text="01/20" scaleX="0.7" scaleY="0.7" font="stripe_text_fnt" letterSpacing="-6" verticalCenter="0" touchEnabled="false"/>
 	</e:Group>
-	<e:Group x="364" y="47">
-		<e:Image source="img_bg_green_2_png" x="0" y="0"/>
-		<e:Image source="img_diamonds_00_png" x="10" y="18"/>
-		<e:BitmapLabel id="amountText" x="87" y="27" text="09/20" scaleX="0.7" scaleY="0.7" font="stripe_text_fnt" letterSpacing="-6"/>
-		<e:Image source="img_schedule_01_png" x="83" y="62"/>
-		<e:Image id="amountPro" source="img_schedule_02_png" x="83" y="62" width="0"/>
+	<e:Group id="scoreProccess" y="260" height="53.33" width="690" horizontalCenter="0" anchorOffsetY="0" touchEnabled="false">
+		<e:BitmapLabel id="levelText" text="第99关" textAlign="center" x="22.67" font="brown_white_text_fnt" verticalCenter="-2.664999999999999" cacheAsBitmap="true"/>
+		<e:Image x="152" source="img_schedule_02_png" verticalCenter="1.8350000000000009" touchEnabled="false"/>
+		<e:Image id="proccessBar" x="152" source="img_schedule_01_png" scale9Grid="7,3,365,17" width="360" verticalCenter="2.335000000000001" touchEnabled="false"/>
+		<e:Image id="star_1" x="242" width="27" height="27" source="img_star_b2_png" verticalCenter="0.8350000000000009" rotation="349.97" touchEnabled="false"/>
+		<e:Image id="star_2" x="340" width="32" height="32" source="img_star_b2_png" verticalCenter="0.33500000000000085" rotation="348.68" touchEnabled="false"/>
+		<e:Image id="star_3" x="512" width="35" height="35" source="img_star_b2_png" verticalCenter="1.3350000000000009" rotation="16.51" touchEnabled="false"/>
+		<e:BitmapLabel id="scoreText" text="6666" width="168" right="-26" anchorOffsetX="0" font="brown_white_text_fnt" letterSpacing="-4" verticalCenter="-1.6649999999999991" touchEnabled="false"/>
 	</e:Group>
-	<e:Image source="img_bg_game_03_png" y="1275" horizontalCenter="0"/>
-	<e:Group id="toolBottom" x="30" y="1190">
+	<e:Group id="recommandGroup" width="332" height="130" x="30" y="128" anchorOffsetY="0" anchorOffsetX="0"/>
+	<e:Group id="toolBottom" x="370" y="138.68" anchorOffsetX="0" width="364.67">
 		<e:Group id="hammer" x="0" y="0" width="110">
-			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
-			<e:Image id="hammer_img" scaleX="0.8" scaleY="0.8" source="img_prop_c1_png" anchorOffsetX="53.5" anchorOffsetY="59" horizontalCenter="0" verticalCenter="0"/>
-			<e:Image id="hammer_lock" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png" visible="false"/>
+			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1" touchEnabled="false"/>
+			<e:Image id="hammer_img" scaleX="0.8" scaleY="0.8" source="img_prop_c1_png" anchorOffsetX="53.5" anchorOffsetY="59" horizontalCenter="0" verticalCenter="0" touchEnabled="false"/>
+			<e:Rect id="hammer_numrect" width="32" height="32" x="78" y="7" strokeColor="0xffffff" strokeWeight="2" ellipseWidth="32" fillColor="0x64c101" touchEnabled="false" cacheAsBitmap="true"/>
+			<e:Label id="hammer_num" text="+" x="79.61" y="12" fontFamily="Arial" size="26" width="30" textAlign="center" touchEnabled="false" bold="true"/>
+			<e:Image id="hammer_lock" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png" touchEnabled="false" visible="false"/>
 			<e:Label id="hammer_text" text="第2关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
 		</e:Group>
 		<e:Group id="hat" x="121" y="0" width="110">
-			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
+			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1" touchEnabled="false"/>
 			<e:Image id="hat_img" scaleX="0.8" scaleY="0.8" source="img_prop_d1_png" anchorOffsetY="57.5" horizontalCenter="-0.5" anchorOffsetX="57" verticalCenter="0"/>
+			<e:Rect id="hat_numrect" width="32" height="32" x="78" y="7" strokeColor="0xFFFFFF" strokeWeight="2" ellipseWidth="32" fillColor="0x64c101" touchEnabled="false" cacheAsBitmap="true"/>
+			<e:Label id="hat_num" text="1" x="79.61" y="12" fontFamily="Arial" size="26" width="30" textAlign="center" bold="true"/>
 			<e:Image id="hat_lock" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png" visible="false"/>
 			<e:Label id="hat_text" text="第10关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
 		</e:Group>
 		<e:Group id="lamp" x="242" y="0" width="110">
 			<e:Image source="img_bg_prop_01_png" x="0" y="0" scaleX="1" scaleY="1"/>
 			<e:Image id="lamp_img" scaleX="0.8" scaleY="0.8" source="img_prop_e1_png" anchorOffsetX="42" anchorOffsetY="64.5" horizontalCenter="-0.5" y="48"/>
+			<e:Rect id="lamp_numrect" width="32" height="32" x="78" y="7" strokeColor="0xFFFFFF" strokeWeight="2" ellipseWidth="32" fillColor="0x64c101"/>
+			<e:Label id="lamp_num" text="1" x="79.61" y="12" fontFamily="Arial" size="26" width="30" textAlign="center" bold="true"/>
 			<e:Image id="lamp_lock" scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png" visible="false"/>
 			<e:Label id="lamp_text" text="第15关" y="81.72" horizontalCenter="0.5" fontFamily="Microsoft YaHei" size="18" textColor="0x7A7867" visible="false"/>
 		</e:Group>
-		<e:Group x="364" y="0" width="110">
-			<e:Image source="img_bg_prop_01_png" x="1.52" y="0" scaleX="1" scaleY="1"/>
-			<e:Image scaleX="1" scaleY="1" horizontalCenter="0" top="0" source="icn_lock_png"/>
-			<e:Label text="期待中" y="81.72" fontFamily="Microsoft YaHei" size="18" textColor="0x7a7867" horizontalCenter="0.5"/>
-		</e:Group>
 	</e:Group>
-	<e:Image id="bulletImg" source="img_bullet_a2_png" x="540" y="1207" width="95" height="85"/>
-	<e:BitmapLabel id="bulletNum" x="630" y="1266" text="X5" font="stripe_text_fnt"/>
-	<e:Image source="img_bg_game_01_jpg" y="195" horizontalCenter="0"/>
-	<e:Group id="hero" x="378" y="1127" anchorOffsetX="55" anchorOffsetY="160" width="154" height="180">
-		<e:Image id="heroImg" scaleX="1" scaleY="1" horizontalCenter="0" source="img_role_1_png"/>
+	<e:Image source="img_bg_game_01_jpg" y="319" horizontalCenter="0" touchEnabled="false" cacheAsBitmap="true"/>
+	<e:Group id="hero" x="378" y="1251" anchorOffsetX="55" anchorOffsetY="160" width="154" height="180">
+		<e:Image id="heroImg" scaleX="1" scaleY="1" horizontalCenter="0" source="img_role_1_png" touchEnabled="false"/>
 	</e:Group>
-	<e:Group id="rayGroup" width="690" height="914" anchorOffsetY="0" y="195" horizontalCenter="0">
+	<e:Image id="bulletImg" source="img_bullet_a2_png" x="605.3" y="1230.99" width="57.66" height="54.33" anchorOffsetX="0" anchorOffsetY="0" touchEnabled="false"/>
+	<e:BitmapLabel id="bulletNum" x="663" y="1258" text="X5" font="stripe_text_fnt" scaleX="0.6" scaleY="0.6" touchEnabled="false"/>
+	<e:Group id="rayGroup" width="690" height="914" anchorOffsetY="0" y="319" horizontalCenter="0">
 	</e:Group>
-	<e:Image id="homeBtn" source="game_img_home_png" y="151" right="0" touchEnabled="true"/>
+	<e:Image id="homeBtn" source="game_img_home_png" y="297.67" right="0" touchEnabled="true"/>
 </e:Skin>

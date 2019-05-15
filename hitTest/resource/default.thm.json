@@ -38,7 +38,10 @@
 		"toolGuide": "resource/modal/toolGuide.exml",
 		"chooseSex": "resource/modal/chooseSex.exml",
 		"dangerModal": "resource/modal/dangerModal.exml",
-		"tipsCom": "resource/modal/tipsCom.exml"
+		"tipsCom": "resource/modal/tipsCom.exml",
+		"continueGift": "resource/modal/continueGift.exml",
+		"useToolModal": "resource/modal/useToolModal.exml",
+		"runningCommand": "resource/modal/runningCommand.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
@@ -57,6 +60,7 @@
 		"resource/eui_skins/VScrollBarSkin.exml",
 		"resource/eui_skins/VSliderSkin.exml",
 		"resource/modal/chooseSex.exml",
+		"resource/modal/continueGift.exml",
 		"resource/modal/dangerModal.exml",
 		"resource/modal/getLifeModal.exml",
 		"resource/modal/getSuccess.exml",
@@ -70,11 +74,13 @@
 		"resource/modal/rankItem.exml",
 		"resource/modal/rankModal.exml",
 		"resource/modal/rebornModal.exml",
+		"resource/modal/runningCommand.exml",
 		"resource/modal/shopItem.exml",
 		"resource/modal/squareGuide.exml",
 		"resource/modal/teachModal.exml",
 		"resource/modal/tipsCom.exml",
 		"resource/modal/toolGuide.exml",
+		"resource/modal/useToolModal.exml",
 		"resource/page/cloudCom.exml",
 		"resource/page/gameOver.exml",
 		"resource/page/levelCom.exml",

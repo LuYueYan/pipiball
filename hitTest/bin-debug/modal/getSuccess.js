@@ -31,6 +31,9 @@ var getSuccess = (function (_super) {
         }
     };
     getSuccess.prototype.init = function () {
+        if (AdMaster.cacheBannerAd) {
+            AdMaster.openBannerAd({ width: 700, height: 300 });
+        }
         this.img.texture = RES.getRes(this.imgName);
         this.txt.text = '' + this.title;
         egret.Tween.get(this.light, { loop: true }).to({ rotation: 360 }, 3000);
@@ -38,9 +41,10 @@ var getSuccess = (function (_super) {
         this.ifShare.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ifShareFun, this);
     };
     getSuccess.prototype.knowFun = function () {
+        AdMaster.closeBannerAd();
         egret.Tween.removeTweens(this.light);
         if (this.shareType == 1) {
-            CallbackMaster.openShare(null, false);
+            CallbackMaster.openShare(null, -1);
         }
         if (sceneMaster.littleModal) {
             sceneMaster.closeLittleModal();
@@ -56,4 +60,3 @@ var getSuccess = (function (_super) {
     return getSuccess;
 }(eui.Component));
 __reflect(getSuccess.prototype, "getSuccess", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=getSuccess.js.map

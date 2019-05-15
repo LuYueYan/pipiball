@@ -8,6 +8,8 @@ class myShop extends eui.Component implements eui.UIComponent {
 
 	public dataGroup: eui.DataGroup;
 	public sourceArr: eui.ArrayCollection;
+
+	public shareCount=0;
 	public constructor() {
 		super();
 	}
@@ -49,10 +51,30 @@ class myShop extends eui.Component implements eui.UIComponent {
 		that.sourceArr.refresh();
 	}
 	public closeFun() {
+		userDataMaster.myCollection.removeEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.collectionChangeHandler, this);
 		sceneMaster.closeModal();
 	}
 	public goldGroupFun() {
-
+		let that = this;
+		if (!userDataMaster.todayShareGold) {
+			platform.showModal({
+				title: '温馨提示',
+				content: '今日获取次数已达上限，请明日再来'
+			});
+			return;
+		}
+		AdMaster.useVideo(()=>{
+			suc();
+		})
+		// CallbackMaster.openShare(() => {
+		// 	suc();
+		// }, that.shareCount);
+		// that.shareCount++;
+		function suc() {
+			userDataMaster.dayShareGold.num++;
+			userDataMaster.myGold = userDataMaster.gold + 20;
+			sceneMaster.openLittleModal(new getSuccess('img_diamond_big_png', 'X' + 20));
+		}
 	}
 
 }

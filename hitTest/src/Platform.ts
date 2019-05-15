@@ -46,6 +46,7 @@ declare interface Platform {
     previewImage(url: string, callback: Function): Promise<any>;//预览图片
     exitMiniProgram(object: Object): Promise<any>;
     showModal(object: Object): Promise<any>//模态弹框
+    showToast(object:Object):Promise<any>
     //设置系统剪贴板的内容
     setClipboardData(object: Object): Promise<any>
     getLaunchOptionsSync()
@@ -97,6 +98,7 @@ class DebugPlatform implements Platform {
     async previewImage(url: string, callback: Function) { }
     async exitMiniProgram(object: Object) { }
     async showModal(object: Object) { }
+    async showToast(object:Object){}
     async setClipboardData(object: Object) { }
     async getLaunchOptionsSync(){}
     async triggerGC(){}

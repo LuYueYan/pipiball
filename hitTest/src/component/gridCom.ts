@@ -6,7 +6,7 @@ class gridCom {
 	public num: number = 1;//需要击打的数量
 	public boxBody: p2.Body;
 	public type: number = 1;//类型 1--方形 2--三角型 5--炸弹 6--冰块
-	public squareType=1;//方块类型
+	public squareType = 1;//方块类型
 	public hitText: egret.Bitmap;//被击中时显示的数字
 	public destroyGif;//被销毁时的动画
 	public isRemoved = false;//是否已经被移除
@@ -55,7 +55,7 @@ class gridCom {
 		} else {
 			// var vertices = [[0.95, -0.95], [0.95, 0.95], [-0.95, 0.95], [-0.95, -0.95]];
 			// boxShape = new p2.Convex({ vertices: vertices });
-			boxShape = new p2.Box({width:1.9,height:1.9 });
+			boxShape = new p2.Box({ width: 1.9, height: 1.9 });
 		}
 		boxShape.collisionGroup = 6;
 		boxShape.collisionMask = 7;
@@ -66,10 +66,10 @@ class gridCom {
 			this.boxBody.type = p2.Body.DYNAMIC;
 			this.boxBody.gravityScale = 0;
 			let self = this;
-			let dt=200+(that.gridArr.length%4)*100;
+			let dt = 200 + (that.gridArr.length % 4) * 100;
 			setTimeout(function () {
 				self.boxBody.velocity = [-0.8, 0];
-		},dt);
+			}, dt);
 		}
 		this.boxBody.fixedRotation = false;
 		this.boxBody.displays = [this.img, this.txt];
@@ -77,7 +77,7 @@ class gridCom {
 		that.addChild(this.txt);
 		return this.boxBody;
 	}
-	public updateText(that, n = 1, callback: Function = null) {
+	public updateText(that, n = 1, callback: Function = null, boom: boolean = false) {
 		//n--击打次数
 		let hitText = new egret.BitmapText();
 		hitText.font = this.font;
@@ -102,8 +102,11 @@ class gridCom {
 			this.txt.parent && this.txt.parent.removeChild(this.txt);
 			//播放销毁的动画
 			let g = this.type == 2 ? 1 : this.type;
+			if (boom) {
+				g = 5;
+			}
 			let gif = movieMaster.getGif('boom_' + g);
-			let w = this.type == 5 ? 250 : 200;
+			let w = g == 5 ? 250 : 200;
 			gif.x = this.img.x - w / 2;
 			gif.y = this.img.y - w / 2;
 
@@ -133,6 +136,7 @@ class gridCom {
 			if (this.type == 5) {
 				soundMaster.playSingleMusic('boom_sound');
 				//是炸弹 判断被炸毁的区域
+				let boomNum = 0;
 				let d = that.adaptParams.itemWidth / that.factor;
 				for (let i = 0, len = that.gridArr.length; i < len; i++) {
 					let item = that.gridArr[i];
@@ -140,24 +144,28 @@ class gridCom {
 					let dy = Math.floor(Math.abs(item.boxBody.position[1] - this.boxBody.position[1]) * 100) / 100;
 					if (item.boxBody.id != this.boxBody.id && (dx <= d && dy <= d)) {
 						// console.log('boom', item.type)
-						if (item.type == 3) {
-							//精灵
-							if (!item.isRemoved) {
-								that.shootPoint.beeNum++;
-								let nx = item.boxBody.position[0];
-								item.updateText(that, () => {
-									let b = new beeCom();
-									b.createBody(that, nx);
-									that.beeArr.push(b);
-								});
-							}
+						boomNum++;
+						setTimeout(function () {
+							if (item.type == 3) {
+								//精灵
+								if (!item.isRemoved) {
+									that.shootPoint.beeNum++;
+									let nx = item.boxBody.position[0];
+									item.updateText(that, () => {
+										let b = new beeCom(that.myData.bulletIndex);
+										b.createBody(that, nx);
+										that.beeArr.push(b);
+									});
+								}
 
-						} else if (item.type == 4) {
-							//星星
-						} else if (!item.isRemoved) {
-							// console.log(55555)
-							item.updateText(that, item.num, callback);
-						}
+							} else if (item.type == 4) {
+								//星星
+							} else if (!item.isRemoved) {
+								// console.log(55555)
+								item.updateText(that, item.num, callback, true);
+							}
+						}, boomNum * 100);
+
 
 					}
 				}

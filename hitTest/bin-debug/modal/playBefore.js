@@ -12,6 +12,8 @@ var playBefore = (function (_super) {
     __extends(playBefore, _super);
     function playBefore(level) {
         var _this = _super.call(this) || this;
+        _this.shareCount_1 = 0;
+        _this.shareCount_2 = 0;
         _this.choose = {
             glass: false,
             bullet: false
@@ -33,6 +35,9 @@ var playBefore = (function (_super) {
     };
     playBefore.prototype.init = function () {
         var that = this;
+        if (AdMaster.cacheBannerAd) {
+            AdMaster.openBannerAd({ width: 700, height: 300 });
+        }
         var guideIndex = 0;
         if (this.level == 5 && userDataMaster.level == 4) {
             //道具bullet首次出现 第五关
@@ -135,7 +140,8 @@ var playBefore = (function (_super) {
             }, function () {
                 CallbackMaster.openShare(function () {
                     suc();
-                });
+                }, that.shareCount_1);
+                that.shareCount_1++;
             });
             return;
         }
@@ -204,6 +210,8 @@ var playBefore = (function (_super) {
                     content: '您的体力不足',
                     success: function (res) {
                         if (res.confirm) {
+                            AdMaster.closeBannerAd();
+                            egret.Tween.removeAllTweens();
                             sceneMaster.changeScene(new startScene());
                             sceneMaster.openModal(new getLifeModal());
                         }
@@ -222,14 +230,16 @@ var playBefore = (function (_super) {
             egret.Tween.get(that).to({ factor: 1 }, t);
             userDataMaster.myLife = userDataMaster.life - 1;
         }
+        that.startBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, that);
         setTimeout(function () {
             for (var item in that.choose) {
                 if (that.choose[item]) {
                     userDataMaster.tool[item].num--;
                 }
             }
+            AdMaster.closeBannerAd();
             egret.Tween.removeAllTweens();
-            sceneMaster.changeScene(new runningScene(that.level, {}, that.choose));
+            sceneMaster.changeScene(new runningScene(that.level, that.choose));
         }, t);
     };
     playBefore.prototype.videoFun = function () {
@@ -239,30 +249,34 @@ var playBefore = (function (_super) {
             that.startFun(false);
             return;
         }
-        if (!userDataMaster.dayFreeLife) {
+        if (!userDataMaster.todayFreeLife) {
             //今天视频次数用完
             platform.showModal({
                 title: '温馨提醒',
                 content: '今日免体力次数已用完，请明日再来'
             });
         }
-        if (userDataMaster.dayFreeLife.num < 3) {
+        else if (userDataMaster.dayFreeLife.num < 3) {
             CallbackMaster.openShare(function () {
+                userDataMaster.dayFreeLife.num++;
                 that.startFun(false);
-            });
+            }, that.shareCount_2);
+            that.shareCount_2++;
         }
         else {
             AdMaster.useVideo(function () {
+                userDataMaster.dayFreeLife.num++;
                 that.startFun(false);
             }, function () {
                 platform.showModal({
                     title: '温馨提示',
-                    content: '暂未开通视频奖励'
+                    content: '没有可以观看的视频'
                 });
             });
         }
     };
     playBefore.prototype.closeFun = function () {
+        AdMaster.closeBannerAd();
         egret.Tween.removeTweens(this.glassImg);
         if (this.bulletImg && this.bulletImg.parent) {
             egret.Tween.removeTweens(this.bulletImg);
@@ -277,4 +291,3 @@ var playBefore = (function (_super) {
     return playBefore;
 }(eui.Component));
 __reflect(playBefore.prototype, "playBefore", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=playBefore.js.map

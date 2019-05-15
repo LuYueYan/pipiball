@@ -5,6 +5,7 @@ var starCom = (function () {
     function starCom() {
         this.type = 4; //星星
         this.isRemoved = false; //是否已经被移除
+        this.squareType = 2; //星星类型
         this.init();
     }
     starCom.prototype.init = function () {
@@ -51,4 +52,3 @@ var starCom = (function () {
 }());
 __reflect(starCom.prototype, "starCom");
 window['starCom'] = starCom;
-//# sourceMappingURL=starCom.js.map

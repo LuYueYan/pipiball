@@ -77,7 +77,7 @@ var AdMaster = (function () {
                             if (parseInt(res.code) === 1 && res.data) {
                                 // res.data.banner_id=['adunit-9770641ec26321d7'];
                                 // res.data.video_id=['adunit-d0c0bc599cd9d2b6'];
-                                if (res.data.edition_1 == 1) {
+                                if (res.data.edition_3 == 2) {
                                     //审核通过，允许分享
                                     CallbackMaster.hasChecked = true;
                                 }
@@ -94,6 +94,14 @@ var AdMaster = (function () {
                                     AdMaster.randomCacheVideoAd();
                                 }
                                 AdMaster.INIT_STATUS = 2;
+                                if (res.data.share_title) {
+                                    //分享标题list
+                                    CallbackMaster.share_title = res.data.share_title;
+                                }
+                                if (res.data.share_img) {
+                                    //分享图list
+                                    CallbackMaster.share_img = res.data.share_img;
+                                }
                             }
                         }, function (err) {
                             AdMaster.INIT_STATUS = 3;
@@ -237,4 +245,3 @@ var AdMaster = (function () {
 }());
 __reflect(AdMaster.prototype, "AdMaster");
 window['AdMaster'] = AdMaster;
-//# sourceMappingURL=AdMaster.js.map

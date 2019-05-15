@@ -20,7 +20,13 @@ class sceneMaster {
 	}
 	public static changeScene(scene) {
 		// console.log('changeScene')
-		sceneMaster.modal&&sceneMaster.modal.parent&&sceneMaster.modal.parent.removeChild(sceneMaster.modal);
+		AdMaster.closeBannerAd();
+		if (userDataMaster.myCollection.hasEventListener(eui.CollectionEvent.COLLECTION_CHANGE)) {
+			userDataMaster.myCollection.removeEventListener(eui.CollectionEvent.COLLECTION_CHANGE, sceneMaster.scene.dataChange, sceneMaster.scene);
+		}
+
+		CallbackMaster.playCallback = null;
+		sceneMaster.modal && sceneMaster.modal.parent && sceneMaster.modal.parent.removeChild(sceneMaster.modal);
 		sceneMaster.scene && sceneMaster.scene.parent && sceneMaster.stage.removeChild(sceneMaster.scene);
 		sceneMaster.scene = scene;
 		sceneMaster.stage.addChild(scene);

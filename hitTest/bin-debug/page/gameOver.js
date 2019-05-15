@@ -30,6 +30,9 @@ var gameOver = (function (_super) {
     };
     gameOver.prototype.init = function () {
         var that = this;
+        if (AdMaster.cacheBannerAd) {
+            AdMaster.openBannerAd({ width: 700, height: 300 });
+        }
         var dataGroup = new eui.DataGroup();
         var list = [];
         if (userDataMaster.recommand['2'] && userDataMaster.recommand['2'].games) {
@@ -62,17 +65,18 @@ var gameOver = (function (_super) {
         this.playBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.playFun, this);
     };
     gameOver.prototype.shareFun = function () {
-        CallbackMaster.openShare(null, false);
+        CallbackMaster.openShare(null, -1);
     };
     gameOver.prototype.homeFun = function () {
+        AdMaster.closeBannerAd();
         egret.Tween.removeAllTweens();
         sceneMaster.changeScene(new startScene());
     };
     gameOver.prototype.playFun = function () {
+        AdMaster.closeBannerAd();
         var level = this.level;
         sceneMaster.openLittleModal(new playBefore(level));
     };
     return gameOver;
 }(eui.Component));
 __reflect(gameOver.prototype, "gameOver", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=gameOver.js.map

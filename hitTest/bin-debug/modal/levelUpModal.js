@@ -12,6 +12,7 @@ var levelUpModal = (function (_super) {
     __extends(levelUpModal, _super);
     function levelUpModal(level, info) {
         var _this = _super.call(this) || this;
+        _this.shareCount = 0;
         _this.level = level;
         _this.info = info;
         return _this;
@@ -29,6 +30,9 @@ var levelUpModal = (function (_super) {
         }
     };
     levelUpModal.prototype.init = function () {
+        if (AdMaster.cacheBannerAd) {
+            AdMaster.openBannerAd({ width: 700, height: 300 });
+        }
         this.scoreText.text = this.info.score + '';
         this.levelText.text = '第' + this.level + '关';
         this.goldText.text = 'X' + this.info.gold;
@@ -71,33 +75,39 @@ var levelUpModal = (function (_super) {
             star: that.info.star
         });
         this.videoBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.videoFun, this);
-        this.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.getFun, this);
+        this.getBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, function () { that.getFun(that.info.gold); }, this);
     };
     levelUpModal.prototype.videoFun = function () {
+        var that = this;
         AdMaster.useVideo(function () {
-            suc();
+            that.getFun(that.info.gold * 2);
         }, function () {
             CallbackMaster.openShare(function () {
-                suc();
-            });
+                that.getFun(that.info.gold * 2);
+            }, that.shareCount);
+            that.shareCount++;
         });
-        var that = this;
-        function suc() {
-            userDataMaster.myGold = userDataMaster.gold + that.info.gold * 2;
-            that.gif.stop();
-            egret.Tween.removeAllTweens();
-            sceneMaster.changeScene(new startScene());
-            sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + that.info.gold * 2));
-        }
+        // let that = this;
+        // function suc() {
+        // 	AdMaster.closeBannerAd()
+        // 	userDataMaster.myGold = userDataMaster.gold + that.info.gold * 2;
+        // 	that.gif.stop();
+        // 	egret.Tween.removeAllTweens();
+        // 	sceneMaster.changeScene(new startScene());
+        // 	sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + that.info.gold * 2));
+        // }
     };
-    levelUpModal.prototype.getFun = function () {
-        userDataMaster.myGold = userDataMaster.gold + this.info.gold;
-        this.gif.stop();
+    levelUpModal.prototype.getFun = function (gold) {
+        var that = this;
+        AdMaster.closeBannerAd();
+        userDataMaster.myGold = userDataMaster.gold + gold;
+        that.gif.stop();
         egret.Tween.removeAllTweens();
         sceneMaster.changeScene(new startScene());
-        sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + this.info.gold));
+        setTimeout(function () {
+            sceneMaster.openModal(new getSuccess('img_diamond_big_png', 'X' + gold));
+        }, 50);
     };
     return levelUpModal;
 }(eui.Component));
 __reflect(levelUpModal.prototype, "levelUpModal", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=levelUpModal.js.map

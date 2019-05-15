@@ -140,5 +140,20 @@
         "path": "modal\\tipsCom.ts",
         "class": "tipsCom",
         "parentPath": ""
+    },
+    "16aaeeb2fb6": {
+        "path": "modal\\continueGift.ts",
+        "class": "continueGift",
+        "parentPath": ""
+    },
+    "16ab4724300": {
+        "path": "modal\\useToolModal.ts",
+        "class": "useToolModal",
+        "parentPath": ""
+    },
+    "16ab60e7c6d": {
+        "path": "modal\\runningCommand.ts",
+        "class": "runningCommand",
+        "parentPath": ""
     }
 }

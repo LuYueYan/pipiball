@@ -144,6 +144,9 @@ class WxgamePlatform {
   showModal(obj) {
     return wx.showModal(obj);
   }
+  showToast(obj){
+    return wx.showToast(obj)
+  }
   setClipboardData(obj) {
     return wx.setClipboardData(obj)
   }

@@ -22,6 +22,9 @@ var dangerModal = (function (_super) {
     };
     dangerModal.prototype.init = function () {
         var that = this;
+        if (AdMaster.cacheBannerAd) {
+            AdMaster.openBannerAd({ width: 700, height: 300 });
+        }
         egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
         that.useBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.useFun, this);
         that.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, that.ignoreFun, this);
@@ -33,10 +36,10 @@ var dangerModal = (function (_super) {
         egret.Tween.removeTweens(this.light);
     };
     dangerModal.prototype.ignoreFun = function () {
+        AdMaster.closeBannerAd();
         egret.Tween.removeTweens(this.light);
         sceneMaster.closeModal();
     };
     return dangerModal;
 }(eui.Component));
 __reflect(dangerModal.prototype, "dangerModal", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=dangerModal.js.map

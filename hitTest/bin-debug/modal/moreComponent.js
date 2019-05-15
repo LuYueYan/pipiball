@@ -68,4 +68,3 @@ var moreComponent = (function (_super) {
 }(eui.Component));
 __reflect(moreComponent.prototype, "moreComponent", ["eui.UIComponent", "egret.DisplayObject"]);
 window['moreComponent'] = moreComponent;
-//# sourceMappingURL=moreComponent.js.map

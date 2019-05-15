@@ -118,7 +118,7 @@ var Main = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 5, , 6]);
+                        _a.trys.push([0, 6, , 7]);
                         return [4 /*yield*/, RES.loadConfig("resource/default.res.json", "resource/")];
                     case 1:
                         _a.sent();
@@ -133,16 +133,21 @@ var Main = (function (_super) {
                         return [4 /*yield*/, RES.loadGroup("load", 0, loadingView_1)];
                     case 4:
                         _a.sent();
+                        return [4 /*yield*/, RES.getResByUrl('https://lixi.h5.app81.com/minigame/game_lixi/shooting/levelArr.json', function (res) {
+                                userDataMaster.levelArr = res.list;
+                            }, this, RES.ResourceItem.TYPE_JSON)];
+                    case 5:
+                        _a.sent();
                         that_1 = this;
                         setTimeout(function () {
                             that_1.checkSuccess(loadingView_1, 0);
                         }, 1000);
-                        return [3 /*break*/, 6];
-                    case 5:
+                        return [3 /*break*/, 7];
+                    case 6:
                         e_1 = _a.sent();
                         console.error(e_1);
-                        return [3 /*break*/, 6];
-                    case 6: return [2 /*return*/];
+                        return [3 /*break*/, 7];
+                    case 7: return [2 /*return*/];
                 }
             });
         });
@@ -175,8 +180,8 @@ var Main = (function (_super) {
      * Create scene interface
      */
     Main.prototype.createGameScene = function () {
-        CallbackMaster.init();
         AdMaster.init();
+        CallbackMaster.init();
         sceneMaster.init(this.stage);
         sceneMaster.changeScene(new startScene());
         movieMaster.init();
@@ -195,4 +200,3 @@ var Main = (function (_super) {
     return Main;
 }(eui.UILayer));
 __reflect(Main.prototype, "Main");
-//# sourceMappingURL=Main.js.map

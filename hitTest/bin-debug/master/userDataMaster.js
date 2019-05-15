@@ -52,30 +52,16 @@ var userDataMaster = (function () {
             userDataMaster.life,
             userDataMaster.level,
             userDataMaster.bulletIndex,
-            userDataMaster.tool
+            userDataMaster.tool,
+            userDataMaster.myInfo
         ];
         //用 ArrayCollection 包装
         userDataMaster.myCollection = new eui.ArrayCollection(sourceArr);
+        // 测试----------------------0430
         userDataMaster.login();
+        // userDataMaster.getGameData(userDataMaster.myInfo.uid)
+        // ----------------
         userDataMaster.getRecommand();
-        userDataMaster.createLevelArr();
-    };
-    userDataMaster.createLevelArr = function () {
-        var arr = [];
-        var bigArr = [5, 8, 11, 14, 15];
-        var goldArr = [6, 8, 11, 13];
-        for (var i = 1; i <= 100; i++) {
-            var small = i < 5 ? i : 5;
-            var big = i > bigArr.length ? i + 10 : bigArr[i - 1];
-            var line = big - small + 1;
-            var amount = Math.ceil((line * 7) / 2);
-            var gold = i < 5 ? goldArr[i - 1] : i + 8;
-            var bullet = i > 30 ? 8 : Math.floor((i - 1) / 10) + 5;
-            var item = { level: i, amount: amount, small: small, score: amount + 1000, gold: gold, bullet: bullet };
-            //score是达到一颗星的最小分数
-            arr.push(item);
-        }
-        userDataMaster.levelArr = arr;
     };
     userDataMaster.getGameData = function (uid) {
         var that = this;
@@ -100,16 +86,15 @@ var userDataMaster = (function () {
                                 //上次退出时体力没满
                                 var closeDate = info.closeDate;
                                 var n = (new Date().getTime() - closeDate) / 1000 / 15 / 60;
-                                var c = userDataMaster.life + Math.floor(n);
+                                var c = info.life + Math.floor(n);
                                 if (c >= 5) {
-                                    userDataMaster.myLife = c;
+                                    userDataMaster.myLife = info.life > 5 ? info.life : 5;
                                 }
                                 else {
                                     userDataMaster.life = c;
                                     userDataMaster.myCollection.replaceItemAt(c, 1);
                                     var t = Math.floor((n - Math.floor(n)) * 15 * 60);
-                                    console.log('exist', t);
-                                    userDataMaster.updateTime(900 - t);
+                                    userDataMaster.updateTime(600 - t);
                                 }
                             }
                         }
@@ -118,17 +103,21 @@ var userDataMaster = (function () {
                         }
                         if (info.dayShareLife) {
                             userDataMaster.dayShareLife = info.dayShareLife;
-                            userDataMaster.todayShareLife; //更新今日次数
+                            1 && userDataMaster.todayShareLife; //更新今日次数
                         }
                         if (info.dayShareGold) {
                             userDataMaster.dayShareGold = info.dayShareGold;
-                            userDataMaster.todayShareGold; //更新今日次数
+                            1 && userDataMaster.todayShareGold; //更新今日次数
                         }
                         if (info.dayGift) {
                             userDataMaster.dayGift = info.dayGift;
+                            1 && userDataMaster.todayGift;
                         }
                         if (info.tool) {
                             userDataMaster.tool = info.tool;
+                        }
+                        if (info.bulletStateNum) {
+                            userDataMaster.bulletStateNum = info.bulletStateNum;
                         }
                         if (info.bulletSateArr) {
                             userDataMaster.bulletSateArr = info.bulletSateArr;
@@ -168,7 +157,7 @@ var userDataMaster = (function () {
             userDataMaster.life = life;
             userDataMaster.myCollection.replaceItemAt(life, 1);
             if (life < 5 && !userDataMaster.terval) {
-                userDataMaster.seconds = 900;
+                userDataMaster.seconds = 600;
                 userDataMaster.updateTime();
             }
         },
@@ -184,7 +173,7 @@ var userDataMaster = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(userDataMaster, "myBulleIndex", {
+    Object.defineProperty(userDataMaster, "myBulletIndex", {
         set: function (index) {
             //更新当前炮弹
             userDataMaster.bulletIndex = index;
@@ -203,9 +192,9 @@ var userDataMaster = (function () {
         configurable: true
     });
     userDataMaster.updateTime = function (t) {
-        if (t === void 0) { t = 900; }
+        if (t === void 0) { t = 600; }
         clearInterval(userDataMaster.terval);
-        userDataMaster.seconds = 900;
+        userDataMaster.seconds = 600;
         userDataMaster.terval = setInterval(function () {
             t--;
             userDataMaster.seconds = t;
@@ -224,6 +213,7 @@ var userDataMaster = (function () {
         },
         set: function (data) {
             userDataMaster.myInfo = data;
+            userDataMaster.myCollection.replaceItemAt(data, 5);
         },
         enumerable: true,
         configurable: true
@@ -264,8 +254,8 @@ var userDataMaster = (function () {
         get: function () {
             //获取今日抽奖次数
             if (userDataMaster.dayGift.day == userDataMaster.getToday()) {
-                if (userDataMaster.dayGift.num >= 2) {
-                    //每日抽奖3次 一次免费 2次分享
+                if (userDataMaster.dayGift.num >= 6) {
+                    //每日抽奖3次 一次免费 2次分享 3视频
                     return false;
                 }
             }
@@ -281,10 +271,10 @@ var userDataMaster = (function () {
         get: function () {
             //获取今日免体力开局次数
             if (userDataMaster.dayFreeLife.day == userDataMaster.getToday()) {
-                if (userDataMaster.dayFreeLife.num >= 8) {
-                    //每日前三次分享，后5次看视频
-                    return false;
-                }
+                // if (userDataMaster.dayFreeLife.num >= 8) {
+                // 	//每日前三次分享，后面无限看视频
+                // 	return false;
+                // }
             }
             else {
                 userDataMaster.dayFreeLife = { day: userDataMaster.getToday(), num: 0 };
@@ -342,6 +332,7 @@ var userDataMaster = (function () {
                 userInfo = res.userInfo;
                 userDataMaster.myInfo.nickName = userInfo.nickName;
                 userDataMaster.myInfo.avatarUrl = userInfo.avatarUrl;
+                userDataMaster.getMyInfo = userDataMaster.myInfo;
                 params = {
                     uid: userDataMaster.getMyInfo.uid,
                     nickName: userInfo.nickName,
@@ -382,6 +373,7 @@ var userDataMaster = (function () {
                                 userDataMaster.getMyInfo = suc.data;
                                 //测试测试………………
                                 // userDataMaster.myInfo.is_new_user = true;
+                                // userDataMaster.myInfo.avatarUrl=''
                                 // userDataMaster.myInfo.gender=0;
                                 // userDataMaster.userInfoBtn && userDataMaster.userInfoBtn.destroy();
                                 //初始化用户openid
@@ -411,7 +403,7 @@ var userDataMaster = (function () {
         return date.getFullYear() + '-' + month + '-' + day;
     };
     userDataMaster.myInfo = { uid: 0, openId: '', is_new_user: true, nickName: '', avatarUrl: '', gender: 0 }; //用户信息
-    userDataMaster.gold = 500; //金币
+    userDataMaster.gold = 0; //金币
     userDataMaster.life = 5; //体力
     userDataMaster.level = 0; //已达成的关卡
     userDataMaster.closeDate = 0; //上次关闭游戏的时间点
@@ -427,13 +419,17 @@ var userDataMaster = (function () {
         lamp: { level: 15, unlock: false, num: 1 }
     }; //道具数量
     userDataMaster.bulletArr = [
-        { id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 1000, powerImg: 1, txt: '', target: {} },
-        { id: 1, img: 'img_bullet_b3', title: '蘑菇炮', price: 500, powerImg: 3, txt: '对炸弹方块威力+2', target: { type_5: 2 } },
-        { id: 2, img: 'img_bullet_c3', title: '大头炮', price: 1000, powerImg: 3, txt: '对移动方块威力+2', target: { type_6: 2 } },
-        { id: 3, img: 'img_bullet_d3', title: '小南瓜', price: 5000, powerImg: 2, txt: '对普通方块威力+1', target: { type_1: 1, type_2: 1 } },
-        { id: 4, img: 'img_bullet_e3', title: '包菜君', price: 5000, powerImg: 2, txt: '对所有方块威力+1', target: { type_1: 1, type_2: 1, type_5: 1, type_6: 1 } }
+        { id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 100, getWay: 'buy', getNum: 1, powerImg: 1, txt: '', target: {} },
+        { id: 1, img: 'img_bullet_b3', title: '蘑菇炮', price: 500, getWay: 'share', getNum: 2, powerImg: 3, txt: '对炸弹方块威力+2', target: { type_5: 2 } },
+        { id: 2, img: 'img_bullet_c3', title: '大头炮', price: 1000, getWay: 'video', getNum: 3, powerImg: 3, txt: '对移动方块威力+2', target: { type_6: 2 } },
+        { id: 3, img: 'img_bullet_d3', title: '小南瓜', price: 2000, getWay: 'buy', getNum: 1, powerImg: 2, txt: '对普通方块威力+1', target: { type_1: 1, type_2: 1 } },
+        { id: 4, img: 'img_bullet_e3', title: '包菜君', price: 3000, getWay: 'buy', getNum: 1, powerImg: 2, txt: '对所有方块威力+1', target: { type_1: 1, type_2: 1, type_5: 1, type_6: 1 } }
     ];
     userDataMaster.bulletSateArr = [1, 0, 0, 0, 0]; //炸弹状态
+    userDataMaster.bulletStateNum = {
+        bullet_1: 0,
+        bullet_2: 0
+    }; ///蘑菇跑和大头跑获得状态次数
     userDataMaster.levelArr = []; //关卡信息数组
     userDataMaster.shareUid = 0; //分享人id
     userDataMaster.requestTimes = 0; //请求游戏数据的次数
@@ -443,8 +439,8 @@ var userDataMaster = (function () {
     userDataMaster.dayFreeLife = { day: '', num: 0 }; //每日免体力开局次数
     userDataMaster.loginCallback = null; //弹窗登录成功的回调
     userDataMaster.getDataSuccess = false; //获取数据成功
+    userDataMaster.tryingIndex = -1; //试玩的植物索引
     return userDataMaster;
 }());
 __reflect(userDataMaster.prototype, "userDataMaster");
 window['userDataMaster'] = userDataMaster;
-//# sourceMappingURL=userDataMaster.js.map

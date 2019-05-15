@@ -57,4 +57,3 @@ var myShop = (function (_super) {
     return myShop;
 }(eui.Component));
 __reflect(myShop.prototype, "myShop", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=myShop.js.map

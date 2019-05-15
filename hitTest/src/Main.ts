@@ -72,7 +72,7 @@ class Main extends eui.UILayer {
             this.stage.addChild(loadingView);
             await this.loadTheme();
             await RES.loadGroup("load", 0, loadingView);
-            await RES.getResByUrl('https://lixi.h5.app81.com/minigame/game_lixi/shooting/levelArr.json', (res) => {
+            await RES.getResByUrl('https://lixi.h5.app81.com/minigame/game_lixi/shooting/levelArr0515.json', (res) => {
                 userDataMaster.levelArr = res.list;
             }, this, RES.ResourceItem.TYPE_JSON);
             let that = this;

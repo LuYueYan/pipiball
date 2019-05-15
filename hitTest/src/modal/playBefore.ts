@@ -80,6 +80,8 @@ class playBefore extends eui.Component implements eui.UIComponent {
 			if (userDataMaster.tool.bullet.num <= 0) {
 				that.bulletNum.visible = false;
 				that.bulletAdd.visible = true;
+			}else{
+				that.bulletNum.text='X'+userDataMaster.tool.bullet.num;
 			}
 			egret.Tween.get(that.bulletImg, { loop: true }).to({ scaleX: 1.2, scaleY: 1.2 }, 1000).to({ scaleX: 1, scaleY: 1 }, 1000);
 			that.bullet.addEventListener(egret.TouchEvent.TOUCH_TAP, () => { that.chooseFun('bullet') }, this);
@@ -115,6 +117,8 @@ class playBefore extends eui.Component implements eui.UIComponent {
 		if (userDataMaster.tool.glass.num <= 0) {
 			that.glassNum.visible = false;
 			that.glassAdd.visible = true;
+		}else{
+			that.glassNum.text='X'+userDataMaster.tool.glass.num;
 		}
 		that.titleText.text = '第' + this.level + '关';
 	}
@@ -227,6 +231,7 @@ class playBefore extends eui.Component implements eui.UIComponent {
 			egret.Tween.get(that).to({ factor: 1 }, t);
 			userDataMaster.myLife = userDataMaster.life - 1;
 		}
+		that.startBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, that.startFun, that);
 		setTimeout(function () {
 			for (let item in that.choose) {
 				if (that.choose[item]) {
@@ -235,7 +240,7 @@ class playBefore extends eui.Component implements eui.UIComponent {
 			}
 			AdMaster.closeBannerAd()
 			egret.Tween.removeAllTweens();
-			sceneMaster.changeScene(new runningScene(that.level, {}, that.choose));
+			sceneMaster.changeScene(new runningScene(that.level, that.choose));
 		}, t);
 
 	}

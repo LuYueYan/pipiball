@@ -30,6 +30,9 @@ var rebornModal = (function (_super) {
     };
     rebornModal.prototype.init = function () {
         var that = this;
+        if (AdMaster.cacheBannerAd) {
+            AdMaster.openBannerAd({ width: 700, height: 300 });
+        }
         that.ignoreBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ignoreFun, this);
         setTimeout(function () {
             that.ignoreBtn.visible = true;
@@ -47,9 +50,9 @@ var rebornModal = (function (_super) {
         }, 1000);
     };
     rebornModal.prototype.ignoreFun = function () {
+        AdMaster.closeBannerAd();
         sceneMaster.openModal(new gameOver(this.level, this.myData));
     };
     return rebornModal;
 }(eui.Component));
 __reflect(rebornModal.prototype, "rebornModal", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=rebornModal.js.map

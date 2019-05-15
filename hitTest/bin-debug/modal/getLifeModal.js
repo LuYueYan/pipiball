@@ -11,7 +11,9 @@ r.prototype = e.prototype, t.prototype = new r();
 var getLifeModal = (function (_super) {
     __extends(getLifeModal, _super);
     function getLifeModal() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.shareCount = 0;
+        return _this;
     }
     getLifeModal.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);
@@ -27,6 +29,9 @@ var getLifeModal = (function (_super) {
     };
     getLifeModal.prototype.init = function () {
         var that = this;
+        if (AdMaster.cacheBannerAd) {
+            AdMaster.openBannerAd({ width: 700, height: 300 });
+        }
         var terval = setInterval(function () {
             if (userDataMaster.life >= 5) {
                 clearInterval(terval);
@@ -52,22 +57,21 @@ var getLifeModal = (function (_super) {
         // return res;
     };
     getLifeModal.prototype.closeFun = function () {
+        AdMaster.closeBannerAd();
         sceneMaster.closeModal();
     };
     getLifeModal.prototype.videoFun = function () {
         AdMaster.useVideo(function () {
             suc();
         }, function () {
-            // CallbackMaster.openShare(() => {
-            // 	suc();
-            // })
             platform.showModal({
                 title: '温馨提示',
-                content: '暂未开通视频奖励'
+                content: '视频奖励次数已达上限'
             });
         });
         function suc() {
-            userDataMaster.myLife++;
+            userDataMaster.myLife = userDataMaster.life + 1;
+            sceneMaster.openLittleModal(new getSuccess('img_gift_01_png', ''));
         }
     };
     getLifeModal.prototype.shareFun = function () {
@@ -79,7 +83,8 @@ var getLifeModal = (function (_super) {
                 userDataMaster.myLife = userDataMaster.life + 1;
                 that.shareTimes.text = "(" + userDataMaster.dayShareLife.num + "/5)";
                 sceneMaster.openLittleModal(new getSuccess('img_gift_01_png', ''));
-            });
+            }, that.shareCount);
+            that.shareCount++;
         }
         else {
             //今日获取次数已用完，请明日再来
@@ -92,4 +97,3 @@ var getLifeModal = (function (_super) {
     return getLifeModal;
 }(eui.Component));
 __reflect(getLifeModal.prototype, "getLifeModal", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=getLifeModal.js.map

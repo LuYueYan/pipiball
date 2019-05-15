@@ -45,6 +45,7 @@
 			</e:Skin>
 			</ns1:skinName>
 		</ns1:tweenButton>
+		<e:Image id="tool_dot" source="img_red_dot_png" x="269.04" y="10.96"/>
 		<ns1:tweenButton id="openRank" label="" x="395" anchorOffsetX="65" anchorOffsetY="67.5" verticalCenter="0">
 			<ns1:skinName>
 			<e:Skin states="up,down,disabled">
@@ -64,7 +65,5 @@
 		</e:layout>
 	</e:Group>
 	<e:Image source="img_game_name_png" y="241" horizontalCenter="0.5"/>
-	<e:Rect width="140" height="500" y="499" ellipseWidth="20" fillColor="0xffffff" fillAlpha="0.3"/>
-	<e:Group id="moreGroup" width="140" height="458" y="524" anchorOffsetY="0" x="0"/>
 	<ns1:tipsCom y="119.35" horizontalCenter="0"/>
 </e:Skin>

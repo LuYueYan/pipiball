@@ -4,16 +4,18 @@ class beeCom {
 	public adaptation = 0;//适配长度
 	public power: number = 1;//每次的伤害值
 	public against: any;//针对威力不同
-	public constructor() {
+	public bulletIndex=userDataMaster.bulletIndex;
+	public constructor(bulletIndex) {
+		this.bulletIndex=bulletIndex;
 		this.init()
 	}
 	public init() {
-		this.img = this.createBitmapByName(userDataMaster.bulletArr[userDataMaster.bulletIndex].img);
+		this.img = this.createBitmapByName(userDataMaster.bulletArr[this.bulletIndex].img);
 		this.img.width = 58;
 		this.img.height = 63;
 		this.img.anchorOffsetX = this.img.width / 2;
 		this.img.anchorOffsetY = this.img.height/4 ;
-		this.against = userDataMaster.bulletArr[userDataMaster.bulletIndex].target;
+		this.against = userDataMaster.bulletArr[this.bulletIndex].target;
 	}
 	public createBody(that, x = 7.5, y = 0) {
 		// var vertices = [[0.25, -0.63], [0.25, 0.63], [-0.25, 0.63], [-0.25, -0.63]];
@@ -40,7 +42,7 @@ class beeCom {
 		if (num == 2) {
 			this.img.texture = RES.getRes('img_lightning_02_png');
 		} else if (num == 1) {
-			this.img.texture = RES.getRes(userDataMaster.bulletArr[userDataMaster.bulletIndex].img + '_png');
+			this.img.texture = RES.getRes(userDataMaster.bulletArr[this.bulletIndex].img + '_png');
 		}
 	}
 	private createBitmapByName(name: string): egret.Bitmap {

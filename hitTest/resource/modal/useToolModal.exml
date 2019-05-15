@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="useToolModalSkin" width="600" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="16ab4724300" ></w:Config>
+	<e:Image source="img_bg_tool_png" horizontalCenter="0" verticalCenter="0"/>
+	<e:Image id="closeBtn" source="btn_close_png" x="522" y="11"/>
+	<e:Image id="title" source="img_name_01_png" y="103" horizontalCenter="0"/>
+	<e:Label id="describ" text="该道具" y="166" fontFamily="Microsoft YaHei" textColor="0x6d381b" horizontalCenter="0"/>
+	<e:Rect width="228" height="216" y="233" anchorOffsetX="0" anchorOffsetY="0" fillAlpha="0" strokeWeight="3" horizontalCenter="0" strokeColor="0xf2d298" ellipseWidth="60"/>
+	<e:Image id="light" y="339" source="img_light_star_png" anchorOffsetX="175" width="350" anchorOffsetY="175" height="350" horizontalCenter="0"/>
+	<e:Image id="img" y="260.5" source="img_gift_06_png" scaleX="0.8" scaleY="0.8" horizontalCenter="0"/>
+	<e:Image id="useBtn" source="btn_use_magic_png" y="508" horizontalCenter="0"/>
+</e:Skin>

@@ -16,13 +16,17 @@ class userDataMaster {
 		lamp: { level: 15, unlock: false, num: 1 }
 	};//道具数量
 	public static bulletArr = [
-		{ id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 100, powerImg: 1, txt: '', target: {} },
-		{ id: 1, img: 'img_bullet_b3', title: '蘑菇炮', price: 500, powerImg: 3, txt: '对炸弹方块威力+2', target: { type_5: 2 } },
-		{ id: 2, img: 'img_bullet_c3', title: '大头炮', price: 1000, powerImg: 3, txt: '对移动方块威力+2', target: { type_6: 2 } },
-		{ id: 3, img: 'img_bullet_d3', title: '小南瓜', price: 2000, powerImg: 2, txt: '对普通方块威力+1', target: { type_1: 1, type_2: 1 } },
-		{ id: 4, img: 'img_bullet_e3', title: '包菜君', price: 3000, powerImg: 2, txt: '对所有方块威力+1', target: { type_1: 1, type_2: 1, type_5: 1, type_6: 1 } }
+		{ id: 0, img: 'img_bullet_a2', title: '刺刺炮', price: 100, getWay: 'buy', getNum: 1, powerImg: 1, txt: '', target: {} },
+		{ id: 1, img: 'img_bullet_b3', title: '蘑菇炮', price: 500, getWay: 'share', getNum: 2, powerImg: 3, txt: '对炸弹方块威力+2', target: { type_5: 2 } },
+		{ id: 2, img: 'img_bullet_c3', title: '大头炮', price: 1000, getWay: 'video', getNum: 3, powerImg: 3, txt: '对移动方块威力+2', target: { type_6: 2 } },
+		{ id: 3, img: 'img_bullet_d3', title: '小南瓜', price: 2000, getWay: 'buy', getNum: 1, powerImg: 2, txt: '对普通方块威力+1', target: { type_1: 1, type_2: 1 } },
+		{ id: 4, img: 'img_bullet_e3', title: '包菜君', price: 3000, getWay: 'buy', getNum: 1, powerImg: 2, txt: '对所有方块威力+1', target: { type_1: 1, type_2: 1, type_5: 1, type_6: 1 } }
 	];
 	public static bulletSateArr = [1, 0, 0, 0, 0];//炸弹状态
+	public static bulletStateNum = {
+		bullet_1: 0,
+		bullet_2: 0
+	};///蘑菇跑和大头跑获得状态次数
 	public static levelArr = [];//关卡信息数组
 	public static myCollection: eui.ArrayCollection;
 	public static shareUid = 0;//分享人id
@@ -35,6 +39,7 @@ class userDataMaster {
 	public static dayFreeLife = { day: '', num: 0 };//每日免体力开局次数
 	public static loginCallback = null;//弹窗登录成功的回调
 	public static getDataSuccess = false;//获取数据成功
+	public static tryingIndex = -1;//试玩的植物索引
 	public constructor() {
 	}
 	public static shared: userDataMaster;
@@ -119,6 +124,9 @@ class userDataMaster {
 						if (info.tool) {
 							userDataMaster.tool = info.tool;
 						}
+						if(info.bulletStateNum){
+							userDataMaster.bulletStateNum=info.bulletStateNum;
+						}
 						if (info.bulletSateArr) {
 							userDataMaster.bulletSateArr = info.bulletSateArr;
 						}
@@ -163,7 +171,7 @@ class userDataMaster {
 		userDataMaster.level = level;
 		userDataMaster.myCollection.replaceItemAt(level, 2);
 	}
-	public static set myBulleIndex(index) {
+	public static set myBulletIndex(index) {
 		//更新当前炮弹
 		userDataMaster.bulletIndex = index;
 		userDataMaster.myCollection.replaceItemAt(index, 3);
@@ -211,9 +219,9 @@ class userDataMaster {
 		return true;
 	}
 	public static get todayShareGold() {
-		//    获取今天分享获得砖石状态
+		//    获取今天看视频获得砖石状态
 		if (userDataMaster.dayShareGold.day == userDataMaster.getToday()) {
-			if (userDataMaster.dayShareGold.num >= 2) {
+			if (userDataMaster.dayShareGold.num >= 5) {
 				return false;
 			}
 		} else {

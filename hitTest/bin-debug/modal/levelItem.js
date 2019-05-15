@@ -21,7 +21,7 @@ var levelItem = (function (_super) {
         this.init();
     };
     levelItem.prototype.init = function () {
-        this.bodyGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
+        // this.bodyGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
     };
     levelItem.prototype.jumpFun = function () {
         sceneMaster.openModal(new playBefore(this.data.level));
@@ -32,6 +32,12 @@ var levelItem = (function (_super) {
         this.bodyGroup.x = levelItem.point[n - 1].x;
         this.bodyGroup.y = levelItem.point[n - 1].y;
         this.levelText.text = this.data.level + '';
+        this.star_1.visible = true;
+        this.star_2.visible = true;
+        this.star_3.visible = true;
+        if (!this.bodyGroup.hasEventListener(egret.TouchEvent.TOUCH_TAP)) {
+            this.bodyGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
+        }
         if (this.data.level <= userDataMaster.levelStar.length) {
             //已过关的
             this.bgImg.texture = RES.getRes('img_wood_01_png');
@@ -45,9 +51,9 @@ var levelItem = (function (_super) {
         }
         else {
             //未达到
-            this.bodyGroup.removeChild(this.star_1);
-            this.bodyGroup.removeChild(this.star_2);
-            this.bodyGroup.removeChild(this.star_3);
+            this.star_1.visible = false;
+            this.star_2.visible = false;
+            this.star_3.visible = false;
             this.bodyGroup.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.jumpFun, this);
         }
         if (this.data.level > userDataMaster.levelArr.length) {
@@ -76,4 +82,3 @@ var levelItem = (function (_super) {
 }(eui.ItemRenderer));
 __reflect(levelItem.prototype, "levelItem", ["eui.UIComponent", "egret.DisplayObject"]);
 window['levelItem'] = levelItem;
-//# sourceMappingURL=levelItem.js.map

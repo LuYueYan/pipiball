@@ -13,6 +13,12 @@ var levelCom = (function (_super) {
     function levelCom() {
         return _super.call(this) || this;
     }
+    levelCom.getInstance = function () {
+        if (!levelCom.shared) {
+            levelCom.shared = new levelCom();
+        }
+        return levelCom.shared;
+    };
     levelCom.prototype.partAdded = function (partName, instance) {
         _super.prototype.partAdded.call(this, partName, instance);
     };
@@ -57,20 +63,24 @@ var levelCom = (function (_super) {
             that.head.y = that.dataGroup.y - that.head.height + levelItem.point[n - 1].y + 130 * userDataMaster.level;
             that.headimg.source = userDataMaster.myInfo.avatarUrl;
             that.headimg.mask = that.headmask;
-            egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
+            // egret.Tween.get(that.light, { loop: true }).to({ rotation: 360 }, 3000);
             that.head.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
                 sceneMaster.openModal(new playBefore(userDataMaster.level + 1));
             }, this);
         }, 300);
-        var userInfo = new eui.ArrayCollection([userDataMaster.myInfo]);
-        userInfo.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.dataChange, this);
+        userDataMaster.myCollection.addEventListener(eui.CollectionEvent.COLLECTION_CHANGE, this.dataChange, this);
     };
     levelCom.prototype.dataChange = function (e) {
         var that = this;
-        that.headimg.source = userDataMaster.myInfo.avatarUrl;
-        that.headimg.mask = that.headmask;
+        if (e.location == 2 || e.location == 5) {
+            var n = (userDataMaster.level + 1 + 2) % levelItem.point.length + 1;
+            that.head.x = levelItem.point[n - 1].x;
+            that.head.y = that.dataGroup.y - that.head.height + levelItem.point[n - 1].y + 130 * userDataMaster.level;
+            that.headimg.source = userDataMaster.myInfo.avatarUrl;
+            that.headimg.mask = that.headmask;
+            that.sourceArr.refresh();
+        }
     };
     return levelCom;
 }(eui.Component));
 __reflect(levelCom.prototype, "levelCom", ["eui.UIComponent", "egret.DisplayObject"]);
-//# sourceMappingURL=levelCom.js.map
